@@ -51,3 +51,54 @@ g=b1'*b2
 e4_1 = [1:1:10]
 e4_1 = e4_1.*e4_1
 e4_2 = [1:1:3; 4:1:6; 7:1:9]*[1 2 3]'
+
+% 5
+clear;
+clc;
+for k = 1 : 10
+    disp(k)
+end
+
+for k=1.0 : -0.1 : 0.5
+    disp(k)
+end
+
+for k=[1 -3 4 -5]
+    disp(k)
+end
+
+% 6
+clear;
+clc;
+Fs = 44100; % サンプリング周波数
+f = 440;    % 信号周波数
+% Bad example
+for k=0 : Fs-1
+    x(k+1) = sin(2 * pi * f * k /Fs);
+end
+
+% Good example
+t = [0 : Fs-1] /Fs; % 時刻
+y = sin(2 * pi * f * t); %
+figure;
+plot(t,y);
+
+% 7
+t = 0:0.001:1;  % 時刻
+f = 5;          % 信号周波数
+y = sin(2 * pi * f * t);
+plot(t, y); % (x, y)
+xlabel('time [s]');
+ylabel('wavwform');
+title('sinusoidal wave');
+
+plot(y);
+axis([0 25 -1 1])   % axis([xmin xmax ymin ymax])
+
+figure;
+subplot(3,1,1);      % subplot(m行, n列, p番目)
+plot(y);
+subplot(3,1,2);
+plot(y);
+subplot(3,1,2);
+plot(t,y);
