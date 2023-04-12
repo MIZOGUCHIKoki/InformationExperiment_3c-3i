@@ -18,7 +18,8 @@ end
 
 figure;
 plot(t,y1);
+xticks(0:1/f:3/f);
 xlabel('time[s]');
 ylabel('waveform');
 title('通常ノコギリ波');
-axis([0 0.01 -3.5 3.5]);
+axis([0 3/f -3.5 3.5]);
