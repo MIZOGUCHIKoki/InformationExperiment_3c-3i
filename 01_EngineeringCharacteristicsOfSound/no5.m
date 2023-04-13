@@ -28,3 +28,5 @@ plot(c,h);
 title('ヒストグラム');
 xlabel('周波数');
 ylabel('頻度');
+
+sound(y,Fs);

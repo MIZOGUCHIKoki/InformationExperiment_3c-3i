@@ -17,16 +17,14 @@ sound(y2,Fs);
 figure;
 subplot(2,1,1)
 plot(t1,y1);
-xticks(0:1/f1:1);
 title('440[Hz]');
 xlabel('time[s]');
 ylabel('waveform');
-axis([0 3/f1 -1.01 1.01])
+axis([0 0.01 -1.01 1.01])
 
 subplot(2,1,2)
 plot(t2,y2);
-xticks(0:1/f2:1);
 title('660[Hz]');
 xlabel('time[s]');
 ylabel('waveform');
-axis([0 3/f1 -1.01 1.01])
+axis([0 0.01 -1.01 1.01])

@@ -13,7 +13,7 @@ for k=1
 end
 subplot(3,1,1);
 plot(t,y);
-axis([0 2/f -3 3]);
+axis([0 1 -3 3]);
 title('N=1');
 
 y = 0;
@@ -22,7 +22,7 @@ for k=1:5
 end
 subplot(3,1,2);
 plot(t,y);
-axis([0 2/f -3 3]);
+axis([0 1 -3 3]);
 title('N=5');
 
 y = 0;
@@ -31,5 +31,5 @@ for k=1:25
 end
 subplot(3,1,3);
 plot(t,y);
-axis([0 2/f -3 3]);
+axis([0 1 -3 3]);
 title('N=25');
