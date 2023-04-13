@@ -5,14 +5,11 @@ f1 = 440;   % [Hz]
 f2 = 660;   % [Hz]
 
 t1 = [0:(Fs-1)] /Fs;
-for k=0:Fs
-    y1 = sin(2*pi*f1*t1);
-end
+y1 = sin(2*pi*f1*t1);
 
 t2 = [0:(Fs-1)] /Fs;
-for k=0:Fs
-    y2 = sin(2*pi*f2*t2);
-end
+y2 = sin(2*pi*f2*t2);
+
 sound(y1,Fs);
 pause(3)
 sound(y2,Fs);
