@@ -3,6 +3,7 @@
 \usepackage{graphicx,color,multicol,verbatim,listingsutf8}
 \usepackage{xcolor}
 \usepackage{url}
+\usepackage[symbol]{footmisc}
 \usetheme{Boadilla}
 \usecolortheme[RGB={140,0,0}]{structure}
 \setbeamertemplate{navigation symbols}{}
@@ -10,6 +11,7 @@
 \usefonttheme{professionalfonts}
 \renewcommand\familydefault{\rmdefault}
 \renewcommand{\figurename}{図\thefigure}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 \setbeamertemplate{enumerate item}[default]
 \setbeamertemplate{itemize item}[triangle]
@@ -126,14 +128,14 @@ clear all;
 Fs = 16000; % サンプリング周波数
 f = 400;    % 基本周波数
 t = [0 : ??] /Fs % 時間軸テーブル
-
 phi1 = pi / 4;   % 初期位相 pi/2
 phi2 = pi / 2;   % 初期位相 pi/4
 phi3 = rand;     % 初期位相 ランダム
 % --- ノコギリ波生成 ---
 for k=1:50 % とりあえず50にでも設定しておく
  y1 = ?? + (-1)^(k-1) * 1/3 * 2/k * sin(???);
- y2 = ?? + (-1)^(k-1) * 1/3 * 2/k * sin(??? + ??);
+ y2 = ...;
+ y3 = ...;
 end
 figure;
 subplot(?,?,?);
@@ -214,5 +216,12 @@ subplot...
         \item 周波数およびピーク値（Y軸の値）は厳密でなくて良い．
         \item \texttt{a}，\texttt{i}の合成音の聞こえ方の違い，及び元の音声との違いについて考察する．
     \end{itemize}
+\end{frame}
+\subsection{サンプルコード}
+\begin{frame}[t,containsverbatim]{\showsec 課題3（サンプルコード）}
+    \begin{lstlisting}[language=Matlab]
+clear all;
+
+\end{lstlisting}
 \end{frame}
 \end{document}
