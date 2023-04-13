@@ -14,7 +14,7 @@ for k=0:Fs
 end
 
 y = y1 + y2;
-% soundsc(y,Fs);
+soundsc(y,Fs);
 
 figure;
 plot(t,y);
