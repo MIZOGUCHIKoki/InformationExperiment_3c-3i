@@ -187,9 +187,12 @@ t = (1:??) /??; % 時間軸テーブル
 z = ??; % yの各要素に対して正ならば負，負ならば正にする
 ...
     \end{lstlisting}
-    \begin{block}{Tips}
-        ステレオからモノラルへの変換をすること．
-    \end{block}
+    \begin{alertblock}{}
+        ステレオからモノラルへの変換をすること！
+        \begin{itemize}
+            \item さもなくば，左右それぞれの信号が処理されグラフが見難くくなる．
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 \addtocontents{toc}{\newpage}
 \section{周波数解析}
@@ -253,6 +256,55 @@ z = ??; % yの各要素に対して正ならば負，負ならば正にする
     \end{columns}
 \end{frame}
 \subsection{高速フーリエ変換（\texttt{fft}）}
+\begin{frame}[t,containsverbatim]{\showsec 周波数分析（高速フーリエ変換 \texttt{fft}）}
+    サンプリング周波数\texttt{Fs}の信号\texttt{y}に対して高速フーリエ変換\texttt{fft}を行うだけでは周波数解析ができない！
+    \begin{lstlisting}[language={Matlab},frame={lines},numbers={none},xleftmargin={0mm}]
+fft_y = fft(y); % データ列yに対してfft を行う．
+    \end{lstlisting}
+    \begin{figure}
+        \centering
+        \begin{minipage}[t]{0.48\textwidth}
+            \caption{\texttt{fft}を行った直後（\texttt{ftt\_y}）}
+            \label{fig:fft}
+            \begin{tikzpicture}
+                \draw[thick](0,0)--(0.9\textwidth,0)--(0.9\textwidth,0.5)--(0,0.5)--cycle;
+                \node[below] at (0,0){\texttt{1}};
+                \node[below] at (0.9\textwidth,0){\texttt{Fs}};
+                \coordinate (C) at ($(0.9\textwidth,0)!0.5!(0,0)$);
+                \draw[thick](C)--($(C)+(0,1.5mm)$);
+                \coordinate (c) at ($(0.9\textwidth,0.5)!0.5!(0,0.5)$);
+                \draw[thick](c)--($(c)+(0,-1.5mm)$);
+                \node at($(C)!0.5!(0,5mm)$){\tiny 正のデータ};
+                \node at($(c)!0.5!(0.9\textwidth,0mm)$){\tiny 負のデータ};
+            \end{tikzpicture}
+        \end{minipage}
+        \begin{minipage}[t]{0.48\textwidth}
+            \caption{理想的な状態}
+            \label{fig:fftshift}
+            \begin{tikzpicture}
+                \draw[thick](0,0)--(0.9\textwidth,0)--(0.9\textwidth,0.5)--(0,0.5)--cycle;
+                \node[below] at (0,0){\texttt{1}};
+                \node[below] at (0.9\textwidth,0){\texttt{Fs}};
+                \coordinate (C) at ($(0.9\textwidth,0)!0.5!(0,0)$);
+                \draw[thick](C)--($(C)+(0,1.5mm)$);
+                \coordinate (c) at ($(0.9\textwidth,0.5)!0.5!(0,0.5)$);
+                \draw[thick](c)--($(c)+(0,-1.5mm)$);
+                \node at($(C)!0.5!(0,5mm)$){\tiny 負のデータ};
+                \node at($(c)!0.5!(0.9\textwidth,0mm)$){\tiny 正のデータ};
+            \end{tikzpicture}
+        \end{minipage}
+    \end{figure}
+    \begin{enumerate}
+        \item 図\ref{fig:fft}から図\ref{fig:fftshift}の状態にするために\texttt{fftshift}関数を用いる．\\
+              \begin{lstlisting}[language={Matlab},frame={lines},numbers={none},xleftmargin={0mm}]
+fftshift_y = fftshift(fft_y);
+            \end{lstlisting}
+        \item 絶対値を取るために\texttt{abs}をとる．\\
+              \begin{lstlisting}[language={Matlab},frame={lines},numbers={none},xleftmargin={0mm}]
+fftshift_abs_y = abs(fftshift_y);
+                        \end{lstlisting}
+    \end{enumerate}
+\end{frame}
 \begin{frame}[t,containsverbatim]{\showsec 周波数分析（高速フーリエ変換 \texttt{fft}）}
 
 \end{frame}
