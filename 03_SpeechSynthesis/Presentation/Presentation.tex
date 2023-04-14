@@ -140,6 +140,9 @@ for k=1:50 % とりあえず50にでも設定しておく
 end
 ...
 \end{lstlisting}
+    \begin{block}{}
+        位相をずらすとどうなるのか？なぜそのような波形になるのか考えよう
+    \end{block}
 \end{frame}
 \subsection{結果：ノコギリ波}
 \begin{frame}{\showsec 課題1（結果：ノコギリ波）}
@@ -258,18 +261,25 @@ z = ??; % yの各要素に対して正ならば負，負ならば正にする
 \subsection{高速フーリエ変換（\texttt{fft}）}
 \begin{frame}[t,containsverbatim]{\showsec 周波数分析（高速フーリエ変換 \texttt{fft}）}
     サンプリング周波数\texttt{Fs}の信号\texttt{y}に対して高速フーリエ変換\texttt{fft}を行うだけでは周波数解析ができない！
+    {\tiny \(\textrm{\texttt{-Fs/2}}\leq \textrm{周波数}\leq\textrm{\texttt{Fs/2}}\)を得られる．}
     \begin{lstlisting}[language={Matlab},frame={lines},numbers={none},xleftmargin={0mm}]
 fft_y = fft(y); % データ列yに対してfft を行う．
     \end{lstlisting}
     \begin{figure}
         \centering
-        \begin{minipage}[t]{0.48\textwidth}
+        \begin{minipage}[t]{0.49\textwidth}
+            \centering
             \caption{\texttt{fft}を行った直後（\texttt{ftt\_y}）}
             \label{fig:fft}
             \begin{tikzpicture}
                 \draw[thick](0,0)--(0.9\textwidth,0)--(0.9\textwidth,0.5)--(0,0.5)--cycle;
-                \node[below] at (0,0){\texttt{1}};
-                \node[below] at (0.9\textwidth,0){\texttt{Fs}};
+                \node[below] at (0,0)(a){\tiny\texttt{1}};
+                \node[above] at (0,0.5){\tiny\texttt{0}};
+                \node[above left] at ($(.9\textwidth,0.5)!0.5!(0,0.5)$){\tiny\texttt{Fs/2}};
+                \node[above right] at ($(.9\textwidth,0.5)!0.5!(0,0.5)$){\tiny\texttt{-Fs/2}};
+                \node[above] at (.9\textwidth,0.5){\tiny\texttt{-1/Fs}};
+                \node[below] at (0.9\textwidth,0)(b){\tiny\texttt{Fs}};
+                \draw[latex-latex](a)--(b)node[midway,below]{\tiny\texttt{index}};
                 \coordinate (C) at ($(0.9\textwidth,0)!0.5!(0,0)$);
                 \draw[thick](C)--($(C)+(0,1.5mm)$);
                 \coordinate (c) at ($(0.9\textwidth,0.5)!0.5!(0,0.5)$);
@@ -278,13 +288,19 @@ fft_y = fft(y); % データ列yに対してfft を行う．
                 \node at($(c)!0.5!(0.9\textwidth,0mm)$){\tiny 負のデータ};
             \end{tikzpicture}
         \end{minipage}
-        \begin{minipage}[t]{0.48\textwidth}
+        \begin{minipage}[t]{0.49\textwidth}
+            \centering
             \caption{理想的な状態}
             \label{fig:fftshift}
             \begin{tikzpicture}
                 \draw[thick](0,0)--(0.9\textwidth,0)--(0.9\textwidth,0.5)--(0,0.5)--cycle;
-                \node[below] at (0,0){\texttt{1}};
-                \node[below] at (0.9\textwidth,0){\texttt{Fs}};
+                \node[below] at (0,0)(a){\tiny\texttt{1}};
+                \node[above right] at (0,0.5){\tiny\texttt{-Fs/2}};
+                \node[above left] at ($(.9\textwidth,0.5)!0.5!(0,0.5)$){\tiny\texttt{-1/Fs}};
+                \node[above right] at ($(.9\textwidth,0.5)!0.5!(0,0.5)$){\tiny\texttt{0}};
+                \node[above] at (.9\textwidth,0.5){\tiny\texttt{Fs/2}};
+                \node[below] at (0.9\textwidth,0)(b){\tiny\texttt{Fs}};
+                \draw[latex-latex](a)--(b)node[midway,below]{\tiny\texttt{index}};
                 \coordinate (C) at ($(0.9\textwidth,0)!0.5!(0,0)$);
                 \draw[thick](C)--($(C)+(0,1.5mm)$);
                 \coordinate (c) at ($(0.9\textwidth,0.5)!0.5!(0,0.5)$);
@@ -305,8 +321,18 @@ fftshift_abs_y = abs(fftshift_y);
                         \end{lstlisting}
     \end{enumerate}
 \end{frame}
-\begin{frame}[t,containsverbatim]{\showsec 周波数分析（高速フーリエ変換 \texttt{fft}）}
-
+\begin{frame}[t]{\showsec 周波数分析（高速フーリエ変換 \texttt{fft}）}
+    \begin{figure}
+        \centering
+        \begin{minipage}{.49\textwidth}
+            \caption{\texttt{fft}}
+            \includegraphics[keepaspectratio,width=\textwidth]{fft_fft.png}
+        \end{minipage}
+        \begin{minipage}{.49\textwidth}
+            \caption{\texttt{fftshift}}
+            \includegraphics[keepaspectratio,width=\textwidth]{fft_fftshift.png}
+        \end{minipage}
+    \end{figure}
 \end{frame}
 \section{課題3}
 \begin{frame}[t]{\showsec 課題3}
