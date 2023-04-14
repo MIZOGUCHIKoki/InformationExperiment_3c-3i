@@ -13,6 +13,7 @@
 \renewcommand\familydefault{\rmdefault}
 \renewcommand{\figurename}{図\thefigure}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\thempfootnote}{\fnsymbol{mpfootnote}}
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
 \setbeamertemplate{enumerate item}[default]
 \setbeamertemplate{itemize item}[triangle]
@@ -24,7 +25,7 @@
         %標準の書体
     basicstyle = \ttfamily\small,
         %コメントの書体
-    commentstyle = {\ttfamily \color[cmyk]{1,0.4,1,0}},
+    commentstyle = {\scriptsize\ttfamily \color[cmyk]{1,0.4,1,0}},
         %関数名等の色の設定
     classoffset = 0,
         %キーワード(int, ifなど)の書体
@@ -46,7 +47,7 @@
     tabsize = 4,
         %キャプションの場所(tbならば上下両方に記載)
     captionpos = t,
-    xleftmargin=1.5em
+    xleftmargin=1em
 }
 \makeatletter
 \title{3. 音声合成}
@@ -134,7 +135,7 @@ phi2 = pi / 2;   % 初期位相 pi/4
 phi3 = rand;     % 初期位相 ランダム
 % --- ノコギリ波生成 ---
 for k=1:50 % とりあえず50にでも設定しておく
-    y1 = ?? + (-1)^(k-1) * 1/3 * 2/k * sin(???);
+    y1 = ?? + (-1)^(k-1) * 1/3 * 2/k * sin(??);
     y2 = ...;
     y3 = ...;
 end
@@ -157,6 +158,27 @@ end
         \centering
         \includegraphics[keepaspectratio,width=0.89\textwidth]{no1_2_ans.png}
     \end{figure}
+\end{frame}
+\section{モノラルとステレオ}
+\begin{frame}[t,containsverbatim]{\showsec モノラルとステレオ（\texttt{audioread}）}
+    \texttt{audioread}関数は，\texttt{filename.wav}のサンプルデータ\texttt{y}と，サンプリング周波数\texttt{Fs}を保存する関数である．
+    \begin{lstlisting}[language={Matlab},xleftmargin={0mm},frame={lines}]
+[y, Fs] = audioread('filename.wav');
+\end{lstlisting}
+    \begin{minipage}[t]{.49\textwidth}
+        \begin{itemize}
+            \item モノラルオーディオの場合\\
+                  \texttt{y}は\texttt{N}行\texttt{1}列のデータ列
+        \end{itemize}
+    \end{minipage}
+    \begin{minipage}[t]{.49\textwidth}
+        \begin{itemize}
+            \item ステレオオーディオの場合\\
+                  \texttt{y}は\texttt{N}行\texttt{2}列のデータ列
+        \end{itemize}
+    \end{minipage}
+    \vspace{2em}\\
+    ステレオからモノラルに変換するには，\texttt{y}の2列目を削除すれば良い．
 \end{frame}
 \section{課題2}
 \subsection{結果}
@@ -193,7 +215,8 @@ z = ??; % yの各要素に対して正ならば負，負ならば正にする
     \begin{alertblock}{}
         ステレオからモノラルへの変換をすること！
         \begin{itemize}
-            \item さもなくば，左右それぞれの信号が処理されグラフが見難くくなる．
+            \item 左右それぞれの信号が処理されグラフが見難くくなったり
+            \item そもそもデータ数が想定していたものと異なるので\texttt{plot}されなかったり
         \end{itemize}
     \end{alertblock}
 \end{frame}
@@ -210,8 +233,8 @@ z = ??; % yの各要素に対して正ならば負，負ならば正にする
         \includegraphics[keepaspectratio,height=0.5\textheight]{nokogiri.png}
     \end{figure}
 \end{frame}
-\subsection{フーリエ係数の分布}
-\begin{frame}[t]{\showsec 周波数解析（フーリエ係数の分布）}
+\subsection{振幅スペクトル}
+\begin{frame}[t]{\showsec 周波数解析（振幅スペクトル）}
     \renewcommand{\arraystretch}{1.5}
     \begin{columns}
         \begin{column}[T]{0.44\textwidth}
@@ -235,7 +258,7 @@ z = ??; % yの各要素に対して正ならば負，負ならば正にする
         \end{column}
         \begin{column}[T]{0.55\textwidth}
             \begin{figure}
-                \caption{フーリエ係数の分布}
+                \caption{振幅スペクトル}
                 \vspace{-1em}
                 \begin{tikzpicture}[remember picture]
                     \node[left] at(0,0){O};
@@ -258,13 +281,28 @@ z = ??; % yの各要素に対して正ならば負，負ならば正にする
         \end{column}
     \end{columns}
 \end{frame}
-\subsection{高速フーリエ変換（\texttt{fft}）}
-\begin{frame}[t,containsverbatim]{\showsec 周波数分析（高速フーリエ変換 \texttt{fft}）}
-    サンプリング周波数\texttt{Fs}の信号\texttt{y}に対して高速フーリエ変換\texttt{fft}を行うだけでは周波数解析ができない！
-    {\tiny \(\textrm{\texttt{-Fs/2}}\leq \textrm{周波数}\leq\textrm{\texttt{Fs/2}}\)を得られる．}
+\subsection{\texttt{fft}}
+\begin{frame}[t,containsverbatim]{\showsec 周波数解析（\texttt{fft}）}\label{frame:fft}
     \begin{lstlisting}[language={Matlab},frame={lines},numbers={none},xleftmargin={0mm}]
 fft_y = fft(y); % データ列yに対してfft を行う．
-    \end{lstlisting}
+                    \end{lstlisting}
+    \begin{block}{}
+        \texttt{fft}は，データ列\texttt{y}を高速フーリエ変換する関数であるが，入力データ列\texttt{y}に対して出力データ列\texttt{fft(y)}のデータ長は，入力データ列\texttt{y}と一致する．\\
+        ただし，indexとその内容についてはそれぞれ異なる．
+        \begin{itemize}
+            \item 入力データ列\texttt{y}のindexは時刻に対応．\footnotemark[1]
+            \item 出力データ列\texttt{fft(y)}のindexは周波数に対応．\footnotemark[2]
+        \end{itemize}
+        \footnotetext{\footnotemark[1]\footnotemark[2]indexが時刻や周波数というわけではない．}
+    \end{block}
+\end{frame}
+\subsection{\texttt{fftshift}}
+\begin{frame}[t,containsverbatim]{\showsec 周波数解析（\texttt{fftshift}）}
+    \begin{itemize}
+        \item サンプリング周波数\texttt{Fs}の信号\texttt{y}に対して高速フーリエ変換\texttt{fft}を行うだけでは周波数解析ができない！\\
+        \item \texttt{fft}では\(\textrm{\texttt{-Fs/2}}\leq \textrm{周波数成分}\leq\textrm{\texttt{Fs/2}}\)を得られる．
+        \item ただし，正のデータ・負のデータが逆転？した状態で出力される．
+    \end{itemize}
     \begin{figure}
         \centering
         \begin{minipage}[t]{0.49\textwidth}
@@ -310,28 +348,123 @@ fft_y = fft(y); % データ列yに対してfft を行う．
             \end{tikzpicture}
         \end{minipage}
     \end{figure}
-    \begin{enumerate}
-        \item 図\ref{fig:fft}から図\ref{fig:fftshift}の状態にするために\texttt{fftshift}関数を用いる．\\
+\end{frame}
+\begin{frame}[t,containsverbatim]{\showsec 周波数解析（\texttt{fftshift}）}
+    \begin{itemize}
+        \item 図\ref{fig:fft},\ref{fig:fft_f}から図\ref{fig:fftshift},\ref{fig:fft_shift_f}の状態にするために\texttt{fftshift}関数を用いる．\\
               \begin{lstlisting}[language={Matlab},frame={lines},numbers={none},xleftmargin={0mm}]
 fftshift_y = fftshift(fft_y);
             \end{lstlisting}
+    \end{itemize}
+    \begin{figure}
+        \centering
+        \begin{minipage}[t]{.49\textwidth}
+            \centering
+            \caption{\texttt{fft}}
+            \label{fig:fft_f}
+            \begin{tikzpicture}
+                \node(fig){\includegraphics[keepaspectratio,width=.9\textwidth]{fft_fft.png}};
+                \coordinate (figsouth) at (fig.south);
+                \coordinate (figscenter) at ($(figsouth)+(0.98mm,5.7mm)$);
+                \coordinate (figncenter) at ($(figscenter)+(0,3.24cm)$);
+                \coordinate (figsleft) at ($(figscenter)+(-2.05cm,0)$);
+                \coordinate (figsright) at ($(figscenter)+(2.05cm,0)$);
+                % \draw[fill=black](figncenter)circle[radius=0.01];
+                % \draw[fill=black](figscenter)circle[radius=0.01];
+                % \draw[fill=black](figsleft)circle[radius=0.01];
+                % \draw[fill=black](figsright)circle[radius=0.01];
+                \fill[fill=red,opacity=0.1](figsleft)--(figsleft |- figncenter)--(figncenter)--(figscenter)--cycle;
+                \fill[fill=blue,opacity=0.1](figsright)--(figsright |- figncenter)--(figncenter)--(figscenter)--cycle;
+            \end{tikzpicture}
+        \end{minipage}
+        \begin{minipage}[t]{.49\textwidth}
+            \centering
+            \caption{\texttt{fftshift}}
+            \label{fig:fft_shift_f}
+            \begin{tikzpicture}
+                \node(fig){\includegraphics[keepaspectratio,width=.9\textwidth]{fft_fftshift.png}};
+                \coordinate (figsouth) at (fig.south);
+                \coordinate (figscenter) at ($(figsouth)+(0.98mm,5.7mm)$);
+                \coordinate (figncenter) at ($(figscenter)+(0,3.24cm)$);
+                \coordinate (figsleft) at ($(figscenter)+(-2.05cm,0)$);
+                \coordinate (figsright) at ($(figscenter)+(2.05cm,0)$);
+                \fill[fill=blue,opacity=0.1](figsleft)--(figsleft |- figncenter)--(figncenter)--(figscenter)--cycle;
+                \fill[fill=red,opacity=0.1](figsright)--(figsright |- figncenter)--(figncenter)--(figscenter)--cycle;
+            \end{tikzpicture}
+        \end{minipage}
+    \end{figure}
+\end{frame}
+\subsection{\texttt{abs}}
+\begin{frame}[t,containsverbatim]{\showsec 周波数解析（\texttt{abs}）}
+    \begin{itemize}
         \item 絶対値を取るために\texttt{abs}をとる．\\
               \begin{lstlisting}[language={Matlab},frame={lines},numbers={none},xleftmargin={0mm}]
 fftshift_abs_y = abs(fftshift_y);
                         \end{lstlisting}
-    \end{enumerate}
-\end{frame}
-\begin{frame}[t]{\showsec 周波数分析（高速フーリエ変換 \texttt{fft}）}
+    \end{itemize}
     \begin{figure}
         \centering
         \begin{minipage}{.49\textwidth}
-            \caption{\texttt{fft}}
-            \includegraphics[keepaspectratio,width=\textwidth]{fft_fft.png}
-        \end{minipage}
-        \begin{minipage}{.49\textwidth}
+            \centering
             \caption{\texttt{fftshift}}
             \includegraphics[keepaspectratio,width=\textwidth]{fft_fftshift.png}
         \end{minipage}
+        \begin{minipage}{.49\textwidth}
+            \centering
+            \caption{\texttt{abs}}
+            \includegraphics[keepaspectratio,width=\textwidth]{fft_abs.png}
+        \end{minipage}
+    \end{figure}
+\end{frame}
+\subsection{周波数テーブルの作成}
+\begin{frame}[t,containsverbatim]{\showsec 周波数解析（周波数テーブルの作成）}
+    これまでの工程で，\texttt{0}を中心として，正負にナイキスト周波数（\texttt{Fs/2}）分離れた振幅？データを得られる．
+    \begin{enumerate}
+        \item データの長さ\texttt{ln = length(abs(fftshift(fft(y))))}を取得する．\\\textcolor{gray}{（\texttt{length(fft(y)) = length(y)，ln = length(y)}となる）→p.\pageref{frame:fft}}
+        \item[?\ ] \textcolor{red}{10個のリンゴ}を\textcolor{blue}{5つの箱}へ均等に入れます．1箱あたり\(10/5\)個のリンゴが入っていますね．
+        \item \textcolor{red}{データ長\texttt{ln}のデータ}を，\textcolor{blue}{サンプリング周波数\texttt{Fs}長の行列}に対応させるためには？
+    \end{enumerate}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[remember picture]
+            \node[above] at ($(0,0.5cm)!0.5!(10cm,0.5cm)$){\footnotesize\texttt{abs(fftshift(fft(y)))}で得られたデータ};
+            \draw[thick](0,0)rectangle(10cm,0.5cm);
+            \node at ($(0,0.5cm)!0.5!(0.5cm,0)$) {\tiny\texttt{1}};
+            \node at ($(9.5cm,0.5cm)!0.5!(10cm,0)$) {\tiny\texttt{ln}};
+            \foreach \u in {0.5,1,...,9.5}{
+                    \draw(\u cm,0.5cm)--(\u cm,0.35cm);
+                    \draw(\u cm,0cm)--(\u cm,0.15cm);}
+            % \node at (0,-0.5cm){};
+        \end{tikzpicture}
+        \begin{tikzpicture}[remember picture]
+            \node[above] at ($(0,0.5cm)!0.5!(10cm,0.5cm)$){\footnotesize 作りたい行列 \texttt{ = freq}};
+            \draw[thick](0,0)rectangle(10cm,0.5cm);
+            \node at ($(0,0.5cm)!0.5!(1cm,0)$) {\tiny\texttt{-Fs/2}};
+            \node at ($(9cm,0.5cm)!0.5!(10cm,0)$) {\tiny\texttt{Fs/2}};
+            \foreach \u in {1,2,...,9}{
+                    \draw(\u cm,0.5cm)--(\u cm,0.35cm);
+                    \draw(\u cm,0cm)--(\u cm,0.15cm);}
+            \draw[latex-latex](0,-0.3cm)--(10cm,-0.3cm)node[midway,fill=white]{\tiny 長さ\texttt{Fs}};
+        \end{tikzpicture}
+    \end{figure}
+    \begin{lstlisting}[language=Matlab,xleftmargin={0mm},frame={lines}]
+freq = [-Fs/2 : ln/Fs : Fs/2 - ln/Fs];
+    \end{lstlisting}
+\end{frame}
+\begin{frame}[t,containsverbatim]{\showsec 周波数解析（周波数テーブルの作成）}
+    \begin{lstlisting}[language={Matlab},frame={lines},xleftmargin={0mm}]
+plot(振幅データ, 周波数テーブル);
+    \end{lstlisting}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \draw[very thick](0,0)node[below]{\texttt{-Fs/2}}--(10cm,0)node[midway,below]{\texttt{0}}node[below]{\texttt{Fs/2}};
+            \draw[very thick](0,0)--(0,3cm)node[midway,left]{\rotatebox{90}{振幅}};
+            \draw[very thick,dashed](0,3cm)--(0,4cm);
+            \node[left] at (0,0){\texttt{0}};
+            \node at (5cm,-0.7cm){周波数};
+            \fill[gray!10] ($(0,0)!0.5!(10cm,4cm)$) circle (4.9cm and 1.9cm)node[black]{データ\texttt{y}の周波数スペクトラム};
+        \end{tikzpicture}
     \end{figure}
 \end{frame}
 \section{課題3}
@@ -345,16 +478,79 @@ fftshift_abs_y = abs(fftshift_y);
     \dotfill
     \begin{itemize}
         \item 0Hz - 10,000Hz 程度までの範囲で，ピークとなる周波数，及びそのピーク値を高い順から10個程度以上抽出する．\\
-              （母音の識別に利用される主な周波数成分は4kHz以下）
+              \begin{itemize}
+                  \item とりあえず，手動で10個抽出する．
+              \end{itemize}
         \item 周波数およびピーク値（Y軸の値）は厳密でなくて良い．
         \item \texttt{a}，\texttt{i}の合成音の聞こえ方の違い，及び元の音声との違いについて考察する．
     \end{itemize}
 \end{frame}
-\subsection{サンプルコード}
-\begin{frame}[t,containsverbatim]{\showsec 課題3（サンプルコード）}
+\subsection{サンプルコード：解析}
+\begin{frame}[t,containsverbatim]{\showsec 課題3（サンプルコード：解析）}
     \begin{lstlisting}[language=Matlab]
 clear all;
+% --- "a" の音声 ---
+[y_a, Fs_a] = audioread('sound_a.wav');
+y_a = y_a(??); % ステレオからモノラルへの変換
+t_a = [0 : length(??)-??]/ ??; % 時間軸テーブル
+Y_a  = ??; % 高速フーリエ変換
+YS_a = ??; % fftshift
+YS_a = ??; % 絶対値を取る
 
+YS_a_len = length(YS_a); % YS_aのデータ長を取得
+
+% 周波数テーブル作成
+tbl_freq = [-Fs_a/2 : ?? : Fs_a/2 - ??];
+
+figure;
+plot(??, ??); % 一度グラフにplotしてみる
+axis([0 5000 0 80]); % 0Hz - 5000Hz まで表示する
 \end{lstlisting}
+\end{frame}
+\begin{frame}[t,containsverbatim]{\showsec 課題3（サンプルコード：解析）}
+    \begin{figure}
+        \centering
+        \begin{minipage}{0.48\textwidth}
+            \centering
+            \caption{振幅スペクトル}
+            \includegraphics[keepaspectratio,width=\textwidth]{freq.png}
+        \end{minipage}
+        \begin{minipage}{0.48\textwidth}
+            \centering
+            \caption{振幅が大きいところ10点選ぶ}
+            \includegraphics[keepaspectratio,width=\textwidth]{pointselect.png}
+        \end{minipage}
+    \end{figure}
+    \begin{itemize}
+        \item plotした点を行列に記す．
+    \end{itemize}
+    \begin{lstlisting}[language={Matlab},firstnumber={last}]
+a_x = [1093 2867 ... 682]
+a_y = [77 36 ...  ... 42]
+    \end{lstlisting}
+\end{frame}
+\subsection{サンプルコード：合成}
+\begin{frame}[t,containsverbatim]{\showsec 課題3（サンプルコード：合成）}
+    \begin{lstlisting}[language={Matlab},firstnumber={last}]
+ya = 0;
+for k=1:10  % t_a は時間軸テーブル
+    ya = ?? + ?? * sin(2*pi* ?? *t_a);
+end
+\end{lstlisting}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \begin{figure}
+            \centering
+            \caption{\scriptsize\texttt{y\_a}を\texttt{t\_a}に対してプロットした結果}
+            \includegraphics[keepaspectratio,height=.45\textheight]{no3.png}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \begin{itemize}
+            \item \texttt{a\_x}は周波数，\texttt{a\_y}は振幅であることを思い出す．
+            \item それらの重ね合わせで音が再現されていたことを思い出す．\\（フーリエ級数展開）
+            \item 周波数\(f\)の正弦波は\[y(t)=\sin(2\pi ft)\]であることを思い出す．
+        \end{itemize}
+    \end{minipage}
 \end{frame}
 \end{document}

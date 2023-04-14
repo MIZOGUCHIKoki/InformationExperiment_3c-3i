@@ -13,7 +13,7 @@ clear;
  
  figure;
  plot(fs1,A1);
- axis([0 5000 0 80]);
+ % axis([0 5000 0 80]);
  title('"a"');
 
  y1mx = [1092 545 819 682 956 2868 3555 136 1219 3680];
@@ -25,4 +25,4 @@ clear;
  end
  figure;
  plot(t1,ya);
- sound(ya,Fs1);
+ % sound(ya,Fs1);
