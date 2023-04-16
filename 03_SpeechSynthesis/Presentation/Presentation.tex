@@ -50,10 +50,11 @@
     xleftmargin=1em
 }
 \makeatletter
-\title{3. 音声合成}
-\subtitle{情報学群実験第3c 3i}
-\author{Group 10\thanks{門屋 陽丈\and 谷保 愛華\and 内藤 熙人\and 成岡 小雪\and 平林 里菜\and 三上 柊\and 溝口 洸熙}}
-\date{2023.04.20}
+\title[音声合成]{3. 音声合成}
+\subtitle[]{情報学群実験第3C 3i}
+\author[Group 10]{\small 門屋陽丈\and 谷保愛華\and 内藤熙人\and 成岡小雪\and 平林里菜\and 三上柊\and 溝口洸熙}
+\institute[]{Group 10}
+\date[2023.04.20]{April 20, 2023}
 \newcommand{\showsec}{\thesection ．}
 \setbeamercolor{block title}{bg=black,fg=white}
 \setbeamercolor{block body}{bg=gray!10,fg=black}
@@ -61,10 +62,15 @@
 \begin{frame}
     \titlepage
 \end{frame}
-\begin{frame}
-    \begin{multicols}{2}
-        \tableofcontents
-    \end{multicols}
+\begin{frame}{お品書き}
+    \begin{columns}[onlytextwidth,T]
+        \begin{column}{.5\textwidth}
+            \tableofcontents[sections={1-5}]
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \tableofcontents[sections={6-7}]
+        \end{column}
+    \end{columns}
 \end{frame}
 \section{初期位相・矩形波}
 \begin{frame}[t]{\showsec 初期位相・矩形波}
@@ -105,7 +111,7 @@
 \subsection{問題}
 \begin{frame}[t,containsverbatim]{\showsec 課題1}
     \begin{exampleblock}{}
-        矩形波，ノコギリ波を基本周波数 440Hz 等の可聴域の範囲で作成し，さらに各周波数成分も位相を適当な値に変化させよう．\\
+        矩形波・ノコギリ波を基本周波数を 440Hz 等の可聴域の範囲で作成し，さらに各周波数成分も位相を適当な値に変化させよう．\\
         （サンプリング周波数\verb|Fs = 16kHz|，長さ\verb|2s|．）
         \begin{itemize}
             \item 位相の操作
@@ -301,7 +307,7 @@ fft_y = fft(y); % データ列yに対してfft を行う．
     \begin{itemize}
         \item サンプリング周波数\texttt{Fs}の信号\texttt{y}に対して高速フーリエ変換\texttt{fft}を行うだけでは周波数解析ができない！\\
         \item \texttt{fft}では\(\textrm{\texttt{-Fs/2}}\leq \textrm{周波数成分}\leq\textrm{\texttt{Fs/2}}\)を得られる．
-        \item ただし，正のデータ・負のデータが逆転？した状態で出力される．
+        \item ただし，正のデータ・負のデータが（左右）が入れ替わった状態で出力される．
     \end{itemize}
     \begin{figure}
         \centering
@@ -418,7 +424,7 @@ fftshift_abs_y = abs(fftshift_y);
 \end{frame}
 \subsection{周波数テーブルの作成}
 \begin{frame}[t,containsverbatim]{\showsec 周波数解析（周波数テーブルの作成）}
-    これまでの工程で，\texttt{0}を中心として，正負にナイキスト周波数（\texttt{Fs/2}）分離れた振幅？データを得られる．
+    これまでの工程で，\texttt{0}を中心として，正負にナイキスト周波数（\texttt{Fs/2}）分離れた振幅データを得られる．
     \begin{enumerate}
         \item データの長さ\texttt{ln = length(abs(fftshift(fft(y))))}を取得する．\\\textcolor{gray}{（\texttt{length(fft(y)) = length(y)，ln = length(y)}となる）→p.\pageref{frame:fft}}
         \item[?\ ] \textcolor{red}{10個のリンゴ}を\textcolor{blue}{5つの箱}へ均等に入れます．1箱あたり\(10/5\)個のリンゴが入っていますね．
