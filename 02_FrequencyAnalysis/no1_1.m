@@ -12,6 +12,6 @@ fft_ys = fftshift(fft_y);
 fft_ys = abs(fft_ys);
 figure;
 plot(fs,fft_ys);
-xlabel('周波数');
+xlabel('周波数[Hz]');
 ylabel('振幅');
-axis([-1000 1000 -10 600]);
+axis([0 1000 -10 600]);

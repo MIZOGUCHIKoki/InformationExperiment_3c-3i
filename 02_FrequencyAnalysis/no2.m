@@ -32,11 +32,14 @@ ylabel('振幅');
 fft_y = fft(y);
 fft_y = fftshift(fft_y);
 f = (-Fs/2 : Fs/length(fft_y)  : Fs/2 - Fs/length(fft_y));
-fft_y_abs=abs(fft_y);
 
 figure;
-plot(f,fft_y_abs);
-axis([-1000 1000 -1 1500]);
+subplot(2,1,1);
+plot(f,fft_y);
+xlabel('周波数[Hz]');
+ylabel('振幅');
+axis([-1000 1000 -1500 1500]);
+
 
 for k=1:length(fft_y)
     if f(k) >= 375.00 || f(k) <= -375.00
@@ -44,10 +47,12 @@ for k=1:length(fft_y)
     end
 end
 
-figure;
-fft_y_abs=abs(fft_y);
-plot(f,fft_y_abs);
-axis([-1000 1000 -1 1500]);
+
+subplot(2,1,2);
+plot(f,fft_y);
+axis([-1000 1000 -1500 1500]);
+xlabel('周波数[Hz]');
+ylabel('振幅');
 ifft_y = ifftshift(fft_y);
 ifft_y = ifft(ifft_y);
 ifft_real = real(ifft_y);

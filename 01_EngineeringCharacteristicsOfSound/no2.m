@@ -36,35 +36,41 @@ pause(3)
 sound(y5,Fs); % 0.25倍
 
 figure;
+hold on;
 plot(t1,y1);
-title('Base');
 xlabel('time[s]');
 ylabel('振幅');
 axis([0 0.01 -1.01 1.01])
 
-figure;
 plot(t1,y2);
-title('位相 pi/2');
 xlabel('time[s]');
 ylabel('振幅');
 axis([0 0.01 -1.01 1.01])
 
 plot(t1,y3);
-title('位相 pi');
 xlabel('time[s]');
 ylabel('振幅');
 axis([0 0.01 -1.01 1.01])
+legend({'初期','90度ずれ','180度ずれ'},'Location','southwest');
+hold off;
+
+
+figure;
+hold on;
+plot(t1,y1);
+xlabel('time[s]');
+ylabel('振幅');
 
 plot(t1,y4);
 yticks(-1:0.25:1);
-title('振幅 1/2');
 xlabel('time[s]');
 ylabel('振幅');
-axis([0 0.01 -0.5 0.5])
 
 plot(t1,y5);
-title('振幅 1/4');
 yticks(-1:0.25:1);
 xlabel('time[s]');
 ylabel('振幅');
-axis([0 0.01 -0.25 0.25])
+
+axis([0 0.01 -1.1 1.1]);
+legend({'初期','振幅 1/2','振幅 1/4'},'Location','southwest');
+hold off;

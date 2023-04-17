@@ -14,7 +14,7 @@ figure;
 xlabel('点[個]');
 ylabel('振幅');
 plot(y);
-axis([0 1024 0 1.5]);
+axis([0 1024 -0.5 1.5]);
 
 fft_y = fft(y);
 ln = length(abs(fftshift(fft(y))));
@@ -22,6 +22,6 @@ fft_ys = fftshift(fft_y);
 fft_ys = abs(fft_ys);
 figure;
 plot(fs,fft_ys);
-xlabel('周波数');
+xlabel('周波数[Hz]');
 ylabel('振幅');
-axis([0 200 -10 1000]);
+axis([0 200 -10 600]);
