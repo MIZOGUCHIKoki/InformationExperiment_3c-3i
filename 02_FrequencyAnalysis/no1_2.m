@@ -11,7 +11,7 @@ y_1 = ones(1,128);
 y = [y_0 y_1];
 y = [y y y y];
 figure;
-xlabel('time[s]');
+xlabel('点[個]');
 ylabel('振幅');
 plot(y);
 axis([0 1024 0 1.5]);
