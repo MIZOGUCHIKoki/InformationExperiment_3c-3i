@@ -12,7 +12,6 @@ b = 0; % 平均
 y = a.*randn(tl,1) + b;
 
 figure;
-subplot(2,1,1);
 plot(t,y);
 title('白色ガウス雑音');
 xlabel('time[s]');
@@ -22,7 +21,7 @@ ylabel('振幅');
 num=100; % ヒストグラム分割数
 
 [h, c] = hist(y, num);
-subplot(2,1,2);
+figure;
 plot(c,h);
 title('ヒストグラム');
 xlabel('周波数');
