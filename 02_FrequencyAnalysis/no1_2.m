@@ -1,18 +1,15 @@
-clear all;
-clc;
+clear;
 
 Fs = 8192;
-t = [0:4*(Fs-1)] / Fs;
+t = (0 : 4*(Fs-1)) / Fs;
 f = 440;
-fs = [-Fs/2:Fs/(128*2*4):(Fs/2)-Fs/(128*2*4)];
+fs = (-Fs/2 : Fs/(128*2*4) : (Fs/2)-Fs/(128*2*4));
 
 y_0 = zeros(1,128);
 y_1 = ones(1,128);
 
 y = [y_0 y_1];
-for k=1:2
-    y = [y y];
-end
+y = [y y y y];
 plot(y);
 
 fft_y = fft(y);
