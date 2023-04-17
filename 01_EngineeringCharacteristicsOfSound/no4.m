@@ -1,11 +1,10 @@
-clear all;
-clc;
+clear;
 
 Fs = 16000;
 T = 1/2; % 周期
 f = 1/T; % 周波数
 
-t = [0:4*(Fs-1)] /Fs;
+t = (0:4*(Fs-1)) /Fs;
 
 y = 0;
 for k=1
@@ -15,6 +14,8 @@ subplot(3,1,1);
 plot(t,y);
 axis([0 1 -3 3]);
 title('N=1');
+xlabel('time[s]');
+ylabel('振幅');
 
 y = 0;
 for k=1:5
@@ -24,6 +25,8 @@ subplot(3,1,2);
 plot(t,y);
 axis([0 1 -3 3]);
 title('N=5');
+xlabel('time[s]');
+ylabel('振幅');
 
 y = 0;
 for k=1:25
@@ -33,3 +36,5 @@ subplot(3,1,3);
 plot(t,y);
 axis([0 1 -3 3]);
 title('N=25');
+xlabel('time[s]');
+ylabel('振幅');

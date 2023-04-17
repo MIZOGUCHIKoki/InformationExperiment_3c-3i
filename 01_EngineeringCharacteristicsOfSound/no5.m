@@ -1,8 +1,7 @@
-clear all;
-clc;
+clear;
 
 Fs = 16000;
-t = [0:(Fs-1)]/Fs;
+t = (0 : (Fs-1)) /Fs;
 tl = length(t);
 
 rng(0,'twister'); % 乱数生成器 初期化
@@ -17,7 +16,7 @@ subplot(2,1,1);
 plot(t,y);
 title('白色ガウス雑音');
 xlabel('time[s]');
-ylabel('waveform');
+ylabel('振幅');
 
 
 num=100; % ヒストグラム分割数
