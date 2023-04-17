@@ -10,24 +10,18 @@ y_1 = ones(1,128);
 
 y = [y_0 y_1];
 y = [y y y y];
+figure;
+xlabel('time[s]');
+ylabel('振幅');
 plot(y);
+axis([0 1024 0 1.5]);
 
 fft_y = fft(y);
 ln = length(abs(fftshift(fft(y))));
-figure;
-plot(fs,fft_y);
-title('ftt');
-xlabel('周波数');
-
 fft_ys = fftshift(fft_y);
-figure;
-plot(fs,fft_ys);
-title('fttshift');
-xlabel('周波数');
-
 fft_ys = abs(fft_ys);
 figure;
 plot(fs,fft_ys);
-title('abs');
 xlabel('周波数');
+ylabel('振幅');
 axis([0 200 -10 1000]);
