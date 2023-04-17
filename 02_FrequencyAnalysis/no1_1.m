@@ -15,14 +15,12 @@ figure;
 plot(fs,fft_y);
 title('ftt');
 xlabel('周波数');
-% axis([-Fs/2 Fs/2 min(fft_y) max(fft_y)]);
 
 fft_ys = fftshift(fft_y);
 figure;
 plot(fs,fft_ys);
 title('fttshift');
 xlabel('周波数');
-% axis([-Fs/2 Fs/2 min(fft_y) max(fft_y)]);
 
 
 fft_ys = abs(fft_ys);
