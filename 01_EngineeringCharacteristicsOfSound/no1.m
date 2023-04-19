@@ -14,17 +14,13 @@ sound(y1,Fs);
 pause(3)
 sound(y2,Fs);
 
-figure;
-subplot(2,1,1)
+fig0 = figure;
+hold on;
 plot(t1,y1);
-title('440[Hz]');
-xlabel('time[s]');
-ylabel('振幅');
-axis([0 0.01 -1.01 1.01])
-
-subplot(2,1,2)
 plot(t2,y2);
-title('660[Hz]');
+hold off;
 xlabel('time[s]');
 ylabel('振幅');
-axis([0 0.01 -1.01 1.01])
+legend({'440Hz','660Hz'},'Location','southwest');
+axis([0 0.01 -1.01 1.01]);
+exportgraphics(fig0,'01_no1.pdf','ContentType','vector');
