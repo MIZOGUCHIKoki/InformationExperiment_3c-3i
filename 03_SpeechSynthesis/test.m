@@ -15,6 +15,7 @@ y4 = 0;
 for k = 1 : 500
     y1 = y1 + (-1)^(k-1) * 2/k * sin(2*pi*f*k*t);       % 級数を表現
 end
+figure;
 
 figure;
 plot(t,y1);
