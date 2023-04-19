@@ -459,7 +459,7 @@ freq = [-Fs/2 : ln/Fs : Fs/2 - ln/Fs];
 \end{frame}
 \begin{frame}[t,containsverbatim]{\showsec 周波数解析（周波数テーブルの作成）}
     \begin{lstlisting}[language={Matlab},frame={lines},xleftmargin={0mm}]
-plot(振幅データ, 周波数テーブル);
+plot(周波数テーブル, 振幅データ);
     \end{lstlisting}
     \begin{figure}
         \centering
@@ -494,19 +494,18 @@ plot(振幅データ, 周波数テーブル);
 \subsection{サンプルコード：解析}
 \begin{frame}[t,containsverbatim]{\showsec 課題3（サンプルコード：解析）}
     \begin{lstlisting}[language=Matlab]
-clear all;
+clear;
 % --- "a" の音声 ---
 [y_a, Fs_a] = audioread('sound_a.wav');
 y_a = y_a(??); % ステレオからモノラルへの変換
 t_a = [0 : length(??)-??]/ ??; % 時間軸テーブル
 Y_a  = ??; % 高速フーリエ変換
 YS_a = ??; % fftshift
-YS_a = ??; % 絶対値を取る
-
-YS_a_len = length(YS_a); % YS_aのデータ長を取得
+YS_a_abs = ??; % 絶対値を取る
+YS_a_len = length(YS_a_abs); % YS_a_absのデータ長を取得
 
 % 周波数テーブル作成
-tbl_freq = [-Fs_a/2 : ?? : Fs_a/2 - ??];
+freq_a = [-Fs_a/2 : ?? : Fs_a/2 - ??];
 
 figure;
 plot(??, ??); % 一度グラフにplotしてみる

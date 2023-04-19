@@ -21,21 +21,22 @@ clear;
  plot(fs1,Y1);
  figure;
  plot(fs1,Y1shift);
- % axis([0 5000 0 80]);
  
  A1=abs(Y1shift);
  A2=abs(Y2shift);
  figure;
  plot(fs1,A1);
- 
+ axis([-25000 25000 -80 80]);
+ xlabel('周波数[Hz]');
+ ylabel('振幅');
  
  figure;
  plot(fs1,A1);
- axis([0 5000 0 80]);
+ axis([-5000 5000 0 80]);
  title('"a"');
  figure;
  plot(fs2,A2);
- axis([0 5000 0 80]);
+ axis([-5000 5000 0 80]);
  title('"i"');
  y1mx = [1092 545 819 682 956 2868 3555 136 1219 3680];
  y1my = [77 51 50 42 36 35 30.3459 25 25 21];
