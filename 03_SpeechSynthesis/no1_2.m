@@ -20,6 +20,15 @@ for k=1:2:50;
     y4=y4+1/k*sin(2*pi*f*k*t+phi3);
 end
 
+soundsc(y1,Fs);
+pause(3);
+soundsc(y2,Fs);
+pause(3);
+soundsc(y3,Fs);
+pause(3);
+soundsc(y4,Fs);
+pause(3);
+
 subplot(4,1,1);
 plot(t,y1);
 xlabel('time[s]');

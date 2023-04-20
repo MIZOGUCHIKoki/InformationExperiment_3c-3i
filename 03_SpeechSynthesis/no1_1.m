@@ -5,7 +5,6 @@ f = 440; % 基本周波数
 t = [0 : 2*(Fs-1)] /Fs; % 時刻
 phi1 = pi / 4;
 phi2 = pi / 2;
-phi3 = rand;
 
 y1 = 0;
 y2 = 0;
@@ -16,8 +15,17 @@ for k = 1 : 500
     y1 = y1 + (-1)^(k-1) * 1/3 * 2/k * sin(2*pi*f*k*t);       % 級数を表現
     y2 = y2 + (-1)^(k-1) * 1/3 * 2/k * sin(2*pi*f*k*t+phi1);
     y3 = y3 + (-1)^(k-1) * 1/3 * 2/k * sin(2*pi*f*k*t+phi2);
-    y4 = y4 + (-1)^(k-1) * 1/3 * 2/k * sin(2*pi*f*k*t+phi3);
+    y4 = y4 + (-1)^(k-1) * 1/3 * 2/k * sin(2*pi*f*k*t+rand);
 end
+
+sound(y1,Fs);
+pause(3);
+sound(y2,Fs);
+pause(3);
+sound(y3,Fs);
+pause(3);
+sound(y4,Fs);
+pause(3);
 
 figure;
 plot(t,y1);

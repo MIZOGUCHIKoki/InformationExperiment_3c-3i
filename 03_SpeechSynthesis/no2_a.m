@@ -1,12 +1,13 @@
 clear;
-clc;
 [y, Fs] = audioread('sound1.wav');
 y=y(:,1); % ステレオからモノラルへの変換
 N = length(y); % yの長さ
 t = (1:N) /Fs; % 時間
 z = y.*(-1);
 
-
+soundsc(y,Fs);
+pause(3);
+soundsc(z,Fs);
 %プロット
 figure;
 subplot(2,1,1);

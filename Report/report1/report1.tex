@@ -1,0 +1,88 @@
+\documentclass[twoside]{ltjsreport}
+\usepackage[top=20truemm,bottom=20truemm,left=15truemm,right=15truemm,headheight=20pt]{geometry}
+\usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow}
+\usepackage[symbol]{footmisc}
+\usepackage{hyperref,graphics,graphicx}
+\newcolumntype{A}{>{\centering\bfseries}X}
+\newcolumntype{B}{>{\centering\bfseries\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}{>{\raggedleft\arraybackslash}X}
+\bibliographystyle{junsrt}
+\hypersetup{
+    colorlinks=true,
+    citecolor=black,
+    linkcolor=black,
+    urlcolor=blue
+}
+\renewcommand{\chaptermark}[1]{\markboth{第\ \thechapter\ 章\,\, #1}{}}
+\fancypagestyle{report}{
+    \fancyhf{}
+    \fancyhead[RO,LE]{\leftmark}
+    \fancyfoot[RO,LE]{\thepage\ /\ \pageref{LastPage}}
+    \pagenumbering{arabic}
+    }
+\lstset{
+    language = {Matlab},
+    %backgroundcolor={\color[gray]{.90}},
+    breaklines = true,
+    breakindent = 10pt,
+    basicstyle = \ttfamily\small,
+    commentstyle = {\ttfamily \color[cmyk]{1,0.4,1,0}},
+    classoffset = 0,
+    keywordstyle = {\bfseries \color[cmyk]{0,1,0,0}},
+    stringstyle = {\ttfamily \color[rgb]{0,0,1}},
+    frame = frame,
+    %他オプション：leftline，topline，bottomline，lines，single，shadowbox
+    framesep = 5pt,
+    numbers = left,
+    stepnumber = 1,
+    numberstyle = \small,
+    tabsize = 4,
+    captionpos = t
+}
+\renewcommand{\figurename}{}
+\renewcommand{\tablename}{}
+\renewcommand{\lstlistingname}{}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\lstlistlistingname}{List of Listings}
+\renewcommand{\thefigure}{Fig.\thechapter-\arabic{figure}}
+\renewcommand{\thetable}{Tbl.\thechapter-\arabic{table}}
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+\renewcommand{\labelenumi}{\textbf{\theenumi}.\ }
+\makeatletter
+\@addtoreset{figure}{chapter}
+\@addtoreset{table}{chapter}
+\@addtoreset{lstlisting}{chapter}
+\@addtoreset{footnote}{page}
+\renewcommand{\chapter}{%
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \global\@topnum\z@
+    \secdef\@chapter\@schapter}
+\makeatother
+\AtBeginDocument{
+    \renewcommand{\thelstlisting}{src.\thechapter-\arabic{lstlisting}}
+}
+\title{聴覚における人間特性と音の工学的特徴についての考察}
+\author{MIZOGUCHI Koki\thanks{高知工科大学 情報学群 学籍番号:1250373 Group10}}
+\date{May 7th, 2023}
+\begin{document}
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+\pagenumbering{roman}\thispagestyle{plain}
+\tableofcontents
+\listoffigures
+\listoftables
+\lstlistoflistings
+\newpage
+\pagestyle{report}
+\setcounter{page}{1}
+\input{00_introduction.tex}
+\bibliography{bib}
+\end{document}

@@ -138,12 +138,12 @@ f = 400;    % 基本周波数
 t = [0 : ??] /Fs % 時間軸テーブル
 phi1 = pi / 4;   % 初期位相 pi/2
 phi2 = pi / 2;   % 初期位相 pi/4
-phi3 = rand;     % 初期位相 ランダム
+% -  phi3 = rand;     % 初期位相 ランダム
 % --- ノコギリ波生成 ---
 for k=1:50 % とりあえず50にでも設定しておく
     y1 = ?? + (-1)^(k-1) * 1/3 * 2/k * sin(??);
     y2 = ...;
-    y3 = ...;
+    y3 = ?? + (-1)^(k-1) * 1/3 * 2/k * sin(?? + rand);
 end
 ...
 \end{lstlisting}
@@ -427,7 +427,7 @@ fftshift_abs_y = abs(fftshift_y);
     これまでの工程で，\texttt{0}を中心として，正負にナイキスト周波数（\texttt{Fs/2}）分離れた振幅データを得られる．
     \begin{enumerate}
         \item データの長さ\texttt{ln = length(abs(fftshift(fft(y))))}を取得する．\\\textcolor{gray}{（\texttt{length(fft(y)) = length(y)，ln = length(y)}となる）→p.\pageref{frame:fft}}
-        \item[?\ ] \textcolor{red}{10個のリンゴ}を\textcolor{blue}{5つの箱}へ均等に入れます．1箱あたり\(10/5\)個のリンゴが入っていますね．
+        \item[?\ ] \textcolor{red}{10個のリンゴ}を\textcolor{blue}{5つの箱}へ均等に入れます．1箱あたり\(10/5\)個のリンゴが入っていますね．（間隔0.5）
         \item \textcolor{red}{データ長\texttt{ln}のデータ}を，\textcolor{blue}{サンプリング周波数\texttt{Fs}長の行列}に対応させるためには？
     \end{enumerate}
     \begin{figure}
@@ -454,7 +454,7 @@ fftshift_abs_y = abs(fftshift_y);
         \end{tikzpicture}
     \end{figure}
     \begin{lstlisting}[language=Matlab,xleftmargin={0mm},frame={lines}]
-freq = [-Fs/2 : ln/Fs : Fs/2 - ln/Fs];
+freq = [-Fs/2 : Fs/ln : Fs/2 - Fs/ln]; 
     \end{lstlisting}
 \end{frame}
 \begin{frame}[t,containsverbatim]{\showsec 周波数解析（周波数テーブルの作成）}
@@ -478,7 +478,7 @@ plot(周波数テーブル, 振幅データ);
     \begin{exampleblock}{}
         \begin{enumerate}
             \item 課題2で録音した各音声を周波数解析し，スペクトル上でピークのある周波数およびその周波数のY軸の値を抽出しよう．
-            \item 抽出した周波数，Y軸の値の順音を合成し，音の違いを聴き比べる．
+            \item 抽出した周波数，Y軸の値の純音を合成し，音の違いを聴き比べる．
         \end{enumerate}
     \end{exampleblock}
     \dotfill
