@@ -25,52 +25,44 @@ end
 for k=0:Fs
     y5 = 0.25 * sin(2*pi*f1*t1);
 end
-sound(y1,Fs); % 基本
-pause(3)
-sound(y2,Fs); % pi/2
-pause(3)
-sound(y3,Fs); % pi
-pause(3)
-sound(y4,Fs); % 0.5倍
-pause(3)
-sound(y5,Fs); % 0.25倍
 
-figure;
+ys2 = [y1;y2]';
+ys3 = [y1;y3]';
+ys4 = [y1;y4]';
+ys5 = [y1;y5]';
+
+sound(ys2,Fs); % pi/2
+pause(3)
+sound(ys3,Fs); % pi
+pause(3)
+sound(ys4,Fs); % 0.5倍
+pause(3)
+sound(ys5,Fs); % 0.25倍
+
+fig0 = figure;
 hold on;
 plot(t1,y1);
-xlabel('time[s]');
-ylabel('振幅');
-axis([0 0.01 -1.01 1.01])
-
 plot(t1,y2);
-xlabel('time[s]');
-ylabel('振幅');
-axis([0 0.01 -1.01 1.01])
-
 plot(t1,y3);
 xlabel('time[s]');
-ylabel('振幅');
+ylabel('amplitude');
 axis([0 0.01 -1.01 1.01])
-legend({'初期','90度ずれ','180度ずれ'},'Location','southwest');
+legend({'pure tone','shift by 90 degrees','shift by 180 degrees'},'Location','southwest');
 hold off;
 
 
-figure;
+fig1 = figure;
 hold on;
 plot(t1,y1);
-xlabel('time[s]');
-ylabel('振幅');
-
 plot(t1,y4);
-yticks(-1:0.25:1);
-xlabel('time[s]');
-ylabel('振幅');
-
 plot(t1,y5);
 yticks(-1:0.25:1);
 xlabel('time[s]');
-ylabel('振幅');
+ylabel('amplitude');
 
 axis([0 0.01 -1.1 1.1]);
-legend({'初期','振幅 1/2','振幅 1/4'},'Location','southwest');
+legend({'pure tone','1/2 times amplitude','1/4 times amplitude'},'Location','southwest');
 hold off;
+
+exportgraphics(fig1,'../Figures/01_02_1.pdf','ContentType','vector');
+exportgraphics(fig0,'../Figures/01_02_2.pdf','ContentType','vector');

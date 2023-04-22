@@ -1,0 +1,3 @@
+- [音響工学理論基礎](https://elib.maruzen.co.jp/elib/html/BookDetail/Id/3000017687?25)
+- [MATLABで学ぶ実践画像・音声処理入門](https://elib.maruzen.co.jp/elib/html/BookDetail/Id/3000094756?37)
+- [よくわかる信号処理 ―フーリエ解析からウェーブレット変換まで―](https://elib.maruzen.co.jp/elib/html/BookDetail/Id/3000032943?49)

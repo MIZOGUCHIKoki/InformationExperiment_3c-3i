@@ -1,7 +1,7 @@
 \documentclass[twoside]{ltjsreport}
 \usepackage[top=20truemm,bottom=20truemm,left=15truemm,right=15truemm,headheight=20pt]{geometry}
 \usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow}
-\usepackage{hyperref,graphics,graphicx}
+\usepackage{hyperref,graphics,graphicx,framed}
 \usepackage[symbol]{footmisc}
 \usepackage{amsmath,amssymb}
 \newcolumntype{A}{>{\centering\bfseries}X}
@@ -23,6 +23,12 @@
     \fancyfoot[RO,LE]{\thepage\ /\ \pageref{LastPage}}
     \pagenumbering{arabic}
     }
+\fancypagestyle{appendixstyle}{
+    \fancyhf{}
+    \fancyhead[RO,LE]{付録}
+    \fancyfoot[RO,LE]{\thepage\ /\ \pageref{LastPage}}
+    \renewcommand{\headrulewidth}{0mm}
+}
 \lstset{
     language = {Matlab},
     %backgroundcolor={\color[gray]{.90}},
@@ -41,7 +47,7 @@
     numberstyle = \small,
     tabsize = 4,
     captionpos = t,
-    otherkeywords = {soundsc}
+    otherkeywords = {soundsc, xticks, yticks, exportgraphics}
 }
 \renewcommand{\figurename}{}
 \renewcommand{\tablename}{}
@@ -72,8 +78,8 @@
 \AtBeginDocument{
     \renewcommand{\thelstlisting}{src.\thechapter-\arabic{lstlisting}}
 }
-\title{聴覚における人間特性と音の工学的特徴についての考察}
-\author{MIZOGUCHI Koki\thanks{高知工科大学 情報学群 学籍番号:1250373 Group10}}
+\title{音の工学的特徴とそれに対する聴覚の特性についての考察}
+\author{溝口 洸熙\thanks{高知工科大学 情報学群 学籍番号:1250373 Group10}}
 \date{May 7th, 2023}
 \begin{document}
 \input{90_kadaitable.tex}
@@ -87,7 +93,6 @@
 \newpage
 \pagestyle{report}
 \setcounter{page}{1}
-\input{00_introduction.tex}
 \input{01_kadai1.tex}
 \input{02_kadai2.tex}
 \bibliography{bib}

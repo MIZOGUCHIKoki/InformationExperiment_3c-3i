@@ -14,12 +14,12 @@ for k=0:Fs
 end
 
 y = y1 + y2;
-soundsc(y,Fs);
+% sound(y,Fs);
 
-figure;
+fig0 = figure;
 plot(t,y);
 xticks(0:1:4);
-title('うなり4回');
 xlabel('time[s]');
-ylabel('振幅');
-axis([0 4 -2.01 2.01])
+ylabel('amplitude');
+axis([0 4 -2.01 2.01]);
+exportgraphics(fig0,'../Figures/01_03.pdf','ContentType','vector');
