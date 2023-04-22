@@ -23,4 +23,4 @@ xlabel('time[s]');
 ylabel('amplitude');
 legend({'440Hz','660Hz'},'Location','southwest');
 axis([0 0.01 -1.01 1.01]);
-% exportgraphics(fig0,'../Figures/01_no1.pdf','ContentType','vector');
+exportgraphics(fig0,'../Figures/01_01.pdf','ContentType','vector');

@@ -1,4 +1,5 @@
 *.asv
 .DS_Store
-*.pdf
 .tmp*
+/Report/report[1-5]/*.pdf
+Presentation.pdf
