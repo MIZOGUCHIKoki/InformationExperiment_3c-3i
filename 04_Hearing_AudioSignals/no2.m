@@ -1,8 +1,8 @@
 clear;
 Fs = 16000;
 freq = (-Fs/2 : 1 : Fs/2 - 1);
-f = 200;
-f2 = 2000;
+f = 2000;
+f2 = 1300;
 t_noise= (0 : 0.1*Fs-1) /Fs;
 t_y = (0 : Fs-1) /Fs;
 y = sin(2*pi*f*t_y);
