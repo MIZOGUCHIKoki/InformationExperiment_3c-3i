@@ -13,7 +13,7 @@ noise_A = 2 * (rand(1,Fs) - 0.5);
 A_fft = fft(noise_A);
 A_fft = fftshift(A_fft);
 
-fig0 = figure; % ノイズB_fft
+fig0 = figure; % ノイズA_fft
 plot(freq,A_fft);
 xlabel('frequency[Hz]');
 ylabel('amplitude');
@@ -68,3 +68,8 @@ soundsc(EX3,Fs);    % pure tone B + noise A
 pause(5);
 soundsc(EX4,Fs);    % pure tone B + noise B
 
+exportgraphics(fig0,'../Figures/04_20_Afft.pdf','ContentType','vector');
+exportgraphics(fig1,'../Figures/04_21_Bfft.pdf','ContentType','vector');
+exportgraphics(fig2,'../Figures/04_22_Anoise.pdf','ContentType','vector');
+exportgraphics(fig3,'../Figures/04_23_Bnoise.pdf','ContentType','vector');
+exportgraphics(fig4,'../Figures/04_24_gosei.pdf','ContentType','vector');

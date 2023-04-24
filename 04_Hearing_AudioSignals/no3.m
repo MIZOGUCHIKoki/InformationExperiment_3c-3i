@@ -20,15 +20,18 @@ hold on;
 plot(t,y_kukei);
 plot(t,mfm_kukei);
 hold off;
-axis([0 0.01 -1 1]);
+legend({'original wave','missing fundamental wave'},'Location','southwest');
+axis([0 0.01 -1.5 1.5]);
 xlabel('time[s]');
 ylabel('amplitude');
+
 fig1 = figure;
 hold on;
 plot(t,y_nokogiri);
 plot(t,mfm_nokogiri);
 hold off;
-axis([0 0.01 -1 1]);
+legend({'original wave','missing fundamental wave'},'Location','southwest');
+axis([0 0.01 -1.5 1.5]);
 xlabel('time[s]');
 ylabel('amplitude');
 
@@ -40,3 +43,6 @@ sound(y_nokogiri,Fs);
 pause(2);
 sound(mfm_nokogiri,Fs);
 pause(2);
+
+exportgraphics(fig0,'../Figures/04_30_kukei.pdf','ContentType','vector');
+exportgraphics(fig1,'../Figures/04_31_nokogiri.pdf','ContentType','vector');
