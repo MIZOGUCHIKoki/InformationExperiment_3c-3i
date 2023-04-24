@@ -19,7 +19,7 @@
     \end{tabularx}
 \end{table}
 また，このレポートない全ての実験では\matlab でプロットしたグラフを出力するために，関数\ref{src:グラフ出力}を用いている．
-\begin{lstlisting}[numbers={none},frame={lines},caption={グラフ出力},label={src:グラフ出力}]
+\begin{lstlisting}[numbers={none},caption={グラフ出力},label={src:グラフ出力}]
 exportgraphics(figurename,'path/figure_name.pdf','ContentType','vecto')
 \end{lstlisting}
 \paragraph{正弦波について}時刻\(t\)に対して周波数\(f\)の正弦波は，\eqref{equ:正弦波}で得られる．
@@ -27,10 +27,11 @@ exportgraphics(figurename,'path/figure_name.pdf','ContentType','vecto')
     y & =\sin(2\pi ft)\label{equ:正弦波}
 \end{align}
 時間軸データ\(t\)を\mat{1}{N}のベクトルに代入する．
-時間軸データの作成について，サンプリング周波数\texttt{Fs}に対して\(m\)秒間の正弦波を生成するためには，\ref{src:時間軸作成}のように\texttt{0}から\texttt{Fs}まのベクトルに対して，各要素をサンプリング周波数で割ると時間軸テーブルを作成することができる．\par
+時間軸データの作成について，サンプリング周波数\texttt{Fs}に対して\(m\)秒間の正弦波を生成するためには，\ref{src:時間軸作成と正弦波の作成}のように\texttt{0}から\texttt{Fs}まのベクトルに対して，各要素をサンプリング周波数で割ると時間軸テーブルを作成することができる．\par
 \begin{wrapfigure}{r}[0mm]{.4\textwidth}
-    \begin{lstlisting}[caption={時間軸作成},numbers={none},label={src:時間軸作成}]
+    \begin{lstlisting}[caption={時間軸作成と正弦波の作成},numbers={none},label={src:時間軸作成と正弦波の作成}]
 t = (0 : m*(Fs-1)) /Fs;
+y = sin(2*pi*f*t);
 \end{lstlisting}
 \end{wrapfigure}
 \(t\)の各要素\(t_n\)に対して三角関数\(\sin(2\pi ft_n)\)を演算し，ベクトル\(y\)の要素\(y_n\)に代入する．従って\(y\)も\mat{1}{N}のベクトルになる．
@@ -141,7 +142,7 @@ sound(y, Fs);
     N & = \big|f_1-f_2\big|\label{equ:うなり}
 \end{align}
 \(f_1\)と\(f_2\)の差が大きければ，当然うなり（\(N\)）の回数は多くなり，\(f_1\)と\(f_2\)の差が小さければうなりの回数は少なくなる．\par
-本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)，\(f_2=441\textrm{Hz}\)の純音を加算合成した波形を生成し再生する．\appd{\ref{sec:\kadaiac}}{src:01_03}\par
+本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)の純音\(y_1\)，\(f_2=441\textrm{Hz}\)の純音\(y_2\)を加算合成\(\big(y_1+y_2\big)\)した波形を生成し再生する．\appd{\ref{sec:\kadaiac}}{src:01_03}
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
     \caption{\kadaiac\ 実験結果}
@@ -164,24 +165,29 @@ sound(y, Fs);
 \purpose
 矩形波は周期関数だが，見た目は正弦波ではない．これをプログラム上でどのように再現するのか．フーリエ級数展開を用いた矩形波の描画やフーリエ級数展開のプログラム上で再現し，理想的な矩形波との比較を行う．
 \method
-\paragraph{フーリエ級数展開}周期\(T\)の任意の周期信号\(f(t)\)に対して，それはより短い周期\(T/n(n=1,2,\dots)\)を持つ正弦波の重ね合わせで表すことができる．具体的には\eqref{equ:フーリエ級数展開}で表すことができ，これをフーリエ級数展開という．\cite[p.18-p.19]{信号処理}
-\begin{align}
-    f(t) & =\frac{1}{2}a_0 + \sum_{k=1}^{\infty}\big(a_k\cos(k\omega_0t)+b_k\sin(k\omega_0t)\big) & \omega_0 & =\frac{2\pi}{T}\label{equ:フーリエ級数展開}  \\
-    f(t) & =\frac{1}{2}a_0 + \sum_{k=1}^{N}\big(a_k\cos(k\omega_0t)+b_k\sin(k\omega_0t)\big)      & \omega_0 & =\frac{2\pi}{T}\label{equ:フーリエ級数展開N}
-\end{align}
-特に\eqref{equ:フーリエ級数展開N}の\(N=1\)の時を基本周波数と呼ぶ．\\
-\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+\paragraph{フーリエ級数展開}周期\(T\)の任意の周期信号\(f(t)\)に対して，それはより短い周期\(T/n(n=1,2,\dots)\)を持つ正弦波の重ね合わせで表すことができる．具体的には\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表すことができ，これをフーリエ級数展開\cite[p.18-p.19]{信号処理}という．特に\eqref{equ:フーリエ級数展開}の\(N=1\)の時を基本周波数と呼ぶ．
+
+\begin{wrapfigure}{r}[0cm]{.3\textwidth}
     \caption{矩形波（\(1\leq k\leq 50\)）}
     \label{fig:矩形波}
     \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_04_1.pdf}
 \end{wrapfigure}
-\paragraph{矩形波}
-矩形波は周期関数である．その周期を\(T\)とすると，関数\(f\)は時刻\(t\)に対して，フーリエ級数展開するとになる．\eqref{equ:矩形波}は周期\(T=1/2\)で定義した矩形波で，\eqref{equ:矩形波N}を\(N=50\)で出力した．\par
 \begin{align}
-    f(t) & =\sum_{k=1}^{\infty}\frac{1}{2k-1}\sin\big(2\pi(2k-1)ft\big)\label{equ:矩形波} \\
-    f(t) & =\sum_{k=1}^{N}\frac{1}{2k-1}\sin\big(2\pi(2k-1)ft\big)\label{equ:矩形波N}
+    f(t) & =\frac{1}{2}a_0 + \sum_{k=1}^{N}\big(a_k\cos(k\omega_0t)+b_k\sin(k\omega_0t)\big) & \omega_0 & =\frac{2\pi}{T}\label{equ:フーリエ級数展開}
 \end{align}
-\paragraph{実験内容}周期\(T=1/2\)として，\eqref{equ:矩形波N}の\(N\)の値を\(N=1, 5, 25\)と増やした時に次第に波形が矩形波に収束していくことを確認する．
+\paragraph{矩形波}
+矩形波は周期関数である．その周期を\(T\)とすると，関数\(f\)は時刻\(t\)に対して，フーリエ級数展開するとになる．\eqref{equ:矩形波}\((N=\infty)\)は周期\(T=1/2\)で定義した矩形波で，\eqref{equ:矩形波}を\(N=50\)で出力した．
+\begin{align}
+    f(t) & =\sum_{k=1}^{N}\frac{1}{2k-1}\sin\big(2\pi(2k-1)ft\big)\label{equ:矩形波}
+\end{align}
+\paragraph{実験内容}周期\(T=1/2\)として，\eqref{equ:矩形波}の\(N\)の値を\(N=1, 5, 25\)と増やした時に次第に波形が矩形波に収束していくことを確認する．
+計算機で和\(\big(\sum\big)\)の演算をに示す通りに行う．
+\begin{lstlisting}[caption={和の演算},label={src:和の演算},numbers={none}]
+y = 0;
+for k=1:50
+    y = y + 1/(2*k-1) * sin(2*pi*(2*k-1)*f*t); % 矩形波の例
+end
+\end{lstlisting}
 \result
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
@@ -200,3 +206,11 @@ sound(y, Fs);
     すべての周波数成分を均等に含む，パワースペクトルが一定である不規則性の非常に強い波のことである．\\
     \hfill\cite{witenoise}
 \end{leftbar}
+ガウス雑音（\textit{gaussian noise}）は以下のように定義されている．
+\begin{leftbar}
+    Gaussian noise represents statistical noise having the probability density function equal to that of the normal distribution.\\
+    \hfill\cite{barbu2013variational}
+\end{leftbar}
+つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．今回の実験ではガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布に従っているかを確認する．
+また，ガウス分布に従った統計的ノイズの利用方法について調査し，考察する．
+\method
