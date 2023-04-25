@@ -11,20 +11,21 @@ b = 0; % 平均
 
 y = a.*randn(tl,1) + b;
 
-figure;
+fig0 = figure;
 plot(t,y);
-title('白色ガウス雑音');
 xlabel('time[s]');
-ylabel('振幅');
+ylabel('amplitude');
 
 
 num=100; % ヒストグラム分割数
 
 [h, c] = hist(y, num);
-figure;
+
+fig1 = figure;
 plot(c,h);
-title('ヒストグラム');
-xlabel('周波数');
-ylabel('頻度');
+xlabel('amplitude');
+ylabel('frequency[times]');
 
 sound(y,Fs);
+exportgraphics(fig0,'../Figures/01_05_0.pdf','ContentType','vector');
+exportgraphics(fig1,'../Figures/01_05_1.pdf','ContentType','vector');

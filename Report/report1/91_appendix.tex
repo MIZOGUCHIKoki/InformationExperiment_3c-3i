@@ -4,9 +4,14 @@
 \setcounter{section}{0}
 \renewcommand{\thelstlisting}{src.\thesection-\arabic{lstlisting}}
 \renewcommand{\thesection}{\Alph{section}}
+\newcommand{\secref}[1]{#1\ （第\ref{sec:#1}節 →p.\pageref{sec:#1}）}
 \section{課題1}
-\lstinputlisting[caption={01-01: \kadaiaa},label={src:01_01}]{../../01_EngineeringCharacteristicsOfSound/no1.m}
-\lstinputlisting[caption={01-02: \kadaiab},label={src:01_02}]{../../01_EngineeringCharacteristicsOfSound/no2.m}
-\lstinputlisting[caption={01-03: \kadaiac},label={src:01_03}]{../../01_EngineeringCharacteristicsOfSound/no3.m}
-\lstinputlisting[caption={01-04: \kadaiad},label={src:01_04}]{../../01_EngineeringCharacteristicsOfSound/no4.m}
-\lstinputlisting[caption={01-05: \kadaiae},label={src:01_05}]{../../01_EngineeringCharacteristicsOfSound/no5.m}
+\lstinputlisting[caption={01-01: \secref{\kadaiaa}},label={src:01_01}]{../../01_EngineeringCharacteristicsOfSound/no1.m}
+\lstinputlisting[caption={01-02: \secref{\kadaiab}},label={src:01_02}]{../../01_EngineeringCharacteristicsOfSound/no2.m}
+\lstinputlisting[caption={01-03: \secref{\kadaiac}},label={src:01_03}]{../../01_EngineeringCharacteristicsOfSound/no3.m}
+\lstinputlisting[caption={01-04: \secref{\kadaiad}},label={src:01_04}]{../../01_EngineeringCharacteristicsOfSound/no4.m}
+\lstinputlisting[caption={01-05: \secref{\kadaiae}},label={src:01_05}]{../../01_EngineeringCharacteristicsOfSound/no5.m}
+\setcounter{lstlisting}{0}
+\section{課題2}
+\lstinputlisting[caption={02-01-1: \secref{\kadaiba}},label={src:02_01_1}]{../../02_FrequencyAnalysis/no1_1.m}
+\lstinputlisting[caption={02-01-2: \secref{\kadaibb}},label={src:02_01_2}]{../../02_FrequencyAnalysis/no1_2.m}

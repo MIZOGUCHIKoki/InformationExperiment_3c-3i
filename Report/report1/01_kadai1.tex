@@ -4,17 +4,17 @@
 我々は音の「高い」「低い」をどのようにして認識しているのだろうか．音が高いまたは低いと感じるためには何かと比較するはずだがその比較の指標は何だろうか．
 この実験ではまず，正弦波の生成をプログラミングを用いて作成する．そして周波数の変化に対して正弦波グラフおよび音の違いを実験を通して確認し，考察する．
 \method
-\paragraph{実験に用いる装置}このレポート内全ての実験に用いる言語はMathworks社の\matlab であ理，実行環境は\ref{tbl:実験環境}の通り．
+\paragraph{実験に用いる装置}このレポート内全ての実験に用いる言語はMathWorks\raisebox{2mm}{\tiny\textregistered}社の\matlab を用い，\ref{tbl:実験環境}の環境を用いて実験する．．
 \begin{table}[H]
     \caption{実験環境}
     \label{tbl:実験環境}
     \begin{tabularx}{\textwidth}{AR}
         \hline
-        実験機                      & Mac Studio 2022 （Apple社） \\
-        プロセッサ                    & Apple Silicon M1 Max     \\
-        メモリ                      & 32GB                     \\
-        \multirow{2}{*}{\matlab} & R2023a 9.14.02206163     \\
-                                 & 64-bit (maci64)          \\
+        実験機                      & Mac Studio 2022 （Apple社）       \\
+        プロセッサ                    & Apple Silicon M1 Max           \\
+        メモリ                      & 32GB                           \\
+        \multirow{2}{*}{\matlab} & R2023a Update1 9.14.02239454   \\
+                                 & 64-bit (maci64) March 30, 2023 \\
         \hline
     \end{tabularx}
 \end{table}
@@ -37,8 +37,7 @@ y = sin(2*pi*f*t);
 \(t\)の各要素\(t_n\)に対して三角関数\(\sin(2\pi ft_n)\)を演算し，ベクトル\(y\)の要素\(y_n\)に代入する．従って\(y\)も\mat{1}{N}のベクトルになる．
 生成した正弦波を\texttt{plot}関数を用いて\(y\)を\(t\)の関数として描画する．このように，ただ一つの正弦波からなるような音を\textbf{純音}という．\cite[p.1]{音響工学理論基礎}
 また，サンプリング周波数を\texttt{Fs}とし，データ列\texttt{y}を再生するためには\texttt{sound}関数を用いる．\par
-\paragraph{実験内容}この実験では，周波数を\(f_1=440\textrm{Hz}\)，\(f_2=660\textrm{Hz}\)の2種類を用いてそれぞれ正弦波\(y_1\)，\(y_2\)を生成する．生成した\(y_n(n=\{1,2\})\)に対して，\(t\)を横軸に取りグラフを作成し，サンプリング周波数を\(\textrm{\texttt{Fs}}=16000\textrm{Hz}\)として再生する．\par
-\appd{\ref{sec:\kadaiaa}}{src:01_01}
+\paragraph{実験内容}この実験では，周波数を\(f_1=440\textrm{Hz}\)，\(f_2=660\textrm{Hz}\)の2種類を用いてそれぞれ正弦波\(y_1\)，\(y_2\)を生成する．生成した\(y_n(n=\{1,2\})\)に対して，\(t\)を横軸に取りグラフを作成し，サンプリング周波数を\(\textrm{\texttt{Fs}}=16000\textrm{Hz}\)として再生する．\srcref{sec:\kadaiaa}{src:01_01}
 \result
 各正弦波のグラフを\ref{fig:\kadaiaa}に示す．音を聴き比べた結果，\(f_2\)の周波数を用いた正弦波は\(f_1\)を用いた正弦波に比べて音が高かった．具体的には\(f_1\)がAの音\footnote{イタリア語音階で「ラ」}であるのに対して，\(f_2\)の音は完全5度大きいEの音\footnote{イタリア語音階で「ミ」}であった．
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
@@ -71,15 +70,17 @@ y = sin(2*pi*f*t);
 \begin{align}
     y & =A\sin(2\pi ft)\label{equ:正弦波_振幅}
 \end{align}
-\paragraph{実験内容}この実験では，初期位相の変化と振幅の変化，それぞれ実験し変化前と変化後の音や波形の違いを発見する．周波数は\(f=440\textrm{Hz}\)とし，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)とする．
-左から純音，右から波長や初期位相を変化させた音を再生するようにして（\ref{src:左右から別の音を出力}），音の変化を確認する．\appd{\ref{sec:\kadaiab}}{src:01_02}
-\begin{lstlisting}[caption={左右から別の音を出力},label={src:左右から別の音を出力},numbers={none}]
+\begin{wrapfigure}{r}[0mm]{.4\textwidth}
+    \begin{lstlisting}[caption={左右から別の音を出力},label={src:左右から別の音を出力},numbers={none}]
 Fs = 16000; % サンプリング周波数
 y1 = 音声データ1; % N行1列（左）
 y2 = 音声データ2; % N行1列（右）
 y = [y1 y2]; % N行2列 列結合を行う
 sound(y, Fs); 
-\end{lstlisting}
+    \end{lstlisting}
+\end{wrapfigure}
+\paragraph{実験内容}この実験では，初期位相の変化と振幅の変化，それぞれ実験し変化前と変化後の音や波形の違いを発見する．周波数は\(f=440\textrm{Hz}\)とし，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)とする．
+左から純音，右から波長や初期位相を変化させた音を再生するようにして（\ref{src:左右から別の音を出力}），音の変化を確認する．\srcref{sec:\kadaiab}{src:01_02}
 \begin{table}[h]
     \caption{\kadaiab\ 実験内容}
     \label{tbl:\kadaiab_実験内容}
@@ -104,7 +105,7 @@ sound(y, Fs);
     \begin{tabularx}{\textwidth}{ccclR}
         \multicolumn{1}{c}{\textbf{実験対象}} & \multicolumn{1}{c}{\textbf{振幅（基準倍）}} & \multicolumn{1}{c}{\textbf{初期位相}} & \multicolumn{1}{c}{\textbf{生成される正弦波}} & \multicolumn{1}{c}{\textbf{純音との比較}} \\
         \hline
-        純音                                & 基準                                   & 基準                                & \(y_0=\sin(2\pi ft)\)                 & \multicolumn{1}{c}{ー}               \\
+        純音                                & 基準                                   & 基準                                & \(y_0=\sin(2\pi ft)\)                 & \multicolumn{1}{c}{---}             \\
         \hline
         \multirow{2}{*}{振幅}               & \(0.5\)                              & \(0\)                             & \(y_1=0.5\times\sin(2\pi ft)\)        & 音量がおおよそ\(1/2\)に聞こえた．                \\
                                           & \(0.25\)                             & \(0\)                             & \(y_2=0.25\times\sin(2\pi ft)\)       & 音量がおおよそ\(1/4\)に聞こえた．                \\
@@ -142,7 +143,7 @@ sound(y, Fs);
     N & = \big|f_1-f_2\big|\label{equ:うなり}
 \end{align}
 \(f_1\)と\(f_2\)の差が大きければ，当然うなり（\(N\)）の回数は多くなり，\(f_1\)と\(f_2\)の差が小さければうなりの回数は少なくなる．\par
-本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)の純音\(y_1\)，\(f_2=441\textrm{Hz}\)の純音\(y_2\)を加算合成\(\big(y_1+y_2\big)\)した波形を生成し再生する．\appd{\ref{sec:\kadaiac}}{src:01_03}
+本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)の純音\(y_1\)，\(f_2=441\textrm{Hz}\)の純音\(y_2\)を加算合成\(\big(y_1+y_2\big)\)した波形を生成し再生する．\srcref{sec:\kadaiac}{src:01_03}
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
     \caption{\kadaiac\ 実験結果}
@@ -161,11 +162,11 @@ sound(y, Fs);
 より\(1\)秒あたり\(1\)回のうなりが聞こえるはずなので，この実験結果は論理的に正しい．
 加算合成波\ref{fig:\kadaiac_実験結果}の振幅に着目しても，周波数\(f_1\)，\(f_2\)それぞれの正弦波の振幅が1であることを考えると，その加算合成波の振幅が2であることも理解できる．
 さらに，この加算合成波は\(t=0\)のとき最大値を迎えており，これは初期位相が同一の正弦波の加算合成であることを表している．
-\section{\kadaiad}
+\section{\kadaiad}\label{sec:\kadaiad}
 \purpose
 矩形波は周期関数だが，見た目は正弦波ではない．これをプログラム上でどのように再現するのか．フーリエ級数展開を用いた矩形波の描画やフーリエ級数展開のプログラム上で再現し，理想的な矩形波との比較を行う．
 \method
-\paragraph{フーリエ級数展開}周期\(T\)の任意の周期信号\(f(t)\)に対して，それはより短い周期\(T/n(n=1,2,\dots)\)を持つ正弦波の重ね合わせで表すことができる．具体的には\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表すことができ，これをフーリエ級数展開\cite[p.18-p.19]{信号処理}という．特に\eqref{equ:フーリエ級数展開}の\(N=1\)の時を基本周波数と呼ぶ．
+\paragraph{フーリエ級数展開}周期\(T\)の任意の周期信号\(f(t)\)に対して，それはより短い周期\(T/n(n=1,2,\dots)\)を持つ正弦波の重ね合わせで表すことができる．具体的には\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表すことができ，これをフーリエ級数展開という．\cite[p.18-p.19]{信号処理}特に\eqref{equ:フーリエ級数展開}の\(N=1\)の時を基本周波数と呼ぶ．
 
 \begin{wrapfigure}{r}[0cm]{.3\textwidth}
     \caption{矩形波（\(1\leq k\leq 50\)）}
@@ -181,7 +182,7 @@ sound(y, Fs);
     f(t) & =\sum_{k=1}^{N}\frac{1}{2k-1}\sin\big(2\pi(2k-1)ft\big)\label{equ:矩形波}
 \end{align}
 \paragraph{実験内容}周期\(T=1/2\)として，\eqref{equ:矩形波}の\(N\)の値を\(N=1, 5, 25\)と増やした時に次第に波形が矩形波に収束していくことを確認する．
-計算機で和\(\big(\sum\big)\)の演算をに示す通りに行う．
+計算機で和\(\big(\sum\big)\)の演算をに示す通りに行う．\srcref{sec:\kadaiad}{src:01_04}
 \begin{lstlisting}[caption={和の演算},label={src:和の演算},numbers={none}]
 y = 0;
 for k=1:50
@@ -199,18 +200,64 @@ end
 \consideration
 計算機を用いて\(N\)の値を無限大で出力することは不可能である．\ref{fig:矩形波}のように\(N=50\)として出力すると，理想的な矩形波に近づくが完全ではない．\par
 ここで\(N\)の値を大きくすると，\(T/2, T\)あたりで尖ったもの（ひげ）が確認される．フーリエ級数では不連続で誤差が大きい．このことをギブス現象という．\cite[p.34]{信号処理}これは，\(N\)が有限である限り無くならない．
-\section{\kadaiae}
+\section{\kadaiae}\label{sec:\kadaiae}
 \purpose
 白色雑音（\textit{white noise}）は以下のように定義されている．
 \begin{leftbar}
-    すべての周波数成分を均等に含む，パワースペクトルが一定である不規則性の非常に強い波のことである．\\
+    すべての周波数成分を均等に含む，パワースペクトルが一定である不規則性の非常に強い波のことである．
     \hfill\cite{witenoise}
 \end{leftbar}
 ガウス雑音（\textit{gaussian noise}）は以下のように定義されている．
 \begin{leftbar}
-    Gaussian noise represents statistical noise having the probability density function equal to that of the normal distribution.\\
+    Gaussian noise represents statistical noise having the probability density function equal to that of the normal distribution.
     \hfill\cite{barbu2013variational}
 \end{leftbar}
-つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．今回の実験ではガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布に従っているかを確認する．
-また，ガウス分布に従った統計的ノイズの利用方法について調査し，考察する．
+つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．今回の実験ではガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布\footnote{以後，課題内容や他の用語との兼ね合いにより「正規分布」を「ガウス分布」と表す．}に従っているかを確認する．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \vspace{-.5cm}
+    \begin{lstlisting}[caption={乱数生成・ヒストグラム},label={src:乱数生成・ヒストグラム},xleftmargin=3mm]
+rng(0, 'twister');
+X = randn(n,m);
+num = 100;
+[h, c] = hist(X, num);
+plot(c,h);
+    \end{lstlisting}
+    \begin{lstlisting}[caption={平均と標準偏差の変更},label={src:平均と標準偏差の変更},numbers={none},xleftmargin=3mm]
+X = randn(n,m); % 乱数生成
+X = a.*X + b; % 演算
+    \end{lstlisting}
+    \vspace{-1cm}
+\end{wrapfigure}
 \method
+\paragraph{\matlab 関数の説明}標準正規分布から乱数の行列を取り出すには，\texttt{randn}関数を用いる．乱数生成機の初期化を行い，\mat{n}{m}の乱数をを取り出すには，\ref{src:乱数生成・ヒストグラム}［1-2行目］を記述する．
+また，データ列\texttt{X}に対して，ヒストグラムを\texttt{num}段階で分割し表示するためには，\ref{src:乱数生成・ヒストグラム}［3-5行目］を記述する．
+\paragraph{ガウス分布と標準正規分布}ガウス分布とは，平均値・中央値・最頻値が一致するという特徴を持つ確率分布．その確率変数を\(x\)としたときの確率密度関数\(f\)は\eqref{equ:確率密度関数}のように与えらえる．
+標準正規分布は，平均\(\mu=0\)，標準偏差\(\sigma^2=1\)のガウス分布である．その標準正規分布の確率密度関数\(f_N\)は\eqref{equ:標準正規分布}となる．
+\begin{align}
+    f(x)   & = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu^2)}{2\sigma^2}\right) & \big(\mu:\textrm{平均}\quad\sigma^2:\textrm{分散}\quad-\infty<x<\infty\big)\label{equ:確率密度関数} \\
+    f_N(x) & =\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{x^2}{2}\right)                        & \big(-\infty<x<\infty\big)\label{equ:標準正規分布}
+\end{align}
+\begin{leftbar}
+    確率変数\(x\)に対して，その平均が\(\mu_x\)，分散が\({\sigma_x}^2\)のとき，\(y=ax+b\quad(a\textrm{と}b\textrm{は定数})\)で定義される確率変数\(y\)の平均は\(\mu_y=a\mu_x+b\)，分散は\({\sigma_y}^2=a^2{\sigma_x}^2\)となる．\hfill\cite{matlab}
+\end{leftbar}
+従って，標準正規分布に従って出力されたデータ列の平均を\texttt{a}，標準偏差を\texttt{b}に変更したい場合には，\mat{n}{m}データ列\texttt{X}に対して\texttt{X}の各要素と\texttt{a}の積をとり，データ列\texttt{X}と\texttt{b}の和をとる．（\ref{src:平均と標準偏差の変更}）\srcref{sec:\kadaiae}{src:01_05}
+\result
+ガウス雑音の波形を\ref{fig:ガウス雑音の波形}，ヒストグラムを\ref{fig:ヒストグラム}に示す．聴音した結果，「ザー」という所謂雑音が聞こえた．
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{.48\textwidth}
+        \centering
+        \caption{ガウス雑音の波形}
+        \label{fig:ガウス雑音の波形}
+        \includegraphics[keepaspectratio,height=.2\textheight]{../../Figures/01_05_0.pdf}
+    \end{minipage}
+    \begin{minipage}{.48\textwidth}
+        \centering
+        \caption{ヒストグラム}
+        \label{fig:ヒストグラム}
+        \includegraphics[keepaspectratio,height=.2\textheight]{../../Figures/01_05_1.pdf}
+    \end{minipage}
+\end{figure}
+\consideration
+聴音確認による，ガウス雑音の特徴は捉えることができなかった．ヒストグラム\ref{fig:ヒストグラム}を確認すると，平均\(\mu=0\)のガウス分布におおよそ従っていることがわかる．
