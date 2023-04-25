@@ -10,18 +10,20 @@ y_1 = ones(1,128);
 
 y = [y_0 y_1];
 y = [y y y y];
-figure;
-xlabel('点[個]');
-ylabel('振幅');
+fig0 = figure;
 plot(y);
+xlabel('point');
+ylabel('amplitude');
 axis([0 1024 -0.5 1.5]);
 
 fft_y = fft(y);
 ln = length(abs(fftshift(fft(y))));
 fft_ys = fftshift(fft_y);
 fft_ys = abs(fft_ys);
-figure;
+fig1 = figure;
 plot(fs,fft_ys);
-xlabel('周波数[Hz]');
-ylabel('振幅');
+xlabel('frequency[Hz]');
+ylabel('amplitude');
 axis([0 200 -10 600]);
+exportgraphics(fig0,'../Figures/02_021.pdf','ContentType','vector');
+exportgraphics(fig1,'../Figures/02_022.pdf','ContentType','vector');

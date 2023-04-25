@@ -5,7 +5,9 @@
 このグラフからわかるのは時刻に対しての振幅だ．ただし波形の分析はそれだけでは不十分である．
 波形というのはフーリエ級数展開の理論により，いかなる波形も\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表せる．
 波形に対してフーリエ変換を行うと「周波数に対する振幅」を得ることができる．矩形波\eqref{equ:矩形波}の振幅と周波数をグラフに描画したものを振幅スペクトルと呼ぶ．（\ref{fig:周波数解析}）\par
-今回の実験では，純音と矩形波に対して演算を施し周波数解析を行う．周波数に対しての振幅をグラフに描画し，どの周波数成分が多いか確認する．
+今回の実験では，純音と矩形波に対して周波数解析を行う．
+純音では解析結果より純音の周波数をより多く含んでいるか確認する．
+また矩形波では高調波の存在を確認し，振幅が\eqref{equ:矩形波}通りになっているか確かめる．
 \begin{figure}[H]
     \centering
     \input{TikZ/02_00FA.tex}
@@ -14,15 +16,15 @@
 \end{figure}
 \method
 \paragraph{高速フーリエ変換の実装}
-\matlab ではデータ列\texttt{y}に対して高速フーリエ変換をする関数\texttt{fft(y)}がある．
-ただし，\texttt{fft}関数の仕様上いくつかの注意が必要である．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．
+\matlab では高速フーリエ変換をする関数（\texttt{fft}）がある．
+ただし，\texttt{fft}関数の仕様上いくつかの注意が必要である．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．（\ref{src:振幅スペクトルの取得}）
 \begin{enumerate}
-    \item 高速フーリエ変換を行う．（\texttt{y\_fft=fft(y)}）\\
+    \item 高速フーリエ変換を行う．\\
           \texttt{fft}関数は出力として，サンプリング周波数\texttt{Fs}に対して，\(\big[\textrm{\texttt{-Fs/2}},\textrm{\texttt{Fs/2}}\big]\)範囲の周波数に対する振幅のデータを得る．
-    \item 出力データ列\texttt{fft(y)}のデータを整列させる．（\texttt{y\_fft=fftshift(y\_fft)}）\\
-          \texttt{fft}関数の出力は，正のデータ・負のデータ（左右）が入れ替わった状態で出力される．
-    \item これまでの過程で出力されるデータは複素数データである．絶対値を取るために\texttt{abs}関数を用いる．
-    \item グラフとして描画するために，周波数軸を作成する．
+    \item 出力データ列\texttt{fft(y)}のデータを整列させる．\\
+          \texttt{fft}関数の出力は，正のデータ・負のデータ（左右）が入れ替わった状態で出力される．（\ref{fig:fft直後のデータ}\ -\ \ref{fig:fftshift後のデータ（グラフ）}）
+    \item これまでの過程で出力されるデータは複素数データである．絶対値を取るために\texttt{abs}関数を用いる．（\ref{fig:absを適用した後のデータ}）
+    \item グラフとして描画するために，周波数軸を作成する．（\ref{src:振幅スペクトルの取得}）
 \end{enumerate}
 \begin{figure}[h]
     \centering
@@ -49,14 +51,83 @@
         \input{TikZ/02_05fftshift.tex}
         \caption{\texttt{fftshift}後の出力データ（グラフ）}
         \label{fig:fftshift後のデータ（グラフ）}
-    \end{minipage}
-    \begin{minipage}{.48\textwidth}
-        \centering
-        \includegraphics[keepaspectratio,width=.9\textwidth]{Figures/fft_fftshift.pdf}
-    \end{minipage}
-    \begin{minipage}{.48\textwidth}
+    \end{minipage}\\
+    \dotfill\\
+    \begin{minipage}[b]{.48\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=.9\textwidth]{Figures/fft_abs.pdf}
+        \caption{\texttt{abs}を適用した後のデータ（グラフ）}
+        \label{fig:absを適用した後のデータ}
+    \end{minipage}
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \begin{lstlisting}[caption={振幅スペクトルの取得},label={src:振幅スペクトルの取得},xleftmargin={.5cm}]
+y; % データ列
+y_fft = fft(y); % 高速フーリエ変換
+y_fftshift = fftshift(y_fft); % 左右交換
+y_abs = fft_y; % 絶対値
+ln = length(y_abs);
+% 周波数テーブルの作成
+freq = [-Fs/2 : Fs/ln : Fs/2 - Fs/ln];
+plot(freq, y_abs); % グラフ描画
+\end{lstlisting}
+        \begin{flushleft}
+            周波数テーブルの作成について，得られたデータ数\texttt{ln}に対して，
+            周波数テーブルの長さ\texttt{Fs}に収める必要があるので，ステップ幅\texttt{Fs/ln}となる\texttt{-Fs/2}から\texttt{Fs/2}の配列を作成する．
+        \end{flushleft}
     \end{minipage}
 \end{figure}
+\paragraph{実験の内容}今回の実験では，純音と矩形波の周波数解析を行う．サンプリング周波数を\(\textrm{\texttt{Fs}}=8192\textrm{Hz}\)と設定する．
+\begin{figure}[H]
+    \begin{minipage}[c]{.55\textwidth}
+        \begin{itemize}
+            \item[\textbf{純音}] \(440\textrm{Hz}\)の純音で実験する．
+            \item 純音から\(1024\)点取り出す．\\
+                  データ列の先頭から\(1024\)個のデータを選択する方法で行う．
+            \item 振幅スペクトルを\(0\textrm{Hz}\)から\(1\textrm{kHz}\)まで描画する．
+            \item \(440\textrm{Hz}\)にピークが来ているか確認する．
+            \item[\textbf{矩形波}] \(128\)点値\(0\)が続き，\(128\)点値\(1\)が続く波形を\(4\)回繰り返す矩形波．（\ref{fig:作成した矩形波}）
+            \item 振幅スペクトルを\(0\textrm{Hz}\)から\(200\textrm{Hz}\)まで描画する．
+            \item 高調波が発生しているか，その振幅が\eqref{equ:矩形波}通りになっているか確認する．
+        \end{itemize}
+        \srcref{sec:\kadaiba}{src:02_01_1}，\ref{src:02_01_2}
+    \end{minipage}
+    \begin{minipage}[c]{.4\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/02_021.pdf}
+        \caption{作成した矩形波}
+        \label{fig:作成した矩形波}
+    \end{minipage}
+\end{figure}
+\result
+出力された結果に対して，特出する点の座標を表示させる．\ref{fig:\kadaiba_純音の振幅スペクトル}について，\(440\textrm{Hz}\)の軸に対して振幅が大きくあることがわかった．\par
+\ref{fig:\kadaiba_矩形波の振幅スペクトル}については図中にある点の高調波が確認された．
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{.48\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/02_01.png}
+        \caption{純音の振幅スペクトル}
+        \label{fig:\kadaiba_純音の振幅スペクトル}
+    \end{minipage}
+    \begin{minipage}{.48\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/02_022.png}
+        \caption{矩形波の振幅スペクトル}
+        \label{fig:\kadaiba_矩形波の振幅スペクトル}
+    \end{minipage}
+\end{figure}
+\consideration
+\paragraph{純音}実験結果より，純音の周波数\(440\textrm{Hz}\)が一番多く，他の高調波はほとんど目立たない．
+\paragraph{矩形波}\ref{fig:\kadaiba_矩形波の振幅スペクトル}より高調波の存在は確認できる．矩形波のフーリエ級数展開は\eqref{equ:矩形波}である．\(k=\{1,2,3,4\}\)のときの正弦波の式を\eqref{equ:矩形波具体例}に示す．
+\begin{equation}
+    \begin{aligned}
+        \sin(2\pi(2-1)ft)            & =\sin(2\pi ft)             & (k=1) \\
+        \frac{1}{3}\sin(2\pi(4-1)ft) & =\frac{1}{3}\sin(6\pi ft)  & (k=2) \\
+        \frac{1}{5}\sin(2\pi(6-1)ft) & =\frac{1}{5}\sin(10\pi ft) & (k=3) \\
+        \frac{1}{7}\sin(2\pi(8-1)ft) & =\frac{1}{7}\sin(14\pi ft) & (k=4) \\
+    \end{aligned}\label{equ:矩形波具体例}
+\end{equation}
+これからわかるように，周波数が大きくなるにつれて振幅は小さくなることがわかる．これは\ref{fig:\kadaiba_矩形波の振幅スペクトル}と一致する．ただし，\eqref{equ:矩形波具体例}のように\(\frac{1}{3}, \frac{1}{5},\dots\)と変化しないのは\texttt{abs}関数の利用の際に振幅が変化するためと考えられるが（\ref{fig:absを適用した後のデータ}），詳しくは不明である．
+また，\ref{fig:\kadaiba_矩形波の振幅スペクトル}と\eqref{equ:矩形波具体例}の周波数に関する関係も不明である．
 \section{\kadaibb}\label{sec:\kadaibb}
