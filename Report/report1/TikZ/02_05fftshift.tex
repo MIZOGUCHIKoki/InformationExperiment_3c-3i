@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+    \node(fig){\includegraphics[keepaspectratio,width=.9\textwidth]{Figures/fft_fftshift.pdf}};
+    \coordinate (figsouth) at (fig.south);
+    \coordinate (figscenter) at ($(figsouth)+(2.75mm,7.1mm)$);
+    \coordinate (figncenter) at ($(figscenter)+(0,5.48cm)$);
+    \coordinate (figsleft) at ($(figscenter)+(-3.47cm,0)$);
+    \coordinate (figsright) at ($(figscenter)+(3.47cm,0)$);
+    \fill[fill=blue,opacity=0.1](figsleft)--(figsleft |- figncenter)--(figncenter)--(figscenter)--cycle;
+    \fill[fill=red,opacity=0.1](figsright)--(figsright |- figncenter)--(figncenter)--(figscenter)--cycle;
+\end{tikzpicture}

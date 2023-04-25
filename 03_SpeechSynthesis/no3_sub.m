@@ -13,23 +13,23 @@ clear;
  
  
 
- figure;
+ fig0 = figure;
  plot(fs1,Y1);
- % axis([-5000 5000 0 80]);
- xlabel('周波数[Hz]');
- ylabel('振幅');
+ axis([-25000 25000 -80 80]);
+ xlabel('frequency[Hz]');
+ ylabel('amplitude');
 
- figure;
+ fig1 = figure;
  plot(fs1,Y1shift);
- % axis([-5000 5000 0 80]);
- xlabel('周波数[Hz]');
- ylabel('振幅');
+ axis([-25000 25000 -80 80]);
+ xlabel('frequency[Hz]');
+ ylabel('amplitude');
 
- figure;
+ fig2 = figure;
  plot(fs1,A1);
- axis([-5000 5000 -80 80]);
- xlabel('周波数[Hz]');
- ylabel('振幅');
+ axis([-25000 25000 -80 80]);
+ xlabel('frequency[Hz]');
+ ylabel('amplitude');
 
  y1mx = [1092 545 819 682 956 2868 3555 136 1219 3680];
  y1my = [77 51 50 42 36 35 30.3459 25 25 21];
@@ -41,3 +41,6 @@ clear;
  figure;
  plot(t1,ya);
  % sound(ya,Fs1);
+ exportgraphics(fig0,'../Report/report1/Figures/fft_fft.pdf','ContentType','vector');
+ exportgraphics(fig1,'../Report/report1/Figures/fft_fftshift.pdf','ContentType','vector');
+ exportgraphics(fig2,'../Report/report1/Figures/fft_abs.pdf','ContentType','vector');

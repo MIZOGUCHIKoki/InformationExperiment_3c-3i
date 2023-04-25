@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+    \fill[fill=blue,opacity=0.1]($(.9\textwidth,0.5)!0.5!(0,0.5)$)rectangle(.9\textwidth,0);
+    \fill[fill=red,opacity=0.1](0,0)rectangle($(.9\textwidth,0.5)!0.5!(0,0.5)$);
+    \draw[thick](0,0)--(0.9\textwidth,0)--(0.9\textwidth,0.5)--(0,0.5)--cycle;
+    \node[below] at (0,0)(a){\tiny\texttt{1}};
+    \node[above] at (0,0.5){\tiny\texttt{0}};
+    \node[above left] at ($(.9\textwidth,0.5)!0.5!(0,0.5)$){\tiny\texttt{Fs/2}};
+    \node[above right] at ($(.9\textwidth,0.5)!0.5!(0,0.5)$){\tiny\texttt{-Fs/2}};
+    \node[above] at (.9\textwidth,0.5){\tiny\texttt{-1/Fs}};
+    \node[below] at (0.9\textwidth,0)(b){\tiny\texttt{Fs}};
+    \draw[latex-latex](a)--(b)node[midway,below]{\tiny\texttt{index}};
+    \coordinate (C) at ($(0.9\textwidth,0)!0.5!(0,0)$);
+    \draw[thick](C)--($(C)+(0,1.5mm)$);
+    \coordinate (c) at ($(0.9\textwidth,0.5)!0.5!(0,0.5)$);
+    \draw[thick](c)--($(c)+(0,-1.5mm)$);
+    \node at($(C)!0.5!(0,5mm)$){\tiny 正のデータ};
+    \node at($(c)!0.5!(0.9\textwidth,0mm)$){\tiny 負のデータ};
+\end{tikzpicture}

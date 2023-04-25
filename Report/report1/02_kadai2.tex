@@ -4,8 +4,59 @@
 \matlab を用いて周波数解析を行う．我々が普段見る「波形」は時間軸を横，振幅を縦にしたグラフである．
 このグラフからわかるのは時刻に対しての振幅だ．ただし波形の分析はそれだけでは不十分である．
 波形というのはフーリエ級数展開の理論により，いかなる波形も\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表せる．
-波形に対してフーリエ変換を行うと「周波数に対する振幅」を得ることができる．\par
-今回の実験では，純音と矩形波に対して演算を施し周波数解析を行う．周波数に対しての振幅をグラフに描画し，結果に対して考察する．
+波形に対してフーリエ変換を行うと「周波数に対する振幅」を得ることができる．矩形波\eqref{equ:矩形波}の振幅と周波数をグラフに描画したものを振幅スペクトルと呼ぶ．（\ref{fig:周波数解析}）\par
+今回の実験では，純音と矩形波に対して演算を施し周波数解析を行う．周波数に対しての振幅をグラフに描画し，どの周波数成分が多いか確認する．
+\begin{figure}[H]
+    \centering
+    \input{TikZ/02_00FA.tex}
+    \caption{周波数解析}
+    \label{fig:周波数解析}
+\end{figure}
 \method
-
+\paragraph{高速フーリエ変換の実装}
+\matlab ではデータ列\texttt{y}に対して高速フーリエ変換をする関数\texttt{fft(y)}がある．
+ただし，\texttt{fft}関数の仕様上いくつかの注意が必要である．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．
+\begin{enumerate}
+    \item 高速フーリエ変換を行う．（\texttt{y\_fft=fft(y)}）\\
+          \texttt{fft}関数は出力として，サンプリング周波数\texttt{Fs}に対して，\(\big[\textrm{\texttt{-Fs/2}},\textrm{\texttt{Fs/2}}\big]\)範囲の周波数に対する振幅のデータを得る．
+    \item 出力データ列\texttt{fft(y)}のデータを整列させる．（\texttt{y\_fft=fftshift(y\_fft)}）\\
+          \texttt{fft}関数の出力は，正のデータ・負のデータ（左右）が入れ替わった状態で出力される．
+    \item これまでの過程で出力されるデータは複素数データである．絶対値を取るために\texttt{abs}関数を用いる．
+    \item グラフとして描画するために，周波数軸を作成する．
+\end{enumerate}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \input{TikZ/02_01beforefft.tex}
+        \caption{\texttt{fft}直後の出力データ}
+        \label{fig:fft直後のデータ}
+    \end{minipage}
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \input{TikZ/02_02afterfft.tex}
+        \caption{\texttt{fftshift}後の出力データ}
+        \label{fig:fftshift後のデータ}
+    \end{minipage}
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \input{Tikz/02_04fft.tex}
+        \caption{\texttt{fft}直後の出力データ（グラフ）}
+        \label{fig:fft直後のデータ（グラフ）}
+    \end{minipage}
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \input{TikZ/02_05fftshift.tex}
+        \caption{\texttt{fftshift}後の出力データ（グラフ）}
+        \label{fig:fftshift後のデータ（グラフ）}
+    \end{minipage}
+    \begin{minipage}{.48\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=.9\textwidth]{Figures/fft_fftshift.pdf}
+    \end{minipage}
+    \begin{minipage}{.48\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=.9\textwidth]{Figures/fft_abs.pdf}
+    \end{minipage}
+\end{figure}
 \section{\kadaibb}\label{sec:\kadaibb}

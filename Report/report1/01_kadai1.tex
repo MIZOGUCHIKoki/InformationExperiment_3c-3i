@@ -41,9 +41,9 @@ y = sin(2*pi*f*t);
 \result
 各正弦波のグラフを\ref{fig:\kadaiaa}に示す．音を聴き比べた結果，\(f_2\)の周波数を用いた正弦波は\(f_1\)を用いた正弦波に比べて音が高かった．具体的には\(f_1\)がAの音\footnote{イタリア語音階で「ラ」}であるのに対して，\(f_2\)の音は完全5度大きいEの音\footnote{イタリア語音階で「ミ」}であった．
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_01.pdf}
     \caption{周波数が異なる正弦波のグラフ}
     \label{fig:\kadaiaa}
-    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_01.pdf}
 \end{wrapfigure}
 さらに，聴音確認・目視確認では音の大きさ，音色，振幅や波形の変化は確認でなかった．\par
 \consideration 周波数\ \((f)\)\ とは1秒間の振動回数であり，これが音の高さを決める．実験結果より周波数が大きい，つまり1秒間により多く振動すれば音が高くなることが分かった．
@@ -117,17 +117,17 @@ sound(y, Fs);
 \end{table}
 \begin{figure}[H]
     \centering
-    \begin{minipage}[t]{.48\textwidth}
+    \begin{minipage}[b]{.48\textwidth}
         \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/01_02_1.pdf}
         \caption{\kadaiab\ 実験結果（振幅の変化）}
         \label{fig:\kadaiab_結果_振幅}
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/01_02_1.pdf}
     \end{minipage}
-    \begin{minipage}[t]{.48\textwidth}
+    \begin{minipage}[b]{.48\textwidth}
         \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/01_02_2.pdf}
         \caption{\kadaiab\ 実験結果（初期位相の変化）}
         \label{fig:\kadaiab_結果_初期位相}
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/01_02_2.pdf}
     \end{minipage}
 \end{figure}
 \consideration
@@ -146,9 +146,9 @@ sound(y, Fs);
 本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)の純音\(y_1\)，\(f_2=441\textrm{Hz}\)の純音\(y_2\)を加算合成\(\big(y_1+y_2\big)\)した波形を生成し再生する．\srcref{sec:\kadaiac}{src:01_03}
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
+    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_03.pdf}
     \caption{\kadaiac\ 実験結果}
     \label{fig:\kadaiac_実験結果}
-    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_03.pdf}
 \end{wrapfigure}
 \result
 うなりは4回聞こえた．また，時間軸に対して加算合成したデータを描画すると\ref{fig:\kadaiac_実験結果}となった．
@@ -169,9 +169,9 @@ sound(y, Fs);
 \paragraph{フーリエ級数展開}周期\(T\)の任意の周期信号\(f(t)\)に対して，それはより短い周期\(T/n(n=1,2,\dots)\)を持つ正弦波の重ね合わせで表すことができる．具体的には\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表すことができ，これをフーリエ級数展開という．\cite[p.18-p.19]{信号処理}特に\eqref{equ:フーリエ級数展開}の\(N=1\)の時を基本周波数と呼ぶ．
 
 \begin{wrapfigure}{r}[0cm]{.3\textwidth}
+    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_04_1.pdf}
     \caption{矩形波（\(1\leq k\leq 50\)）}
     \label{fig:矩形波}
-    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_04_1.pdf}
 \end{wrapfigure}
 \begin{align}
     f(t) & =\frac{1}{2}a_0 + \sum_{k=1}^{N}\big(a_k\cos(k\omega_0t)+b_k\sin(k\omega_0t)\big) & \omega_0 & =\frac{2\pi}{T}\label{equ:フーリエ級数展開}
@@ -192,9 +192,9 @@ end
 \result
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
+    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_04_2.pdf}
     \caption{\kadaiad\ 実験結果}
     \label{fig:\kadaiae_実験結果}
-    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_04_2.pdf}
 \end{wrapfigure}
 \ref{fig:\kadaiae_実験結果}の通り，\(N\)を大きくすると，矩形波に収束することがわかった．また，基本周波数と矩形波の周期も目測では一致している．
 \consideration
@@ -246,17 +246,17 @@ X = a.*X + b; % 演算
 ガウス雑音の波形を\ref{fig:ガウス雑音の波形}，ヒストグラムを\ref{fig:ヒストグラム}に示す．聴音した結果，「ザー」という所謂雑音が聞こえた．
 \begin{figure}[h]
     \centering
-    \begin{minipage}{.48\textwidth}
+    \begin{minipage}[b]{.48\textwidth}
         \centering
+        \includegraphics[keepaspectratio,height=.2\textheight]{../../Figures/01_05_0.pdf}
         \caption{ガウス雑音の波形}
         \label{fig:ガウス雑音の波形}
-        \includegraphics[keepaspectratio,height=.2\textheight]{../../Figures/01_05_0.pdf}
     \end{minipage}
-    \begin{minipage}{.48\textwidth}
+    \begin{minipage}[b]{.48\textwidth}
         \centering
+        \includegraphics[keepaspectratio,height=.2\textheight]{../../Figures/01_05_1.pdf}
         \caption{ヒストグラム}
         \label{fig:ヒストグラム}
-        \includegraphics[keepaspectratio,height=.2\textheight]{../../Figures/01_05_1.pdf}
     \end{minipage}
 \end{figure}
 \consideration
