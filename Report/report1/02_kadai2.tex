@@ -4,7 +4,7 @@
 \matlab を用いて周波数解析を行う．我々が普段見る「波形」は時間軸を横，振幅を縦にしたグラフである．
 このグラフからわかるのは時刻に対しての振幅だ．ただし波形の分析はそれだけでは不十分である．
 波形というのはフーリエ級数展開の理論により，いかなる波形も\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表せる．
-波形に対してフーリエ変換を行うと「周波数に対する振幅」を得ることができる．矩形波\eqref{equ:矩形波}の振幅と周波数をグラフに描画したものを振幅スペクトルと呼ぶ．（\ref{fig:周波数解析}）\par
+波形に対してフーリエ変換を行うと「周波数に対する振幅」を得ることができる．矩形波\eqref{equ:矩形波}の振幅と周波数をグラフに描画したものを振幅スペクトルと呼ぶ．（\figref{fig:周波数解析}）\par
 今回の実験では，純音と矩形波に対して周波数解析を行う．
 純音では解析結果より純音の周波数をより多く含んでいるか確認する．
 また矩形波では高調波の存在を確認し，振幅が\eqref{equ:矩形波}通りになっているか確かめる．
@@ -17,40 +17,36 @@
 \method
 \paragraph{高速フーリエ変換の実装}
 \matlab では高速フーリエ変換をする関数（\texttt{fft}）がある．
-ただし，\texttt{fft}関数の仕様上いくつかの注意が必要である．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．（\ref{src:振幅スペクトルの取得}）
+ただし，\texttt{fft}関数の仕様上いくつかの注意が必要である．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．（\srcref{src:振幅スペクトルの取得}）
 \begin{enumerate}
     \item 高速フーリエ変換を行う．\\
           \texttt{fft}関数は出力として，サンプリング周波数\texttt{Fs}に対して，\(\big[\textrm{\texttt{-Fs/2}},\textrm{\texttt{Fs/2}}\big]\)範囲の周波数に対する振幅のデータを得る．
     \item 出力データ列\texttt{fft(y)}のデータを整列させる．\\
-          \texttt{fft}関数の出力は，正のデータ・負のデータ（左右）が入れ替わった状態で出力される．（\ref{fig:fft直後のデータ}\ -\ \ref{fig:fftshift後のデータ（グラフ）}）
-    \item これまでの過程で出力されるデータは複素数データである．絶対値を取るために\texttt{abs}関数を用いる．（\ref{fig:absを適用した後のデータ}）
-    \item グラフとして描画するために，周波数軸を作成する．（\ref{src:振幅スペクトルの取得}）
+          \texttt{fft}関数の出力は，正のデータ・負のデータ（左右）が入れ替わった状態で出力される．（\figref{fig:fft直後のデータ}，\figref{fig:fftshift後のデータ}）
+    \item これまでの過程で出力されるデータは複素数データである．絶対値を取るために\texttt{abs}関数を用いる．（\figref{fig:absを適用した後のデータ}）
+    \item グラフとして描画するために，周波数軸を作成する．（\srcref{src:振幅スペクトルの取得}）
 \end{enumerate}
 \begin{figure}[h]
     \centering
     \begin{minipage}[b]{.48\textwidth}
         \centering
         \input{TikZ/02_01beforefft.tex}
+    \end{minipage}
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \input{TikZ/02_02afterfft.tex}
+    \end{minipage}
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \input{Tikz/02_04fft.tex}
         \caption{\texttt{fft}直後の出力データ}
         \label{fig:fft直後のデータ}
     \end{minipage}
     \begin{minipage}[b]{.48\textwidth}
         \centering
-        \input{TikZ/02_02afterfft.tex}
+        \input{TikZ/02_05fftshift.tex}
         \caption{\texttt{fftshift}後の出力データ}
         \label{fig:fftshift後のデータ}
-    \end{minipage}
-    \begin{minipage}[b]{.48\textwidth}
-        \centering
-        \input{Tikz/02_04fft.tex}
-        \caption{\texttt{fft}直後の出力データ（グラフ）}
-        \label{fig:fft直後のデータ（グラフ）}
-    \end{minipage}
-    \begin{minipage}[b]{.48\textwidth}
-        \centering
-        \input{TikZ/02_05fftshift.tex}
-        \caption{\texttt{fftshift}後の出力データ（グラフ）}
-        \label{fig:fftshift後のデータ（グラフ）}
     \end{minipage}\\
     \dotfill\\
     \begin{minipage}[b]{.48\textwidth}
@@ -86,11 +82,11 @@ plot(freq, y_abs); % グラフ描画
                   データ列の先頭から\(1024\)個のデータを選択する方法で行う．
             \item 振幅スペクトルを\(0\textrm{Hz}\)から\(1\textrm{kHz}\)まで描画する．
             \item \(440\textrm{Hz}\)にピークが来ているか確認する．
-            \item[\textbf{矩形波}] \(128\)点値\(0\)が続き，\(128\)点値\(1\)が続く波形を\(4\)回繰り返す矩形波．（\ref{fig:作成した矩形波}）
+            \item[\textbf{矩形波}] \(128\)点値\(0\)が続き，\(128\)点値\(1\)が続く波形を\(4\)回繰り返す矩形波．（\figref{fig:作成した矩形波}）
             \item 振幅スペクトルを\(0\textrm{Hz}\)から\(200\textrm{Hz}\)まで描画する．
             \item 高調波が発生しているか，その振幅が\eqref{equ:矩形波}通りになっているか確認する．
         \end{itemize}
-        \srcref{sec:\kadaiba}{src:02_01_1}\(\underset{\Rightarrow\textrm{p.\pageref{src:02_01_2}}}{\textrm{\ref{src:02_01_2}}}\)．
+        \ssrcref{sec:\kadaiba}{src:02_01_1}\(\underset{\Rightarrow\textrm{p.\pageref{src:02_01_2}}}{\textrm{\srcref{src:02_01_2}}}\)．
     \end{minipage}
     \begin{minipage}[c]{.4\textwidth}
         \centering
@@ -100,8 +96,8 @@ plot(freq, y_abs); % グラフ描画
     \end{minipage}
 \end{figure}
 \result
-出力された結果に対して，特出する点の座標を表示させる．\ref{fig:\kadaiba_純音の振幅スペクトル}について，\(440\textrm{Hz}\)の軸に対して振幅が大きくあることがわかった．\par
-\ref{fig:\kadaiba_矩形波の振幅スペクトル}については図中にある点の高調波が確認された．
+出力された結果に対して，特出する点の座標を表示させる．\figref{fig:\kadaiba_純音の振幅スペクトル}について，\(440\textrm{Hz}\)の軸に対して振幅が大きくあることがわかった．\par
+\figref{fig:\kadaiba_矩形波の振幅スペクトル}については図中にある点の高調波が確認された．
 \begin{figure}[h]
     \centering
     \begin{minipage}{.48\textwidth}
@@ -119,7 +115,7 @@ plot(freq, y_abs); % グラフ描画
 \end{figure}
 \consideration
 \paragraph{純音}実験結果より，純音の周波数\(440\textrm{Hz}\)が一番多く，他の高調波はほとんど目立たない．
-\paragraph{矩形波}\ref{fig:\kadaiba_矩形波の振幅スペクトル}より高調波の存在は確認できる．矩形波のフーリエ級数展開は\eqref{equ:矩形波}である．\(k=\{1,2,3,4\}\)のときの正弦波の式を\eqref{equ:矩形波具体例}に示す．
+\paragraph{矩形波}\figref{fig:\kadaiba_矩形波の振幅スペクトル}より高調波の存在は確認できる．矩形波のフーリエ級数展開は\eqref{equ:矩形波}である．\(k=\{1,2,3,4\}\)のときの正弦波の式を\eqref{equ:矩形波具体例}に示す．
 \begin{equation}
     \begin{aligned}
         \sin(2\pi(2-1)ft)            & =\sin(2\pi ft)             & (k=1) \\
@@ -128,8 +124,8 @@ plot(freq, y_abs); % グラフ描画
         \frac{1}{7}\sin(2\pi(8-1)ft) & =\frac{1}{7}\sin(14\pi ft) & (k=4) \\
     \end{aligned}\label{equ:矩形波具体例}
 \end{equation}
-これからわかるように，周波数が大きくなるにつれて振幅は小さくなることがわかる．これは\ref{fig:\kadaiba_矩形波の振幅スペクトル}と一致する．ただし，\eqref{equ:矩形波具体例}のように\(\frac{1}{3}, \frac{1}{5},\dots\)と変化しないのは\texttt{abs}関数の利用の際に振幅が変化するためと考えられるが（\ref{fig:absを適用した後のデータ}），詳しくは不明である．
-また，\ref{fig:\kadaiba_矩形波の振幅スペクトル}と\eqref{equ:矩形波具体例}の周波数に関する関係も不明である．
+これからわかるように，周波数が大きくなるにつれて振幅は小さくなることがわかる．これは\figref{fig:\kadaiba_矩形波の振幅スペクトル}と一致する．ただし，\eqref{equ:矩形波具体例}のように\(\frac{1}{3}, \frac{1}{5},\dots\)と変化しないのは\texttt{abs}関数の利用の際に振幅が変化するためと考えられるが（\figref{fig:absを適用した後のデータ}），詳しくは不明である．
+また，\figref{fig:\kadaiba_矩形波の振幅スペクトル}と\eqref{equ:矩形波具体例}の周波数に関する関係も不明である．
 \section{\kadaibb}\label{sec:\kadaibb}
 \purpose
 ローパスフィルタ（以下LPF）は以下のように説明されている．
@@ -139,7 +135,7 @@ plot(freq, y_abs); % グラフ描画
 今回の実験ではLPFを作成して，別途作成した音に対してフィルターを適用する．
 フィルターを適用する前後での振幅スペクトルを比較し，フィルターが機能しているかを確認するとともに，フィルターが適用されているか聴音確認する．
 \method
-今回フィルターを適用させる音源は，ドイツ語音階で「C4」から「C5」まで\(0.25\)秒づつ音を提示する．提示する音の順序を\eqref{equ:音の順序}に，各音階の周波数を\ref{tbl:音階と周波数}に示す．
+今回フィルターを適用させる音源は，ドイツ語音階で「C4」から「C5」まで\(0.25\)秒づつ音を提示する．提示する音の順序を\eqref{equ:音の順序}に，各音階の周波数を\tblref{tbl:音階と周波数}に示す．
 \begin{align}
     \textrm{C4}\to\textrm{D4}\to\textrm{E4}\to\textrm{F4}\to\textrm{G4}\to\textrm{A4}\to\textrm{H4}\to\textrm{C5}\label{equ:音の順序}
 \end{align}
@@ -156,7 +152,7 @@ plot(freq, y_abs); % グラフ描画
     \end{tabularx}
 \end{table}
 \paragraph{LPFの作成と適用}
-今回はフィルターの行列を作る方法ではなく，周波数テーブルの閉区間\(\big[-375\textrm{Hz},375\textrm{Hz}\big]\)以外の振幅を\(0\)にする方法でフィルターを適用する．（\ref{src:フィルターを適用する}）\srcref{sec:\kadaibb}{src:02_02}
+今回はフィルターの行列を作る方法ではなく，周波数テーブルの閉区間\(\big[-375\textrm{Hz},375\textrm{Hz}\big]\)以外の振幅を\(0\)にする方法でフィルターを適用する．（\srcref{src:フィルターを適用する}）\ssrcref{sec:\kadaibb}{src:02_02}
 \begin{lstlisting}[caption={フィルターを適用する},label={src:フィルターを適用する},numbers={none}]
 % データ列yをフーリエ変換後，Shiftしてabsをとったものを "fft_y" に格納している．
 % 周波数テーブルの変数名は "freq" である．
@@ -166,3 +162,29 @@ for k=1:length(fft_y)
     end
 end
 \end{lstlisting}
+\result
+LPF適用前の音声波形と，LPF適用後の音声波形をに示す．また，\figref{fig:振幅スペクトルの確認}には上にフィルタ適用前の振幅スペクトル，下にフィルタ適用後の振幅スペクトルを示している．聴音確認の結果G4以降の音は聞こえなかった．
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/02_20.pdf}
+        \caption{LPF適用前の波形}
+        \label{fig:LPF適用前の波形}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/02_22.pdf}
+        \caption{LPF適用後の波形}
+        \label{fig:LPF適用後の波形}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/02_21.pdf}
+        \caption{振幅スペクトルの確認}
+        \label{fig:振幅スペクトルの確認}
+    \end{minipage}
+\end{figure}
+\consideration
+結果より\(1\)秒後の音以降が聞こえない．1音階\(0.25\)秒あるので，4音階分（C4，D4，E4，F4）までが聞こえることを考えると，実験結果は理論的に正しい．\par
+\figref{fig:振幅スペクトルの確認}より，特定周波数以降が切り取られていることも確認できる．

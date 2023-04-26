@@ -51,22 +51,25 @@
     captionpos = t,
     otherkeywords = {soundsc, xticks, yticks, exportgraphics}
 }
-\renewcommand{\figurename}{}
-\renewcommand{\tablename}{}
-\renewcommand{\lstlistingname}{}
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+\renewcommand{\lstlistingname}{src.}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \renewcommand{\contentsname}{目次}
 \renewcommand{\listfigurename}{図目次}
 \renewcommand{\listtablename}{表目次}
 \renewcommand{\lstlistlistingname}{ソースコード}
-\renewcommand{\thefigure}{Fig.\thechapter-\arabic{figure}}
-\renewcommand{\thetable}{Tbl.\thechapter-\arabic{table}}
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+\renewcommand{\thetable}{\thechapter-\arabic{table}}
 \renewcommand{\theequation}{\thechapter.\arabic{equation}}
 \renewcommand{\labelenumi}{\textbf{\theenumi}.\ }
 \renewcommand{\eqref}[1]{式(\ref{#1})}
 \newcommand{\matlab}{{\large M}ATLAB\raisebox{2mm}{\tiny\textregistered}}
 \newcommand{\mat}[2]{\(#1\)行\(#2\)列}
-\newcommand{\srcref}[2]{\ref{#1}節ソースコードは\(\underset{\Rightarrow\textrm{p.\pageref{#2}}}{\textrm{\ref{#2}}}\)．}
+\newcommand{\ssrcref}[2]{\ref{#1}節ソースコードは\(\underset{\Rightarrow\textrm{p.\pageref{#2}}}{\textrm{\ref{#2}}}\)．}
+\newcommand{\figref}[1]{図\ref{#1}}
+\newcommand{\tblref}[1]{表\ref{#1}}
+\newcommand{\srcref}[1]{src.\ref{#1}}
 \makeatletter
 \@addtoreset{figure}{chapter}
 \@addtoreset{table}{chapter}
@@ -78,7 +81,7 @@
     \secdef\@chapter\@schapter}
 \makeatother
 \AtBeginDocument{
-    \renewcommand{\thelstlisting}{src.\thechapter-\arabic{lstlisting}}
+    \renewcommand{\thelstlisting}{\thechapter-\arabic{lstlisting}}
 }
 \title{音の工学的特徴とそれに対する聴覚の特性についての考察}
 \author{溝口 洸熙\thanks{高知工科大学 情報学群 学籍番号:1250373 Group10}}
