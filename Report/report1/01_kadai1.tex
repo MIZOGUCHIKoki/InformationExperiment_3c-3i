@@ -10,9 +10,9 @@
     \label{tbl:実験環境}
     \begin{tabularx}{\textwidth}{AR}
         \hline
-        実験機                      & Mac Studio 2022 （Apple社）       \\
-        プロセッサ                    & Apple Silicon M1 Max           \\
-        メモリ                      & 32GB                           \\
+        実験機                   & Mac Studio 2022 （Apple社）    \\
+        プロセッサ               & Apple Silicon M1 Max           \\
+        メモリ                   & 32GB                           \\
         \multirow{2}{*}{\matlab} & R2023a Update1 9.14.02239454   \\
                                  & 64-bit (maci64) March 30, 2023 \\
         \hline
@@ -87,13 +87,13 @@ sound(y, Fs);
     \begin{tabularx}{\textwidth}{RCCR}
         \multicolumn{1}{c}{\textbf{実験対象}} & \multicolumn{1}{c}{\textbf{振幅（基準倍）}} & \multicolumn{1}{c}{\textbf{初期位相}} & \multicolumn{1}{c}{\textbf{生成される正弦波}} \\
         \hline
-        純音                                & 基準                                   & 基準                                & \(y_0=\sin(2\pi ft)\)                 \\
+        純音                                  & 基準                                        & 基準                                  & \(y_0=\sin(2\pi ft)\)                         \\
         \hline
-        \multirow{2}{*}{振幅}               & \(0.5\)                              & \(0\)                             & \(y_1=0.5\times\sin(2\pi ft)\)        \\
-                                          & \(0.25\)                             & \(0\)                             & \(y_2=0.25\times\sin(2\pi ft)\)       \\
+        \multirow{2}{*}{振幅}                 & \(0.5\)                                     & \(0\)                                 & \(y_1=0.5\times\sin(2\pi ft)\)                \\
+                                              & \(0.25\)                                    & \(0\)                                 & \(y_2=0.25\times\sin(2\pi ft)\)               \\
         \hline
-        \multirow{2}{*}{初期位相}             & \(1\)                                & \(+\frac{\pi}{2}\)                & \(y_3=\sin(2\pi ft+\frac{\pi}{2})\)   \\
-                                          & \(1\)                                & \(+\pi\)                          & \(y_4=\sin(2\pi ft+\pi)\)             \\
+        \multirow{2}{*}{初期位相}             & \(1\)                                       & \(+\frac{\pi}{2}\)                    & \(y_3=\sin(2\pi ft+\frac{\pi}{2})\)           \\
+                                              & \(1\)                                       & \(+\pi\)                              & \(y_4=\sin(2\pi ft+\pi)\)                     \\
         \hline
     \end{tabularx}
 \end{table}
@@ -105,13 +105,13 @@ sound(y, Fs);
     \begin{tabularx}{\textwidth}{ccclR}
         \multicolumn{1}{c}{\textbf{実験対象}} & \multicolumn{1}{c}{\textbf{振幅（基準倍）}} & \multicolumn{1}{c}{\textbf{初期位相}} & \multicolumn{1}{c}{\textbf{生成される正弦波}} & \multicolumn{1}{c}{\textbf{純音との比較}} \\
         \hline
-        純音                                & 基準                                   & 基準                                & \(y_0=\sin(2\pi ft)\)                 & \multicolumn{1}{c}{---}             \\
+        純音                                  & 基準                                        & 基準                                  & \(y_0=\sin(2\pi ft)\)                         & \multicolumn{1}{c}{---}                   \\
         \hline
-        \multirow{2}{*}{振幅}               & \(0.5\)                              & \(0\)                             & \(y_1=0.5\times\sin(2\pi ft)\)        & 音量がおおよそ\(1/2\)に聞こえた．                \\
-                                          & \(0.25\)                             & \(0\)                             & \(y_2=0.25\times\sin(2\pi ft)\)       & 音量がおおよそ\(1/4\)に聞こえた．                \\
+        \multirow{2}{*}{振幅}                 & \(0.5\)                                     & \(0\)                                 & \(y_1=0.5\times\sin(2\pi ft)\)                & 音量がおおよそ\(1/2\)に聞こえた．         \\
+                                              & \(0.25\)                                    & \(0\)                                 & \(y_2=0.25\times\sin(2\pi ft)\)               & 音量がおおよそ\(1/4\)に聞こえた．         \\
         \hline
-        \multirow{2}{*}{初期位相}             & \(1\)                                & \(+\frac{\pi}{2}\)                & \(y_3=\sin(2\pi ft+\frac{\pi}{2})\)   & 違いは分からなかった．                         \\
-                                          & \(1\)                                & \(+\pi\)                          & \(y_4=\sin(2\pi ft+\pi)\)             & 違いは分からなかった．                         \\
+        \multirow{2}{*}{初期位相}             & \(1\)                                       & \(+\frac{\pi}{2}\)                    & \(y_3=\sin(2\pi ft+\frac{\pi}{2})\)           & 違いは分からなかった．                    \\
+                                              & \(1\)                                       & \(+\pi\)                              & \(y_4=\sin(2\pi ft+\pi)\)                     & 違いは分からなかった．                    \\
         \hline
     \end{tabularx}
 \end{table}
@@ -196,6 +196,7 @@ end
     \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_04_2.pdf}
     \caption{\kadaiad\ 実験結果}
     \label{fig:\kadaiae_実験結果}
+    \vspace{-1cm}
 \end{wrapfigure}
 \ref{fig:\kadaiae_実験結果}の通り，\(N\)を大きくすると，矩形波に収束することがわかった．また，基本周波数と矩形波の周期も目測では一致している．
 \consideration
