@@ -10,9 +10,9 @@
     \label{tbl:実験環境}
     \begin{tabularx}{\textwidth}{AR}
         \hline
-        実験機                   & Mac Studio 2022 （Apple社）    \\
-        プロセッサ               & Apple Silicon M1 Max           \\
-        メモリ                   & 32GB                           \\
+        実験機                      & Mac Studio 2022 （Apple社）       \\
+        プロセッサ                    & Apple Silicon M1 Max           \\
+        メモリ                      & 32GB                           \\
         \multirow{2}{*}{\matlab} & R2023a Update1 9.14.02239454   \\
                                  & 64-bit (maci64) March 30, 2023 \\
         \hline
@@ -87,13 +87,13 @@ sound(y, Fs);
     \begin{tabularx}{\textwidth}{RCCR}
         \multicolumn{1}{c}{\textbf{実験対象}} & \multicolumn{1}{c}{\textbf{振幅（基準倍）}} & \multicolumn{1}{c}{\textbf{初期位相}} & \multicolumn{1}{c}{\textbf{生成される正弦波}} \\
         \hline
-        純音                                  & 基準                                        & 基準                                  & \(y_0=\sin(2\pi ft)\)                         \\
+        純音                                & 基準                                   & 基準                                & \(y_0=\sin(2\pi ft)\)                 \\
         \hline
-        \multirow{2}{*}{振幅}                 & \(0.5\)                                     & \(0\)                                 & \(y_1=0.5\times\sin(2\pi ft)\)                \\
-                                              & \(0.25\)                                    & \(0\)                                 & \(y_2=0.25\times\sin(2\pi ft)\)               \\
+        \multirow{2}{*}{振幅}               & \(0.5\)                              & \(0\)                             & \(y_1=0.5\times\sin(2\pi ft)\)        \\
+                                          & \(0.25\)                             & \(0\)                             & \(y_2=0.25\times\sin(2\pi ft)\)       \\
         \hline
-        \multirow{2}{*}{初期位相}             & \(1\)                                       & \(+\frac{\pi}{2}\)                    & \(y_3=\sin(2\pi ft+\frac{\pi}{2})\)           \\
-                                              & \(1\)                                       & \(+\pi\)                              & \(y_4=\sin(2\pi ft+\pi)\)                     \\
+        \multirow{2}{*}{初期位相}             & \(1\)                                & \(+\frac{\pi}{2}\)                & \(y_3=\sin(2\pi ft+\frac{\pi}{2})\)   \\
+                                          & \(1\)                                & \(+\pi\)                          & \(y_4=\sin(2\pi ft+\pi)\)             \\
         \hline
     \end{tabularx}
 \end{table}
@@ -105,13 +105,13 @@ sound(y, Fs);
     \begin{tabularx}{\textwidth}{ccclR}
         \multicolumn{1}{c}{\textbf{実験対象}} & \multicolumn{1}{c}{\textbf{振幅（基準倍）}} & \multicolumn{1}{c}{\textbf{初期位相}} & \multicolumn{1}{c}{\textbf{生成される正弦波}} & \multicolumn{1}{c}{\textbf{純音との比較}} \\
         \hline
-        純音                                  & 基準                                        & 基準                                  & \(y_0=\sin(2\pi ft)\)                         & \multicolumn{1}{c}{---}                   \\
+        純音                                & 基準                                   & 基準                                & \(y_0=\sin(2\pi ft)\)                 & \multicolumn{1}{c}{---}             \\
         \hline
-        \multirow{2}{*}{振幅}                 & \(0.5\)                                     & \(0\)                                 & \(y_1=0.5\times\sin(2\pi ft)\)                & 音量がおおよそ\(1/2\)に聞こえた．         \\
-                                              & \(0.25\)                                    & \(0\)                                 & \(y_2=0.25\times\sin(2\pi ft)\)               & 音量がおおよそ\(1/4\)に聞こえた．         \\
+        \multirow{2}{*}{振幅}               & \(0.5\)                              & \(0\)                             & \(y_1=0.5\times\sin(2\pi ft)\)        & 音量がおおよそ\(1/2\)に聞こえた．                \\
+                                          & \(0.25\)                             & \(0\)                             & \(y_2=0.25\times\sin(2\pi ft)\)       & 音量がおおよそ\(1/4\)に聞こえた．                \\
         \hline
-        \multirow{2}{*}{初期位相}             & \(1\)                                       & \(+\frac{\pi}{2}\)                    & \(y_3=\sin(2\pi ft+\frac{\pi}{2})\)           & 違いは分からなかった．                    \\
-                                              & \(1\)                                       & \(+\pi\)                              & \(y_4=\sin(2\pi ft+\pi)\)                     & 違いは分からなかった．                    \\
+        \multirow{2}{*}{初期位相}             & \(1\)                                & \(+\frac{\pi}{2}\)                & \(y_3=\sin(2\pi ft+\frac{\pi}{2})\)   & 違いは分からなかった．                         \\
+                                          & \(1\)                                & \(+\pi\)                          & \(y_4=\sin(2\pi ft+\pi)\)             & 違いは分からなかった．                         \\
         \hline
     \end{tabularx}
 \end{table}
@@ -143,7 +143,7 @@ sound(y, Fs);
     N & = \big|f_1-f_2\big|\label{equ:うなり}
 \end{align}
 \(f_1\)と\(f_2\)の差が大きければ，当然うなり（\(N\)）の回数は多くなり，\(f_1\)と\(f_2\)の差が小さければうなりの回数は少なくなる．\par
-本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)の純音\(y_1\)，\(f_2=441\textrm{Hz}\)の純音\(y_2\)を加算合成\(\big(y_1+y_2\big)\)した波形を生成し再生する．\srcref{sec:\kadaiac}{src:01_03}
+本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)の純音\(y_1\)，\(f_2=441\textrm{Hz}\)の純音\(y_2\)を加算合成\(\big(y_1+y_2\big)\)した波形を生成し再生する．\srcref{sec:\kadaiac}{src:01_03}\\
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
     \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_03.pdf}
@@ -152,13 +152,7 @@ sound(y, Fs);
 \end{wrapfigure}
 \result
 うなりは4回聞こえた．また，時間軸に対して加算合成したデータを描画すると\ref{fig:\kadaiac_実験結果}となった．
-\consideration \eqref{equ:うなり}に従って，
-\begin{equation}
-    \begin{aligned}
-        \big|f_1-f_2\big| & = \big|440-441\big| \\
-                          & =1
-    \end{aligned}
-\end{equation}
+\consideration \eqref{equ:うなり}に従って，\(\big|f_1-f_2\big|= \big|440-441\big|=1\)
 より\(1\)秒あたり\(1\)回のうなりが聞こえるはずなので，この実験結果は論理的に正しい．
 加算合成波\ref{fig:\kadaiac_実験結果}の振幅に着目しても，周波数\(f_1\)，\(f_2\)それぞれの正弦波の振幅が1であることを考えると，その加算合成波の振幅が2であることも理解できる．
 さらに，この加算合成波は\(t=0\)のとき最大値を迎えており，これは初期位相が同一の正弦波の加算合成であることを表している．
@@ -183,7 +177,7 @@ sound(y, Fs);
     f(t) & =\sum_{k=1}^{N}\frac{1}{2k-1}\sin\big(2\pi(2k-1)ft\big)\label{equ:矩形波}
 \end{align}
 \paragraph{実験内容}周期\(T=1/2\)として，\eqref{equ:矩形波}の\(N\)の値を\(N=1, 5, 25\)と増やした時に次第に波形が矩形波に収束していくことを確認する．
-計算機で和\(\big(\sum\big)\)の演算をに示す通りに行う．\srcref{sec:\kadaiad}{src:01_04}
+計算機で和\(\big(\sum\big)\)の演算方法を\ref{src:和の演算}に示す．\srcref{sec:\kadaiad}{src:01_04}
 \begin{lstlisting}[caption={和の演算},label={src:和の演算},numbers={none}]
 y = 0;
 for k=1:50

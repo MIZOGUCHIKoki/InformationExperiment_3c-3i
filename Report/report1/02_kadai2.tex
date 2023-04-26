@@ -131,3 +131,38 @@ plot(freq, y_abs); % グラフ描画
 これからわかるように，周波数が大きくなるにつれて振幅は小さくなることがわかる．これは\ref{fig:\kadaiba_矩形波の振幅スペクトル}と一致する．ただし，\eqref{equ:矩形波具体例}のように\(\frac{1}{3}, \frac{1}{5},\dots\)と変化しないのは\texttt{abs}関数の利用の際に振幅が変化するためと考えられるが（\ref{fig:absを適用した後のデータ}），詳しくは不明である．
 また，\ref{fig:\kadaiba_矩形波の振幅スペクトル}と\eqref{equ:矩形波具体例}の周波数に関する関係も不明である．
 \section{\kadaibb}\label{sec:\kadaibb}
+\purpose
+ローパスフィルタ（以下LPF）は以下のように説明されている．
+\begin{leftbar}
+    ある周波数（カットオフ周波数）より高い周波数を通さないフィルタはLPF（ローパスフィルタ）と呼ばれる．\\\hfill\cite[p.65]{2019matlabで学ぶ実践画像}
+\end{leftbar}
+今回の実験ではLPFを作成して，別途作成した音に対してフィルターを適用する．
+フィルターを適用する前後での振幅スペクトルを比較し，フィルターが機能しているかを確認するとともに，フィルターが適用されているか聴音確認する．
+\method
+今回フィルターを適用させる音源は，ドイツ語音階で「C4」から「C5」まで\(0.25\)秒づつ音を提示する．提示する音の順序を\eqref{equ:音の順序}に，各音階の周波数を\ref{tbl:音階と周波数}に示す．
+\begin{align}
+    \textrm{C4}\to\textrm{D4}\to\textrm{E4}\to\textrm{F4}\to\textrm{G4}\to\textrm{A4}\to\textrm{H4}\to\textrm{C5}\label{equ:音の順序}
+\end{align}
+音源に対して，G4より低い音のみを通過させるLPFを作成しフィルターを適用する．カットオフ周波数をG4の周波数に設定すると，G4の周波数より小さいわずかな成分が除去できないため，F4とG4の中間に位置する周波数（\(375\textrm{Hz}\)）に設定する．
+\begin{table}[h]
+    \centering
+    \caption{音階と周波数}
+    \label{tbl:音階と周波数}
+    \begin{tabularx}{\textwidth}{ACCCCCCCC}
+        \hline
+        音階                 & C4     & D4     & E4     & F4     & G4     & A4     & H4     & C5     \\
+        周波数\(\textrm{Hz}\) & 261.38 & 293.67 & 329.63 & 349.23 & 392.00 & 440.00 & 493.88 & 523.23 \\
+        \hline
+    \end{tabularx}
+\end{table}
+\paragraph{LPFの作成と適用}
+今回はフィルターの行列を作る方法ではなく，周波数テーブルの閉区間\(\big[-375\textrm{Hz},375\textrm{Hz}\big]\)以外の振幅を\(0\)にする方法でフィルターを適用する．（\ref{src:フィルターを適用する}）\srcref{sec:\kadaibb}{src:02_02}
+\begin{lstlisting}[caption={フィルターを適用する},label={src:フィルターを適用する},numbers={none}]
+% データ列yをフーリエ変換後，Shiftしてabsをとったものを "fft_y" に格納している．
+% 周波数テーブルの変数名は "freq" である．
+for k=1:length(fft_y)
+    if freq(k) >= 375 || freq(k) <= -375
+        fft_y(k) = 0;
+    end
+end
+\end{lstlisting}
