@@ -9,13 +9,13 @@ figure;
 imshow(gimg_i);
 imwrite(gimg_i,"../Figures/05_318.png");
 
-gray_4bit = bitshift(gimg,-4) * 16;  % XXXX XXXX -> XXXX
-gray_2bit = bitshift(gimg,-6) * 128; % XXXX XXXX -> XX
-gray_1bit = bitshift(gimg,-7) * 255; % XXXX XXXX -> X
+gray_4bit = bitshift(gimg,-4) * (255/15);  % XXXX XXXX -> XXXX
+gray_2bit = bitshift(gimg,-6) * (255/3);   % XXXX XXXX -> XX
+gray_1bit = bitshift(gimg,-7) * (255/1);   % XXXX XXXX -> X
 
 gray_4bit = cast(gray_4bit,"double");
 gimg_i4 = -1 * gray_4bit;
-gimg_i4 = gimg_i4 + 25;
+gimg_i4 = gimg_i4 + 255;
 gimg_i4 = cast(gimg_i4,"uint8");
 figure;
 imshow(gimg_i4);
