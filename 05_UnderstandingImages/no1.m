@@ -1,0 +1,21 @@
+clear;
+img = imread("kut.jpg");
+% color channel 1=red, 2=green, 3=blue
+red = img(:,:,1);
+green = img(:,:,2);
+blue = img(:,:,3);
+fig0 = figure;
+imshow(red);
+imwrite(red,'../Figures/05_111r.png');
+fig1 = figure;
+imshow(green);
+imwrite(green,'../Figures/05_112g.png');
+fig2 = figure;
+imshow(blue);
+imwrite(blue,'../Figures/05_113b.png');
+fig3 = figure;
+changeimg(:,:,1) = blue;
+changeimg(:,:,2) = green;
+changeimg(:,:,3) = red;
+imshow(changeimg);
+imwrite(changeimg,'../Figures/05_12change.png');
