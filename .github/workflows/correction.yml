@@ -1,0 +1,12 @@
+name: Correction
+on:
+  issue_comment:
+    types:
+      - created
+      - edited
+
+jobs:
+  job_correction_WF:
+    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/correction_main.yml@main
+    secrets:
+      gh_token: ${{ secrets.ACCESS_TOKEN }}
