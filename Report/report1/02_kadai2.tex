@@ -1,11 +1,11 @@
 \chapter{周波数解析}
 \section{\kadaiba}\label{sec:\kadaiba}
 \purpose
-\matlab を用いて周波数解析を行う．我々が普段見る「波形」は時間軸を横，振幅を縦にしたグラフである．
+\matlab を用いて周波数解析する．我々が普段見る「波形」は時間軸を横，振幅を縦にしたグラフである．
 このグラフからわかるのは時刻に対しての振幅だ．ただし波形の分析はそれだけでは不十分である．
 波形というのはフーリエ級数展開の理論により，いかなる波形も\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表せる．
-波形に対してフーリエ変換を行うと「周波数に対する振幅」を得ることができる．矩形波\eqref{equ:矩形波}の振幅と周波数をグラフに描画したものを振幅スペクトルと呼ぶ．（\figref{fig:周波数解析}）\par
-今回の実験では，純音と矩形波に対して周波数解析を行う．
+波形に対してフーリエ変換すると「周波数に対する振幅」を得ることができる．矩形波\eqref{equ:矩形波}の振幅と周波数をグラフに描画したものを振幅スペクトルと呼ぶ．（\figref{fig:周波数解析}）\par
+今回の実験では，純音と矩形波に対して周波数解析する．
 純音では解析結果より純音の周波数をより多く含んでいるか確認する．
 また矩形波では高調波の存在を確認し，振幅が\eqref{equ:矩形波}通りになっているか確かめる．
 \begin{figure}[H]
@@ -19,7 +19,7 @@
 \matlab では高速フーリエ変換をする関数（\texttt{fft}）がある．
 ただし，\texttt{fft}関数の仕様上いくつかの注意が必要である．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．（\srcref{src:振幅スペクトルの取得}）
 \begin{enumerate}
-    \item 高速フーリエ変換を行う．\\
+    \item 高速フーリエ変換する．\\
           \texttt{fft}関数は出力として，サンプリング周波数\texttt{Fs}に対して，\(\big[\textrm{\texttt{-Fs/2}},\textrm{\texttt{Fs/2}}\big]\)範囲の周波数に対する振幅のデータを得る．
     \item 出力データ列\texttt{fft(y)}のデータを整列させる．\\
           \texttt{fft}関数の出力は，正のデータ・負のデータ（左右）が入れ替わった状態で出力される．（\figref{fig:fft直後のデータ}，\figref{fig:fftshift後のデータ}）
@@ -73,7 +73,7 @@ plot(freq, y_abs); % グラフ描画
         \end{flushleft}
     \end{minipage}
 \end{figure}
-\paragraph{実験の内容}今回の実験では，純音と矩形波の周波数解析を行う．サンプリング周波数を\(\textrm{\texttt{Fs}}=8192\textrm{Hz}\)と設定する．
+\paragraph{実験の内容}今回の実験では，純音と矩形波の周波数解析する．サンプリング周波数を\(\textrm{\texttt{Fs}}=8192\textrm{Hz}\)と設定する．
 \begin{figure}[H]
     \begin{minipage}[c]{.55\textwidth}
         \begin{itemize}
@@ -96,7 +96,7 @@ plot(freq, y_abs); % グラフ描画
     \end{minipage}
 \end{figure}
 \result
-出力された結果に対して，特出する点の座標を表示させる．\figref{fig:\kadaiba_純音の振幅スペクトル}について，\(440\textrm{Hz}\)の軸に対して振幅が大きくあることがわかった．\par
+出力された結果に対して，特出する点の座標を表示させる．\figref{fig:\kadaiba_純音の振幅スペクトル}について，周波数\(440\textrm{Hz}\)の振幅は最大であることが分かった．\par
 \figref{fig:\kadaiba_矩形波の振幅スペクトル}については図中にある点の高調波が確認された．
 \begin{figure}[h]
     \centering
@@ -114,7 +114,7 @@ plot(freq, y_abs); % グラフ描画
     \end{minipage}
 \end{figure}
 \consideration
-\paragraph{純音}実験結果より，純音の周波数\(440\textrm{Hz}\)が一番多く，他の高調波はほとんど目立たない．
+\paragraph{純音}実験結果より，純音の周波数\(440\textrm{Hz}\)が一番多く，ほかの高調波はほとんど目立たない．
 \paragraph{矩形波}\figref{fig:\kadaiba_矩形波の振幅スペクトル}より高調波の存在は確認できる．矩形波のフーリエ級数展開は\eqref{equ:矩形波}である．\(k=\{1,2,3,4\}\)のときの正弦波の式を\eqref{equ:矩形波具体例}に示す．
 \begin{equation}
     \begin{aligned}
@@ -132,14 +132,14 @@ plot(freq, y_abs); % グラフ描画
 \begin{leftbar}
     ある周波数（カットオフ周波数）より高い周波数を通さないフィルタはLPF（ローパスフィルタ）と呼ばれる．\\\hfill\cite[p.65]{2019matlabで学ぶ実践画像}
 \end{leftbar}
-今回の実験ではLPFを作成して，別途作成した音に対してフィルターを適用する．
-フィルターを適用する前後での振幅スペクトルを比較し，フィルターが機能しているかを確認するとともに，フィルターが適用されているか聴音確認する．
+今回の実験ではLPFを作成して，別途作成した音に対してフィルタを適用する．
+フィルタを適用する前後での振幅スペクトルを比較し，フィルタが機能しているかを確認するとともに，フィルタが適用されているか聴音確認する．
 \method
-今回フィルターを適用させる音源は，ドイツ語音階で「C4」から「C5」まで\(0.25\)秒づつ音を提示する．提示する音の順序を\eqref{equ:音の順序}に，各音階の周波数を\tblref{tbl:音階と周波数}に示す．
+今回フィルタを適用させる音源は，ドイツ語音階で「C4」から「C5」まで\(0.25\)秒ずつ音を提示する．提示する音の順序を\eqref{equ:音の順序}に，各音階の周波数を\tblref{tbl:音階と周波数}に示す．
 \begin{align}
     \textrm{C4}\to\textrm{D4}\to\textrm{E4}\to\textrm{F4}\to\textrm{G4}\to\textrm{A4}\to\textrm{H4}\to\textrm{C5}\label{equ:音の順序}
 \end{align}
-音源に対して，G4より低い音のみを通過させるLPFを作成しフィルターを適用する．カットオフ周波数をG4の周波数に設定すると，G4の周波数より小さいわずかな成分が除去できないため，F4とG4の中間に位置する周波数（\(375\textrm{Hz}\)）に設定する．
+音源に対して，G4より低い音のみを通過させるLPFを作成しフィルタを適用する．カットオフ周波数をG4の周波数に設定すると，G4の周波数より小さいわずかな成分が除去できないため，F4とG4の中間に位置する周波数（\(375\textrm{Hz}\)）へ設定する．
 \begin{table}[h]
     \centering
     \caption{音階と周波数}
@@ -152,7 +152,7 @@ plot(freq, y_abs); % グラフ描画
     \end{tabularx}
 \end{table}
 \paragraph{LPFの作成と適用}
-今回はフィルターの行列を作る方法ではなく，周波数テーブルの閉区間\(\big[-375\textrm{Hz},375\textrm{Hz}\big]\)以外の振幅を\(0\)にする方法でフィルターを適用する．（\srcref{src:フィルターを適用する}）\ssrcref{sec:\kadaibb}{src:02_02}
+今回はフィルタの行列を作る方法ではなく，周波数テーブルの閉区間\(\big[-375\textrm{Hz},375\textrm{Hz}\big]\)以外の振幅を\(0\)にする方法でフィルタを適用する．（\srcref{src:フィルターを適用する}）\ssrcref{sec:\kadaibb}{src:02_02}
 \begin{lstlisting}[caption={フィルターを適用する},label={src:フィルターを適用する},numbers={none}]
 % データ列yをフーリエ変換後，Shiftしてabsをとったものを "fft_y" に格納している．
 % 周波数テーブルの変数名は "freq" である．

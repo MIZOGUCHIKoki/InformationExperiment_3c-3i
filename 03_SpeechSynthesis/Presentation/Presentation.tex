@@ -221,7 +221,7 @@ z = ??; % yの各要素に対して正ならば負，負ならば正にする
     \begin{alertblock}{}
         ステレオからモノラルへの変換をすること！
         \begin{itemize}
-            \item 左右それぞれの信号が処理されグラフが見難くなったり
+            \item 左右それぞれの信号を処理されグラフが見にくくなったり
             \item そもそもデータ数が想定していたものと異なるので\texttt{plot}されなかったり
         \end{itemize}
     \end{alertblock}
@@ -305,7 +305,7 @@ fft_y = fft(y); % データ列yに対してfft を行う．
 \subsection{\texttt{fftshift}}
 \begin{frame}[t,containsverbatim]{\showsec 周波数解析（\texttt{fftshift}）}
     \begin{itemize}
-        \item サンプリング周波数\texttt{Fs}の信号\texttt{y}に対して高速フーリエ変換\texttt{fft}を行うだけでは周波数解析ができない！\\
+        \item サンプリング周波数\texttt{Fs}の信号\texttt{y}に対して高速フーリエ変換\texttt{fft}するだけでは周波数解析ができない！\\
         \item \texttt{fft}では\(\textrm{\texttt{-Fs/2}}\leq \textrm{周波数成分}\leq\textrm{\texttt{Fs/2}}\)を得られる．
         \item ただし，正のデータ・負のデータが（左右）が入れ替わった状態で出力される．
     \end{itemize}
@@ -357,7 +357,7 @@ fft_y = fft(y); % データ列yに対してfft を行う．
 \end{frame}
 \begin{frame}[t,containsverbatim]{\showsec 周波数解析（\texttt{fftshift}）}
     \begin{itemize}
-        \item 図\ref{fig:fft},\ref{fig:fft_f}から図\ref{fig:fftshift},\ref{fig:fft_shift_f}の状態にするために\texttt{fftshift}関数を用いる．\\
+        \item 図\ref{fig:fft},\ref{fig:fft_f}から図\ref{fig:fftshift}，\ref{fig:fft_shift_f}の状態にするため\texttt{fftshift}関数を用いる．\\
               \begin{lstlisting}[language={Matlab},frame={lines},numbers={none},xleftmargin={0mm}]
 fftshift_y = fftshift(fft_y);
             \end{lstlisting}
@@ -483,12 +483,12 @@ plot(周波数テーブル, 振幅データ);
     \end{exampleblock}
     \dotfill
     \begin{itemize}
-        \item 0Hz - 10,000Hz 程度までの範囲で，ピークとなる周波数，及びそのピーク値を高い順から10個程度以上抽出する．\\
+        \item 0Hz - 10,000Hz 程度までの範囲で，ピークとなる周波数，およびそのピーク値を高い順から10個程度以上抽出する．\\
               \begin{itemize}
                   \item とりあえず，手動で10個抽出する．
               \end{itemize}
-        \item 周波数およびピーク値（Y軸の値）は厳密でなくて良い．
-        \item \texttt{a}，\texttt{i}の合成音の聞こえ方の違い，及び元の音声との違いについて考察する．
+        \item 周波数とピーク値（Y軸の値）は厳密でなくて良い．
+        \item \texttt{a}，\texttt{i}の合成音の聞こえ方の違い，そして元の音声との違いについて考察する．
     \end{itemize}
 \end{frame}
 \subsection{サンプルコード：解析}
