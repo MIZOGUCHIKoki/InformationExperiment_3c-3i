@@ -1,5 +1,5 @@
 clear;
-[y, Fs] = audioread('sound2.wav');
+[y, Fs] = audioread('sound1.wav');
 y=y(:,1); % ステレオからモノラルへの変換
 N = length(y); % yの長さ
 t = (1:N) /Fs; % 時間

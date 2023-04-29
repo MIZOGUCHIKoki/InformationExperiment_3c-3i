@@ -5,15 +5,25 @@
 \renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
 \renewcommand{\thesection}{\Alph{section}}
 \newcommand{\secref}[1]{#1\ （第\ref{sec:#1}節 →p.\pageref{sec:#1}）}
-\section{課題1}
-\lstinputlisting[caption={[\kadaiaa]{01-01: \secref{\kadaiaa}}},label={src:01_01}]{../../01_EngineeringCharacteristicsOfSound/no1.m}
-\lstinputlisting[caption={[\kadaiab]{01-02: \secref{\kadaiab}}},label={src:01_02}]{../../01_EngineeringCharacteristicsOfSound/no2.m}
-\lstinputlisting[caption={[\kadaiac]{01-03: \secref{\kadaiac}}},label={src:01_03}]{../../01_EngineeringCharacteristicsOfSound/no3.m}
-\lstinputlisting[caption={[\kadaiad]{01-04: \secref{\kadaiad}}},label={src:01_04}]{../../01_EngineeringCharacteristicsOfSound/no4.m}
-\lstinputlisting[caption={[\kadaiae]{01-05: \secref{\kadaiae}}},label={src:01_05}]{../../01_EngineeringCharacteristicsOfSound/no5.m}
-\setcounter{lstlisting}{0}
+\makeatletter
+\@addtoreset{lstlisting}{section}
+\makeatother
+\lstset{
+    frame={single}
+}
+\section{音の工学的特徴\ (April 13th, 2023)}
+\lstinputlisting[caption={[\kadaiaa]{\secref{\kadaiaa}}},label={src:01_01}]{../../01_EngineeringCharacteristicsOfSound/no1.m}
+\lstinputlisting[caption={[\kadaiab]{\secref{\kadaiab}}},label={src:01_02}]{../../01_EngineeringCharacteristicsOfSound/no2.m}
+\lstinputlisting[caption={[\kadaiac]{\secref{\kadaiac}}},label={src:01_03}]{../../01_EngineeringCharacteristicsOfSound/no3.m}
+\lstinputlisting[caption={[\kadaiad]{\secref{\kadaiad}}},label={src:01_04}]{../../01_EngineeringCharacteristicsOfSound/no4.m}
+\lstinputlisting[caption={[\kadaiae]{\secref{\kadaiae}}},label={src:01_05}]{../../01_EngineeringCharacteristicsOfSound/no5.m}
 \newpage
-\section{課題2}
-\lstinputlisting[caption={[\kadaiba （純音）]{02-01-1: \secref{\kadaiba}（純音）}},label={src:02_01_1}]{../../02_FrequencyAnalysis/no1_1.m}
-\lstinputlisting[caption={[\kadaiba （矩形波）]{02-01-2: \secref{\kadaiba}（矩形波）}},label={src:02_01_2}]{../../02_FrequencyAnalysis/no1_2.m}
-\lstinputlisting[caption={[\kadaibb]{02-02: \secref{\kadaibb}}},label={src:02_02}]{../../02_FrequencyAnalysis/no2.m}
+\section{周波数解析\ (April 17th, 2023)}
+\lstinputlisting[caption={[\kadaiba （純音）]{\secref{\kadaiba}（純音）}},label={src:02_01_1}]{../../02_FrequencyAnalysis/no1_1.m}
+\lstinputlisting[caption={[\kadaiba （矩形波）]{\secref{\kadaiba}（矩形波）}},label={src:02_01_2}]{../../02_FrequencyAnalysis/no1_2.m}
+\lstinputlisting[caption={[\kadaibb]{\secref{\kadaibb}}},label={src:02_02}]{../../02_FrequencyAnalysis/no2.m}
+\newpage
+\section{音声合成\ (April 20th, 2023)}
+\lstinputlisting[caption={[\kadaica （矩形波）]{\secref{\kadaica}（矩形波）}},label={src:03_01_1}]{../../03_SpeechSynthesis/no1_1.m}
+\lstinputlisting[caption={[\kadaica （ノコギリ波）]{\secref{\kadaica}（ノコギリ波）}},label={src:03_01_2}]{../../03_SpeechSynthesis/no1_2.m}
+% \lstinputlisting[caption={[\kadaicb]{\secref{\kadaicb}}},label={src:03_02}]{../../03_SpeechSynthesis/no2.m}
