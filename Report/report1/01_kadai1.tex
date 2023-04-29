@@ -10,11 +10,11 @@
     \label{tbl:実験環境}
     \begin{tabularx}{\textwidth}{AR}
         \hline
-        実験機                      & Mac Studio 2022 （Apple社）       \\
-        プロセッサ                    & Apple Silicon M1 Max           \\
-        メモリ                      & 32GB                           \\
-        \multirow{2}{*}{\matlab} & R2023a Update1 9.14.02239454   \\
-                                 & 64-bit (maci64) March 30, 2023 \\
+        実験機                      & MacBook Air 2022 （Apple社）                     \\
+        プロセッサ                    & Apple Silicon M2                              \\
+        メモリ                      & 32GB                                          \\
+        \multirow{2}{*}{\matlab} & R2023a - academic use (Update1 9.14.02239454) \\
+                                 & 64-bit (maci64) March 30, 2023                \\
         \hline
     \end{tabularx}
 \end{table}
@@ -136,7 +136,7 @@ sound(y, Fs);
 \end{figure}
 \consideration
 \paragraph{振幅の変化について} 振幅の変化は，音量と比例することが確認できた．\figref{fig:振幅・位相の確認_結果_振幅}より，各正弦波において周期や初期位相が等しいので，縦軸が\(0\)になる時刻や最大値を迎えるは等しいく，振幅のみが異なる．
-\paragraph{初期位相の変化について} 位相の変化による音の変化は確認できなかった．\figref{fig:振幅・位相の確認_結果_初期位相}より，振幅や周期は等しい．初期位相が異なるため最小値や最大値を迎える時刻が初期位相分異なるが，その変化を知覚できなかった．
+\paragraph{初期位相の変化について} 初期位相の変化による音の変化は確認できなかった．\figref{fig:振幅・位相の確認_結果_初期位相}より，振幅や周期は等しい．初期位相が異なるため最小値や最大値を迎える時刻が初期位相分異なるが，その変化を知覚できなかった．
 \section{\kadaiac}\label{sec:\kadaiac}
 \purpose
 ティンパニやギターのチューニングを行うとき，音叉やチューナーから音を出して，異なる互いに周波数であれば気付きチューニングする．それぞれ異なる周波数の違いによるうなりの発生やその原因を数学的観点から考察する．
@@ -169,7 +169,7 @@ sound(y, Fs);
 
 \begin{wrapfigure}{r}[0cm]{.3\textwidth}
     \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_04_1.pdf}
-    \caption{矩形波（\(1\leq k\leq 50\)）}
+    \caption{矩形波\ \((N=50)\)}
     \label{fig:矩形波}
 \end{wrapfigure}
 \begin{align}
@@ -234,7 +234,7 @@ X = a.*X + b; % 演算
     f_N(x) & =\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{x^2}{2}\right)                        & \big(-\infty<x<\infty\big)\label{equ:標準正規分布}
 \end{align}
 \begin{leftbar}
-    確率変数\(x\)に対して，その平均が\(\mu_x\)で，分散が\({\sigma_x}^2\)のとき，\(y=ax+b\quad(a\textrm{と}b\textrm{は定数})\)で定義される確率変数\(y\)の平均は\(\mu_y=a\mu_x+b\)で，分散は\({\sigma_y}^2=a^2{\sigma_x}^2\)．\hfill\cite{matlab}
+    確率変数\(x\)に対して，その平均が\(\mu_x\)で，分散が\({\sigma_x}^2\)のとき，\(y=ax+b\quad(a\textrm{と}b\textrm{は定数})\)で定義される確率変数\(y\)の平均は\(\mu_y=a\mu_x+b\)で，分散は\({\sigma_y}^2=a^2{\sigma_x}^2\)．\hfill\cite{matlab_randn}
 \end{leftbar}
 したがって，標準正規分布に従って出力されたデータ列の平均を\texttt{a}，標準偏差を\texttt{b}に変更したい場合には，\mat{n}{m}データ列\texttt{X}に対して\texttt{X}の各要素と\texttt{a}の積をとり，データ列\texttt{X}と\texttt{b}の和をとる．（\srcref{src:平均と標準偏差の変更}）\ssrcref{sec:\kadaiae}{src:01_05}
 \result

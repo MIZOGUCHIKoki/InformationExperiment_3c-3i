@@ -3,3 +3,6 @@
 .tmp*
 /Report/report[1-5]/*.pdf
 Presentation.pdf
+*.bbl
+*.lol
+*.gz

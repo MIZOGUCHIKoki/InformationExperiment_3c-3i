@@ -1,1 +1,95 @@
 \chapter{音声合成}
+\section{\kadaica}\label{sec:\kadaica}
+\purpose
+ノコギリ波も，矩形波と同様周期関数である．故にノコギリ波も\eqref{equ:フーリエ級数展開}で表すことができる．矩形波もノコギリ波も合成波である．\par
+この実験ではノコギリ波と矩形波の，初期位相の変化に対して波形の変化と音の変化を確かめる．初期位相の変化は，固定値と高調波成分ごとにランダムな値で確かめる．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/03_11_nokogiri.pdf}
+    \caption{ノコギリ波\ \((N=50)\)}
+    \label{fig:ノコギリ波}
+    \begin{lstlisting}[caption={ランダム初期位相},label={src:ランダム初期位相},numbers={none}]
+for k=1:50
+ y =y+sin(2*pi*f*t+rand);
+end    
+    \end{lstlisting}
+    \vspace{-2cm}
+\end{wrapfigure}
+\method
+\paragraph{ノコギリ波}ノコギリ波は\eqref{equ:noko1}を周期\(2\pi\)の関数として周期的に\eqref{equ:noko2}へ拡張したものであり，ノコギリ波をフーリエ級数展開すると，\eqref{equ:ノコギリ波}の\(N=\infty\)で表せる．
+\begin{align}
+    f(t) & =t\label{equ:noko1}                                                                               \\
+    f(t) & =f(t+2k\pi)                                                   & (k\in\mathbb{Z})\label{equ:noko2} \\
+    f(t) & =\sum_{k=1}^{N}(-1)^{k-1}\frac{2}{k}\sin(kt)\label{equ:ノコギリ波}
+\end{align}
+\paragraph{乱数の生成}乱数の生成は\matlab の\texttt{rand}関数を用いる．\texttt{rand}関数は引数や演算を与えない状態（\texttt{r = rand}）で用いると，区間\((0,1)\)の一様分布から取り出された乱数スカラーを返す\cite{matlab_rand}．
+今回は，引数や演算を与えずに\texttt{rand}関数を用いる．\par
+波形に高調波成分ごとにランダムな初期位相を与えるためには，繰り返し処理の1つ1つで\texttt{rand}関数を呼び出すと良い．（\srcref{src:ランダム初期位相}）
+\paragraph{実験の内容}今回の実験では，ノコギリや初期位相に対して，固定値の初期位相\(\pi/4\)，\(\pi/2\)を与え，高調波ごとにランダムな初期位相を与える．また，\eqref{equ:矩形波}，\eqref{equ:ノコギリ波}ともに\(N=50\)として実装する．
+\result
+\paragraph{矩形波}
+音の波形を\figref{fig:矩形波の初期位相}に示す．聴音確認の結果，\figref{fig:実験結果矩形波_pure}に比べて，\figref{fig:実験結果矩形波_p2PI}，\figref{fig:実験結果矩形波_p4PI}の方が滑らかな音に聞こえた．
+\figref{fig:実験結果矩形波_pure}と\figref{fig:実験結果矩形波_rand}の音は似ていた．矩形波は純音に比べて，掠れた音が聞こえた．音量について，\figref{fig:実験結果矩形波_p2PI}，\figref{fig:実験結果矩形波_p4PI}は\figref{fig:実験結果矩形波_pure}の\(3/4\)程度の音量に聞こえた．\figref{fig:実験結果矩形波_pure}と\figref{fig:実験結果矩形波_rand}の音量変化は確認できなかった．
+\paragraph{ノコギリ波}
+音の波形を\figref{fig:ノコギリ波の初期位相}に示す．聴音確認の結果，\figref{fig:実験結果ノコギリ波_pure}に比べて，矩形波と同様に\figref{fig:実験結果ノコギリ波_p2PI}，\figref{fig:実験結果ノコギリ波_p4PI}の方が滑らかな音に聞こえた．
+\figref{fig:実験結果ノコギリ波_pure}と\figref{fig:実験結果ノコギリ波_rand}の音は似ていた．ノコギリ波は純音に比べて，尖った音が聞こえた．音量について，\figref{fig:実験結果矩形波_p2PI}，\figref{fig:実験結果ノコギリ波_p4PI}は\figref{fig:実験結果ノコギリ波_pure}の\(3/4\)程度の音量に聞こえた．\figref{fig:実験結果ノコギリ波_pure}と\figref{fig:実験結果ノコギリ波_rand}の音量変化は確認できなかった．
+\paragraph{波形}波形は，初期位相を固定値で与えると，初期位相が\(0\)の波形とは異なる波形を示す．
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{.24\textwidth}
+        \centering
+        \subcaption{矩形波}
+        \label{fig:実験結果矩形波_pure}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_11_kukei.pdf}
+    \end{minipage}
+    \begin{minipage}[b]{.24\textwidth}
+        \centering
+        \subcaption{初期位相\ \(+\pi/4\)}
+        \label{fig:実験結果矩形波_p4PI}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_12.pdf}
+    \end{minipage}
+    \begin{minipage}[b]{.24\textwidth}
+        \centering
+        \subcaption{初期位相\ \(+\pi/2\)}
+        \label{fig:実験結果矩形波_p2PI}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_13.pdf}
+    \end{minipage}
+    \begin{minipage}[b]{.24\textwidth}
+        \centering
+        \subcaption{初期位相\ \texttt{rand}}
+        \label{fig:実験結果矩形波_rand}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_14.pdf}
+    \end{minipage}
+    \caption{矩形波の初期位相}
+    \label{fig:矩形波の初期位相}
+    \begin{minipage}{.24\textwidth}
+        \centering
+        \subcaption{ノコギリ波}
+        \label{fig:実験結果ノコギリ波_pure}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_21_nokogiri.pdf}
+    \end{minipage}
+    \begin{minipage}{.24\textwidth}
+        \centering
+        \subcaption{初期位相\ \(+\pi/4\)}
+        \label{fig:実験結果ノコギリ波_p4PI}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_22.pdf}
+    \end{minipage}
+    \begin{minipage}{.24\textwidth}
+        \centering
+        \subcaption{初期位相\ \(+\pi/2\)}
+        \label{fig:実験結果ノコギリ波_p2PI}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_23.pdf}
+    \end{minipage}
+    \begin{minipage}{.24\textwidth}
+        \centering
+        \subcaption{初期位相\ \texttt{rand}}
+        \label{fig:実験結果ノコギリ波_rand}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_24.pdf}
+    \end{minipage}
+    \caption{ノコギリ波の初期位相}
+    \label{fig:ノコギリ波の初期位相}
+\end{figure}
+\consideration
+純音（正弦波）では初期位相を与えると，その波形は横軸に並行移動する．
+しかし，矩形波やノコギリ波は並行移動せずに波形が変わる．これは，矩形波やノコギリ波がさまざまな周波数の高調波から成り立っているからであろう．

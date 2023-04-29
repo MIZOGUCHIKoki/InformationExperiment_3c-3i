@@ -11,7 +11,7 @@
 また矩形波では高調波の存在を確認し，振幅が\eqref{equ:矩形波}通りになっているか確かめる．
 \begin{figure}[H]
     \centering
-    \scalebox{0.8}{
+    \scalebox{0.7}{
         \input{TikZ/02_00FA.tex}
     }
     \caption{周波数解析}
@@ -28,7 +28,7 @@
     \item これまでの過程で出力されるデータは複素数データである．絶対値を取るために\texttt{abs}関数を用いる．（\figref{fig:absを適用した後のデータ}）
     \item グラフとして描画するために，周波数軸を作成する．\footnote{今回は各要素を2乗しないので，縦軸は\texttt{power}でなく\texttt{|amplitude|}とする．}（\srcref{src:振幅スペクトルの取得}）
 \end{enumerate}
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{minipage}[b]{.48\textwidth}
         \centering

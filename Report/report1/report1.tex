@@ -1,7 +1,9 @@
 \documentclass[twoside]{ltjsreport}
+\usepackage{silence}
+\WarningFilter{caption}{Unknown document}
 \usepackage[top=20truemm,bottom=20truemm,left=15truemm,right=15truemm,headheight=20pt]{geometry}
-\usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow}
-\usepackage{hyperref,graphics,graphicx,framed}
+\usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow,multicol}
+\usepackage{hyperref,graphics,graphicx,framed,subcaption}
 \usepackage[symbol]{footmisc}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz}
@@ -62,6 +64,7 @@
 \renewcommand{\thefigure}{\thechapter-\arabic{figure}}
 \renewcommand{\thetable}{\thechapter-\arabic{table}}
 \renewcommand{\theequation}{\thechapter.\arabic{equation}}
+\renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\labelenumi}{\textbf{\theenumi}.\ }
 \renewcommand{\eqref}[1]{式(\ref{#1})}
 \newcommand{\matlab}{{\large M}ATLAB\raisebox{2mm}{\tiny\textregistered}}
@@ -70,6 +73,7 @@
 \newcommand{\tblref}[1]{表\ref{#1}}
 \newcommand{\srcref}[1]{src.\ref{#1}}
 \newcommand{\ssrcref}[2]{\ref{#1}節ソースコードは\(\underset{\Rightarrow\textrm{p.\pageref{#2}}}{\textrm{\srcref{#2}}}\)．}
+\captionsetup[subfigure]{labelformat=simple}
 \makeatletter
 \@addtoreset{figure}{chapter}
 \@addtoreset{table}{chapter}
@@ -100,6 +104,7 @@
 \setcounter{page}{1}
 \input{01_kadai1.tex}
 \input{02_kadai2.tex}
+\input{03_kadai3.tex}
 \bibliography{bib}
 \input{91_appendix.tex}
 \end{document}
