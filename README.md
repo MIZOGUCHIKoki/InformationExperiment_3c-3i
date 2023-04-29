@@ -1,4 +1,5 @@
 # Information_Experiment3c-3i
 情報学群実験第3c 3i
-
-2023年度 情報学群3年 溝口洸熙
+- School of Information 3rd grade (2023)
+- E-mail: [250373b@ugs.kochi-tech.ac.jp](mailto:250373b@ugs.kochi-tech.ac.jp)
+- ⚠️：コードの剽窃はバレるので，行わないこと！！！
