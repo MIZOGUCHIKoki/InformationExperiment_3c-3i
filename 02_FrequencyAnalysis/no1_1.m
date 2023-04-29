@@ -13,6 +13,6 @@ fft_ys = abs(fft_ys);
 fig0 = figure;
 plot(fs,fft_ys);
 xlabel('frequency[Hz]');
-ylabel('amplitude');
+ylabel('|amplitude|');
 axis([0 1000 -10 600]);
 exportgraphics(fig0,'../Figures/02_01.pdf','ContentType','vector');

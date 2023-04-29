@@ -202,18 +202,13 @@ end
 ここで\(N\)の値を大きくすると，\(T/2, T\)あたりで尖ったもの（ひげ）が確認される．フーリエ級数では不連続で誤差が大きい．このことをギブス現象という．\cite[p.34]{信号処理}
 \section{\kadaiae}\label{sec:\kadaiae}
 \purpose
-白色雑音（\textit{white noise}）は以下のように定義されている．
-\begin{leftbar}
-    すべての周波数成分を均等に含む，パワースペクトルが一定である不規則性の非常に強い波のことである．
-    \hfill\cite{witenoise}
-\end{leftbar}
 ガウス雑音（\textit{gaussian noise}）は以下のように定義されている．
 \begin{leftbar}
     Gaussian noise represents statistical noise having the probability density function equal to that of the normal distribution.
     \hfill\cite{barbu2013variational}
 \end{leftbar}
-つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．今回の実験ではガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布\footnote{以後，課題内容や他の用語との兼ね合いにより「正規分布」を「ガウス分布」と表す．}に従っているかを確認する．
-
+つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．今回の実験ではガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布\footnote{以後，課題内容や他の用語との兼ね合いにより「正規分布」を「ガウス分布」と表す．}に従っているかを確認する．\par
+一方，白色雑音（\textit{white noise}）は，周波数成分を均等に含み，パワースペクトルが一定である不規則な波のことである．\cite{witenoise}
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \vspace{-.5cm}
     \begin{lstlisting}[caption={乱数生成・ヒストグラム},label={src:乱数生成・ヒストグラム},xleftmargin=3mm]

@@ -23,7 +23,7 @@ fft_ys = abs(fft_ys);
 fig1 = figure;
 plot(fs,fft_ys);
 xlabel('frequency[Hz]');
-ylabel('amplitude');
+ylabel('|amplitude|');
 axis([0 200 -10 600]);
 exportgraphics(fig0,'../Figures/02_021.pdf','ContentType','vector');
 exportgraphics(fig1,'../Figures/02_022.pdf','ContentType','vector');
