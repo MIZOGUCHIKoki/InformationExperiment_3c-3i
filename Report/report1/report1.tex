@@ -72,7 +72,8 @@
 \newcommand{\figref}[1]{図\ref{#1}}
 \newcommand{\tblref}[1]{表\ref{#1}}
 \newcommand{\srcref}[1]{src.\ref{#1}}
-\newcommand{\ssrcref}[2]{\ref{#1}節ソースコードは\(\underset{\Rightarrow\textrm{p.\pageref{#2}}}{\textrm{\srcref{#2}}}\)．}
+\newcommand{\scall}{\thesection 節のソースコードは，}
+\newcommand{\sref}[1]{\(\underset{\blacktriangleright\textrm{p.\pageref{#1}}}{\textrm{\srcref{#1}}}\)}
 \captionsetup[subfigure]{labelformat=simple}
 \makeatletter
 \@addtoreset{figure}{chapter}

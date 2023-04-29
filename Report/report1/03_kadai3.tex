@@ -27,7 +27,7 @@ end
 今回は，引数や演算を与えずに\texttt{rand}関数を用いる．\par
 波形に高調波成分ごとのランダムな初期位相を与えるためには，繰り返し処理の都度\texttt{rand}関数を呼び出すと良い．（\srcref{src:ランダム初期位相}）
 \paragraph{実験の内容}今回の実験では，ノコギリや初期位相に対して，固定値の初期位相\(\pi/4\)，\(\pi/2\)を与え，高調波ごとにランダムな初期位相を与える．また，\eqref{equ:矩形波}，\eqref{equ:ノコギリ波}ともに\(N=50\)として実装する．
-\ssrcref{sec:\kadaica}{src:03_01_1}\(\underset{\Rightarrow\textrm{p.\pageref{src:03_01_2}}}{\textrm{\srcref{src:03_01_2}}}\)．
+\scall\sref{src:03_01_1}，\sref{src:03_01_2}．
 \result
 \paragraph{矩形波}
 音の波形を\figref{fig:矩形波の初期位相}に示す．聴音確認の結果，\figref{fig:実験結果矩形波_pure}に比べて，\figref{fig:実験結果矩形波_p2PI}，\figref{fig:実験結果矩形波_p4PI}の方が滑らかな音に聞こえた．
@@ -120,7 +120,7 @@ mono = y(:,1); % 2列目を削除
 また，録音した音声がステレオオーディオの場合，モノラルオーディオに変換する．（\srcref{src:モノラルへの変換}）
 \paragraph{実験の内容}
 今回は母音「\texttt{a}」，「\texttt{i}」の2つを処理する．それぞれ振幅データと\(-1\)の積をとる．その波形，元の波形，合成波の，それぞれ一部（\(0.01\)秒）を描画する．
-\texttt{a}の音声データを\texttt{sound1.wav}，\texttt{i}の音声データを\texttt{sound2.wav}に格納している．\ssrcref{sec:\kadaicb}{src:03_02_a}\(\underset{\Rightarrow\textrm{p.\pageref{src:03_02_i}}}{\textrm{\srcref{src:03_02_i}}}\)．
+\texttt{a}の音声データを\texttt{sound1.wav}，\texttt{i}の音声データを\texttt{sound2.wav}に格納している．\scall\sref{src:03_02_a}，\sref{src:03_02_i}．
 \result
 波形を\figref{fig:処理前後の波形_a}，\figref{fig:処理前後の波形_i}に示す．聴音確認の結果，処理の前後で音の変化は確認できなかった．
 さらに，合成波（\texttt{synthetic wave}）は常に\(0\)であった．
@@ -141,4 +141,5 @@ mono = y(:,1); % 2列目を削除
 \end{figure}
 \consideration
 結果より，合成波が\(0\)であることを確認した．上下（正負）を逆にして生成した音波と元となった音波を合成すると無音になる．
-人間の聴覚は振動を「音圧」としてとらえているので，波の正負が反転しても，聞こえ方は変わらないと考えられる．
+波の正負が反転しても，聞こえ方は変わらないと知覚する理由として，人間の聴覚は振動を「音圧」としてとらえているというものが挙げられる．
+\section{\kadaicc}\label{sec:\kadaicc}

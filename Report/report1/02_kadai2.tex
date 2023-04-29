@@ -88,7 +88,7 @@ plot(freq, y_abs); % グラフ描画
             \item 振幅スペクトルを\(0\textrm{Hz}\)から\(200\textrm{Hz}\)まで描画する．
             \item 高調波が発生しているか，その振幅が\eqref{equ:矩形波}通りになっているか確認する．
         \end{itemize}
-        \ssrcref{sec:\kadaiba}{src:02_01_1}\(\underset{\Rightarrow\textrm{p.\pageref{src:02_01_2}}}{\textrm{\srcref{src:02_01_2}}}\)．
+        \scall\sref{src:02_01_1}，\sref{src:02_01_2}．
     \end{minipage}
     \begin{minipage}[c]{.4\textwidth}
         \centering
@@ -154,7 +154,7 @@ plot(freq, y_abs); % グラフ描画
     \end{tabularx}
 \end{table}
 \paragraph{LPFの作成と適用}
-今回はフィルタの行列を作る方法ではなく，周波数テーブルの閉区間\(\big[-375\textrm{Hz},375\textrm{Hz}\big]\)以外の振幅を\(0\)にする方法でフィルタを適用する．（\srcref{src:フィルターを適用する}）\ssrcref{sec:\kadaibb}{src:02_02}
+今回はフィルタの行列を作る方法ではなく，周波数テーブルの閉区間\(\big[-375\textrm{Hz},375\textrm{Hz}\big]\)以外の振幅を\(0\)にする方法でフィルタを適用する．（\srcref{src:フィルターを適用する}）\scall\sref{src:02_02}．
 \begin{lstlisting}[caption={フィルターを適用する},label={src:フィルターを適用する},numbers={none}]
 % データ列yをフーリエ変換後，Shiftしてabsをとったものを "fft_y" に格納している．
 % 周波数テーブルの変数名は "freq" である．

@@ -39,7 +39,7 @@ y = sin(2*pi*f*t);
 \(t\)の各要素\(t_n\)に対して三角関数\(\sin(2\pi ft_n)\)を演算し，ベクトル\(y\)の要素\(y_n\)に代入する．したがって\(y\)も\mat{1}{N}のベクトルになる．
 生成した正弦波を\texttt{plot}関数を用いて\(y\)を\(t\)の関数として描画する．このように，ただ一つの正弦波からなるような音を\textbf{純音}という．\cite[p.1]{音響工学理論基礎}
 また，サンプリング周波数を\texttt{Fs}とし，データ列\texttt{y}を再生するためには\texttt{sound}関数を用いる．\par
-\paragraph{実験内容}この実験では，周波数を\(f_1=440\textrm{Hz}\)，\(f_2=660\textrm{Hz}\)の2種類を用いてそれぞれ正弦波\(y_1\)，\(y_2\)を生成する．生成した\(y_n(n=\{1,2\})\)に対して，\(t\)を横軸に取りグラフを作成し，サンプリング周波数を\(\textrm{\texttt{Fs}}=16000\textrm{Hz}\)として再生する．\ssrcref{sec:\kadaiaa}{src:01_01}
+\paragraph{実験内容}この実験では，周波数を\(f_1=440\textrm{Hz}\)，\(f_2=660\textrm{Hz}\)の2種類を用いてそれぞれ正弦波\(y_1\)，\(y_2\)を生成する．生成した\(y_n(n=\{1,2\})\)に対して，\(t\)を横軸に取りグラフを作成し，サンプリング周波数を\(\textrm{\texttt{Fs}}=16000\textrm{Hz}\)として再生する．\scall\sref{src:01_01}．
 \result
 各正弦波のグラフを\figref{fig:\kadaiaa}に示す．音を聴き比べた結果，\(f_2\)の周波数を用いた正弦波は\(f_1\)を用いた正弦波に比べて音が高かった．具体的には\(f_1\)がAの音\footnote{イタリア語音階で「ラ」}であるのに対して，\(f_2\)の音は完全5度大きいEの音\footnote{イタリア語音階で「ミ」}であった．
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
@@ -84,7 +84,7 @@ sound(y, Fs);
 \end{wrapfigure}
 \paragraph{実験内容}
 振幅，周期，音の変化を確認する．周波数\(f=440\textrm{Hz}\)，サンプリング周波数\(\texttt{Fs}=16000\textrm{Hz}\)とする．
-確認方法として，左から純音，右から実験変化させた音を再生するようにし（\srcref{src:左右から別の音を出力}），音の変化を確認する．\ssrcref{sec:\kadaiab}{src:01_02}
+確認方法として，左から純音，右から実験変化させた音を再生するようにし（\srcref{src:左右から別の音を出力}），音の変化を確認する．\scall\sref{src:01_02}．
 \begin{table}[h]
     \caption{\kadaiab\ 実験内容}
     \label{tbl:\kadaiab_実験内容}
@@ -147,7 +147,8 @@ sound(y, Fs);
     N & = \big|f_1-f_2\big|\label{equ:うなり}
 \end{align}
 \(f_1\)と\(f_2\)の差が大きければ，当然うなり（\(N\)）の回数は多くなり，\(f_1\)と\(f_2\)の差が小さければうなりの回数は少なくなる．\par
-本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)の純音\(y_1\)，\(f_2=441\textrm{Hz}\)の純音\(y_2\)を加算合成\(\big(y_1+y_2\big)\)した波形を生成し再生する．\ssrcref{sec:\kadaiac}{src:01_03}\\
+本実験では，サンプリング周波数を\(\texttt{Fs}=16000\textrm{Hz}\)，提示時間\(4\)秒，周波数が\(f_1=440\textrm{Hz}\)の純音\(y_1\)，\(f_2=441\textrm{Hz}\)の純音\(y_2\)を加算合成\(\big(y_1+y_2\big)\)した波形を生成し再生する．\scall\sref{src:01_03}．
+
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
     \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_03.pdf}
@@ -181,7 +182,7 @@ sound(y, Fs);
     f(t) & =\sum_{k=1}^{N}\frac{1}{2k-1}\sin\big(2\pi(2k-1)ft\big)\label{equ:矩形波}
 \end{align}
 \paragraph{実験内容}周期\(T=1/2\)として，\eqref{equ:矩形波}の\(N\)の値を\(N=1, 5, 25\)と増やしたときに次第に波形が矩形波に収束していくことを確認する．
-計算機で和\(\big(\sum\big)\)の演算方法を\srcref{src:和の演算}に示す．\ssrcref{sec:\kadaiad}{src:01_04}
+計算機で和\(\big(\sum\big)\)の演算方法を\srcref{src:和の演算}に示す．\scall\sref{src:01_04}．
 \begin{lstlisting}[caption={和の演算},label={src:和の演算},numbers={none}]
 y = 0;
 for k=1:50
@@ -236,7 +237,7 @@ X = a.*X + b; % 演算
 \begin{leftbar}
     確率変数\(x\)に対して，その平均が\(\mu_x\)で，分散が\({\sigma_x}^2\)のとき，\(y=ax+b\quad(a\textrm{と}b\textrm{は定数})\)で定義される確率変数\(y\)の平均は\(\mu_y=a\mu_x+b\)で，分散は\({\sigma_y}^2=a^2{\sigma_x}^2\)．\hfill\cite{matlab_randn}
 \end{leftbar}
-したがって，標準正規分布に従って出力されたデータ列の平均を\texttt{a}，標準偏差を\texttt{b}に変更したい場合には，\mat{n}{m}データ列\texttt{X}に対して\texttt{X}の各要素と\texttt{a}の積をとり，データ列\texttt{X}と\texttt{b}の和をとる．（\srcref{src:平均と標準偏差の変更}）\ssrcref{sec:\kadaiae}{src:01_05}
+したがって，標準正規分布に従って出力されたデータ列の平均を\texttt{a}，標準偏差を\texttt{b}に変更したい場合には，\mat{n}{m}データ列\texttt{X}に対して\texttt{X}の各要素と\texttt{a}の積をとり，データ列\texttt{X}と\texttt{b}の和をとる．（\srcref{src:平均と標準偏差の変更}）\scall\sref{src:01_05}．
 \result
 ガウス雑音の波形を\figref{fig:ガウス雑音の波形}，ヒストグラムを\figref{fig:ヒストグラム}に示す．聴音した結果，「ザー」といういわゆる雑音が聞こえた．
 \begin{figure}[h]
