@@ -97,3 +97,48 @@ end
 音量について，振幅と音量は比例する．初期位相を与えた場合，波形の振幅が大きくなるにもかかわらず，音量は小さくなることが分かった．この理由は今後の課題として調査したい．\par
 また，実験結果からわかるように，矩形波やノコギリ波に初期位相を与えると，波形が滑らかになるとともに音も滑らかに知覚される．この相関も調査したい．
 \section{\kadaicb}\label{sec:\kadaicb}
+\purpose
+最近のイヤホンやヘッドホンには「ノイズキャンセリング」という機能が搭載されている．これは周りの雑音を音声加工によって軽減する技術である．
+この技術は雑音と，それをもとに生成した音の加算合成波を\(0\)にすることで再現している．今回の実験では\matlab を用いて，ある音波に対して合成波が\(0\)になるような音波を生成する．
+生成した音波と元となった音波の音と波形の違いを明確にする．
+\method
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \vspace{-1cm}
+    \centering
+    \begin{lstlisting}[caption={モノラルへの変換},label={src:モノラルへの変換},numbers={none}]
+% y : N行2列
+% ステレオオーディオデータ
+mono = y(:,1); % 2列目を削除
+    \end{lstlisting}
+    \vspace{-1cm}
+\end{wrapfigure}
+正弦波\(y_1=\sin(x)\)に対して，合成波が\(0\)になるような正弦波は，\(y_2=-\sin(x)\)であり，\(y_1\)と\(-1\)の積である．無論，\(y_1+y_2=0\)となる．\par
+これは正弦波に限った話ではない．任意の実数値関数\(f:x\longrightarrow f(x)\quad(x\in\mathbb{R})\)に対して，横軸に\(x\)，縦軸に\(f(x)\)のグラフを描画する．
+横軸を対称の軸として，値\(f(x)\)を線対称移動すると\(-f(x)\)になる．つまり，ある音波に対して，その振幅と\(-1\)の積を取った値を加算合成すれば，合成波は\(0\)になる．
+\paragraph{実装}
+音波Aの各要素と\(-1\)の積を演算するには，\texttt{A.*(-1)}と入力する．\texttt{.*}は各要素との積をとる演算子である．
+また，録音した音声が音声がステレオオーディオの場合，モノラルオーディオに変換する．（\srcref{src:モノラルへの変換}）
+\paragraph{実験の内容}
+今回は母音「\texttt{a}」，「\texttt{i}」の2つを処理する．それぞれ振幅データと\(-1\)の積をとる．その波形，元の波形，合成波の，それぞれ一部（\(0.01\)秒）を描画する．
+\texttt{a}の音声データを\texttt{sound1.wav}，\texttt{i}の音声データを\texttt{sound2.wav}に格納している．\ssrcref{sec:\kadaicb}{src:03_02_a}\(\underset{\Rightarrow\textrm{p.\pageref{src:03_02_i}}}{\textrm{\srcref{src:03_02_i}}}\)．
+\result
+波形を\figref{fig:処理前後の波形_a}，\figref{fig:処理前後の波形_i}に示す．聴音確認の結果，処理の前後で音の変化は確認できなかった．
+さらに，合成波（\texttt{synthetic wave}）は常に\(0\)であった．
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_2_a.pdf}
+        \caption{処理前後の波形：「\texttt{a}」}
+        \label{fig:処理前後の波形_a}
+    \end{minipage}
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_2_i.pdf}
+        \caption{処理前後の波形「\texttt{i}」}
+        \label{fig:処理前後の波形_i}
+    \end{minipage}
+\end{figure}
+\consideration
+結果より，合成波が\(0\)であることを確認した．上下（正負）を逆にして生成した音波と元となった音波を合成すると無音になる．
+人間の聴覚は振動を「音圧」として捉えているので，波の正負が反転しても，聞こえ方は変わらないと考えられる．
