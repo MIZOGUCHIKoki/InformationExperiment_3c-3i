@@ -74,6 +74,6 @@ clear;
  axis([0 1 -400 400]);
  exportgraphics(fig3,'../Figures/03_33_i.pdf','ContentType','vector');
 
- % sound(ya,Fs1);
- % pause(4);
- % sound(yi,Fs2);
+ sound(ya,Fs1);
+ pause(4);
+ sound(yi,Fs2);
