@@ -143,3 +143,63 @@ mono = y(:,1); % 2列目を削除
 結果より，合成波が\(0\)であることを確認した．上下（正負）を逆にして生成した音波と元となった音波を合成すると無音になる．
 波の正負が反転しても，聞こえ方は変わらないと知覚する理由として，人間の聴覚は振動を「音圧」としてとらえているというものが挙げられる．
 \section{\kadaicc}\label{sec:\kadaicc}
+\purpose
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \vspace{-2cm}
+    \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/03_00_ex.png}
+    \caption{縦横軸の値を抽出する}
+    \label{fig:縦横軸の値を抽出する}
+    \vspace{-2cm}
+\end{wrapfigure}
+
+\ref{sec:\kadaiad}節より，任意の波はフーリエ変換し，周波数解析できる．
+今回の実験では，音声を周波数解析し，振幅スペクトル上でピークのある周波数および振幅データを抽出した後，それらを元に音波を生成する．生成した音波と元となった音波の違いを聴き比べる．
+\method
+\ref{sec:\kadaicb}節で用いた\texttt{sound1.wav}，\texttt{sound2.wav}に対して，周波数解析する．
+\matlab の\texttt{plot}関数で出力したグラフは，ピークの点をクリックするとその点の値を取り出すことができる．（\figref{fig:縦横軸の値を抽出する}）今回は，\(0\textrm{Hz}\)から\(10000\textrm{Hz}\)までを振幅スペクトルとして書き出す．
+取り出した点を行列に保存し，その振幅と周波数から純音を生成する．
+このとき，時刻\(t\)に対して，周波数\(f\)と振幅\(A\)に対して，\(f(t) = A\sin(2\pi ft)\)と表せること，すべての波は正弦波の和で表せることをもとに，生成した純音を合成し，音波を作成する．\scall\sref{src:03_03}．
+\result
+聴音確認の結果，合成後の音は，「\texttt{a}」，「\texttt{i}」と聞こえたが，原音に比べて「ガサガサ」とした音であった．
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_30_0a.pdf}
+        \subcaption{源音波（一部）}
+    \end{minipage}
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_30_afft.pdf}
+        \subcaption{振幅スペクトルの絶対値}
+    \end{minipage}
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_32_a.pdf}
+        \subcaption{合成音波（一部）}
+    \end{minipage}
+    \caption{母音「\texttt{a}」}
+    \label{fig:合成音声_a}
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_30_0i.pdf}
+        \subcaption{源音波（一部）}
+    \end{minipage}
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_31_ifft.pdf}
+        \subcaption{振幅スペクトルの絶対値}
+    \end{minipage}
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/03_33_i.pdf}
+        \subcaption{合成音波（一部）}
+    \end{minipage}
+    \caption{母音「\texttt{i}」}
+    \label{fig:合成音声_i}
+\end{figure}
+\consideration
+源音波と合成音波を比べてみると，縦軸が異なる．これは，特定の周波数を取り出すことによって，弱めあう正弦波を合成しなかったためであろう．
+また，「ガサガサ」と音が聞こえるのは，抽出していない大部分の高調波成分が欠け，「本来必要な周波数の正弦波がないこと」が原因である．
+高調波成分の欠落で音質が悪くなるのかの具体的な原因は，今後の課題として調査したい．

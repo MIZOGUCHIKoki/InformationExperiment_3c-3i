@@ -39,7 +39,8 @@ y = sin(2*pi*f*t);
 \(t\)の各要素\(t_n\)に対して三角関数\(\sin(2\pi ft_n)\)を演算し，ベクトル\(y\)の要素\(y_n\)に代入する．したがって\(y\)も\mat{1}{N}のベクトルになる．
 生成した正弦波を\texttt{plot}関数を用いて\(y\)を\(t\)の関数として描画する．このように，ただ一つの正弦波からなるような音を\textbf{純音}という．\cite[p.1]{音響工学理論基礎}
 また，サンプリング周波数を\texttt{Fs}とし，データ列\texttt{y}を再生するためには\texttt{sound}関数を用いる．\par
-\paragraph{実験内容}この実験では，周波数を\(f_1=440\textrm{Hz}\)，\(f_2=660\textrm{Hz}\)の2種類を用いてそれぞれ正弦波\(y_1\)，\(y_2\)を生成する．生成した\(y_n(n=\{1,2\})\)に対して，\(t\)を横軸に取りグラフを作成し，サンプリング周波数を\(\textrm{\texttt{Fs}}=16000\textrm{Hz}\)として再生する．\scall\sref{src:01_01}．
+\paragraph{実験内容}この実験では，周波数を\(f_1=440\textrm{Hz}\)，\(f_2=660\textrm{Hz}\)の2種類を用いてそれぞれ正弦波\(y_1\)，\(y_2\)を生成する．生成した\(y_n(n=\{1,2\})\)に対して，\(t\)を横軸に取りグラフを作成し，サンプリング周波数を\(\textrm{\texttt{Fs}}=16000\textrm{Hz}\)として再生する．\scall\sref{src:01_01}．\par
+グラフを描画するときの横軸を時間としたとき，便宜的に縦軸を\texttt{amplitude}とする．\footnote{振幅は，振動の中心からの距離であり，正の値である．ゆえに負の値が存在するデータ対して\texttt{amplitude}（振幅）と記すのは不適切である．}
 \result
 各正弦波のグラフを\figref{fig:\kadaiaa}に示す．音を聴き比べた結果，\(f_2\)の周波数を用いた正弦波は\(f_1\)を用いた正弦波に比べて音が高かった．具体的には\(f_1\)がAの音\footnote{イタリア語音階で「ラ」}であるのに対して，\(f_2\)の音は完全5度大きいEの音\footnote{イタリア語音階で「ミ」}であった．
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
@@ -73,6 +74,7 @@ y = sin(2*pi*f*t);
     y & =A\sin(2\pi ft)\label{equ:正弦波_振幅}
 \end{align}
 \begin{wrapfigure}{r}[0mm]{.4\textwidth}
+    \vspace{-.5cm}
     \begin{lstlisting}[caption={左右から別の音を出力},label={src:左右から別の音を出力},numbers={none}]
 Fs = 16000; % サンプリング周波数
 y1 = 音声データ1; % N行1列（左）
@@ -80,7 +82,6 @@ y2 = 音声データ2; % N行1列（右）
 y = [y1 y2]; % N行2列 列結合を行う
 sound(y, Fs); 
     \end{lstlisting}
-    \vspace{-1cm}
 \end{wrapfigure}
 \paragraph{実験内容}
 振幅，周期，音の変化を確認する．周波数\(f=440\textrm{Hz}\)，サンプリング周波数\(\texttt{Fs}=16000\textrm{Hz}\)とする．
@@ -163,9 +164,12 @@ sound(y, Fs);
 さらに，この加算合成波は\(t=0\)のとき最大値を迎えており，これは初期位相が同一の正弦波の加算合成であることを表している．
 \section{\kadaiad}\label{sec:\kadaiad}
 \purpose
-矩形波は周期関数だが，見た目は正弦波ではない．これをプログラム上でどのように再現するのか．フーリエ級数展開を用いた矩形波の描画やフーリエ級数展開のプログラム上で再現し，理想的な矩形波との比較する．
+フーリエ変換とは，自然界に現れるさまざまな曲線を三角関数に変換する方法である．フーリエ変換のうち基礎的なものはフーリエ級数展開と呼ばれ，周期的な三角関数の和で表す．
+フーリエ級数展開は周期関数のみに適用できるのに対して，フーリエ変換は非周期関数にも適用できる．\cite[p.410]{かたち創造の百科事典}\par
+矩形波は周期関数だが，正弦波ではない．これをプログラム上でどのように再現するのか．フーリエ級数展開を用いた矩形波の描画や，フーリエ級数展開をプログラム上で再現し，理想的な矩形波との比較する．
 \method
-\paragraph{フーリエ級数展開}周期\(T\)の任意の周期信号\(f(t)\)に対して，それはより短い周期\(T/n(n=1,2,\dots)\)を持つ正弦波の重ね合わせで表すことができる．具体的には\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表すことができ，これをフーリエ級数展開という．\cite[p.18-p.19]{信号処理}特に\eqref{equ:フーリエ級数展開}の\(N=1\)の時を基本周波数と呼ぶ．
+\paragraph{フーリエ級数展開}周期\(T\)の任意の周期信号\(f(t)\)に対して，それはより短い周期\(T/n(n=1,2,\dots)\)を持つ正弦波の重ね合わせで表すことができる．具体的には\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表すことができ，これをフーリエ級数展開という．\cite[p.18-p.19]{信号処理}特に\eqref{equ:フーリエ級数展開}の\(N=1\)の時を基本周波数と呼ぶ．\par
+さらに，非周期関数を
 また，\(k>1\)のときの周波数を持つ正弦波を高調波と呼ぶ．
 
 \begin{wrapfigure}{r}[0cm]{.3\textwidth}
@@ -200,7 +204,7 @@ end
 \figref{fig:\kadaiae_実験結果}の通り，\(N\)を大きくすると，矩形波に収束することがわかった．また，基本周波数と矩形波の周期も目測では一致している．
 \consideration
 計算機を用いて\(N\)の値を無限大で出力は不可能である．\figref{fig:矩形波}のように\(N=50\)として出力すると，理想的な矩形波に近付くが完全ではない．\par
-ここで\(N\)の値を大きくすると，\(T/2, T\)あたりで尖ったもの（ひげ）が確認される．フーリエ級数では不連続で誤差が大きい．このことをギブス現象という．\cite[p.34]{信号処理}
+ここで\(N\)の値を大きくすると，\(T/2, T\)あたりで尖ったもの（ひげ）が確認される．フーリエ級数展開では不連続で誤差が大きい．このことをギブス現象という．\cite[p.34]{信号処理}
 \section{\kadaiae}\label{sec:\kadaiae}
 \purpose
 ガウス雑音（\textit{gaussian noise}）は以下のように定義されている．
@@ -208,7 +212,7 @@ end
     Gaussian noise represents statistical noise having the probability density function equal to that of the normal distribution.
     \hfill\cite{barbu2013variational}
 \end{leftbar}
-つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．今回の実験ではガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布\footnote{以後，課題内容や他の用語との兼ね合いにより「正規分布」を「ガウス分布」と表す．}に従っているかを確認する．\par
+つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．今回の実験ではガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布（正規分布）に従っているかを確認する．\par
 一方，白色雑音（\textit{white noise}）は，周波数成分を均等に含み，パワースペクトルが一定である不規則な波のことである．\cite{witenoise}
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \vspace{-.5cm}
@@ -237,23 +241,20 @@ X = a.*X + b; % 演算
 \begin{leftbar}
     確率変数\(x\)に対して，その平均が\(\mu_x\)で，分散が\({\sigma_x}^2\)のとき，\(y=ax+b\quad(a\textrm{と}b\textrm{は定数})\)で定義される確率変数\(y\)の平均は\(\mu_y=a\mu_x+b\)で，分散は\({\sigma_y}^2=a^2{\sigma_x}^2\)．\hfill\cite{matlab_randn}
 \end{leftbar}
-したがって，標準正規分布に従って出力されたデータ列の平均を\texttt{a}，標準偏差を\texttt{b}に変更したい場合には，\mat{n}{m}データ列\texttt{X}に対して\texttt{X}の各要素と\texttt{a}の積をとり，データ列\texttt{X}と\texttt{b}の和をとる．（\srcref{src:平均と標準偏差の変更}）\scall\sref{src:01_05}．
+したがって，標準正規分布に従って出力されたデータ列の平均を\texttt{a}，標準偏差を\texttt{b}に変更したい場合には，\mat{n}{m}データ列\texttt{X}に対して\texttt{X}の各要素と\texttt{a}の積をとり，データ列\texttt{X}と\texttt{b}の和をとる．（\srcref{src:平均と標準偏差の変更}）
+今回は，サンプリング周波数\(\textrm{\texttt{Fs}=16\textrm{kHz}}\)，提示時間\(1\)秒の白色ガウス雑音を生成する．つまり，\(16\textrm{k}\)個の乱数を作成し，それを振幅として音波を形成する．\scall\sref{src:01_05}．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \includegraphics[keepaspectratio,width=.2\textwidth]{../../Figures/01_05_0.pdf}
+    \caption{ガウス雑音の波形}
+    \label{fig:ガウス雑音の波形}
+    \includegraphics[keepaspectratio,width=.2\textwidth]{../../Figures/01_05_1.pdf}
+    \caption{ヒストグラム}
+    \label{fig:ヒストグラム}
+\end{wrapfigure}
 \result
 ガウス雑音の波形を\figref{fig:ガウス雑音の波形}，ヒストグラムを\figref{fig:ヒストグラム}に示す．聴音した結果，「ザー」といういわゆる雑音が聞こえた．
-\begin{figure}[h]
-    \centering
-    \begin{minipage}[b]{.48\textwidth}
-        \centering
-        \includegraphics[keepaspectratio,height=.2\textheight]{../../Figures/01_05_0.pdf}
-        \caption{ガウス雑音の波形}
-        \label{fig:ガウス雑音の波形}
-    \end{minipage}
-    \begin{minipage}[b]{.48\textwidth}
-        \centering
-        \includegraphics[keepaspectratio,height=.2\textheight]{../../Figures/01_05_1.pdf}
-        \caption{ヒストグラム}
-        \label{fig:ヒストグラム}
-    \end{minipage}
-\end{figure}
 \consideration
-聴音確認による，ガウス雑音の特徴はとらえることができなかった．ヒストグラム\figref{fig:ヒストグラム}を確認すると，平均\(\mu=0\)のガウス分布に従っていると考えられる．
+聴音確認による，ガウス雑音の特徴はとらえることができなかった．ヒストグラム\figref{fig:ヒストグラム}を確認すると，平均\(\mu=0\)のガウス分布に従っていると推測する．
+今回はサンプリング周波数\(\textrm{\texttt{Fs}}=16\textrm{kHz}\)で音波を形成したが，理論上\(\textrm{\texttt{Fs}}=\infty\)とするとガウス分布を得るであろう．
