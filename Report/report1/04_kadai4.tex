@@ -46,14 +46,13 @@
 周波数の\(1020\textrm{Hz}\)から\(1620\textrm{Hz}\)を除去するとき，\texttt{fft}の戻り値を考慮してフィルタを作成する．（\srcref{src:白色雑音の作成}）
 \figref{fig:ノイズAのFFT後}と\figref{fig:ノイズBのFFT後}を比較すると，ノイズBに周波数フィルタの適用が確認される．
 フィルタを通した振幅スペクトルに対して，逆フーリエ変換することで音波を形成する．\par
-\paragraph{純音の作成}純音の周波数は，純音A\(=400\textrm{Hz}\)，純音B\(=1300\textrm{Hz}\)で作成する．
-\paragraph{連続聴効果が生じる音刺激の作成}純音\(1\)秒，雑音\(0.1\)秒を4回繰り返す．実験する周波数の組み合わせを\tblref{tbl:連続聴効果}に示す．
+\paragraph{連続聴効果が生じる音刺激の作成}純音の周波数は，純音A\(=400\textrm{Hz}\)，純音B\(=1300\textrm{Hz}\)で作成する．純音BはノイズBに存在しない周波数を設定した．
+純音\(1\)秒，雑音\(0.1\)秒を4回繰り返したものを実験する音刺激とする．実験する周波数の組み合わせを\tblref{tbl:連続聴効果}に示す．\scall\sref{src:04_02}
 \begin{lstlisting}[caption={白色雑音の作成},label={src:白色雑音の作成}]
 white_noise = 2 * (rand(1,Fs) - 0.5); % 白色雑音の作成
 B_fft = fftshift(fft(白色雑音)); % フーリエ変換
 noise_filter = ones(1,Fs);
-filter_rangeS = 1020; % カット始 周波数
-filter_rangeG = 1620; % カット終 周波数
+filter_rangeS = 1020; filter_rangeG = 1620; % カット終始 周波数
 noise_filter((Fs/2)-filter_rangeG : (Fs/2)-filter_rangeS) = 0; % フィルタの作成
 noise_filter((Fs/2)+filter_rangeS : (Fs/2)+filter_rangeG) = 0; % フィルタの作成
 B_fft = noise_filter.* A_fft; % 各要素とフィルタの積を取る
@@ -63,16 +62,16 @@ noise_B = real(ifft(ifftshift(B_fft))); % 虚部を含むため，real関数を�
     \centering
     \begin{minipage}{.45\textwidth}
         \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/04_20_Afft.pdf}
         \caption{ノイズAの\texttt{fft}後}
         \label{fig:ノイズAのFFT後}
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/04_20_Afft.pdf}
     \end{minipage}
     \hspace{1em}
     \begin{minipage}{.45\textwidth}
         \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/04_21_Bfft.pdf}
         \caption{ノイズBの\texttt{fft}後}
         \label{fig:ノイズBのFFT後}
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/04_21_Bfft.pdf}
     \end{minipage}
 \end{figure}
 \result
@@ -94,4 +93,5 @@ noise_B = real(ifft(ifftshift(B_fft))); % 虚部を含むため，real関数を�
 実験結果より，純音の周波数がノイズの周波数に含まれていないとき，連続聴効果は生じなかった．
 挿入されるノイズに純音の周波数が含まれているとき，雑音の周波数を基に，脳内で純音を補完していると考えられる．
 ゆえに，純音の周波数をノイズから削除すると，連続聴効果が生じにくいと考えられる．\par
-今回は純音に対する連続聴効果を実験したが，馴染み深い言語（日本語のフレーズ）に対して雑音を挿入すると，純音に比べて連続聴効果を知覚できるのではないだろうか．これは今後の課題として調査したい．
+今回は純音に対する連続聴効果を実験したが，馴染み深い言語（日本語のフレーズ）に対して雑音を挿入すると，純音に比べて連続聴効果を知覚できるのではないだろうか．日頃日本語を聞きなれている我々なら，より強く補完が働くだろう．
+これは今後の課題として調査したい．
