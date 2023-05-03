@@ -39,7 +39,3 @@ fig2 = figure;
 plot(ta, EX3_rep);
 xlabel('time[s]');
 ylabel('amplitude');
-
-exportgraphics(fig0,'../Figures/04_10_1000-990.pdf','ContentType','vector');
-exportgraphics(fig1,'../Figures/04_11_1000-800.pdf','ContentType','vector');
-exportgraphics(fig2,'../Figures/04_12_1000-200.pdf','ContentType','vector');

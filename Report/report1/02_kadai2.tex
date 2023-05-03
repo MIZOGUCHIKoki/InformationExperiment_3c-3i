@@ -1,7 +1,8 @@
 \chapter{周波数解析}
 \section{\kadaiba}\label{sec:\kadaiba}
 \purpose
-任意の周期関数は\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表せる．また，任意の関数に対してフーリエ変換すると「周波数に対する振幅」を得ることができる．
+任意の周期関数は\eqref{equ:フーリエ級数展開}の\(N=\infty\)で表せる．
+また，任意の関数に対して離散フーリエ変換\footnote{デジタル値（離散値）に対してフーリエ変換するときは，離散フーリエ変換と呼ぶ．このレポート常の全実験では，全てのフーリエ変換を離散値に対して行うので，離散フーリエ変換をフーリエ変換と記す．}すると「周波数に対する振幅」を得ることができる．
 矩形波\eqref{equ:矩形波}の振幅と周波数をグラフに描画したものを振幅スペクトルと呼ぶ．\footnote{振幅スペクトルの縦軸は，便宜上\texttt{amplitude}（振幅）とする．}（\figref{fig:周波数解析}）
 さらに，周波数に対してフーリエ変換した絶対値の2乗をとったグラフをパワースペクトルと呼ぶ．\par
 今回の実験では，純音と矩形波に対して周波数解析し，純音では解析結果より純音の周波数をより多く含んでいるか確認する．
@@ -16,7 +17,7 @@
 \end{figure}
 \method
 \paragraph{高速フーリエ変換の実装}
-\matlab では高速フーリエ変換をする関数（\texttt{fft}）がある．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．（\srcref{src:振幅スペクトルの取得}）
+\matlab では高速フーリエ変換\footnote{高速フーリエ変換は，離散フーリエ変換を高速に計算する手法}をする関数（\texttt{fft}）がある．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．（\srcref{src:振幅スペクトルの取得}）
 \begin{enumerate}
     \item 高速フーリエ変換する．\\
           \texttt{fft}関数は出力として，サンプリング周波数\texttt{Fs}に対して，\(\big[\textrm{\texttt{-Fs/2}},\textrm{\texttt{Fs/2}}\big]\)範囲の周波数に対する振幅のデータを得る．
@@ -72,7 +73,7 @@ plot(freq, y_abs); % グラフ描画
         \end{flushleft}
     \end{minipage}
 \end{figure}
-\paragraph{実験の内容}今回の実験では，純音と矩形波の周波数解析する．サンプリング周波数を\(\textrm{\texttt{Fs}}=8192\textrm{Hz}\)と設定する．
+\paragraph{実験の内容}今回の実験では，純音と矩形波の周波数解析する．サンプリング周波数を\(8192\textrm{Hz}\)と設定する．
 \begin{figure}[H]
     \begin{minipage}[c]{.55\textwidth}
         \begin{itemize}
