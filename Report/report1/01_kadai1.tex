@@ -213,10 +213,11 @@ end
     Gaussian noise represents statistical noise having the probability density function equal to that of the normal distribution.
     \hfill\cite{barbu2013variational}
 \end{leftbar}
-つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．今回の実験ではガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布（正規分布）の概形に従っているかを確認する．\par
-一方，白色雑音（\textit{white noise}）は，周波数成分を均等に含み，パワースペクトルが一定である不規則な波のことである．\cite{witenoise}
+つまり，「正規分布の確率関数と等しい確率密度関数を持つ統計的ノイズ」を表す．
+一方，白色雑音（\textit{white noise}）は，周波数成分を均等に含み，パワースペクトルが一定である不規則な波のことである\cite{witenoise}．白色性は，白色雑音が満たす性質である．\par
+また，白色性を持つガウス雑音を白色ガウス雑音と呼ぶ．今回の実験では白色ガウス雑音を計算機上で構成し，その信号振幅のヒストグラムを作成する．そのヒストグラムがガウス分布（正規分布）の概形に従っているかを確認する．
+
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
-    \vspace{-.5cm}
     \begin{lstlisting}[caption={乱数生成・ヒストグラム},label={src:乱数生成・ヒストグラム},xleftmargin=3mm]
 rng(0, 'twister');
 X = randn(n,m);
@@ -243,7 +244,8 @@ X = a.*X + b; % 演算
     確率変数\(x\)に対して，その平均が\(\mu_x\)で，分散が\({\sigma_x}^2\)のとき，\(y=ax+b\quad(a\textrm{と}b\textrm{は定数})\)で定義される確率変数\(y\)の平均は\(\mu_y=a\mu_x+b\)で，分散は\({\sigma_y}^2=a^2{\sigma_x}^2\)．\hfill\cite{matlab_randn}
 \end{leftbar}
 したがって，標準正規分布に従って出力されたデータ列の平均を\texttt{a}，標準偏差を\texttt{b}に変更したい場合には，\mat{n}{m}データ列\texttt{X}に対して\texttt{X}の各要素と\texttt{a}の積をとり，データ列\texttt{X}と\texttt{b}の和をとる．（\srcref{src:平均と標準偏差の変更}）
-今回は，サンプリング周波数を\(16\textrm{kHz}\)，平均\(\mu=0\)，標準偏差\(\sigma^2=0.2\)，提示時間\(1\)秒のガウス雑音を生成する．つまり，\(16\textrm{k}\)個の乱数を作成し，それを振幅として音波を形成する．\scall\sref{src:01_05}．
+今回は，サンプリング周波数を\(16\textrm{kHz}\)，平均\(\mu=0\)，標準偏差\(\sigma^2=0.2\)，提示時間\(1\)秒のガウス雑音を生成する．つまり，\(16\textrm{k}\)個の乱数を作成し，それを振幅として音波を形成する．白色性は，\texttt{randn}関数で保証されているものとする．
+\scall\sref{src:01_05}．
 
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
