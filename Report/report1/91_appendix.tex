@@ -4,7 +4,7 @@
 \setcounter{section}{0}
 \renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
 \renewcommand{\thesection}{\Alph{section}}
-\newcommand{\secref}[1]{#1\ （第\ref{sec:#1}節 →p.\pageref{sec:#1}）}
+\newcommand{\secref}[1]{#1\ （第\ref{sec:#1}章 →p.\pageref{sec:#1}）}
 \makeatletter
 \@addtoreset{lstlisting}{section}
 \makeatother
@@ -33,3 +33,4 @@
 \section{聴覚と音声信号\ (April 24th, 2023)}
 \lstinputlisting[caption={[\kadaida]{\secref{\kadaida}}},label={src:04_01}]{../../04_Hearing_AudioSignals/no1.m}
 \lstinputlisting[caption={[\kadaidb]{\secref{\kadaidb}}},label={src:04_02}]{../../04_Hearing_AudioSignals/no2.m}
+\lstinputlisting[caption={[\kadaidc]{\secref{\kadaidc}}},label={src:04_03}]{../../04_Hearing_AudioSignals/no3.m}
