@@ -10,9 +10,9 @@
     \label{tbl:実験環境}
     \begin{tabularx}{\textwidth}{AR}
         \hline
-        実験機                      & MacBook Air 2022 （Apple社）                     \\
-        プロセッサ                    & Apple Silicon M2                              \\
-        メモリ                      & 32GB                                          \\
+        実験機                      & MacBook Air 2022 （Apple社）\texttt{MLY13J/A}    \\
+        プロセッサ                    & Apple Silicon M2\ \  8コアCPU，8コアGPU            \\
+        メモリ                      & 8GB                                           \\
         \multirow{2}{*}{\matlab} & R2023a - academic use (Update1 9.14.02239454) \\
                                  & 64-bit (maci64) March 30, 2023                \\
         \hline
@@ -39,8 +39,8 @@ y = sin(2*pi*f*t);
 \(t\)の各要素\(t_n\)に対して三角関数\(\sin(2\pi ft_n)\)を演算し，ベクトル\(y\)の要素\(y_n\)に代入する．したがって\(y\)も\mat{1}{N}のベクトルになる．
 生成した正弦波を\texttt{plot}関数を用いて\(y\)を\(t\)の関数として描画する．このように，ただ一つの正弦波からなるような音を\textbf{純音}という．\cite[p.1]{音響工学理論基礎}
 また，サンプリング周波数を\texttt{Fs}とし，データ列\texttt{y}を再生するためには\texttt{sound}関数を用いる．\par
-\paragraph{実験内容}この実験では，周波数を\(f_1=440\textrm{Hz}\)，\(f_2=660\textrm{Hz}\)の2種類を用いてそれぞれ正弦波\(y_1\)，\(y_2\)を生成する．生成した\(y_n(n=\{1,2\})\)に対して，\(t\)を横軸に取りグラフを作成し，サンプリング周波数を\(\textrm{\texttt{Fs}}=16\textrm{kHz}\)として再生する．\scall\sref{src:01_01}．\par
-グラフを描画するときの横軸を時間としたとき，便宜的に縦軸を\texttt{amplitude}とする．\footnote{振幅は，振動の中心からの距離であり，正の値である．ゆえに負の値が存在するデータ対して\texttt{amplitude}（振幅）と記すのは不適切である．}
+\paragraph{実験内容}この実験では，周波数を\(f_1=440\textrm{Hz}\)，\(f_2=660\textrm{Hz}\)の2種類を用いてそれぞれ正弦波\(y_1\)，\(y_2\)を生成する．生成した\(y_1\)，\(y_2\)に対して，\(t\)を横軸に取りグラフを作成し，サンプリング周波数を\(\textrm{\texttt{Fs}}=16\textrm{kHz}\)として再生する．\scall\sref{src:01_01}．\par
+グラフを描画するときの横軸を時間としたとき，便宜的に縦軸を\texttt{amplitude}とする．\footnote{振幅は振動の中心からの距離であり，正の値である．ゆえに負の値が存在するデータ対して\texttt{amplitude}（振幅）と記すのは本来不適切である．}
 \result
 各正弦波のグラフを\figref{fig:\kadaiaa}に示す．音を聴き比べた結果，\(f_2\)の周波数を用いた正弦波は\(f_1\)を用いた正弦波に比べて音が高かった．具体的には\(f_1\)がAの音\footnote{イタリア語音階で「ラ」}であるのに対して，\(f_2\)の音は完全5度大きいEの音\footnote{イタリア語音階で「ミ」}であった．
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
@@ -136,7 +136,7 @@ sound(y, Fs);
     \end{minipage}
 \end{figure}
 \consideration
-\paragraph{振幅の変化について} 振幅の変化は，音量と比例することが確認できた．\figref{fig:振幅・位相の確認_結果_振幅}より，各正弦波において周期や初期位相が等しいので，縦軸が\(0\)になる時刻や最大値を迎えるは等しいく，振幅のみが異なる．
+\paragraph{振幅の変化について} 振幅の変化は，音量と比例することが確認できた．\figref{fig:振幅・位相の確認_結果_振幅}より，各正弦波において周期や初期位相が等しいので，縦軸が\(0\)になる時刻や最大値を迎える時刻は等しいく，振幅のみが異なる．
 \paragraph{初期位相の変化について} 初期位相の変化による音の変化は確認できなかった．\figref{fig:振幅・位相の確認_結果_初期位相}より，振幅や周期は等しい．初期位相が異なるため最小値や最大値を迎える時刻が初期位相分異なるが，その変化を知覚できなかった．
 \section{\kadaiac}\label{sec:\kadaiac}
 \purpose
