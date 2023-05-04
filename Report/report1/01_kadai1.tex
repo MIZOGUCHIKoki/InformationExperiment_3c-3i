@@ -2,9 +2,9 @@
 \section{\kadaiaa}\label{sec:\kadaiaa}
 \purpose
 我々は音の「高い」「低い」をどのようにして認識しているのだろうか．音が高いまたは低いと知覚するためには何かと比較するはずだがその比較の指標は何だろうか．
-この実験ではまず，正弦波の生成をプログラミングを用いて作成する．そして周波数の変化に対して正弦波グラフおよび音の違いを実験を通して確認し，考察する．
+この実験ではまず，行列上に正弦波を生成する．そして周波数の変化に対して正弦波グラフおよび音の違いを実験を通して確認し，考察する．
 \method
-\paragraph{実験に用いる装置}このレポート内すべての実験に用いる言語はMathWorks\raisebox{2mm}{\tiny\textregistered}社の\matlab を用い，\tblref{tbl:実験環境}の環境を用いて実験する．
+\paragraph{実験に用いる装置}このレポート内すべての実験にはMathWorks\raisebox{2mm}{\tiny\textregistered}社の\matlab を用いて，\tblref{tbl:実験環境}の環境下で実験を行う．
 \begin{table}[H]
     \caption{実験環境}
     \label{tbl:実験環境}
@@ -50,7 +50,7 @@ y = sin(2*pi*f*t);
 \end{wrapfigure}
 さらに，聴音確認・目視確認では音の大きさ，音色，振幅や波形の変化は確認でなかった．\par
 \consideration 周波数\ \((f)\)\ とは1秒間の振動回数であり，これが音の高さを決める．実験結果より周波数が大きい，つまり1秒間により多く振動すれば音は高くなることが分かった．
-また，1回振動あたりの時間を周期\ \((T)\)\ と言うが，周期と周波数は反比例の関係であり，\eqref{equ:周期と周波数}が成り立つ．
+また，1回振動あたりの時間を周期\ \((T)\)\ と言い，周期と周波数は反比例の関係であり，\eqref{equ:周期と周波数}が成り立つ．
 \begin{align}
     f & =\frac{1}{T} & \big(\textrm{無論}\quad T\neq 0,\quad f\neq 0\big)\label{equ:周期と周波数}
 \end{align}
