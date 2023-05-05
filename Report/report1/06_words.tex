@@ -20,4 +20,51 @@ IIRはFIRに比べてメモリ消費量を抑えられ，高速で演算量も�
 \paragraph{関連}
 振幅スペクトルに対して，フィルタ処理を行った\ref{sec:\kadaibb}章，\ref{sec:\kadaidb}章に関連する．両方とも有限範囲に対するフィルタを適用したので，FIRを適用したと言える．
 \section{ノイズキャンセリング}
+ノイズキャンセリングは，「雑音除去」を表す．大きく2つあり，イヤフォンやヘッドフォンなどの音声出力装置についているものと，音声入力装置（マイク）についているものである．
+どちらも，外部雑音を除去するために用いられる．\par
+\paragraph{音声出力装置}イヤフォンやヘッドフォンに搭載されているノイズキャンセリングでは，イヤフォン外の雑音を一度取り込み，それに対して\ref{sec:\kadaicb}章で扱ったように，各データと\(-1\)の積を取り，その波をイヤフォンから出力することで，雑音を打ち消せる．\par
+\paragraph{音声入力装置}Apple社のiOS15以降では，「声を分離」という機能がある．これは，入力された音声から雑音を取り除く技術である．これは音声入力装置のものとは異なり，雑音を機械学習でとらえ，除去する技術である．
 \section{聴覚におけるマスキング}
+対象とする音（マスキ）の聴き取りが，別の音（マスカ）の存在によって妨害される現象．
+マスキングには2種類あり，同時マスキング，継時マスキングがある．
+\paragraph{同時マスキング}同時マスキングは，周波数軸上のマスキング効果．マスキとマスカが同時に提示されたとき，マスカに近いマスキの周波数が聴き取りにくく現象\cite{マスキングと騒音対策}．
+\figref{fig:同時マスキング}中の着色部は，不可聴音の領域である．同時マスキングの特徴として，高音が低音よりも音量が大きい場合，高音は低音をマスクしにくいのに対して，低音が高音よりもマスクしやすいことがあげられる．
+\paragraph{継時マスキング}継時マスキングは，時間軸上のマスキング効果．マスカを提示した直前や直後のマスキが聴き取りにくくなる現象．
+\figref{fig:継時マスキング}中の着色部は，不可聴音の領域である．マスカ提示時刻より前のマスキングを逆行マスキング，マスカ提示時刻より後のマスキングを順行マスキングと呼ぶ．
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \fill[blue,opacity=.1](0,0)to[out=0,in=-120](2,2)--(2,2)to[out=-60,in=180](4,0)--cycle;
+            \draw[thin](0,0)to[out=0,in=-120](2,2);
+            \draw[thin](2,2)to[out=-60,in=180](4,0);
+            \draw[-latex](0,0)--(0,3)node[midway,left]{\tiny 音圧レベル};
+            \draw[-latex](0,0)--(4,0)node[right]{\tiny 周波数};
+            \draw[thick](2,0)node[below]{\tiny マスカ周波数}--(2,2)node[above]{\tiny マスカ};
+            \node[fill=blue,opacity=.1,text opacity=1,text centered]at(3,2.6){\tiny 同時マスキング領域};
+        \end{tikzpicture}
+        \caption{同時マスキング}
+        \label{fig:同時マスキング}
+    \end{minipage}
+    \begin{minipage}[b]{.48\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \fill[red,opacity=.1](1,0)to[out=20,in=-100](2,2)--(2,0)--cycle;
+            \fill[green,opacity=.1](2,2)to[out=-60,in=180](4,0)--(2,0)--cycle;
+            \draw[thin](1,0)to[out=20,in=-100](2,2);
+            \draw[thin](2,2)to[out=-60,in=180](4,0);
+            \draw[-latex](0,0)--(0,3)node[midway,left]{\tiny 音圧レベル};
+            \draw[-latex](0,0)--(4,0)node[right]{\tiny 時間};
+            \draw[thick](2,0)node[below]{\tiny マスカ提示時刻}--(2,2)node[above]{\tiny マスカ};
+            \node[fill=red,opacity=.1,text opacity=1]at(1,2.6)(G){\tiny 逆行マスキング領域};
+            \node[fill=green,opacity=.1,text opacity=1]at(3,2.6)(J){\tiny 順行マスキング領域};
+        \end{tikzpicture}
+        \caption{継時マスキング}
+        \label{fig:継時マスキング}
+    \end{minipage}
+\end{figure}
+\paragraph{関連}
+逆行マスキングに着目する．逆行マスキングは，つまり何らかの刺激（マスカ）の直前の刺激を知覚できない現象である．これは，連続聴効果と関連付けることができる．（\ref{sec:\kadaidb}）
+逆行マスキングの効果による，日常生活で聞こえない部分を，連続聴効果で補っていると考えられる．
+\section{音声認識}
