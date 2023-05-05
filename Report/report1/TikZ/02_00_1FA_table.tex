@@ -1,0 +1,15 @@
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}[c]{r|cc}
+    \multicolumn{1}{c}{正弦波}   & 振幅                                                            & 周波数                                                             \\
+    \hline
+    \(2\sin(t)\)              & \tikz[remember picture,baseline=(A.base)]{\node(A){\(2\)}}    & \tikz[remember picture,baseline=(D.base)]{\node(D){\(1/2\pi\)}} \\
+    \(-\sin (2t)\)            & \(-1\)                                                        & \(1/\pi\)                                                       \\
+    \(\frac{2}{3}\sin (3t)\)  & \(2/3\)                                                       & \(3/2\pi\)                                                      \\
+    \(-\frac{1}{2}\sin (4t)\) & \tikz[remember picture,baseline=(C.base)]{\node(C){\(-1/2\)}} & \tikz[remember picture,baseline=(B.base)]{\node(B){\(2/\pi\)}}  \\
+    \multicolumn{3}{c}{{\LARGE\vdots}}
+\end{tabular}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[inner sep=0.1mm,fit={(A)(B)(C)(D)},draw,rounded corners,draw=blue](warp){};
+\end{tikzpicture}
+}

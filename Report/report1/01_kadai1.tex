@@ -29,12 +29,12 @@ exportgraphics(figurename,'path/figure_name.pdf','ContentType','vecto');
 時間軸データ\(t\)を\mat{1}{N}のベクトルに代入する．
 時間軸データの作成について，サンプリング周波数\texttt{Fs}に対して\(m\)秒間の正弦波を生成するためには，\srcref{src:時間軸作成と正弦波の作成}のように\texttt{0}から\texttt{Fs}まのベクトルに対して，各要素をサンプリング周波数で割ると時間軸テーブルを作成できる．\par
 \begin{wrapfigure}{r}[0mm]{.4\textwidth}
-    \vspace{-1cm}
+    \vspace{-1.3cm}
     \begin{lstlisting}[caption={時間軸作成と正弦波の作成},numbers={none},label={src:時間軸作成と正弦波の作成}]
 t = (0 : m*(Fs-1)) /Fs;
 y = sin(2*pi*f*t);
 \end{lstlisting}
-    \vspace{-1cm}
+    \vspace{-.5cm}
 \end{wrapfigure}
 \(t\)の各要素\(t_n\)に対して三角関数\(\sin(2\pi ft_n)\)を演算し，ベクトル\(y\)の要素\(y_n\)に代入する．したがって\(y\)も\mat{1}{N}のベクトルになる．
 生成した正弦波を\texttt{plot}関数を用いて\(y\)を\(t\)の関数として描画する．このように，ただ一つの正弦波からなるような音を\textbf{純音}という．\cite[p.1]{音響工学理論基礎}
@@ -252,6 +252,7 @@ X = a.*X + b; % 演算
     \includegraphics[keepaspectratio,width=.2\textwidth]{../../Figures/01_05_0.pdf}
     \caption{ガウス雑音の波形}
     \label{fig:ガウス雑音の波形}
+    \vspace{1em}
     \includegraphics[keepaspectratio,width=.2\textwidth]{../../Figures/01_05_1.pdf}
     \caption{ヒストグラム}
     \label{fig:ヒストグラム}
