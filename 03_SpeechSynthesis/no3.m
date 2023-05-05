@@ -1,4 +1,4 @@
-clear;
+ clear;
  [y1,Fs1] = audioread('sound1.wav');
  [y2,Fs2] = audioread('sound2.wav');
 

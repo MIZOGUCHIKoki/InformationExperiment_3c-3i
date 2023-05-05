@@ -1,5 +1,4 @@
 clear;
-clc;
 
 Fs = 8192;
 t = (0 : 0.25*(Fs-1)) /Fs;
@@ -61,7 +60,7 @@ xlabel('time[s]');
 ylabel('amplitude');
 xticks(0:0.25:2);
 axis([0 2 -1.5 1.5]);
-% sound(ifft_real,Fs)
+sound(ifft_real,Fs)
 exportgraphics(fig0,'../Figures/02_20.pdf','ContentType','vector');
 exportgraphics(fig1,'../Figures/02_21.pdf','ContentType','vector');
 exportgraphics(fig2,'../Figures/02_22.pdf','ContentType','vector');

@@ -1,9 +1,7 @@
 clear;
-
 Fs = 16000;
 T = 1/2; % 周期
 f = 1/T; % 周波数
-
 t = (0:4*(Fs-1)) /Fs;
 
 y = 0;
@@ -29,7 +27,6 @@ xlabel('time[s]');
 ylabel('振幅');
 hold off;
 legend({'N=1','N=5','N=25'},'Location','southwest');
-
 fig1 = figure;
 y = 0;
 for k=1:50

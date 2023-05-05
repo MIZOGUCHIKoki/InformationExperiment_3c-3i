@@ -1,12 +1,10 @@
 clear;
-
 Fs = 16000; % 
 f1 = 440;   % [Hz]
 f2 = 660;   % [Hz]
 
 t1 = (0:(Fs-1)) /Fs;
 y1 = sin(2*pi*f1*t1);
-
 t2 = (0:(Fs-1)) /Fs;
 y2 = sin(2*pi*f2*t2);
 

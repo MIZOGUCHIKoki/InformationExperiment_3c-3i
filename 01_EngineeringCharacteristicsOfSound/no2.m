@@ -1,13 +1,10 @@
 clear;
-
 Fs = 16000; % 
 f1 = 440;   % [Hz]
-
 t1 = (0:(Fs-1)) /Fs;
 for k=0:Fs
     y1 = sin(2*pi*f1*t1);
 end
-
 p = pi/2;
 for k=0:Fs
     y2 = sin(2*pi*f1*t1 + p);
@@ -50,7 +47,6 @@ axis([0 0.01 -1.01 1.01])
 legend({'pure tone','shift by 90 degrees','shift by 180 degrees'},'Location','southwest');
 hold off;
 
-
 fig1 = figure;
 hold on;
 plot(t1,y1);
@@ -59,10 +55,8 @@ plot(t1,y5);
 yticks(-1:0.25:1);
 xlabel('time[s]');
 ylabel('amplitude');
-
 axis([0 0.01 -1.1 1.1]);
 legend({'pure tone','1/2 times amplitude','1/4 times amplitude'},'Location','southwest');
 hold off;
-
 exportgraphics(fig1,'../Figures/01_02_1.pdf','ContentType','vector');
 exportgraphics(fig0,'../Figures/01_02_2.pdf','ContentType','vector');

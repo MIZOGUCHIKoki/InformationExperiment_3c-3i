@@ -1,7 +1,7 @@
 clear;
  [y1,Fs1] = audioread('sound1.wav');
  y1=y1(:,1);
- t1 = [0:length(y1)-1]/Fs1;
+ t1 = (0 : length(y1)-1)/Fs1;
 
  % ピークを探すための処理
  Y1=fft(y1);
@@ -9,10 +9,8 @@ clear;
  A1=abs(Y1shift);
 
  y1l = length(y1);
- fs1 = [-Fs1/2:Fs1/y1l:(Fs1/2)-Fs1/y1l];
+ fs1 = (-Fs1/2 : Fs1/y1l : (Fs1/2)-Fs1/y1l);
  
- 
-
  fig0 = figure;
  plot(fs1,Y1);
  axis([-25000 25000 -80 80]);
@@ -40,7 +38,7 @@ clear;
  end
  figure;
  plot(t1,ya);
- % sound(ya,Fs1);
+ sound(ya,Fs1);
  exportgraphics(fig0,'../Report/report1/Figures/fft_fft.pdf','ContentType','vector');
  exportgraphics(fig1,'../Report/report1/Figures/fft_fftshift.pdf','ContentType','vector');
  exportgraphics(fig2,'../Report/report1/Figures/fft_abs.pdf','ContentType','vector');

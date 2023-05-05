@@ -40,7 +40,6 @@ ylabel('amplitude');
 axis([0 0.01 -3 3]);
 exportgraphics(fig1,'../Figures/03_12.pdf','ContentType','vector');
 
-
 fig2 = figure;
 plot(t,y3);
 xlabel('time[s]');
