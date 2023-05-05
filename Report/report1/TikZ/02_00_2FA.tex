@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+    \node[left] at(0,0){O};
+    \draw[very thick,-Stealth](0,0)--(3,0)node[right]{\scriptsize 周波数};
+    \draw[very thick,-Stealth](0,-1.6)--(0,3.5)node[left]at($(0,0)!0.5!(0,3.5)$){\scriptsize \rotatebox{90}{振幅}};
+    \foreach \u \v in {0.4/3,0.8/-1.5,1.2/1,1.6/-0.75}
+    \draw[thick,blue](\u,0)--(\u,\v);
+    \foreach \u \v \z in {0.4/{\(1/2\pi\)}/below,0.8/{\(1/\pi\)}/above,1.2/{\(3/2\pi\)}/below,1.6/{\(2/\pi\)}/above}
+    \node[\z] at(\u,0){\tiny\v};
+    \coordinate (O) at (0,0);
+    \foreach \u \v \z \w in {0.4/3/a/{\(2\)},0.8/-1.5/b/{\(-1\)},1.2/1/c/{\(2/3\)},1.6/-0.75/d/{\(-1/2\)}} {
+    \coordinate (\z) at (\u,\v);
+    \draw[dotted,thin](\z)--(O |- \z)node[left]{\tiny\w};
+    }
+\end{tikzpicture}
