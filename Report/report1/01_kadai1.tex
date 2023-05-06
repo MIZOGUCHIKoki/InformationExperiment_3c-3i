@@ -141,6 +141,18 @@ sound(y, Fs);
     \includegraphics[keepaspectratio,width=.3\textwidth]{../../Figures/01_03.pdf}
     \caption{\kadaiac\ 実験結果}
     \label{fig:\kadaiac_実験結果}
+    \begin{tikzpicture}[samples=300,domain=0:pi+1/8*pi]
+        \draw[thick,-latex](0,0)--(4,0)node[below]{\tiny \texttt{time}};
+        \draw[thick,-latex](0,-2)--(0,2)node[midway,left]{\tiny \rotatebox{90}{\texttt{amplitude}}};
+        \draw[thick,magenta] plot(\x,{1.5 * cos(\x r * 2)});
+        \draw[thick,magenta] plot(\x,{-1.5 * cos(\x r * 2)});
+        \draw[thin, cyan] plot(\x,{1.5 * cos(\x r * 2) * sin(\x r * 50)});
+        \draw[latex-latex](0,-1.7)--(pi/2,-1.7)node[midway,below]{\tiny うなりの周期\ \((T_0)\)};
+        \draw[dashed,thin](pi/2,0)--(pi/2,-1.7);
+    \end{tikzpicture}
+    \caption{うなりの仕組み}
+    \label{fig:うなりの仕組み}
+    \vspace{-2cm}
 \end{wrapfigure}
 \result
 うなりは4回聞こえた．また，時間軸に対して加算合成したデータを描画すると\figref{fig:\kadaiac_実験結果}となった．
@@ -148,6 +160,20 @@ sound(y, Fs);
 より\(1\)秒あたり\(1\)回のうなりが聞こえるはずなので，この実験結果は論理的に正しい．
 加算合成波\figref{fig:\kadaiac_実験結果}の振幅に着目しても，周波数\(f_1\)，\(f_2\)それぞれの正弦波の振幅が1であることを考えると，その加算合成波の振幅が\(2\)であることも論理的に正しい．
 さらに，この加算合成波は\(t=0\)のとき最大値を迎えており，これは初期位相が同一の正弦波の加算合成であることを表している．
+\paragraph{うなりの仕組み}
+異なる周波数\(f_1\)，\(f_2\)の正弦波を加算合成すると，\eqref{equ:和積の公式}の和積の公式より，\eqref{equ:うなり仕組み}となる．
+\begin{align}
+    \sin\theta_1+\sin\theta_2 & =2\sin\left(\frac{\theta_1+\theta_2}{2}\right)\cos\left(\frac{\theta_1-\theta_2}{2}\right)\label{equ:和積の公式}
+\end{align}
+\begin{align}
+    \sin(2\pi f_1t)+\sin(2\pi f_2t) & =\tikz[remember picture,baseline=(co.base)]{\node[fill=magenta!10,rounded corners](co){\(2\cos\left(2\pi\dfrac{f_1-f_2}{2}t\right)\)}}\times\tikz[remember picture,baseline=(sn.base)]{\node[fill=cyan!10,rounded corners](sn){\(\sin\left(2\pi\dfrac{f_1+f_2}{2}t\right)\)}}\label{equ:うなり仕組み}
+\end{align}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[below=0.05cm of co.south]{\(\to\)\texttt{A}};
+    \node[below=0.05cm of sn.south]{\(\to\)\texttt{B}};
+\end{tikzpicture}\\
+\(f_1-f_2\ll f_1+f_2\)より，\eqref{equ:うなり仕組み}の\texttt{A}を，\texttt{B}の振幅として考えると，\figref{fig:うなりの仕組み}のようになる．
+1回のうなりは，\texttt{A}の半周期なので，\(f_1-f_2\)が，1秒あたりのうなりの回数になる．これは\(f_1\)，\(f_2\)を入れ替えても成り立つので，\eqref{equ:うなり}が成り立つ．
 \section{\kadaiad}\label{sec:\kadaiad}
 \purpose
 フーリエ変換とは，自然界に現れるさまざまな曲線を三角関数に変換する方法である．フーリエ変換のうち基礎的なものはフーリエ級数展開と呼ばれ，周期的な三角関数の和で表す．
