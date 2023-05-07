@@ -1,0 +1,19 @@
+\chapter*{付録}
+\pagestyle{appendixstyle}
+\addcontentsline{toc}{chapter}{付録}
+\setcounter{section}{0}
+\renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
+\renewcommand{\thesection}{\Alph{section}}
+\newcommand{\secref}[1]{#1\ （第\ref{sec:#1}章 →p.\pageref{sec:#1}）}
+\makeatletter
+\@addtoreset{lstlisting}{section}
+\makeatother
+\lstset{
+    frame={single},
+    numbers={left}
+}
+\section{音の工学的特徴\ (April 13th, 2023)}
+% \lstinputlisting[caption={[\kadaiaa]{\secref{\kadaiaa}}},label={src:01_01}]{../../01_EngineeringCharacteristicsOfSound/no1.m}
+\section{周波数解析\ (April 17th, 2023)}
+\section{音声合成\ (April 20th, 2023)}
+\section{聴覚と音声信号\ (April 24th, 2023)}
