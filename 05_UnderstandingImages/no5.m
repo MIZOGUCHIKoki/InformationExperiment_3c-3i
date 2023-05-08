@@ -1,5 +1,5 @@
 clear;
-img = imread("kut.jpg");
+img = imread("../kut.jpg");
 gimg = 0.3*img(:,:,1) + 0.59*img(:,:,2) + 0.11*img(:,:,3);
 pixel = (0:1:255);
 nof_pixel = zeros(1,256);

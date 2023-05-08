@@ -1,5 +1,5 @@
 clear;
-img = imread("kut.jpg");
+img = imread("../kut.jpg");
 % color channel 1=red, 2=green, 3=blue
 red = img(:,:,1);
 green = img(:,:,2);
