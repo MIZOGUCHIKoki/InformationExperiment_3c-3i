@@ -29,14 +29,14 @@
 \end{figure}
 \method
 \paragraph{高速フーリエ変換の実装}
-\matlab では高速フーリエ変換\footnote{高速フーリエ変換は，離散フーリエ変換を高速に計算する手法}をする関数（\texttt{fft}）がある．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである．（\srcref{src:振幅スペクトルの取得}）
+\matlab では高速フーリエ変換\footnote{高速フーリエ変換は，離散フーリエ変換を高速に計算する手法}をする関数（\texttt{fft}）がある．データ列\texttt{y}に対して振幅スペクトルを取得する手順は以下の通りである（\srcref{src:振幅スペクトルの取得}）．
 \begin{enumerate}
     \item 高速フーリエ変換する．\\
           \texttt{fft}関数は出力として，サンプリング周波数\texttt{Fs}に対して，\(\big[\textrm{\texttt{-Fs/2}},\textrm{\texttt{Fs/2}}\big]\)範囲の周波数に対する振幅のデータを得る．
     \item 出力データ列\texttt{fft(y)}のデータを整列させる．\\
-          \texttt{fft}関数の出力は，正のデータ・負のデータ（左右）が入れ替わった状態で出力される．（\figref{fig:fft直後のデータ}，\figref{fig:fftshift後のデータ}）
-    \item これまでの過程で出力されるデータは複素数データである．絶対値を取るために\texttt{abs}関数を用いる．（\figref{fig:absを適用した後のデータ}）
-    \item グラフとして描画するために，周波数軸を作成する．\footnote{今回は各要素を2乗しないので，縦軸は\texttt{power}でなく\texttt{|amplitude|}とする．}（\srcref{src:振幅スペクトルの取得}）
+          \texttt{fft}関数の出力は，正のデータ・負のデータ（左右）が入れ替わった状態で出力される（\figref{fig:fft直後のデータ}，\figref{fig:fftshift後のデータ}）．
+    \item これまでの過程で出力されるデータは複素数データである．絶対値を取るために\texttt{abs}関数を用いる（\figref{fig:absを適用した後のデータ}）．
+    \item グラフとして描画するために，周波数軸を作成する\footnote{今回は各要素を2乗しないので，縦軸は\texttt{power}でなく\texttt{|amplitude|}とする．}（\srcref{src:振幅スペクトルの取得}）．
 \end{enumerate}
 \begin{figure}[H]
     \centering
