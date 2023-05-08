@@ -25,5 +25,6 @@ in_white_bin = (rnd>0.99); % (1%)
 in_img(in_white_bin) = 255;
 in_img(in_black_bin) = 0;
 % writing
+figure;
 imshow(in_img);
 imwrite(wgn_img,'./file_impluse-noise.png');

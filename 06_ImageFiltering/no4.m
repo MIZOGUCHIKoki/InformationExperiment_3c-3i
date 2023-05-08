@@ -22,7 +22,7 @@ axis([0 255 0 max(num1)+10000]);
 xlabel('pixel value');
 ylabel('number of pixels');
 exportgraphics(fig0,'../Figures/06_42_Thresholding-graph.pdf','ContentType','vector');
-bin = lf_img > 30; % Threshold = 254
+bin = lf_img > 30; % Threshold = 30
 lf_img_thresholding = lf_img;
 lf_img_thresholding(bin) = 255;
 figure;
