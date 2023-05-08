@@ -1,4 +1,4 @@
-clear;
+clear; close all;
 in_img = imread("file_impluse-noise.png");
 in_img_size = size(in_img);
 in_img_size_height = in_img_size(1,1);

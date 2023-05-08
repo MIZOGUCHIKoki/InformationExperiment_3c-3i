@@ -1,7 +1,7 @@
-clear;
-% Differential filter (diff)
+clear; close all;
 img = imread("../kut.jpg");
 gimg = 0.3*img(:,:,1) + 0.59*img(:,:,2) + 0.11*img(:,:,3);
+% Differential filter (diff)
 filter_diff_y = [-1 -2 -1; 0 0 0; 1 2 1];
 filter_diff_x = filter_diff_y';
 diff_x_img = filter2(filter_diff_x,gimg);
