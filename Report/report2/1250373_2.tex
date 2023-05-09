@@ -74,7 +74,7 @@
 \newcommand{\srcref}[1]{src.\ref{#1}}
 \newcommand{\scall}{\thesection 章のソースコードは，}
 \newcommand{\sref}[1]{\(\underset{\blacktriangleright\textrm{p.\pageref{#1}}}{\textrm{\srcref{#1}}}\)}
-\captionsetup[subfigure]{labelformat=simple}
+% \captionsetup[subfigure]{labelformat=simple}
 \makeatletter
 \@addtoreset{figure}{chapter}
 \@addtoreset{table}{chapter}
@@ -103,6 +103,7 @@
 \newpage
 \pagestyle{report}
 \setcounter{page}{1}
+\input{01_kadai1.tex}
 \bibliography{bib}
 \input{91_appendix.tex}
 \end{document}
