@@ -1,0 +1,97 @@
+\chapter{\kadaib}
+\section{\purpose}
+この実験では，画像に対してフィルタの適用，色空間の変換を行う．\par
+\paragraph{画像フィルタ} 画像に対して，フィルタを適用するとはどのようなことか？我々は，携帯電話の写真アプリを用いて，写真を「加工」する．
+我々は「加工」という行為を「フィルタをかける」と呼ぶが，この「フィルタ」という言葉と，画像処理におけるフィルタは意味が異なる．
+画像処理におけるフィルタは，以下のように説明されている．
+\begin{quote}
+    ``画像処理検査において、撮像した画像内に含まれる雑音を除去したり、特徴を抽出したりすることで、欠陥検出をより円滑に行うための基本処理を画像フィルタと呼びます。''\hfill\cite{画像フィルタ}
+\end{quote}
+\newcommand{\originimg}{\texttt{original\_img}}
+テスト画像として，以下の画像を用意する．元画像を\originimg とする．
+\setlength{\columnseprule}{0.1mm}
+\begin{enumerate}
+    \item \textbf{白色ガウス雑音}\\
+          \newcommand{\wgnimg}{\texttt{wgn\_img}}
+          白色ガウス雑音は，白色性を持つガウス雑音である．今回は，平均\(0\)，標準偏差\(10\)としてガウス分布の乱数を発生させる．
+          このテスト画像を\wgnimg とする．
+    \item \textbf{インパルス雑音}\\
+          \newcommand{\inimg}{\texttt{in\_img}}
+          インパルス雑音とは．超短時間におこる高周波の雑音のことを指す．今回は，画像のランダムな画素を，白または黒で塗り替える．それぞれ全体画素の1\% の割合で作成する．
+          このテスト画像を\inimg とする．
+\end{enumerate}
+画像フィルタ幾つかの種類があり，画像雑音の除去やエッジの強調に用いられる．
+\begin{enumerate}
+    \item \textbf{平滑化フィルタ}
+          \begin{itemize}
+              \item 画像の各画素\(p\)に対して，\(n\)近傍と中央の画素値の平均や重み付け平均をとり，\(p\)の画素値とするフィルタ．
+              \item 今回の実験では，各画素\(p\)に対して，\(3\times 3\)，つまり8近傍と\(p\)の画素値の平均をとり，中央の画素値として定義する．2つのテスト画像にフィルタを適用し，雑音とフィルタの関係を考察する．
+          \end{itemize}
+    \item \textbf{メディアンフィルタ}
+          \begin{itemize}
+              \item 画像の各画素\(p\)に対して，\(n\)近傍と中央の画素値を昇順に整列し，その中央値を\(p\)の画素値とする．
+              \item 今回の実験では，各画素\(p\)に対して，\(3\times 3\)，つまり8近傍と\(p\)の画素値値を昇順に整列し，その中央値を\(p\)の画素値として定義する．2つのテスト画像にフィルタを適用し，雑音とフィルタの関係を考察する．
+          \end{itemize}
+    \item \textbf{微分フィルタ}
+          \begin{itemize}
+              \item 微分フィルタは，境界線の強調や局所的な特徴の抽出を行うフィルタである．しかし，一次微分フィルタ，二次微分フィルタを用いると，画像の雑音も強調される．ここでPrewittフィルタとSobelフィルタを用いると，雑音がある画像でも上手く境界線を抽出できる\cite[p.87]{画像処理}．
+                    \begin{itemize}
+                        \item \textbf{Prewitt Filter}：隣り合う2画素の画素値を持ちいて3画素ずつをセットにして濃度の変化点を抽出するアルゴリズム\cite[p.87]{画像処理}．
+                        \item \textbf{Sobel Filter}：画像の各ピクセルの周囲の画素との差を計算して，その差の大きさを使って，エッジを検出するアルゴリズム．
+                    \end{itemize}
+              \item 今回の実験では，\originimg に対して，Sobelフィルタを用いて縦微分，横微分，縦微分と横微分の加算合成した画像を作成する．フィルタを適用した画像の特徴と，それぞれの違いを考察する．
+          \end{itemize}
+    \item \textbf{ラプラシアンフィルタ}
+          \begin{itemize}
+              \item ラプラシアンフィルタは，微分フィルタ同様，境界線を見つけるために使われる方法である．
+              \item 今回の実験では，\originimg に対して，ラプラシアンフィルタを適用し，適用した画像と特徴と違いを考察する．
+          \end{itemize}
+\end{enumerate}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.24\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw (0,0) grid (3,3);
+            \foreach \u \v in {0.5/0.5,1.5/0.5,2.5/0.5,0.5/1.5,1.5/1.5,2.5/1.5,0.5/2.5,1.5/2.5,2.5/2.5}
+            \node at (\u,\v) {\(1/9\)};
+        \end{tikzpicture}
+        \subcaption{平滑化フィルタ}
+        \label{fig:平滑化フィルタ}
+    \end{minipage}
+    \begin{minipage}[b]{.24\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw (0,0) grid (3,3);
+            \foreach \u \v \w in {0.5/0.5/{\(-1\)},1.5/0.5/{\(0\)},2.5/0.5/{\(1\)},0.5/1.5/{\(-2\)},1.5/1.5/{\(0\)},2.5/1.5/{\(2\)},0.5/2.5/{\(-1\)},1.5/2.5/{\(0\)},2.5/2.5/{\(1\)}}
+            \node at (\u,\v) {\w};
+        \end{tikzpicture}
+        \subcaption{Prewittフィルタ：横方向}
+        \label{fig:Prewittフィルタ_横方向}
+    \end{minipage}
+    \begin{minipage}[b]{.24\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw (0,0) grid (3,3);
+            \foreach \u \v \w in {0.5/0.5/{\(1\)},1.5/0.5/{\(2\)},2.5/0.5/{\(1\)},0.5/1.5/{\(0\)},1.5/1.5/{\(0\)},2.5/1.5/{\(0\)},0.5/2.5/{\(-1\)},1.5/2.5/{\(-2\)},2.5/2.5/{\(-1\)}}
+            \node at (\u,\v) {\w};
+        \end{tikzpicture}
+        \subcaption{Prewittフィルタ：縦方向}
+        \label{fig:Prewittフィルタ_縦方向}
+    \end{minipage}
+    \begin{minipage}[b]{.24\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw (0,0) grid (3,3);
+            \foreach \u \v in {0.5/0.5,1.5/0.5,2.5/0.5,0.5/1.5,2.5/1.5,0.5/2.5,1.5/2.5,2.5/2.5}
+            \node at (\u,\v) {\(1\)};
+            \node at (1.5,1.5) {\(8\)};
+        \end{tikzpicture}
+        \subcaption{ラプラシアンフィルタ}
+        \label{fig:ラプラシアンフィルタ}
+    \end{minipage}
+    \caption{\(3\times 3\)画像フィルタ}
+\end{figure}
+\paragraph{色空間変換}この実験では，RGB色空間から，HSV色空間へ変換する．RGB色空間は，赤（Red），緑（Green），青（Blue）の3チャネルで構成する．HSVは色相（Hue），彩度（Saturation），明度（Value）の3チャネルで構成する．
+HSV色空間の特徴として，人間が色を知覚する方法と類似しており，視覚障害者向けのアクセシビリティ向上に役立つことが挙げられる．例えば，HSVの「明度」を調節することで，文字が見やすくなる\cite[p.97\ -\ p.98]{画像処理}．\par
+また，人間が色を知覚する方法と類似していることを踏まえて，HSV色空間を用いることで，画像の特徴を抽出しやすくなる．今回の実験では，自分の手の写真をRGB色空間からHSV色空間へ変換し，肌色領域を抽出する．抽出した肌色領域を白色，その他の部分を黒色にして出力する．出力した画像と，RGB色空間における肌色領域を抽出した場合の精度について考察する．
