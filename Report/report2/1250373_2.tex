@@ -7,7 +7,7 @@
 \usepackage[symbol]{footmisc}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz}
-\usetikzlibrary{calc,arrows.meta,fit,positioning}
+\usetikzlibrary{calc,arrows.meta,fit,positioning,math}
 \newcolumntype{A}{>{\centering\bfseries}X}
 \newcolumntype{B}{>{\centering\bfseries\arraybackslash}X}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
@@ -51,7 +51,7 @@
     numberstyle = \small,
     tabsize = 4,
     captionpos = t,
-    otherkeywords = {soundsc, xticks, yticks, exportgraphics}
+    otherkeywords = {xticks, yticks, exportgraphics, imwrite, bitshift}
 }
 \renewcommand{\figurename}{図}
 \renewcommand{\tablename}{表}
@@ -72,7 +72,7 @@
 \newcommand{\figref}[1]{図\ref{#1}}
 \newcommand{\tblref}[1]{表\ref{#1}}
 \newcommand{\srcref}[1]{src.\ref{#1}}
-\newcommand{\scall}{\thesection 章のソースコードは，}
+\newcommand{\scall}[1]{課題\ \textbf{#1}\ のソースコードは，}
 \newcommand{\sref}[1]{\(\underset{\blacktriangleright\textrm{p.\pageref{#1}}}{\textrm{\srcref{#1}}}\)}
 \captionsetup[subfigure]{labelformat=simple}
 \makeatletter
