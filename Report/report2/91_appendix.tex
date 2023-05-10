@@ -4,7 +4,7 @@
 \setcounter{section}{0}
 \renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
 \renewcommand{\thesection}{\Alph{section}}
-\newcommand{\secref}[1]{#1}
+\newcommand{\secref}[1]{[#1]{#1}}
 \makeatletter
 \@addtoreset{lstlisting}{section}
 \makeatother
@@ -13,7 +13,11 @@
     numbers={left}
 }
 \section{\kadaia\ (April 27th, 2023)}
-\lstinputlisting[caption={[\kadaiaa]{\secref{\kadaiaa}}},label={src:01_01}]{../../05_UnderstandingImages/no1.m}
-\section{周波数解析\ (April 17th, 2023)}
+\lstinputlisting[caption={\secref{\kadaiaa}},label={src:05_01}]{../../05_UnderstandingImages/no1.m}
+\lstinputlisting[caption={\secref{\kadaiab}},label={src:05_02}]{../../05_UnderstandingImages/no2.m}
+\lstinputlisting[caption={\secref{\kadaiac}},label={src:05_03}]{../../05_UnderstandingImages/no3.m}
+\lstinputlisting[caption={\secref{\kadaiad}},label={src:05_04}]{../../05_UnderstandingImages/no4.m}
+\lstinputlisting[caption={\secref{\kadaiae}},label={src:05_05}]{../../05_UnderstandingImages/no5.m}
+\section{\kadaib\ (April 17th, 2023)}
 \section{音声合成\ (April 20th, 2023)}
 \section{聴覚と音声信号\ (April 24th, 2023)}

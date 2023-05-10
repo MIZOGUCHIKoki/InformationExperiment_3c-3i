@@ -29,20 +29,30 @@
 また，このレポートないすべての実験では\matlab でプロットしたグラフを出力するための\texttt{exportgraphics}関数，画像を書き出すための\texttt{imwrite}関数を用いる（\srcref{src:グラフ・画像出力}）．
 \begin{lstlisting}[numbers={none},caption={グラフ・画像出力},label={src:グラフ・画像出力}]
 exportgraphics(figurename,'path/figure_name.pdf','ContentType','vecto');
-imwrite(data,'path/figure_name.png');
+imwrite(data,"path/figure_name.png");
 \end{lstlisting}
 \paragraph{\kadaiaa}
 \texttt{imwrite}関数を用いて，画像の読み込む．読み込んだ画像はRGB色空間で保存されており，チャネル1にはR，チャネル2にはG，チャネル3にはBが保存されている．
 グレイスケール画像を作成するには，\eqref{equ:grayscale}の割合で画像を加算合成する．\mat{m}{n}の行列\texttt{A}に対して，\mat{1}{n}を取り出したければ，\verb|A(1,:)|と記述する．\verb|:|は，すべての要素を表す記号である．
-赤チャネルと青チャネルを入れ替えるためには，赤チャネルの行列と青チャネルの行列を変数に保存し，それぞれ互いのチャネルに代入する．\scall{\kadaiaa}\sref{src:01_01}．
+赤チャネルと青チャネルを入れ替えるためには，赤チャネルの行列と青チャネルの行列を変数に保存し，それぞれ互いのチャネルに代入する．\scall{\kadaiaa}\sref{src:05_01}．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \vspace{-.7cm}
+    \begin{lstlisting}[caption={\texttt{bitshift}関数},label={src:bitshift}]
+img = bitshift(img, n);
+    \end{lstlisting}
+    \vspace{-.5cm}
+\end{wrapfigure}
+\paragraph{\kadaiab}
+量子化数を変更するために，\texttt{bitshift}関数を用いる（\srcref{src:bitshift}）．
+この関数は，\texttt{img}を左に\texttt{n}ビットシフトする関数である．右シフトしたい場合は\texttt{n}を負の数で与える．
+ビットシフトについて，1ビット右シフトするごとにそのデータは\(1/2\)される．
+これを利用して，量子化数4Bitの場合は右に4Bitシフト，量子化数2Bitの場合は右に6Bitシフト，量子化数1Bitの場合は右に7Bitシフトする．
 
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
     \vspace{-.5cm}
-    \begin{lstlisting}[caption={\texttt{bitshift}関数},label={src:bitshift}]
-img = bitshift(img, n);
-    \end{lstlisting}
-    \vspace{1cm}
     \begin{tikzpicture}
         \coordinate (A) at (4,1);
         \draw (0,0.5)--(4,0.5);
@@ -53,17 +63,50 @@ img = bitshift(img, n);
                 \draw (\x/2,1)--(\x/2,0.9);
                 \draw (\x/2,0)--(\x/2,0.1);
                 \node at ($(\x/2-1/2,0.5)!0.5!(\x/2,1)$){\texttt{1}};
-                \node at ($(\x/2-1/2,0)!0.5!(\x/2,0.5)$){\ifnum\x<5\texttt{0}\else\texttt{1}\fi};
+                \node at ($(\x/2-1/2,0)!0.5!(\x/2,0.5)$){\ifnum\x<5\texttt{0}\else\ifnum\x>5\texttt{1}\else\ifnum\x=5\texttt{1}\fi\fi\fi};
             }
     \end{tikzpicture}
     \caption{4ビットシフト}
     \label{fig:4ビットシフト}
     \vspace{-.5cm}
 \end{wrapfigure}
-\paragraph{\kadaiab}
-量子化数を変更するために，\texttt{bitshift}関数を用いる（\srcref{src:bitshift}）．
-この関数は，\texttt{img}を左に\texttt{n}ビットシフトする関数である．右シフトしたい場合は\texttt{n}を負の数にすれば良い．
-ビットシフトについて，1ビット右シフトするごとにそのデータは\(1/2\)される．
-これを利用して，量子化数4Bitの場合は右に4Bitシフト，量子化数2Bitの場合は右に6Bitシフト，量子化数1Bitの場合は右に7Bitシフトすると良い．
-量子化数4Bitを例にあげる．右に4Bitシフトするとき，
-\paragraph{\kadaiac}各量子化数ごとに階調反転する．
+量子化数4Bitを例にあげる．仮に画素値が\texttt{255}（白）を持つ画素の場合，量子化数を4Bitにする，つまり4Bit右シフトすると，画素値は\texttt{15}になる（\figref{fig:4ビットシフト}）．このままでは画素値の範囲が\(0\)から\(15\)となる．
+この対策として，全体画素値と\(255/15\)の積を取ることで，画素値を\(0\)から\(255\)にスケーリングする．\scall{\kadaiab}\srcref{src:05_02}．
+\paragraph{\kadaiac}
+各量子化数ごとに階調反転する．階調反転を実現するためには，階調反転した画像を\texttt{double}型に変換したあと，\(-1\)との積をとり，\(255\)を足した後で\texttt{unit8}型に変換する\footnote{その画像の各画素値が\texttt{double}型であるとき，\texttt{imwrite}が，データを自動的にリスケールし書き出すため．}．\scall{\kadaiac}\sref{src:05_03}．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \vspace{-.7cm}
+    \begin{lstlisting}[caption={判定結果の格納},label={src:判定結果の格納}]
+mat = [1 2 3; 4 5 6; 7 8 9];
+bin = mat > 5;
+% -- 結果 --
+bin = [0 0 0; 0 0 1; 1 1 1];     
+    \end{lstlisting}
+    \vspace{-.5cm}
+\end{wrapfigure}
+\paragraph{\kadaiad}
+\matlab には，判定結果のブール値を行列に格納する機能がある．
+\srcref{src:判定結果の格納}より，行列\texttt{mat}の各元が\(5\)より大きい箇所を\(1\)，\(5\)以下のところを\(0\)とする行列\texttt{bin}を作成することができる．この行列を真理行列と呼ぶ．
+この機能を用いて，ある閾値に対して，閾値よりも大きければ\(1\)，閾値以下であれば\(0\)を戻す行列を作成する．画素値の範囲を\(0\)から\(255\)にするために，行列の各元と\(255\)の積をとる．\scall{\kadaiad}\sref{src:05_04}
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \vspace{-.7cm}
+    \begin{lstlisting}[caption={\texttt{sum}関数},label={src:sum関数}]
+matA = [1 2 3];
+s_matA = sum(matA); 
+% -> 出力:6
+matB = [1 2; 1 1; 1 1];
+s_matB = sum(matB); 
+% -> 出力:[3 4]
+s_s_matB = sum(sum(matB)); 
+% -> 出力:12
+    \end{lstlisting}
+\end{wrapfigure}
+\paragraph{\kadaiae}
+ヒストグラムを作成するために，この関数は行列の元を足し合わせる\texttt{sum}関数を用いる（\srcref{src:sum関数}）．
+各画素値\(0\)から\(255\)に対して，その画素値と等しい箇所を\(1\)とする真理行列を作成し，各元の和を\texttt{sum}関数を用いて算出する．
+その結果が，ある画素値がいくつ画像に含まれているかを指す．
+\paragraph{\kadaiaf}
