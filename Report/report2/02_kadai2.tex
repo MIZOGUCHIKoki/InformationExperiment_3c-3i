@@ -110,13 +110,21 @@ w = (rnd > 0.99);
 in_img(w) = 255;
 in_img(b) = 0;
     \end{lstlisting}
-    \vspace{-.5cm}
+    \vspace{-1cm}
 \end{wrapfigure}
 \section{\method}
 \paragraph{白色ガウス雑音を加えた画像}
 白色ガウス雑音の作成には\texttt{randn}関数を用い，生成した乱数と，標準偏差の積を取る．生成した乱数を\texttt{uint8}型に変換し，\originimg と和を取る（\srcref{src:白色ガウス雑音画像の生成}）．
 \(255\)を上回る，または\(0\)を下回る場合，それぞれの値に変換したものを， \wgnimg とする．
 \paragraph{インパルス雑音を加えた画像}
-インパルス雑音は，\texttt{rand}関数を用いて作成する．発生率を1\% にするために，乱数の\(0.01\)未満の画素を黒，乱数の\(0.99\)より大きい画素を白としてインパルスノイズを設計する（\srcref{src:インパルス雑音画像の生成}）．
+インパルス雑音は，\texttt{rand}関数を用いて作成する．発生率を1\% にするため，乱数の\(0.01\)未満の画素を黒，乱数の\(0.99\)より大きい画素を白としてインパルスノイズを設計する（\srcref{src:インパルス雑音画像の生成}）．
 \paragraph{フィルタの適用}
-平滑化フィルタ，微分フィルタ，
+平滑化フィルタ，微分フィルタ，ラプラシアンフィルタの適用は，\texttt{filter2}関数，（\ \verb|filter2(filter, img)|\ ）を用いる．
+メディアンフィルタは，画像の\mat{i}{j}に対して，\texttt{median}関数を用いてフィルタ処理する．メディアンフィルタを適用する際に，四方に画素がない画素（\mat{1}{1}画素，\mat{m}{1}画素など）はフィルタ処理できないため，0パディング処理を行い，メディアンフィルタを適用する（\srcref{src:メディアンフィルタの適用}）．
+\begin{lstlisting}[caption={メディアンフィルタの適用},label={src:メディアンフィルタの適用},frame={left}]
+for h = 2:img_height % 画像行列 img の高さ
+    for w = 2:img_width % 画像行列 img の横幅，median_filter は0パディング後のimg
+        median_filter(h-1, w-1) = median(img(h-1:h+1,w-1:w+1),"all"); 
+    end
+end
+\end{lstlisting}
