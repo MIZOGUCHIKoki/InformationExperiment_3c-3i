@@ -1,4 +1,4 @@
-clear;
+clear; close all;
 img = imread("../kut.jpg");
 gimg = 0.3*img(:,:,1) + 0.59*img(:,:,2) + 0.11*img(:,:,3);
 pixel = (0:1:255);
@@ -12,4 +12,4 @@ plot(pixel,nof_pixel);
 xlabel('pixcel value');
 ylabel('number of pixels');
 axis([0 255 0 8000]);
-exportgraphics(fig0,'../Figures/05_500_graph.pdf','ContentType','vector');
+exportgraphics(fig0,'../Figures/05_50_graph.pdf','ContentType','vector');
