@@ -1,4 +1,4 @@
-clear;
+clear; close all;
 img = imread("../kut.jpg");
 % color channel 1=red, 2=green, 3=blue
 red = img(:,:,1);

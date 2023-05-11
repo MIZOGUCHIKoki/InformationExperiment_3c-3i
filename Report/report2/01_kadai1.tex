@@ -111,43 +111,160 @@ s_s_matB = sum(sum(matB));
 その結果が，ある画素値がいくつ画像に含まれているかを指す．
 \paragraph{\kadaiaf}
 固定カメラ\footnote{手での固定は，背景がズレる可能性があるので，カメラを固定して撮影した．}で撮影した写真を用いる．「背景と被写体が写っている画像\texttt{img\_sbj}」「背景のみの画像\texttt{img\_bg}」の2点を撮影した．背景差分画像は，\(\texttt{img\_sbj}-\texttt{img\_bg}\)で生成する．
-生成した画像に対して，閾値処理する．閾値処理する前後での画像比較，閾値による比較し，考察する．今回，閾値を\(64\)，\(128\)，\(192\)で実験する．\scall{\kadaiaf}\sref{src:05_06}．
+生成した画像に対して，閾値処理する．閾値処理する前後での画像比較，閾値による比較し，考察する．今回，閾値を\(32\)，\(64\)，\(128\)で実験する．\scall{\kadaiaf}\sref{src:05_06}．
 \section{\result}
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{.3\textwidth}
+    \begin{minipage}[b]{.19\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../kut.jpg}
+        \subcaption{元画像}
+    \end{minipage}
+    \begin{minipage}[b]{.19\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_11_r.png}
-        \subcaption{赤チャネルからグレイスケール}
+        \subcaption{赤チャネル}
     \end{minipage}
-    \begin{minipage}[b]{.3\textwidth}
+    \begin{minipage}[b]{.19\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_12_g.png}
-        \subcaption{緑チャネルからグレイスケール}
+        \subcaption{緑チャネル}
     \end{minipage}
-    \begin{minipage}[b]{.3\textwidth}
+    \begin{minipage}[b]{.19\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_13_b.png}
-        \subcaption{青チャネルからグレイスケール}
+        \subcaption{青チャネル}
+    \end{minipage}
+    \begin{minipage}[b]{.19\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_14_change.png}
+        \subcaption{赤青チャネル入れ替え}
     \end{minipage}
     \caption{\kadaiaa\ 実験結果}
-\end{figure}
-\begin{figure}[h]
-    \centering
-    \begin{minipage}[b]{.3\textwidth}
+    \vspace{.5em}
+    \begin{minipage}[b]{.23\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_21_gimg.png}
+        \subcaption{量子化数\ 8Bit\footnotemark[1]}
+    \end{minipage}
+    \begin{minipage}[b]{.23\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_22_4bit.png}
         \subcaption{量子化数\ 4Bit}
     \end{minipage}
-    \begin{minipage}[b]{.3\textwidth}
+    \begin{minipage}[b]{.23\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_23_2bit.png}
         \subcaption{量子化数\ 2Bit}
     \end{minipage}
-    \begin{minipage}[b]{.3\textwidth}
+    \begin{minipage}[b]{.23\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_24_1bit.png}
         \subcaption{量子化数\ 1Bit}
     \end{minipage}
     \caption{\kadaiab\ 実験結果}
+    \vspace{.5em}
+    \begin{minipage}[b]{.23\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_31_8.png}
+        \subcaption{量子化数\ 8Bit}
+    \end{minipage}
+    \begin{minipage}[b]{.23\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_32_4.png}
+        \subcaption{量子化数\ 4Bit}
+    \end{minipage}
+    \begin{minipage}[b]{.23\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_33_2.png}
+        \subcaption{量子化数\ 2Bit}
+    \end{minipage}
+    \begin{minipage}[b]{.23\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_34_1.png}
+        \subcaption{量子化数\ 1Bit}
+    \end{minipage}
+    \caption{\kadaiac\ 実験結果}
+    \vspace{.5em}
+    \begin{minipage}[b]{.7\textwidth}
+        \centering
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_41.png}
+            \subcaption{閾値\ \(64\)}
+        \end{minipage}
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_42.png}
+            \subcaption{閾値\ \(128\)}
+        \end{minipage}
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_43.png}
+            \subcaption{閾値\ \(192\)}
+        \end{minipage}
+        \caption{\kadaiad\ 実験結果}
+    \end{minipage}
+    \begin{minipage}[b]{.25\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_50_graph.pdf}
+        \caption{\kadaiae\ 実験結果}
+    \end{minipage}
+    \vspace{.5em}
+    \nextfloat
+    \begin{minipage}[b]{.49\textwidth}
+        \centering
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../05_UnderstandingImages/fig1_g.jpg}
+            \subcaption{被写体と背景}
+        \end{minipage}
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../05_UnderstandingImages/fig2_g.jpg}
+            \subcaption{背景のみ}
+        \end{minipage}
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_60.png}
+            \subcaption{背景差分画像}
+        \end{minipage}
+        \caption{\kadaiaf\ 実験結果}
+    \end{minipage}
+    \nextfloat
+    \begin{minipage}[b]{.49\textwidth}
+        \centering
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_61.png}
+            \subcaption{閾値\ \(32\)}
+        \end{minipage}
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_62.png}
+            \subcaption{閾値\ \(64\)}
+        \end{minipage}
+        \begin{minipage}[b]{.3\textwidth}
+            \centering
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_63.png}
+            \subcaption{閾値\ \(128\)}
+        \end{minipage}
+        \caption{背景差分画像の閾値処理}
+    \end{minipage}
 \end{figure}
+\footnotetext[1]{NTSC輝度信号のグレイスケール画像}
+\section{\consideration}
+\paragraph{\kadaiaa}
+実験結果より，原画像に近い画像は，緑チャネルだけを抜き出してグレイスケール画像として表示したものである．
+また，赤チャネルと青チャネルを入れ替えた画像では，文字や建物の概形をはっきりと捉えることができる．
+これらは，\eqref{equ:grayscale}でGreenの割合が一番多い理由と考えられる．
+\paragraph{\kadaiab}
+量子化数を減らすことで，等高線のようなものが見える．
+これは，元画像でなだらかな画素値の変化箇所が，量子化数を減らすことでとびとびの値になることで生じる．これを擬似輪郭という．
+擬似輪郭は，量子化数を減らすことでより顕著になる．
+\paragraph{\kadaiac}
+量子化数が減ると擬似輪郭が生じる．この擬似輪郭は，階調反転しても変わらない．
+\paragraph{\kadaiad}
+閾値を調節することで，擬似輪郭を境に白と黒に別れることがわかった．
+\paragraph{\kadaiaf}
+背景差分画像では，被写体がぼんやりと写っている．この画像に対して閾値処理することで，被写体を強調することができることがわかった．
