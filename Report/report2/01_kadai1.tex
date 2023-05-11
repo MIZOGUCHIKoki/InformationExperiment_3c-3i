@@ -50,7 +50,7 @@ img = bitshift(img, n);
 ビットシフトについて，1ビット右シフトするごとにそのデータは\(1/2\)される．
 これを利用して，量子化数4Bitの場合は右に4Bitシフト，量子化数2Bitの場合は右に6Bitシフト，量子化数1Bitの場合は右に7Bitシフトする．
 
-\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+\begin{wrapfigure}{r}[0mm]{.225\textwidth}
     \centering
     \vspace{-.5cm}
     \begin{tikzpicture}
@@ -71,7 +71,7 @@ img = bitshift(img, n);
     \vspace{-.5cm}
 \end{wrapfigure}
 量子化数4Bitを例にあげる．仮に画素値が\texttt{255}（白）を持つ画素の場合，量子化数を4Bitにする，つまり4Bit右シフトすると，画素値は\texttt{15}になる（\figref{fig:4ビットシフト}）．このままでは画素値の範囲が\(0\)から\(15\)となる．
-この対策として，全体画素値と\(255/15\)の積を取ることで，画素値を\(0\)から\(255\)にスケーリングする．\scall{\kadaiab}\srcref{src:05_02}．
+この対策として，全体画素値と\(255/15\)の積を取ることで，画素値を\(0\)から\(255\)にスケーリングする．\scall{\kadaiab}\sref{src:05_02}．
 \paragraph{\kadaiac}
 各量子化数ごとに階調反転する．階調反転を実現するためには，階調反転した画像を\texttt{double}型に変換したあと，\(-1\)との積をとり，\(255\)を足した後で\texttt{unit8}型に変換する\footnote{その画像の各画素値が\texttt{double}型であるとき，\texttt{imwrite}が，データを自動的にリスケールし書き出すため．}．\scall{\kadaiac}\sref{src:05_03}．
 
@@ -89,11 +89,11 @@ bin = [0 0 0; 0 0 1; 1 1 1];
 \paragraph{\kadaiad}
 \matlab には，判定結果のブール値を行列に格納する機能がある．
 \srcref{src:判定結果の格納}より，行列\texttt{mat}の各元が\(5\)より大きい箇所を\(1\)，\(5\)以下のところを\(0\)とする行列\texttt{bin}を作成できる．この行列を真理行列と呼ぶ．
-この機能を用いて，ある閾値に対して，閾値よりも大きければ\(1\)を戻し，閾値以下であれば\(0\)を戻す行列を作成する．画素値の範囲を\(0\)から\(255\)へするために，行列の各元と\(255\)の積をとる．\scall{\kadaiad}\sref{src:05_04}
+この機能を用いて，ある閾値に対して，閾値よりも大きければ\(1\)を戻し，閾値以下であれば\(0\)を戻す行列を作成する．画素値の範囲を\(0\)から\(255\)へするために，行列の各元と\(255\)の積をとる．今回は，閾値を\(64\)，\(128\)，\(192\)で実験する．\scall{\kadaiad}\sref{src:05_04}
 
 \begin{wrapfigure}{r}[0mm]{.3\textwidth}
     \centering
-    \vspace{-.7cm}
+    \vspace{-.9cm}
     \begin{lstlisting}[caption={\texttt{sum}関数},label={src:sum関数}]
 matA = [1 2 3];
 s_matA = sum(matA); 
@@ -104,6 +104,7 @@ s_matB = sum(matB);
 s_s_matB = sum(sum(matB)); 
 % -> 出力:12
     \end{lstlisting}
+    \vspace{-.7cm}
 \end{wrapfigure}
 \paragraph{\kadaiae}
 ヒストグラムを作成するために，この関数は行列の元を足し合わせる\texttt{sum}関数を用いる（\srcref{src:sum関数}）．
@@ -111,3 +112,4 @@ s_s_matB = sum(sum(matB));
 その結果が，ある画素値がいくつ画像に含まれているかを指す．
 \paragraph{\kadaiaf}
 固定カメラ\footnote{手での固定は，背景がズレる可能性があるので，カメラを固定して撮影した．}で撮影した写真を用いる．「背景と被写体が写っている画像\texttt{img\_sbj}」「背景のみの画像\texttt{img\_bg}」の2点を撮影した．背景差分画像は，\(\texttt{img\_sbj}-\texttt{img\_bg}\)で生成する．
+生成した画像に対して，閾値処理する．閾値処理する前後での画像比較，閾値による比較を行い，考察する．今回，閾値を\(64\)，\(128\)，\(192\)で実験する．\scall{\kadaiaf}\sref{src:05_06}．
