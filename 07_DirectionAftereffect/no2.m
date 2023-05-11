@@ -29,42 +29,39 @@ end
 Y2 = 255*0.95;
 cir = (w.^2 + h.^2 >= 10.^2)*Y2;
 
+rct = ones(100,400);
+rct = rct * Y2;
+rct(50-9:50+10,200-49:200+50)=0;
 
 dg_90 = [L; cir; L];
-fig90 = figure;
+dg_10 = [L_p10; rct; L_n10];
+dg_45 = [L_n45; rct; L_p45];
+
+fig10 = figure;
+set(fig10, "position",get(0,"ScreenSize"));
+colormap(gray(256));
+image(dg_10);
+axis off;
+axis image;
+pause(5);
 colormap(gray(256));
 image(dg_90);
 axis off;
 axis image;
 
-rct = ones(100,400);
-rct = rct * Y2;
-rct(50-9:50+10,200-49:200+50)=0;
+pause(5);
+close all;
 
-dg_10 = [L_p10; rct; L_n10];
-fig10 = figure;
-colormap(gray(256));
-image(dg_10);
-axis off;
-axis image;
-
-dg_45 = [L_n45; rct; L_p45];
 fig45 = figure;
+set(fig45, "position",get(0,"ScreenSize"));
 colormap(gray(256));
 image(dg_45);
 axis off;
 axis image;
-
-% close all;
-
-set(fig10, "position",get(0,"ScreenSize"));
-pause(10);
-close();
-set(fig90, "position",get(0,"ScreenSize"));
-close();
 pause(5);
-set(fig45, "position",get(0,"ScreenSize"));
-pause(10);
-close();
-set(fig90, "position",get(0,"ScreenSize"));
-close();
+colormap(gray(256));
+image(dg_90);
+axis off;
+axis image;
+pause(5);
+close all;
