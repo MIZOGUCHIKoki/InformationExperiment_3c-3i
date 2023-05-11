@@ -10,4 +10,4 @@ result = abs(result);
 result = uint8(result);
 figure;
 imshow(result);
-imwrite(result,"../Figures/05_6.png");
+imwrite(result,"../Figures/05_60.png");

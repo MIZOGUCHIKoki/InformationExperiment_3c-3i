@@ -1,12 +1,11 @@
 \chapter{\kadaia}
 \section{\purpose}
 本章では，画像のカラーチャネル操作，量子化，階調反転，閾値処理を行う．またグレイスケール画像に対してヒストグラムを作成する．
-\paragraph{\kadaiaa}RGB色空間の画像を，緑チャネルだけを抜き出してグレイスケール画像を作成する．緑チャネルは色の濃淡を多く含む．RGB色空間から色の濃淡を抽出したい場合は，緑（G）の成分を多く抽出するとよい．具体的な割合を，\eqref{equ:grayscale}に示す．ここではNTSC輝度信号を取り出す方法で行う．
-さらに，RGB画像の赤チャネルと青チャネルを入れ替えたカラー画像を作成する．
+\paragraph{\kadaiaa}RGB色空間の画像を，緑チャネルだけを抜き出してグレイスケール画像を作成する．赤チャネル，青チャネルについても同様にグレイスケール画像を生成する．さらに，RGB画像の赤チャネルと青チャネルを入れ替えたカラー画像を作成する．
+\paragraph{\kadaiab}グレイスケール画像を生成する．緑チャネルは色の濃淡を多く含む．RGB色空間から色の濃淡を抽出したい場合は，緑（G）の成分を多く抽出するとよい．具体的な割合を，\eqref{equ:grayscale}に示す．ここではNTSC輝度信号を取り出す方法で行う．生成したグレイスケール画像に対して，画像の量子化数を変更することによる，画像の変化を確認する．量子化数は8Bit，4Bit，2Bit，1Bitの4種をテストする．量子化数1Bitの画像を2値画像という．
 \begin{align}
     \textrm{Gray scale image} & = \textrm{Red}\times 30\% +\textrm{Green}\times 59\% +\textrm{Blue}\times 11\%\label{equ:grayscale}
 \end{align}
-\paragraph{\kadaiab}画像の量子化数を変更することによる，画像の変化を確認する．量子化数は8Bit，4Bit，2Bit，1Bitの4種をテストする．量子化数1Bitの画像を2値画像という．
 \paragraph{\kadaiac}各量子化数の画像に対して，その画像を階調反転させる．階調反転とは，白黒を反転させることである．量子化数による階調変換後の画像を比較する．
 \paragraph{\kadaiad}閾値処理とは，とある値（閾値）以上の場合を白，閾値以下を黒とし，2値画像を作成することである．
 \paragraph{\kadaiae}量子化数8Bitのグレイスケール画像のヒストグラムを作成する．画素値\(n(n=0,1,\dots ,255)\)の画素が何画素含まれているかのヒストグラムを作成する．
@@ -113,3 +112,42 @@ s_s_matB = sum(sum(matB));
 \paragraph{\kadaiaf}
 固定カメラ\footnote{手での固定は，背景がズレる可能性があるので，カメラを固定して撮影した．}で撮影した写真を用いる．「背景と被写体が写っている画像\texttt{img\_sbj}」「背景のみの画像\texttt{img\_bg}」の2点を撮影した．背景差分画像は，\(\texttt{img\_sbj}-\texttt{img\_bg}\)で生成する．
 生成した画像に対して，閾値処理する．閾値処理する前後での画像比較，閾値による比較し，考察する．今回，閾値を\(64\)，\(128\)，\(192\)で実験する．\scall{\kadaiaf}\sref{src:05_06}．
+\section{\result}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_11_r.png}
+        \subcaption{赤チャネルからグレイスケール}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_12_g.png}
+        \subcaption{緑チャネルからグレイスケール}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_13_b.png}
+        \subcaption{青チャネルからグレイスケール}
+    \end{minipage}
+    \caption{\kadaiaa\ 実験結果}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_22_4bit.png}
+        \subcaption{量子化数\ 4Bit}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_23_2bit.png}
+        \subcaption{量子化数\ 2Bit}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_24_1bit.png}
+        \subcaption{量子化数\ 1Bit}
+    \end{minipage}
+    \caption{\kadaiab\ 実験結果}
+\end{figure}
