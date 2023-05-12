@@ -134,7 +134,7 @@ end
 読み込んだ画像はRGB色空間で保存される．この画像をHSV色空間に変換するためには，\texttt{rgb2hsv}関数を用いる．
 出力された値と\(255\)の積を取り，HSV色空間で出力された画像を書き出す．
 色相，彩度，明度それぞれのチャネルを抽出し，\matlab のアプリケーションを用いて，肌色要素のHSV成分を出力する（\sref{src:06_05_f}）．
-それぞれの値に合致した画素を，画素値\(255\)，他画素の画素値を\(0\)とした画像を書き出す．また，RGB色空間における，肌色領域の抽出も行う．肌色部ある点のRGB値と等しい画素を白く塗る．
+それぞれの値に合致した画素を，画素値\(255\)，ほかの画素値を\(0\)とした画像を書き出す．また，RGB色空間における，肌色領域の抽出も行う．肌色部ある点のRGB値と等しい画素を白く塗る．
 \scall{\kadaibe}\sref{src:06_05}，\sref{src:06_05_1}．
 \section{\result}
 \begin{figure}[h]
@@ -157,25 +157,25 @@ end
     \caption{\kadaiaa\ 実験結果}
     \begin{minipage}[b]{.49\textwidth}
         \begin{minipage}[b]{.49\textwidth}
-            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_21-sf_img_wgn.png}
-            \subcaption{平滑化フィルタ}
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_21_sf_img_wgn.png}
+            \subcaption{\wgnimg}
         \end{minipage}
         \begin{minipage}[b]{.49\textwidth}
-            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_23-mf_img_wgn.png}
-            \subcaption{メディアンフィルタ}
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_22_sf_img_in.png}
+            \subcaption{\inimg}
         \end{minipage}
-        \caption{\wgnimg に対するフィルタ適用}
+        \caption{平滑化フィルタ}
     \end{minipage}
     \begin{minipage}[b]{.49\textwidth}
         \begin{minipage}[b]{.49\textwidth}
-            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_22-sf_img_in.png}
-            \subcaption{平滑化フィルタ}
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_23_mf_img_wgn.png}
+            \subcaption{\wgnimg}
         \end{minipage}
         \begin{minipage}[b]{.49\textwidth}
-            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_24-mf_img_in.png}
-            \subcaption{メディアンフィルタ}
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_24_mf_img_in.png}
+            \subcaption{\inimg}
         \end{minipage}
-        \caption{\inimg に対するフィルタ適用}
+        \caption{メディアンフィルタ}
     \end{minipage}
     \begin{minipage}[b]{.3\textwidth}
         \centering
@@ -211,7 +211,7 @@ end
     \caption{ラプラシアンフィルタの適用と処理}
 \end{figure}
 \footnotetext{横方向微分フィルタ適用後画像と縦方向微分フィルタ適用後画像の和．}
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \begin{minipage}[b]{.23\textwidth}
         \centering
@@ -234,3 +234,8 @@ end
     \end{minipage}
     \caption{\kadaibe\ 実験結果}
 \end{figure}
+\section{\consideration}
+\paragraph{平滑化フィルタ}
+\wgnimg に対して平滑化フィルタを適用すると，雑音部分が目立たなくなった．
+また，\inimg に対して平滑化フィルタを適用すると，雑音が取り除かれることなく残った．
+これは，
