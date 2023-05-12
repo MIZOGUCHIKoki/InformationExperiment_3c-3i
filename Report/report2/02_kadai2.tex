@@ -41,7 +41,7 @@
     \item \textbf{ラプラシアンフィルタ}
           \begin{itemize}
               \item ラプラシアンフィルタは，微分フィルタ同様，境界線を見つけるために使われる方法である．
-              \item 今回の実験では，\originimg に対して，ラプラシアンフィルタを適用し，適用した画像と特徴と違いを考察する．
+              \item 今回の実験では，\originimg に対して，ラプラシアンフィルタを適用し，閾値処理する．フィルタを適用し閾値処理した画像と特徴と違いを考察する．
           \end{itemize}
 \end{enumerate}
 \begin{figure}[h]
@@ -134,5 +134,103 @@ end
 読み込んだ画像はRGB色空間で保存される．この画像をHSV色空間に変換するためには，\texttt{rgb2hsv}関数を用いる．
 出力された値と\(255\)の積を取り，HSV色空間で出力された画像を書き出す．
 色相，彩度，明度それぞれのチャネルを抽出し，\matlab のアプリケーションを用いて，肌色要素のHSV成分を出力する（\sref{src:06_05_f}）．
-それぞれの値に合致した画素を，画素値\(255\)，他画素の画素値を\(0\)とした画像を書き出す．
-\scall{\kadaibe}\sref{src:06_05}．
+それぞれの値に合致した画素を，画素値\(255\)，他画素の画素値を\(0\)とした画像を書き出す．また，RGB色空間における，肌色領域の抽出も行う．肌色部ある点のRGB値と等しい画素を白く塗る．
+\scall{\kadaibe}\sref{src:06_05}，\sref{src:06_05_1}．
+\section{\result}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_21_gimg.png}
+        \subcaption{元画像}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../06_ImageFiltering/file_white-Gaussian-Noise.png}
+        \subcaption{白色ガウス雑音（\wgnimg）}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../06_ImageFiltering/file_impluse-noise.png}
+        \subcaption{インパルス雑音（\inimg）}
+    \end{minipage}
+    \caption{\kadaiaa\ 実験結果}
+    \begin{minipage}[b]{.49\textwidth}
+        \begin{minipage}[b]{.49\textwidth}
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_21-sf_img_wgn.png}
+            \subcaption{平滑化フィルタ}
+        \end{minipage}
+        \begin{minipage}[b]{.49\textwidth}
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_23-mf_img_wgn.png}
+            \subcaption{メディアンフィルタ}
+        \end{minipage}
+        \caption{\wgnimg に対するフィルタ適用}
+    \end{minipage}
+    \begin{minipage}[b]{.49\textwidth}
+        \begin{minipage}[b]{.49\textwidth}
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_22-sf_img_in.png}
+            \subcaption{平滑化フィルタ}
+        \end{minipage}
+        \begin{minipage}[b]{.49\textwidth}
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_24-mf_img_in.png}
+            \subcaption{メディアンフィルタ}
+        \end{minipage}
+        \caption{\inimg に対するフィルタ適用}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_31_diff-x-img.png}
+        \subcaption{横方向微分フィルタ}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_32_diff-y-img.png}
+        \subcaption{縦方向微分フィルタ}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_33_diff-img.png}
+        \subcaption{微分フィルタ\footnotemark}
+    \end{minipage}
+    \caption{微分フィルタ適用}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_41_lf-img}
+        \subcaption{ラプラシアンフィルタ}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_43_lf-img-thresholding.png}
+        \subcaption{閾値処理}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_42_Thresholding-graph.pdf}
+        \subcaption{画素値ヒストグラム}
+    \end{minipage}
+    \caption{ラプラシアンフィルタの適用と処理}
+\end{figure}
+\footnotetext{横方向微分フィルタ適用後画像と縦方向微分フィルタ適用後画像の和．}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{.23\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../06_ImageFiltering/file_hand.png}
+        \subcaption{元画像}
+    \end{minipage}
+    \begin{minipage}[b]{.23\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_51_img-hsv.png}
+        \subcaption{HSV色空間への変換後}
+    \end{minipage}
+    \begin{minipage}[b]{.23\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_52_scd.png}
+        \subcaption{肌色領域の抽出（HSV）}
+    \end{minipage}
+    \begin{minipage}[b]{.23\textwidth}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_53_hand.png}
+        \subcaption{肌色領域の抽出（RGB）}
+    \end{minipage}
+    \caption{\kadaibe\ 実験結果}
+\end{figure}

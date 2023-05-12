@@ -57,4 +57,4 @@ imshow(mf_img_wgn);
 imwrite(sf_img_wgn,"../Figures/06_23-mf_img_wgn.png");
 figure;
 imshow(mf_img_in);
-imwrite(sf_img_wgn,"../Figures/06_23-mf_img_ing.png");
+imwrite(sf_img_wgn,"../Figures/06_24-mf_img_in.png");

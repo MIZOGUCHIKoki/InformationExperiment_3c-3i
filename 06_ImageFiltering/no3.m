@@ -22,4 +22,4 @@ imshow(diff_y_img);
 imwrite(diff_y_img,"../Figures/06_32_diff-y-img.png");
 figure;
 imshow(diff_img);
-imwrite(diff_img,"../Figures/06_33-diff-img.png");
+imwrite(diff_img,"../Figures/06_33_diff-img.png");
