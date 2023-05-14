@@ -30,10 +30,10 @@ sf_img_in = uint8(sf_img_in);
 
 figure;
 imshow(sf_img_wgn);
-imwrite(sf_img_wgn,"../Figures/06_21-sf_img_wgn.png");
+imwrite(sf_img_wgn,"../Figures/06_21_sf_img_wgn.png");
 figure;
 imshow(sf_img_in);
-imwrite(sf_img_wgn,"../Figures/06_22-sf_img_in.png");
+imwrite(sf_img_in,"../Figures/06_22_sf_img_in.png");
 
 % Median filter (mf)
 zeroPadding_height = zeros(gimg_height, 1);
@@ -54,7 +54,7 @@ for h = 2:gimg_height
 end
 figure;
 imshow(mf_img_wgn);
-imwrite(sf_img_wgn,"../Figures/06_23-mf_img_wgn.png");
+imwrite(mf_img_wgn,"../Figures/06_23_mf_img_wgn.png");
 figure;
 imshow(mf_img_in);
-imwrite(sf_img_wgn,"../Figures/06_23-mf_img_ing.png");
+imwrite(mf_img_in,"../Figures/06_24_mf_img_in.png");

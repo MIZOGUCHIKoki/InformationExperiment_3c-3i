@@ -114,11 +114,13 @@ s_s_matB = sum(sum(matB));
 生成した画像に対して，閾値処理する．閾値処理する前後での画像比較，閾値による比較し，考察する．今回，閾値を\(32\)，\(64\)，\(128\)で実験する．\scall{\kadaiaf}\sref{src:05_06}．
 \section{\result}
 \begin{figure}[h]
+    \newcommand{\vsp}{\vspace{2em}}
     \centering
     \begin{minipage}[b]{.19\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../kut.jpg}
         \subcaption{元画像}
+        \label{fig:元画像}
     \end{minipage}
     \begin{minipage}[b]{.19\textwidth}
         \centering
@@ -141,7 +143,7 @@ s_s_matB = sum(sum(matB));
         \subcaption{赤青チャネル入れ替え}
     \end{minipage}
     \caption{\kadaiaa\ 実験結果}
-    \vspace{.5em}
+    \vsp
     \begin{minipage}[b]{.23\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_21_gimg.png}
@@ -163,7 +165,7 @@ s_s_matB = sum(sum(matB));
         \subcaption{量子化数\ 1Bit}
     \end{minipage}
     \caption{\kadaiab\ 実験結果}
-    \vspace{.5em}
+    \vsp
     \begin{minipage}[b]{.23\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_31_8.png}
@@ -185,7 +187,7 @@ s_s_matB = sum(sum(matB));
         \subcaption{量子化数\ 1Bit}
     \end{minipage}
     \caption{\kadaiac\ 実験結果}
-    \vspace{.5em}
+    \vsp
     \begin{minipage}[b]{.7\textwidth}
         \centering
         \begin{minipage}[b]{.3\textwidth}
@@ -210,8 +212,8 @@ s_s_matB = sum(sum(matB));
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_50_graph.pdf}
         \caption{\kadaiae\ 実験結果}
     \end{minipage}
-    \vspace{.5em}
     \nextfloat
+    \\\vsp
     \begin{minipage}[b]{.49\textwidth}
         \centering
         \begin{minipage}[b]{.3\textwidth}
@@ -256,7 +258,7 @@ s_s_matB = sum(sum(matB));
 \section{\consideration}
 \paragraph{\kadaiaa}
 実験結果より，原画像に近い画像は，緑チャネルだけを抜き出してグレイスケール画像として表示したものである．
-また，赤チャネルと青チャネルを入れ替えた画像では，文字や建物の概形をはっきりと，とらえることができる．
+また，赤チャネルと青チャネルを入れ替えた画像では，文字や建物の概形を，はっきりとらえることができる．
 これらは，\eqref{equ:grayscale}でGreenの割合が一番多い理由と考えられる．
 \paragraph{\kadaiab}
 量子化数を減らすことで，等高線のようなものが見える．
