@@ -1,0 +1,16 @@
+\chapter{\kadaic}
+\section{\method}
+\paragraph{\kadaica}
+\matlab で，方位を定義できる正弦波縞を作成する．
+方位\(\theta\)，空間周波数\(f\)，コントラスト\(C\)の正弦波縞は\eqref{equ:正弦波縞}で表せる．
+\(L(x,y)\)を点\(L(x,y)\)における輝度，\(L_0\)を全体画像の平均輝度とする．
+\begin{align}
+    L(x,y) & = L_0\Bigg(1+C\sin\Big(2\pi f\big(y\sin(\theta)+x\cos(\theta)\big)\Big)\Bigg)\label{equ:正弦波縞}
+\end{align}
+左に\(30^\circ\)傾いた空間周波数\(0.05\textrm{cycle}/\textrm{pixel}\)の正弦波縞と，
+右に\(60^{\circ}\)傾いた空間周波数\(0.03\textrm{cycle}/\textrm{pixel}\)の正弦波を作成する．
+平均輝度は，最大輝度の\(0.5\)倍，コントラストを\(0.5\)とする．
+\paragraph{\kadaicb}
+方位\(90\pm 10^\circ\)，\(90\pm 45^\circ\)正弦波縞の順応刺激を上下に提示して，\(60\)秒後に垂直縞\(90^\circ\)のテスト刺激を表示する．
+全体画像サイズを\(\textrm{縦}900\times\textrm{横}400\textrm{pixel}\)，格子縞のサイズを\(400\times 400\textrm{pixel}\)，順応時に提示する中央の矩形を\(20\times 100\textrm{pixel}\)，順応後の注視点を\(20\textrm{pixel}\)とする．
+正弦波縞の空間周波数を\(0.03\textrm{cycle}/\textrm{pixel}\)，コントラストは\(0.5\)とする．
