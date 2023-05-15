@@ -1,11 +1,11 @@
 clear; close all;
-img = imread("file_hand.png");
+img = imread('file_hand.png');
 img_hsv = rgb2hsv(img);
 img_hsv_255 = img_hsv * 255;
 img_hsv_255= uint8(img_hsv_255);
 figure;
 imshow(img_hsv_255);
-imwrite(img_hsv,"../Figures/06_51_img-hsv.png");
+imwrite(img_hsv,'../Figures/06_51_img-hsv.png');
 hsv_h = img_hsv(:,:,1); % Hue（色相）
 hsv_s = img_hsv(:,:,2); % Saturation（彩度）
 hsv_v = img_hsv(:,:,3); % Value（明度）
@@ -26,4 +26,4 @@ scd = scd * 255;
 scd = uint8(scd);
 figure;
 imshow(scd);
-imwrite(scd,"../Figures/06_52_scd.png");
+imwrite(scd,'../Figures/06_52_scd.png');

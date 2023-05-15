@@ -18,14 +18,17 @@ for x = 1:width
     end
 end
 
-figure;
+
+fig0 = figure;
 colormap(gray(256));
 image(L_l30);
 axis off;
 axis image;
+exportgraphics(fig0 ,'../Figures/07_10_l30.pdf','ContentType','vector');
 
-figure;
+fig1 = figure;
 colormap(gray(256));
 image(L_r60);
 axis off;
 axis image;
+exportgraphics(fig1 ,'../Figures/07_11_r60.pdf','ContentType','vector');
