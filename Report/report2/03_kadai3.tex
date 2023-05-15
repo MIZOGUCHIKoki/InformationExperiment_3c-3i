@@ -1,11 +1,13 @@
 \chapter{\kadaic}
 \section{\purpose}
 \paragraph{方位残効とは}
-方位残効とは，ある方向に傾いた線分を眺めて順応した後，テスト垂直の線分を見ると，順応刺激と反対の方向に傾いて知覚される現象である\cite[p.5]{方位残効と運動残効のメカニズム}．\par
+方位残効とは，ある方向に傾いた線分を眺めて順応した後，テスト垂直の線分を見ると，順応刺激と反対の方向に傾いて知覚される現象である\cite[p.5]{方位残効と運動残効のメカニズム}．
+\paragraph{方位選択性とは}
+大脳皮質視覚野細胞は受容野に特定の傾き（方位）線分刺激を定時他ときに応答し，それと異なる傾きの刺激には応答しないことを，方位選択性という\cite[p.764]{方位選択性}．\par
 今回の実験では，方位の大きさと，残効の度合いを比較し，視覚情報処理を考慮したうえで，現象について考察する．
 \section{\method}
 \paragraph{\kadaica}
-\matlab で，方位を定義できる正弦波縞を作成する．
+方位を定義できる正弦波縞を作成する．
 方位\(\theta\)，空間周波数\(f\)，コントラスト\(C\)の正弦波縞は\eqref{equ:正弦波縞}で表せる．
 \(L(x,y)\)を点\(L(x,y)\)における輝度，\(L_0\)を全体画像の平均輝度とする．
 \begin{align}
@@ -19,7 +21,8 @@
 全体画像サイズを\(\textrm{縦}900\times\textrm{横}400\textrm{pixel}\)，格子縞のサイズを\(400\times 400\textrm{pixel}\)，順応時に提示する中央の矩形を\(20\times 100\textrm{pixel}\)，順応後の注視点を\(20\textrm{pixel}\)とする．
 正弦波縞の空間周波数を\(0.03\textrm{cycle}/\textrm{pixel}\)，コントラストは\(0.5\)とする．
 刺激を観察する際，網膜上の，局所的な明るさの順応を避けるために，\(60\)秒の順応時間では，矩形を満遍なく見るようにする．
-\begin{center}
+\begin{flushright}
+    \vspace{-1em}
     \begin{minipage}[t]{.48\textwidth}
         \begin{lstlisting}[caption={矩形と円の作成},label={src:矩形と円の作成}]
 [w, h] = meshgrid(-199:200, 50:-1:-49);
@@ -30,7 +33,7 @@ rct = rct * Y2;
 rct(50-9:50+10,200-49:200+50)=0;
         \end{lstlisting}
     \end{minipage}
-    \hspace{1em}
+    \hspace{.5em}
     \begin{minipage}[t]{.48\textwidth}
         \begin{lstlisting}[caption={順応刺激画像の作成},label={src:順応刺激画像の作成}]
 % L: 正弦波縞 90°
@@ -41,9 +44,10 @@ dg_10 = [L_p10; rct; L_n10];
 dg_45 = [L_n45; rct; L_p45];
         \end{lstlisting}
     \end{minipage}
-\end{center}
+    \vspace{-.5em}
+\end{flushright}
 
-\begin{wrapfigure}{r}[0mm]{.48\textwidth}
+\begin{wrapfigure}{r}[-1mm]{.48\textwidth}
     \vspace{-1cm}
     \begin{lstlisting}[caption={刺激画像の表示方法},label={src:刺激画像の表示方法}]
 fig = figure;
@@ -53,6 +57,7 @@ image(dg_10);
 axis off;
 axis image;    
     \end{lstlisting}
+    \vspace{-1cm}
 \end{wrapfigure}
 \paragraph{刺激画像の表示}
 順応刺激画像を方位残効が生じやすいように，全画面表示にし，\(60\)秒後にテスト刺激を提示するためには，\matlab の\texttt{set}関数を用いる．
@@ -87,3 +92,6 @@ axis image;
     \end{minipage}
     \caption{生成した画像}
 \end{figure}
+\paragraph{方位残効}
+順応刺激\(90\pm10^\circ\)は，方位残効を知覚できた．順応刺激\(90\pm45^\circ\)は，方位残効を知覚できなかった．
+\section{\consideration}
