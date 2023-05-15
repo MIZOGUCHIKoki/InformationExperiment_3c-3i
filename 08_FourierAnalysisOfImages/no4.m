@@ -1,5 +1,5 @@
 clear; close all;
-img = imread('LENNA.bmp');
+img = imread('../LENNA.bmp');
 H = 256;
 W = 256;
 filter_50 = ones(H,W);
