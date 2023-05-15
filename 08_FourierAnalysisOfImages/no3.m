@@ -13,12 +13,16 @@ imshow(img2);
 img1_fft = abs(fftshift(fft2(img1))).^2;
 img2_fft = abs(fftshift(fft2(img2))).^2;
 
-figure;
+fig0 = figure;
 colormap('gray');
 imagesc(img1_fft);
-figure;
+xlabel('x: frequency');
+ylabel('y: frequency');
+fig1 = figure;
 colormap('gray');
 imagesc(img2_fft);
+xlabel('x: frequency');
+ylabel('y: frequency');
 
 diff = img2_fft - img1_fft;
 diff_max = max(max(diff));

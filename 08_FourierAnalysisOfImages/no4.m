@@ -20,20 +20,25 @@ end
 figure;
 imshow(filter_50);
 img_fft = fftshift(fft2(img));
-figure;
+fig0 = figure;
 colormap('gray');
 imagesc(log(1 + abs(img_fft).^2));
+xlabel('x: frequency');
+ylabel('y: frequency');
+
 img_filter50 = img_fft.*filter_50;
 img_filter100 = img_fft.*filter_100;
 img_ifilter50 = real(ifft2(ifftshift(img_filter50)));
 img_ifilter100 = real(ifft2(ifftshift(img_filter100)));
-figure;
+fig1 = figure;
 colormap('gray');
 imagesc(log(1 + abs(img_filter50).^2));
+xlabel('x: frequency');
+ylabel('y: frequency');
 
-figure;
+fig2 = figure;
 colormap('gray');
 imagesc(img_ifilter50);
-figure;
+fig3 = figure;
 colormap('gray');
 imagesc(img_ifilter100);
