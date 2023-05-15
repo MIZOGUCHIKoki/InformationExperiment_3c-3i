@@ -1,5 +1,4 @@
 clear; close all;
-clear; close all;
 C = 0.5; % コントラスト（今回は0.5）
 f = 0.05; % 空間周波数（今回は0.05）
 d1 = (-1/6)*(1/3)*pi; % 10度
@@ -13,7 +12,6 @@ L_n10 = zeros(height,width);
 L_p45 = zeros(height,width);
 L_n45 = zeros(height,width);
 L = zeros(height,width);
-
 
 for x = 1:width
     for y = 1:height
@@ -38,30 +36,49 @@ dg_10 = [L_p10; rct; L_n10];
 dg_45 = [L_n45; rct; L_p45];
 
 fig10 = figure;
-set(fig10, "position",get(0,"ScreenSize"));
+set(fig10, 'position',get(0,'ScreenSize'));
 colormap(gray(256));
 image(dg_10);
 axis off;
 axis image;
-pause(5);
+pause(60);
 colormap(gray(256));
 image(dg_90);
 axis off;
 axis image;
 
 pause(5);
-close all;
-
-fig45 = figure;
-set(fig45, "position",get(0,"ScreenSize"));
+close();
 colormap(gray(256));
 image(dg_45);
 axis off;
 axis image;
-pause(5);
+pause(60);
 colormap(gray(256));
 image(dg_90);
 axis off;
 axis image;
 pause(5);
 close all;
+
+% 保存用
+fig90 = figure;
+colormap(gray(256));
+image(dg_90);
+axis off;
+axis image;
+exportgraphics(fig90 ,'../Figures/07_21_dg90.pdf','ContentType','vector');
+
+fig45 = figure;
+colormap(gray(256));
+image(dg_45);
+axis off;
+axis image;
+exportgraphics(fig45 ,'../Figures/07_22_dg45.pdf','ContentType','vector');
+
+fig10 = figure;
+colormap(gray(256));
+image(dg_10);
+axis off;
+axis image;
+exportgraphics(fig10 ,'../Figures/07_23_dg10.pdf','ContentType','vector');

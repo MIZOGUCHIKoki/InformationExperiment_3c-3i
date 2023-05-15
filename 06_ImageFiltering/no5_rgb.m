@@ -1,5 +1,5 @@
 clear; close all;
-img = imread("file_hand.png");
+img = imread('file_hand.png');
 r = img(:,:,1);
 g = img(:,:,2);
 b = img(:,:,3);
@@ -13,4 +13,4 @@ hand = bin_r + bin_g + bin_b;
 bin = (hand > 255);
 hand(bin) = 255;
 imshow(hand);
-imwrite(hand,"../Figures/06_53_hand.png");
+imwrite(hand,'../Figures/06_53_hand.png');
