@@ -10,7 +10,7 @@ img2(H/2+60-30:H/2+60+30,W/2+60-15:W/2+60+15) = 255;
 figure;
 imshow(img2);
 
-img1_fft = abs(fftshift(fft2(img1))).^2;
+img1_fft = log(1 + abs(fftshift(fft2(img1))).^2);
 img2_fft = abs(fftshift(fft2(img2))).^2;
 
 fig0 = figure;
