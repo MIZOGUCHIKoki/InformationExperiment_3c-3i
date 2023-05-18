@@ -1,0 +1,142 @@
+\section{\method}
+\paragraph{実験に用いる装置}このレポート内すべての実験にはMathWorks\raisebox{2mm}{\tiny\textregistered}社の\matlab を用いて，\tblref{tbl:実験環境}の環境下で実験する．
+\begin{table}[H]
+    \caption{実験環境}
+    \label{tbl:実験環境}
+    \begin{tabularx}{\textwidth}{AR}
+        \hline
+        実験機                      & MacBook Air 2022 （Apple社）\texttt{MLY13J/A}    \\
+        プロセッサ                    & Apple Silicon M2\ \  8コアCPU，8コアGPU            \\
+        メモリ                      & 8GB                                           \\
+        \multirow{2}{*}{\matlab} & R2023a - academic use (Update1 9.14.02239454) \\
+                                 & 64-bit (maci64) March 30, 2023                \\
+        \hline
+    \end{tabularx}
+\end{table}
+また，このレポートないすべての実験では\matlab でプロットしたグラフを出力するための\texttt{exportgraphics}関数，画像を書き出すための\texttt{imwrite}関数を用いる（\srcref{src:グラフ・画像出力}）．
+\begin{lstlisting}[numbers={none},caption={グラフ・画像出力},label={src:グラフ・画像出力}]
+exportgraphics(figurename,'path/figure_name.pdf','ContentType','vector');
+imwrite(data,"path/figure_name.png");
+\end{lstlisting}
+\paragraph{\kadaiaa}
+\texttt{imwrite}関数を用いて，画像の読み込む．読み込んだ画像はRGB色空間で保存されており，チャネル1にはR，チャネル2にはG，チャネル3にはBが保存されている．
+グレイスケール画像を作成するには，\eqref{equ:grayscale}の割合で画像を加算合成する．\mat{m}{n}の行列\texttt{A}に対して，\mat{1}{n}を取り出したければ，\verb|A(1,:)|と記述する．\verb|:|は，すべての要素を表す記号である．
+赤チャネルと青チャネルを入れ替えるためには，赤チャネルの行列と青チャネルの行列を変数に保存し，それぞれ互いのチャネルに代入する．\scall{\kadaiaa}\sref{src:05_01}．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \vspace{-.7cm}
+    \begin{lstlisting}[caption={\texttt{bitshift}関数},label={src:bitshift}]
+img = bitshift(img, n);
+    \end{lstlisting}
+    \vspace{-.5cm}
+\end{wrapfigure}
+\paragraph{\kadaiab}
+量子化数を変更するために，\texttt{bitshift}関数を用いる（\srcref{src:bitshift}）．
+この関数は，\texttt{img}を左に\texttt{n}ビットシフトする関数である．右シフトしたい場合は\texttt{n}を負の数で与える．
+ビットシフトについて，1ビット右シフトするごとにそのデータは\(1/2\)される．
+これを利用して，量子化数4Bitの場合は右に4Bitシフト，量子化数2Bitの場合は右に6Bitシフト，量子化数1Bitの場合は右に7Bitシフトする．
+
+\begin{wrapfigure}{r}[0mm]{.225\textwidth}
+    \centering
+    \vspace{-.5cm}
+    \begin{tikzpicture}
+        \coordinate (A) at (4,1);
+        \draw (0,0.5)--(4,0.5);
+        \draw (0,0)rectangle(A);
+        \foreach \x in {1,2,...,8}
+            {
+                \draw (\x/2,0.4)--(\x/2,0.6);
+                \draw (\x/2,1)--(\x/2,0.9);
+                \draw (\x/2,0)--(\x/2,0.1);
+                \node at ($(\x/2-1/2,0.5)!0.5!(\x/2,1)$){\texttt{1}};
+                \node at ($(\x/2-1/2,0)!0.5!(\x/2,0.5)$){\ifnum\x<5\texttt{0}\else\ifnum\x>5\texttt{1}\else\ifnum\x=5\texttt{1}\fi\fi\fi};
+            }
+    \end{tikzpicture}
+    \caption{4ビットシフト}
+    \label{fig:4ビットシフト}
+    \vspace{-.5cm}
+\end{wrapfigure}
+量子化数4Bitを例にあげる．仮に画素値が\texttt{255}（白）を持つ画素の場合，量子化数を4Bitにする，つまり4Bit右シフトすると，画素値は\texttt{15}になる（\figref{fig:4ビットシフト}）．このままでは画素値の範囲が\(0\)から\(15\)となる．
+この対策として，全体画素値と\(255/15\)の積を取ることで，画素値を\(0\)から\(255\)にスケーリングする．\scall{\kadaiab}\sref{src:05_02}．
+\paragraph{\kadaiac}
+各量子化数ごとに階調反転する．階調反転を実現するためには，階調反転した画像を\texttt{double}型に変換したあと，\(-1\)との積をとり，\(255\)を足した後で\texttt{unit8}型に変換する\footnote{その画像の各画素値が\texttt{double}型であるとき，\texttt{imwrite}が，データを自動的にリスケールし書き出すため．}．\scall{\kadaiac}\sref{src:05_03}．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \vspace{-.7cm}
+    \begin{lstlisting}[caption={判定結果の格納},label={src:判定結果の格納}]
+mat = [1 2 3; 4 5 6; 7 8 9];
+bin = mat > 5;
+% -- 結果 --
+bin = [0 0 0; 0 0 1; 1 1 1];     
+    \end{lstlisting}
+    \vspace{-.5cm}
+\end{wrapfigure}
+\paragraph{\kadaiad}
+\matlab には，判定結果のブール値を行列に格納する機能がある．
+\srcref{src:判定結果の格納}より，行列\texttt{mat}の各元が\(5\)より大きい箇所を\(1\)，\(5\)以下のところを\(0\)とする行列\texttt{bin}を作成できる．この行列を真理行列と呼ぶ．
+この機能を用いて，ある閾値に対して，閾値よりも大きければ\(1\)を戻し，閾値以下であれば\(0\)を戻す行列を作成する．画素値の範囲を\(0\)から\(255\)へするために，行列の各元と\(255\)の積をとる．今回は，閾値を\(64\)，\(128\)，\(192\)で実験する．\scall{\kadaiad}\sref{src:05_04}
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \vspace{-.9cm}
+    \begin{lstlisting}[caption={\texttt{sum}関数},label={src:sum関数}]
+matA = [1 2 3];
+s_matA = sum(matA); 
+% -> 出力:6
+matB = [1 2; 1 1; 1 1];
+s_matB = sum(matB); 
+% -> 出力:[3 4]
+s_s_matB = sum(sum(matB)); 
+% -> 出力:12
+    \end{lstlisting}
+    \vspace{-.7cm}
+\end{wrapfigure}
+\paragraph{\kadaiae}
+ヒストグラムを作成するために，この関数は行列の元を足し合わせる\texttt{sum}関数を用いる（\srcref{src:sum関数}）．
+各画素値\(0\)から\(255\)に対して，その画素値と等しい箇所を\(1\)とする真理行列を作成し，各元の和を\texttt{sum}関数を用いて算出する．
+その結果が，ある画素値がいくつ画像に含まれているかを指す．
+\paragraph{\kadaiaf}
+固定カメラ\footnote{手での固定は，背景がズレる可能性があるので，カメラを固定して撮影した．}で撮影した写真を用いる．「背景と被写体が写っている画像\texttt{img\_sbj}」「背景のみの画像\texttt{img\_bg}」の2点を撮影した．背景差分画像は，\(\texttt{img\_sbj}-\texttt{img\_bg}\)で生成する．
+生成した画像に対して，閾値処理する．閾値処理する前後での画像比較，閾値による比較し，考察する．今回，閾値を\(32\)，\(64\)，\(128\)で実験する．\scall{\kadaiaf}\sref{src:05_06}．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \vspace{-.5cm}
+    \begin{lstlisting}[caption={白色ガウス雑音画像の生成},label={src:白色ガウス雑音画像の生成}]
+% 画像サイズ : n x m
+wgn = 10*randn(n, m);
+wgn = uint8(wgn);
+wgn_img = wgn + gimg;
+    \end{lstlisting}
+    \begin{lstlisting}[caption={インパルス雑音画像の生成},label={src:インパルス雑音画像の生成}]
+% 画像サイズ : n x m
+rnd = rand(n, m);
+b = (rnd < 0.01);
+w = (rnd > 0.99);
+in_img(w) = 255;
+in_img(b) = 0;
+    \end{lstlisting}
+    \vspace{-1cm}
+\end{wrapfigure}
+\paragraph{白色ガウス雑音を加えた画像}白色ガウス雑音の作成には\texttt{randn}関数を用い，生成した乱数と，標準偏差の積を取る．生成した乱数を\texttt{uint8}型に変換し，\originimg と和を取る（\srcref{src:白色ガウス雑音画像の生成}）．
+\(255\)を上回る，または\(0\)を下回る場合，それぞれの値に変換したものを， \wgnimg とする．
+\paragraph{インパルス雑音を加えた画像}
+インパルス雑音は，\texttt{rand}関数を用いて作成する．発生率を\(1\%\) にするため，乱数の\(0.01\)未満の画素を黒，乱数の\(0.99\)より大きい画素を白としてインパルスノイズを設計する（\srcref{src:インパルス雑音画像の生成}）．
+\paragraph{フィルタの適用}
+平滑化フィルタ，微分フィルタ，Laplacianフィルタの適用は，\texttt{filter2}関数，（\ \verb|filter2(filter, img)|\ ）を用いる．
+メディアンフィルタは，画像の\mat{i}{j}に対して，\texttt{median}関数を用いてフィルタ処理する．メディアンフィルタを適用する際に，四方すべてに画素がない画素（\mat{1}{1}画素，\mat{m}{1}画素など）はフィルタ処理できないため，0パディング処理を行い，メディアンフィルタを適用する（\srcref{src:メディアンフィルタの適用}）．
+\begin{lstlisting}[caption={メディアンフィルタの適用},label={src:メディアンフィルタの適用},frame={left}]
+for h = 2:img_height % 画像行列 img の高さ
+    for w = 2:img_width % 画像行列 img の横幅，median_filter は0パディング後のimg
+        median_filter(h-1, w-1) = median(img(h-1:h+1,w-1:w+1),"all"); 
+    end
+end
+\end{lstlisting}
+課題（フィルタ処理）のスクリプトは，\sref{src:06_01} - \sref{src:06_04}．
+\paragraph{色空間変換}
+読み込んだ画像はRGB色空間で保存される．この画像をHSV色空間に変換するためには，\texttt{rgb2hsv}関数を用いる．
+出力された値と\(255\)の積を取り，HSV色空間で出力された画像を書き出す．
+色相，彩度，明度それぞれのチャネルを抽出し，\matlab のアプリケーションを用いて，肌色要素のHSV成分を出力する（\sref{src:06_05_f}）．
+それぞれの値に合致した画素を，画素値\(255\)，ほかの画素値を\(0\)とした画像を書き出す．同様な方法で，RGB色空間における肌色領域の抽出も行う（\sref{src:06_05_f2}）．
+\scall{\kadaibe}\sref{src:06_05}，\sref{src:06_05_1}．
