@@ -1,6 +1,13 @@
 \section{\result}
+\newcommand{\axisfig}[1]{
+    \begin{tikzpicture}
+        \node (fig){\includegraphics[width=.9\textwidth,keepaspectratio]{#1}};
+        \node[left] at ($(fig.south west)!0.5!(fig.north west)+(0.2cm,0)$){\rotatebox{90}{\tiny \texttt{frequency}}};
+        \node[below] at ($(fig.south west)!0.5!(fig.south east)+(0,0.2cm)$){\rotatebox{0}{\tiny \texttt{frequency}}};
+    \end{tikzpicture}
+    \vspace{-1em}
+}
 \begin{figure}[H]
-    \newcommand{\vsp}{\vspace{2em}}
     \centering
     \begin{minipage}[b]{.19\textwidth}
         \centering
@@ -29,7 +36,6 @@
         \subcaption{赤青チャネル入れ替え}
     \end{minipage}
     \caption{\kadaiaa\ 実験結果}
-    \vsp
     \begin{minipage}[b]{.23\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_21_gimg.png}
@@ -51,7 +57,6 @@
         \subcaption{量子化数\ 1Bit}
     \end{minipage}
     \caption{\kadaiab\ 実験結果}
-    \vsp
     \begin{minipage}[b]{.23\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_31_8.png}
@@ -73,7 +78,8 @@
         \subcaption{量子化数\ 1Bit}
     \end{minipage}
     \caption{\kadaiac\ 実験結果}
-    \vsp
+\end{figure}
+\begin{figure}[H]
     \begin{minipage}[b]{.7\textwidth}
         \centering
         \begin{minipage}[b]{.3\textwidth}
@@ -98,8 +104,8 @@
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_50_graph.pdf}
         \caption{\kadaiae\ 実験結果}
     \end{minipage}
-    \nextfloat
-    \\\vsp
+\end{figure}
+\begin{figure}[H]
     \begin{minipage}[b]{.49\textwidth}
         \centering
         \begin{minipage}[b]{.3\textwidth}
@@ -141,8 +147,7 @@
     \end{minipage}
 \end{figure}
 \footnotetext[1]{NTSC輝度信号のグレイスケール画像}
-\newpage
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \begin{minipage}[b]{.3\textwidth}
         \centering
@@ -160,6 +165,9 @@
         \subcaption{インパルス雑音（\inimg）}
     \end{minipage}
     \caption{\kadaiaa\ 実験結果}
+\end{figure}
+\begin{figure}[H]
+    \centering
     \begin{minipage}[b]{.49\textwidth}
         \begin{minipage}[b]{.49\textwidth}
             \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_21_sf_img_wgn.png}
@@ -182,6 +190,9 @@
         \end{minipage}
         \caption{メディアンフィルタ}
     \end{minipage}
+\end{figure}
+\begin{figure}[H]
+    \centering
     \begin{minipage}[b]{.3\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_31_diff-x-img.png}
@@ -198,6 +209,9 @@
         \subcaption{Sobelフィルタ\footnotemark}
     \end{minipage}
     \caption{Sobelフィルタ適用}
+\end{figure}
+\begin{figure}[H]
+    \centering
     \begin{minipage}[b]{.3\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_41_lf-img}
@@ -217,7 +231,7 @@
     \caption{Laplacianフィルタの適用と処理}
 \end{figure}
 \footnotetext{横方向Sobelフィルタ適用後画像と縦方向Sobelフィルタ適用後画像の和．}
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \begin{minipage}[b]{.23\textwidth}
         \centering
@@ -247,3 +261,135 @@
 横微分フィルタを適用すると，縦方向のエッジが強調され，縦方向微分フィルタを適用すると，横方向のエッジが強調された．
 これらの画像を足し合わせて，\(255\)を上回る値を処理すると，画像全体のエッジが強調された画像を生成できた．
 Laplacianフィルタを適用すると，画像が暗く出力された．この画像に対して\figref{fig:Laplacianフィルタのヒストグラム}を用いて，閾値\(30\)の閾値処理し，全体画像のエッジが強調された画像を生成できた．
+\paragraph{2次元フーリエ変換}
+両矩形の変化は，目視で確認できなかった．ただし，両パワースペクトルの差分を取った行列の最大値，最小値を調べると，いずれも\(0\)ではなかった．
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{.2\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_31_rec1.pdf}
+        \subcaption{長方形\ 1}
+    \end{minipage}
+    \begin{minipage}[b]{.2\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_32_rec2.pdf}
+        \subcaption{長方形\ 2}
+    \end{minipage}
+    \begin{minipage}[b]{.25\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_33_rec1-fft.pdf}
+        \subcaption{長方形\ 1\ パワースペクトル\footnotemark[2]}
+    \end{minipage}
+    \begin{minipage}[b]{.25\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_34_rec2-fft.pdf}
+        \subcaption{長方形\ 2\ パワースペクトル\footnotemark[2]}
+    \end{minipage}
+    \caption{画像の座標とパワースペクトルの関係}
+\end{figure}
+\footnotetext[2]{対数をとったパワースペクトル}
+\newpage
+\begin{figure}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{p{.05\textwidth}CCC}
+                                                                                          & 縞数\(4\) & 縞数\(16\) & 縞数\(64\) \\
+        \hline
+        \vspace{.5em}                                                                                                     \\
+        \begin{minipage}{.05\textwidth}
+            \centering
+            \rotatebox{90}{縦縞}
+        \end{minipage}                                                   &
+        \begin{minipage}{.25\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_11_img4.pdf}
+        \end{minipage}  &
+        \begin{minipage}{.25\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_12_img16.pdf}
+        \end{minipage} &
+        \begin{minipage}{.25\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_13_img64.pdf}
+        \end{minipage}                                  \\
+        \vspace{.5em}                                                                                                     \\
+        \begin{minipage}{.05\textwidth}
+            \centering
+            \rotatebox{90}{\small 縦縞\ パワースペクトル}
+        \end{minipage}                                               &
+        \begin{minipage}{.25\textwidth}
+            \centering
+            \axisfig{../../Figures/08_14_img4-fft.pdf}
+        \end{minipage}                                        &
+        \begin{minipage}{.25\textwidth}
+            \axisfig{../../Figures/08_15_img16-fft.pdf}
+        \end{minipage}                                       &
+        \begin{minipage}{.25\textwidth}
+            \axisfig{../../Figures/08_16_img64-fft.pdf}
+        \end{minipage}                                                                        \\
+        \vspace{.5em}                                                                                                     \\
+        \begin{minipage}{.05\textwidth}
+            \centering
+            \rotatebox{90}{横縞}
+        \end{minipage}                                                   &
+        \begin{minipage}{.25\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_21_img4.pdf}
+        \end{minipage}  &
+        \begin{minipage}{.25\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_22_img16.pdf}
+        \end{minipage} &
+        \begin{minipage}{.25\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_23_img64.pdf}
+        \end{minipage}                                  \\
+        \vspace{.5em}                                                                                                     \\
+        \begin{minipage}{.05\textwidth}
+            \centering
+            \rotatebox{90}{\small 横縞\ パワースペクトル}
+        \end{minipage}                                               &
+        \begin{minipage}{.25\textwidth}
+            \axisfig{../../Figures/08_24_img4-fft.pdf}
+        \end{minipage}                                        &
+        \begin{minipage}{.25\textwidth}
+            \axisfig{../../Figures/08_25_img16-fft.pdf}
+        \end{minipage}                                       &
+        \begin{minipage}{.25\textwidth}
+            \axisfig{../../Figures/08_26_img64-fft.pdf}
+        \end{minipage}                                                                        \\
+        \vspace{.5em}                                                                                                     \\
+        \hline
+    \end{tabularx}
+    \caption{縦縞・横縞に対するフーリエ変換}
+    \nextfloat
+    \vspace{.5em}
+    \begin{minipage}[b]{.15\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../LENNA.jpeg}
+        \subcaption{元画像}
+    \end{minipage}
+    \begin{minipage}[b]{.15\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_42_fft.pdf}
+        \subcaption{\scriptsize パワースペクトル}
+    \end{minipage}
+    \begin{minipage}[b]{.15\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_41_filter.pdf}
+        \subcaption{円形フィルタ\footnotemark[1]}
+    \end{minipage}
+    \begin{minipage}[b]{.15\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_43_fft-filter.pdf}
+        \subcaption{フィルタの適用\footnotemark[1]}
+    \end{minipage}
+    \begin{minipage}[b]{.15\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_44_fft-filter-50.pdf}
+        \subcaption{\scriptsize フィルタ適用後\((50)\)}
+    \end{minipage}
+    \begin{minipage}[b]{.15\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_45_fft-filter-100.pdf}
+        \subcaption{\scriptsize フィルタ適用後\((100)\)}
+    \end{minipage}
+    \caption{高域通過フィルタ}
+\end{figure}
+\footnotetext[1]{例として，半径が\(50\textrm{pixel}\)のフィルタを示す．}
