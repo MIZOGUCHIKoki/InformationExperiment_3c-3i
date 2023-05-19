@@ -5,7 +5,7 @@
         \node[left] at ($(fig.south west)!0.5!(fig.north west)+(0.2cm,0)$){\rotatebox{90}{\tiny \texttt{frequency}}};
         \node[below] at ($(fig.south west)!0.5!(fig.south east)+(0,0.2cm)$){\rotatebox{0}{\tiny \texttt{frequency}}};
     \end{tikzpicture}
-    \vspace{-1em}
+    \vspace{-2em}
 }
 \begin{figure}[H]
     \centering
@@ -277,12 +277,12 @@ Laplacianフィルタを適用すると，画像が暗く出力された．こ�
     \end{minipage}
     \begin{minipage}[b]{.25\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_33_rec1-fft.pdf}
+        \axisfig{../../Figures/08_33_rec1-fft.pdf}
         \subcaption{長方形\ 1\ パワースペクトル\footnotemark[2]}
     \end{minipage}
     \begin{minipage}[b]{.25\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_34_rec2-fft.pdf}
+        \axisfig{../../Figures/08_34_rec2-fft.pdf}
         \subcaption{長方形\ 2\ パワースペクトル\footnotemark[2]}
     \end{minipage}
     \caption{画像の座標とパワースペクトルの関係}
@@ -367,17 +367,17 @@ Laplacianフィルタを適用すると，画像が暗く出力された．こ�
     \end{minipage}
     \begin{minipage}[b]{.15\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_42_fft.pdf}
-        \subcaption{\scriptsize パワースペクトル}
-    \end{minipage}
-    \begin{minipage}[b]{.15\textwidth}
-        \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_41_filter.pdf}
         \subcaption{円形フィルタ\footnotemark[1]}
     \end{minipage}
     \begin{minipage}[b]{.15\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_43_fft-filter.pdf}
+        \scalebox{.85}{\axisfig{../../Figures/08_42_fft.pdf}}
+        \subcaption{\scriptsize パワースペクトル}
+    \end{minipage}
+    \begin{minipage}[b]{.15\textwidth}
+        \centering
+        \scalebox{.85}{\axisfig{../../Figures/08_43_fft-filter.pdf}}
         \subcaption{フィルタの適用\footnotemark[1]}
     \end{minipage}
     \begin{minipage}[b]{.15\textwidth}
