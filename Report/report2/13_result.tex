@@ -1,12 +1,4 @@
 \section{\result}
-\newcommand{\axisfig}[1]{
-    \begin{tikzpicture}
-        \node (fig){\includegraphics[width=.9\textwidth,keepaspectratio]{#1}};
-        \node[left] at ($(fig.south west)!0.5!(fig.north west)+(0.2cm,0)$){\rotatebox{90}{\tiny \texttt{frequency}}};
-        \node[below] at ($(fig.south west)!0.5!(fig.south east)+(0,0.2cm)$){\rotatebox{0}{\tiny \texttt{frequency}}};
-    \end{tikzpicture}
-    \vspace{-2em}
-}
 \begin{figure}[H]
     \centering
     \begin{minipage}[b]{.19\textwidth}
@@ -277,12 +269,12 @@ Laplacianフィルタを適用すると，画像が暗く出力された．こ�
     \end{minipage}
     \begin{minipage}[b]{.25\textwidth}
         \centering
-        \axisfig{../../Figures/08_33_rec1-fft.pdf}
+        \includegraphics[keepaspectratio,width=.8\textwidth]{../../Figures/08_33_rec1-fft.pdf}
         \subcaption{長方形\ 1\ パワースペクトル\footnotemark[2]}
     \end{minipage}
     \begin{minipage}[b]{.25\textwidth}
         \centering
-        \axisfig{../../Figures/08_34_rec2-fft.pdf}
+        \includegraphics[keepaspectratio,width=.8\textwidth]{../../Figures/08_34_rec2-fft.pdf}
         \subcaption{長方形\ 2\ パワースペクトル\footnotemark[2]}
     \end{minipage}
     \caption{画像の座標とパワースペクトルの関係}
@@ -291,71 +283,68 @@ Laplacianフィルタを適用すると，画像が暗く出力された．こ�
 \newpage
 \begin{figure}[H]
     \centering
+    \renewcommand{\arraystretch}{1.3}
     \begin{tabularx}{\textwidth}{p{.05\textwidth}CCC}
-                                                                                          & 縞数\(4\) & 縞数\(16\) & 縞数\(64\) \\
-        \hline
-        \vspace{.5em}                                                                                                     \\
+                                                                                              & 縞数\(4\) & 縞数\(16\) & 縞数\(64\) \\
         \begin{minipage}{.05\textwidth}
             \centering
             \rotatebox{90}{縦縞}
-        \end{minipage}                                                   &
+        \end{minipage}                                                       &
         \begin{minipage}{.25\textwidth}
             \centering
             \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_11_img4.pdf}
-        \end{minipage}  &
+        \end{minipage}      &
         \begin{minipage}{.25\textwidth}
             \centering
             \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_12_img16.pdf}
-        \end{minipage} &
+        \end{minipage}     &
         \begin{minipage}{.25\textwidth}
             \centering
             \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_13_img64.pdf}
-        \end{minipage}                                  \\
-        \vspace{.5em}                                                                                                     \\
+        \end{minipage}                                      \\
+
         \begin{minipage}{.05\textwidth}
             \centering
             \rotatebox{90}{\small 縦縞\ パワースペクトル}
-        \end{minipage}                                               &
+        \end{minipage}                                                   &
         \begin{minipage}{.25\textwidth}
             \centering
-            \axisfig{../../Figures/08_14_img4-fft.pdf}
-        \end{minipage}                                        &
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_14_img4-fft.pdf}
+        \end{minipage}  &
         \begin{minipage}{.25\textwidth}
-            \axisfig{../../Figures/08_15_img16-fft.pdf}
-        \end{minipage}                                       &
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_15_img16-fft.pdf}
+        \end{minipage} &
         \begin{minipage}{.25\textwidth}
-            \axisfig{../../Figures/08_16_img64-fft.pdf}
-        \end{minipage}                                                                        \\
-        \vspace{.5em}                                                                                                     \\
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_16_img64-fft.pdf}
+        \end{minipage}                                  \\
+
         \begin{minipage}{.05\textwidth}
             \centering
             \rotatebox{90}{横縞}
-        \end{minipage}                                                   &
+        \end{minipage}                                                       &
         \begin{minipage}{.25\textwidth}
             \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_21_img4.pdf}
-        \end{minipage}  &
+        \end{minipage}      &
         \begin{minipage}{.25\textwidth}
             \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_22_img16.pdf}
-        \end{minipage} &
+        \end{minipage}     &
         \begin{minipage}{.25\textwidth}
             \includegraphics[width=\textwidth,keepaspectratio]{../../Figures/08_23_img64.pdf}
-        \end{minipage}                                  \\
-        \vspace{.5em}                                                                                                     \\
+        \end{minipage}                                      \\
+
         \begin{minipage}{.05\textwidth}
             \centering
             \rotatebox{90}{\small 横縞\ パワースペクトル}
-        \end{minipage}                                               &
+        \end{minipage}                                                   &
         \begin{minipage}{.25\textwidth}
-            \axisfig{../../Figures/08_24_img4-fft.pdf}
-        \end{minipage}                                        &
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_24_img4-fft.pdf}
+        \end{minipage}  &
         \begin{minipage}{.25\textwidth}
-            \axisfig{../../Figures/08_25_img16-fft.pdf}
-        \end{minipage}                                       &
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_25_img16-fft.pdf}
+        \end{minipage} &
         \begin{minipage}{.25\textwidth}
-            \axisfig{../../Figures/08_26_img64-fft.pdf}
-        \end{minipage}                                                                        \\
-        \vspace{.5em}                                                                                                     \\
-        \hline
+            \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_26_img64-fft.pdf}
+        \end{minipage}                                  \\
     \end{tabularx}
     \caption{縦縞・横縞に対するフーリエ変換}
     \nextfloat
@@ -372,12 +361,12 @@ Laplacianフィルタを適用すると，画像が暗く出力された．こ�
     \end{minipage}
     \begin{minipage}[b]{.15\textwidth}
         \centering
-        \scalebox{.85}{\axisfig{../../Figures/08_42_fft.pdf}}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_42_fft.pdf}
         \subcaption{\scriptsize パワースペクトル}
     \end{minipage}
     \begin{minipage}[b]{.15\textwidth}
         \centering
-        \scalebox{.85}{\axisfig{../../Figures/08_43_fft-filter.pdf}}
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/08_43_fft-filter.pdf}
         \subcaption{フィルタの適用\footnotemark[1]}
     \end{minipage}
     \begin{minipage}[b]{.15\textwidth}
