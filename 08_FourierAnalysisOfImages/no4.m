@@ -67,3 +67,9 @@ axis image;
 xlabel('pixel');
 ylabel('pixel');
 exportgraphics(fig0,'../Figures/08_45_fft-filter-100.pdf','ContentType','vector');
+
+img_fft(128,128) = 0;
+fig0 = figure;
+colormap('gray');
+imagesc(real(ifft2(ifftshift(img_fft))));
+axis image;
