@@ -73,3 +73,23 @@ xlabel('x: frequency');
 ylabel('y: frequency');
 axis([128-80 128+80+1 128-80 128+80+1]);
 exportgraphics(fig0,'../Figures/08_16_img64-fft.pdf','ContentType','vector');
+
+% 直交成分削除
+img_fft = fftshift(fft2(img4));
+img_fft(129,129) = 0;
+img_fft = abs(img_fft).^2;
+figure;
+colormap('gray');
+imagesc(img_fft);
+axis image;
+xticks(1:16:256);
+yticks(1:16:256);
+xticklabels(-128:16:127);
+yticklabels(-128:16:127);
+xlabel('x: frequency');
+ylabel('y: frequency');
+axis([128-32 128+32+1 128-32 128+32+1]);
+fig0 = figure;
+colormap('gray');
+imagesc(real(ifft2(ifftshift(img_fft))));
+axis image;
