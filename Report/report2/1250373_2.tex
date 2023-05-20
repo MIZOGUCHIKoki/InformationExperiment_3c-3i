@@ -39,10 +39,10 @@
     breaklines = true,
     breakindent = 10pt,
     basicstyle = \ttfamily\small,
-    commentstyle = {\ttfamily \color[cmyk]{1,0.4,1,0}},
+    commentstyle = {\ttfamily \color[rgb]{0,0.45,0}},
     classoffset = 0,
-    keywordstyle = {\bfseries \color[cmyk]{0,1,0,0}},
-    stringstyle = {\ttfamily \color[rgb]{0,0,1}},
+    keywordstyle = {\bfseries \color{blue}},
+    stringstyle = {\ttfamily \color{magenta}},
     frame = left,
     %他オプション：leftline，topline，bottomline，lines，single，shadowbox
     framesep = 5pt,
@@ -88,7 +88,7 @@
 \AtBeginDocument{
     \renewcommand{\thelstlisting}{\thechapter-\arabic{lstlisting}}
 }
-\title{{\normalsize 情報学群実験第3C/3i 実験レポート 第2回}\\Title}
+\title{{\normalsize 情報学群実験第3C/3i 実験レポート 第2回}\\画像の解析と視覚情報処理についての考察}
 \author{1250373\hspace{1\zw}溝口 洸熙\thanks{高知工科大学 情報学群 情報セキュリティシステム研究室}\\Group 10}
 \date{May 7th, 2023}
 \begin{document}
@@ -98,7 +98,6 @@
 \pagenumbering{roman}\thispagestyle{plain}
 \tableofcontents
 \listoffigures
-\listoftables
 \lstlistoflistings
 \newpage
 \pagestyle{report}
@@ -108,6 +107,7 @@
 \input{13_result.tex}
 \input{14_consideration.tex}
 \input{21_chapter.tex}
+\input{30_words.tex}
 \bibliography{bib}
 \input{91_appendix.tex}
 \end{document}
