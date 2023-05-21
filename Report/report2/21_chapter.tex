@@ -1,10 +1,13 @@
 \chapter{\kadaic}
 \section{\purpose}
-\paragraph{方位残効とは}
+運動残効は以下のように説明されている．
+\begin{quote}
+    ``ある一定方向への運動をしばらく注視した後に，静止した物体を観測すると，それが逆方向に動いて見える現象．''\\
+    \hfill\cite[p.58]{認知心理学辞典}
+\end{quote}
 方位残効とは，ある方向に傾いた線分を眺めて順応した後，テスト垂直の線分を見ると，順応刺激と反対の方向に傾いて知覚される現象である\cite[p.5]{方位残効と運動残効のメカニズム}．
-\paragraph{方位選択性とは}
-大脳皮質視覚野細胞は受容野に特定の傾き（方位）線分刺激を提示したときに応答し，それと異なる傾きの刺激には応答しないことを，方位選択性という\cite[p.764]{方位選択性}．
-\paragraph{目的}今回の実験では，方位の大きさと，残効の度合いを比較し，視覚情報処理を考慮したうえで，現象について考察する．
+また，方位選択性とは，大脳皮質視覚野細胞は受容野に特定の傾き（方位）線分刺激を提示したときに応答し，それと異なる傾きの刺激には応答しないことをいう\cite[p.764]{認知心理学辞典}．\par
+今回の実験では，方位の大きさと，残効の度合いを比較し，視覚情報処理を考慮したうえで，現象について考察する．
 \section{\method}
 \paragraph{\kadaica}
 方位を定義できる正弦波縞を作成する．
@@ -22,8 +25,7 @@
 全体画像サイズを\(\textrm{縦}900\times\textrm{横}400\textrm{pixel}\)，格子縞のサイズを\(400\times 400\textrm{pixel}\)，順応時に提示する中央の矩形を\(20\times 100\textrm{pixel}\)，順応後の注視点を\(20\textrm{pixel}\)とする．
 正弦波縞の空間周波数を\(0.03\textrm{cycle}/\textrm{pixel}\)，コントラストは\(0.5\)とする．
 刺激を観察する際，網膜上の，局所的な明るさの順応を避けるために，\(60\)秒の順応時間では，矩形を満遍なく見るようにする．
-\begin{flushright}
-    \vspace{-1em}
+\begin{center}
     \begin{minipage}[t]{.48\textwidth}
         \begin{lstlisting}[caption={矩形と円の作成},label={src:矩形と円の作成}]
 [w, h] = meshgrid(-199:200, 50:-1:-49);
@@ -46,8 +48,8 @@ dg_45 = [L_n45; rct; L_p45];
         \end{lstlisting}
     \end{minipage}
     \vspace{-.5em}
-\end{flushright}
-
+\end{center}
+\newpage
 \begin{wrapfigure}{r}[-1mm]{.48\textwidth}
     \vspace{-1cm}
     \begin{lstlisting}[caption={刺激画像の表示方法},label={src:刺激画像の表示方法}]
@@ -58,11 +60,11 @@ image(dg_10);
 axis off;
 axis image;    
     \end{lstlisting}
-    \vspace{-1cm}
+    \vspace{-.5cm}
 \end{wrapfigure}
 \paragraph{刺激画像の表示}
 順応刺激画像を方位残効が生じやすいように，全画面表示にし，\(60\)秒後にテスト刺激を提示するためには，\matlab の\texttt{set}関数を用いる．
-また，\(60\)秒の待機時間を\texttt{pause(60)}で設定する．画像に軸や数値ラベルを表示しないために，\texttt{axis}も設定する．
+また，\(60\)秒の待機時間を\texttt{pause(60)}で設定する．\texttt{axis}を設定して，画像に軸や数値ラベルを非表示にする．
 \section{\result}
 \begin{figure}[h]
     \centering
@@ -78,17 +80,17 @@ axis image;
     \end{minipage}
     \begin{minipage}[b]{.19\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=.6\textwidth]{../../Figures/07_21_dg90.pdf}
+        \includegraphics[keepaspectratio,width=.8\textwidth]{../../Figures/07_21_dg90.pdf}
         \subcaption{テスト刺激}
     \end{minipage}
     \begin{minipage}[b]{.19\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=.6\textwidth]{../../Figures/07_22_dg45.pdf}
+        \includegraphics[keepaspectratio,width=.8\textwidth]{../../Figures/07_22_dg45.pdf}
         \subcaption{順応刺激\ \(90\pm 45^\circ\)}
     \end{minipage}
     \begin{minipage}[b]{.19\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=.6\textwidth]{../../Figures/07_23_dg10.pdf}
+        \includegraphics[keepaspectratio,width=.8\textwidth]{../../Figures/07_23_dg10.pdf}
         \subcaption{順応刺激\ \(90\pm 10^\circ\)}
     \end{minipage}
     \caption{生成した画像}
@@ -96,3 +98,101 @@ axis image;
 \paragraph{方位残効}
 順応刺激\(90\pm10^\circ\)は，方位残効を知覚できた．順応刺激\(90\pm45^\circ\)は，方位残効を知覚できなかった．
 \section{\consideration}
+運動残効は，運動方位に選択的な細胞の発火頻度が高くなることで生じる．運動残効は運動を主に処理するMT野（V5）で生じる．
+方位残効のメカニズムも運動残効と同じメカニズムであるが，運動残効がMT野で生じるのに対して，方位残効は1次視覚野（V1）で生じる．
+垂直方向に反応する受容野に対して，順応刺激\(90-10^\circ\)の応答と感度を，\figref{fig:方位残効のメカニズム}に示す．
+垂直方向に反応する受容野について，\(90\pm n^\circ\)順応刺激の\(n\)が大きい場合，感度が抑制されても応答への影響は少ない．
+\(n\)が小さい場合，その感度が抑制されると，応答が小さくなるため，方位残効を知覚しやすいと考えられる．
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}[remember picture]
+            \foreach \u in {0.3, 0.6, ..., 3.6}{
+                    \fill[cyan!50](\u-0.02,0)rectangle(\u+0.02,1.8);
+                    \draw[thin](\u,-0.05)--(\u,0.05);
+                }
+            \node[fill=cyan!50,draw,text centered] at (0.45,1.5){\tiny 感度};
+            \draw[-latex](0,0)--(3.6,0);
+            \draw[-latex](0,0)--(0,2)node[midway,left]{\rotatebox{90}{\tiny 活動電位}};
+            \foreach \u \v in {0.3/90,1.2/30,1.5/10,1.8/0,2.1/-10,2.4/-30,3.3/-90}{
+                    \draw[thin](\u,-0.05)--(\u,0.05);
+                    \fill[gray!50,rotate around={\v:($(\u-0.1,-0.3)!0.5!(\u+0.1,-0.8)$)}](\u-0.02,-0.3)rectangle(\u+0.02,-0.8);
+                }
+            \draw[domain=0.2:3.4,thick,samples=300] plot[smooth] (\x, {exp(-1 * (\x - 1.8)^2 / (2*0.3))/sqrt(2 * pi * 0.3)*1.5+0.1})node[above left=.1cm,fill=white,draw,thin]{\tiny 応答};
+            \node at ($(0,0)!0.5!(3.6,0)+(0,-1)$){\tiny 刺激方位};
+            \coordinate (A) at (4,1);
+        \end{tikzpicture}
+        \subcaption{順応前のテスト}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}[remember picture]
+            \foreach \u in {3,6,...,33}{
+                    \ifnum\u<9
+                        \fill[cyan!50](\u/10-0.02,0)rectangle(\u/10+0.02,1.8);
+                    \else\ifnum\u>21
+                            \fill[cyan!50](\u/10-0.02,0)rectangle(\u/10+0.02,1.8);
+                        \fi
+                    \fi
+                }
+            \foreach \u\v in{9/1.5,12/1.0,15/0.5,18/1.0,21/1.5}{
+                    \fill[magenta!50](\u/10-0.02,0)rectangle(\u/10+0.02,\v);
+                }
+            \foreach \u in {3,6,...,33}{
+                    \draw[thin](\u/10,-0.05)--(\u/10,0.05);
+                }
+            \node[fill=cyan!50,draw,text centered] at (0.45,1.5){\tiny 感度};
+            \draw[-latex](0,0)--(3.6,0);
+            \draw[-latex](0,0)--(0,2)node[midway,left]{\rotatebox{90}{\tiny 活動電位}};
+            \foreach \u \v in {0.3/90,1.2/30,1.8/0,2.1/-10,2.4/-30,3.3/-90}{
+                    \draw[thin](\u,-0.05)--(\u,0.05);
+                    \fill[gray!50,rotate around={\v:($(\u-0.1,-0.3)!0.5!(\u+0.1,-0.8)$)}](\u-0.02,-0.3)rectangle(\u+0.02,-0.8);
+                }
+            \fill[magenta!50,rotate around={10:($(1.5-0.1,-0.3)!0.5!(1.5+0.1,-0.8)$)}](1.5-0.02,-0.3)rectangle(1.5+0.02,-0.8);
+            \node at ($(0,0)!0.5!(3.6,0)+(0,-1)$){\tiny 刺激方位};
+            \draw[-Stealth,very thick](1.5,1.8)--(1.5,0.7)node[midway,fill=white]{\tiny 抑制};
+            \coordinate (2A) at (-1,1);
+            \coordinate (B) at (4,1);
+        \end{tikzpicture}
+        \subcaption{\(90-10^\circ\)の縞画像に順応}
+    \end{minipage}
+    \begin{minipage}[b]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}[remember picture]
+            \foreach \u in {3,6,...,33}{
+                    \ifnum\u<9
+                        \fill[cyan!50](\u/10-0.02,0)rectangle(\u/10+0.02,1.8);
+                    \else\ifnum\u>21
+                            \fill[cyan!50](\u/10-0.02,0)rectangle(\u/10+0.02,1.8);
+                        \fi
+                    \fi
+                }
+            \foreach \u\v in{9/1.5,12/1.0,15/0.5,18/1.0,21/1.5}{
+                    \fill[magenta!50](\u/10-0.02,0)rectangle(\u/10+0.02,\v);
+                }
+            \foreach \u in {3,6,...,33}{
+                    \draw[thin](\u/10,-0.05)--(\u/10,0.05);
+                }
+            \node[fill=cyan!50,draw,text centered] at (0.45,1.5){\tiny 感度};
+            \draw[-latex](0,0)--(3.6,0);
+            \draw[-latex](0,0)--(0,2)node[midway,left]{\rotatebox{90}{\tiny 活動電位}};
+            \foreach \u \v in {0.3/90,1.2/30,1.8/0,2.1/-10,2.4/-30,3.3/-90}{
+                    \draw[thin](\u,-0.05)--(\u,0.05);
+                    \fill[gray!50,rotate around={\v:($(\u-0.1,-0.3)!0.5!(\u+0.1,-0.8)$)}](\u-0.02,-0.3)rectangle(\u+0.02,-0.8);
+                }
+            \fill[magenta!50,rotate around={10:($(1.5-0.1,-0.3)!0.5!(1.5+0.1,-0.8)$)}](1.5-0.02,-0.3)rectangle(1.5+0.02,-0.8);
+            \node at ($(0,0)!0.5!(3.6,0)+(0,-1)$){\tiny 刺激方位};
+            \draw[domain=0.2:3.4,thick,samples=300,gray!80,dashed] plot[smooth] (\x, {exp(-1 * (\x - 1.8)^2 / (2*0.3))/sqrt(2 * pi * 0.3)*1.5+0.1});
+            \draw[domain=0.2:3.4,thick,samples=300] plot[smooth] (\x, {exp(-1 * (\x - 1.8)^2 / (2*0.3))/sqrt(2 * pi * 0.3)*1.0+0.1})node[above left=.1cm,fill=white,draw,thin]{\tiny 応答};
+            \coordinate (2B) at (-1,1);
+        \end{tikzpicture}
+        \subcaption{\(90^\circ\)の縞画像を再びテスト}
+    \end{minipage}
+    \caption{方位残効のメカニズム（垂直方向に反応する受容野）}
+    \label{fig:方位残効のメカニズム}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay]
+    \draw[ultra thick,-latex](A)--(2A);
+    \draw[ultra thick,-latex](B)--(2B);
+\end{tikzpicture}
