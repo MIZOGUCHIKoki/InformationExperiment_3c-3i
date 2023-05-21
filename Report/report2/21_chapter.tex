@@ -100,7 +100,9 @@ axis image;
 \section{\consideration}
 運動残効は，運動方位に選択的な細胞の発火頻度が高くなることで生じる．運動残効は運動を主に処理するMT野（V5）で生じる．
 方位残効のメカニズムも運動残効と同じメカニズムであるが，運動残効がMT野で生じるのに対して，方位残効は1次視覚野（V1）で生じる．
-方位残効のメカニズムを，\figref{fig:方位残効のメカニズム}に示す．この図は，垂直方向に反応する受容野で，順応刺激\(90\pm 10^\circ\)の上部を例にする．
+垂直方向に反応する受容野に対して，順応刺激\(90-10^\circ\)の応答と感度を，\figref{fig:方位残効のメカニズム}に示す．
+垂直方向に反応する受容野について，\(90\pm n^\circ\)順応刺激の\(n\)が大きい場合，感度が抑制されても応答への影響は少ない．
+\(n\)が小さい場合，その感度が抑制されると，応答が小さくなるため，方位残効を知覚しやすいと考えられる．
 \begin{figure}[H]
     \centering
     \begin{minipage}[b]{.3\textwidth}
@@ -117,8 +119,9 @@ axis image;
                     \draw[thin](\u,-0.05)--(\u,0.05);
                     \fill[gray!50,rotate around={\v:($(\u-0.1,-0.3)!0.5!(\u+0.1,-0.8)$)}](\u-0.02,-0.3)rectangle(\u+0.02,-0.8);
                 }
-            \draw[domain=0.2:3.4,thick,samples=300] plot[smooth] (\x, {exp(-1 * (\x - 1.8)^2 / (2*0.3))/sqrt(2 * pi * 0.3)*1.5+0.1})node[above=.2cm,fill=white,draw,thin]{\tiny 応答};
+            \draw[domain=0.2:3.4,thick,samples=300] plot[smooth] (\x, {exp(-1 * (\x - 1.8)^2 / (2*0.3))/sqrt(2 * pi * 0.3)*1.5+0.1})node[above left=.1cm,fill=white,draw,thin]{\tiny 応答};
             \node at ($(0,0)!0.5!(3.6,0)+(0,-1)$){\tiny 刺激方位};
+            \coordinate (A) at (4,1);
         \end{tikzpicture}
         \subcaption{順応前のテスト}
     \end{minipage}
@@ -148,6 +151,9 @@ axis image;
                 }
             \fill[magenta!50,rotate around={10:($(1.5-0.1,-0.3)!0.5!(1.5+0.1,-0.8)$)}](1.5-0.02,-0.3)rectangle(1.5+0.02,-0.8);
             \node at ($(0,0)!0.5!(3.6,0)+(0,-1)$){\tiny 刺激方位};
+            \draw[-Stealth,very thick](1.5,1.8)--(1.5,0.7)node[midway,fill=white]{\tiny 抑制};
+            \coordinate (2A) at (-1,1);
+            \coordinate (B) at (4,1);
         \end{tikzpicture}
         \subcaption{\(90-10^\circ\)の縞画像に順応}
     \end{minipage}
@@ -178,10 +184,15 @@ axis image;
             \fill[magenta!50,rotate around={10:($(1.5-0.1,-0.3)!0.5!(1.5+0.1,-0.8)$)}](1.5-0.02,-0.3)rectangle(1.5+0.02,-0.8);
             \node at ($(0,0)!0.5!(3.6,0)+(0,-1)$){\tiny 刺激方位};
             \draw[domain=0.2:3.4,thick,samples=300,gray!80,dashed] plot[smooth] (\x, {exp(-1 * (\x - 1.8)^2 / (2*0.3))/sqrt(2 * pi * 0.3)*1.5+0.1});
-            \draw[domain=0.2:3.4,thick,samples=300] plot[smooth] (\x, {exp(-1 * (\x - 1.5)^2 / (2*0.3))/sqrt(2 * pi * 0.3)*1.5+0.1})node[above=.2cm,fill=white,draw,thin]{\tiny 応答};
+            \draw[domain=0.2:3.4,thick,samples=300] plot[smooth] (\x, {exp(-1 * (\x - 1.8)^2 / (2*0.3))/sqrt(2 * pi * 0.3)*1.0+0.1})node[above left=.1cm,fill=white,draw,thin]{\tiny 応答};
+            \coordinate (2B) at (-1,1);
         \end{tikzpicture}
         \subcaption{\(90^\circ\)の縞画像を再びテスト}
     \end{minipage}
-    \caption{方位残効のメカニズム}
+    \caption{方位残効のメカニズム（垂直方向に反応する受容野）}
     \label{fig:方位残効のメカニズム}
 \end{figure}
+\begin{tikzpicture}[remember picture,overlay]
+    \draw[ultra thick,-latex](A)--(2A);
+    \draw[ultra thick,-latex](B)--(2B);
+\end{tikzpicture}
