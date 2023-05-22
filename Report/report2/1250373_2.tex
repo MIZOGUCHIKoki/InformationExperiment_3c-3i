@@ -23,14 +23,14 @@
 \renewcommand{\chaptermark}[1]{\markboth{第\ \thechapter\ 章\,\, #1}{}}
 \fancypagestyle{report}{
     \fancyhf{}
-    \fancyhead[RO,LE]{\leftmark}
-    \fancyfoot[RO,LE]{\thepage\ /\ \pageref{LastPage}}
+    \fancyhead[RE,LO]{\leftmark}
+    \fancyfoot[RE,LO]{\thepage\ /\ \pageref{LastPage}}
     \pagenumbering{arabic}
     }
 \fancypagestyle{appendixstyle}{
     \fancyhf{}
-    \fancyhead[RO,LE]{付録}
-    \fancyfoot[RO,LE]{\thepage\ /\ \pageref{LastPage}}
+    \fancyhead[RE,LO]{付録}
+    \fancyfoot[RE,LO]{\thepage\ /\ \pageref{LastPage}}
     \renewcommand{\headrulewidth}{0mm}
 }
 \lstset{

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="no1.css" id="CSS">
+
+<head>
+
+</head>
+<script type="text/javascript">
+    const agent = window.navigator.userAgent.toLowerCase();
+    var elem = document.getElementById("CSS");
+    var userAgent = navigator.userAgent;
+    if (userAgent.indexOf("Firefox") != -1) {
+        elem.href = "no2_2_firefox.css";
+    } else if (userAgent.indexOf("Chrome") != -1 && userAgent.indexOf("Edg")) {
+        elem.href = "no2_2_chrome.css";
+    } else {
+        elem.href = "no2_2_default.css";
+    }
+</script>
+
+<body>
+
+</body>
+
+</html>

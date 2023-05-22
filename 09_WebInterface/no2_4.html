@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="no1.css" id="CSS">
+
+<head>
+
+</head>
+<script type="text/javascript">
+    function input_item() {
+        var date = new Date();
+        var sec = date.getSeconds();
+        var min = date.getMinutes();
+        var hour = date.getHours();
+        var st = " : ";
+        var time = String(hour) + st + String(min) + st + String(sec)
+
+        var list = document.getElementById("imz");
+        var listItem = document.createElement("li");
+        listItem.textContent = time;
+        list.appendChild(listItem);
+    }
+</script>
+
+<body>
+    <span>
+        <p onmousedown="input_item()">現在時刻の取得</p>
+    </span>
+    <ul id="imz">
+    </ul>
+</body>
+
+</html>
