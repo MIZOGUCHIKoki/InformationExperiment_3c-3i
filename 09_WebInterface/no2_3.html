@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="no1.css" id="CSS">
+
+<head>
+
+</head>
+<script type="text/javascript">
+    const agent = window.navigator.userAgent.toLowerCase();
+    var elem = document.getElementById("CSS");
+    var date = new Date();
+    var sec = date.getSeconds();
+    var userAgent = navigator.userAgent;
+    if (20 <= sec && sec < 40) {
+        elem.href = "no2_2_chrome.css";
+    } else if (40 <= sec && sec <= 59) {
+        elem.href = "no2_2_default.css";
+    }
+</script>
+
+<body>
+
+</body>
+
+</html>
