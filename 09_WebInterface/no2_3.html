@@ -11,7 +11,10 @@
     var date = new Date();
     var sec = date.getSeconds();
     var userAgent = navigator.userAgent;
-    if (20 <= sec && sec < 40) {
+    if (0 <= sec && sec < 20) {
+        elem.href = "no2_2_firefox.css";
+    }
+    else if (20 <= sec && sec < 40) {
         elem.href = "no2_2_chrome.css";
     } else if (40 <= sec && sec <= 59) {
         elem.href = "no2_2_default.css";
