@@ -11,7 +11,7 @@
     var userAgent = navigator.userAgent;
     if (userAgent.indexOf("Firefox") != -1) {
         elem.href = "no2_2_firefox.css";
-    } else if (userAgent.indexOf("Chrome") != -1) {
+    } else if (userAgent.indexOf("Chrome") != -1 && userAgent.indexOf("Edg")) {
         elem.href = "no2_2_chrome.css";
     } else {
         elem.href = "no2_2_default.css";
