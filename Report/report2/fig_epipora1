@@ -1,0 +1,40 @@
+\begin{tikzpicture}
+    \coordinate (C) at (0,0);
+    \coordinate (P) at (3,3);
+    \coordinate (C2) at (6,0);
+    \coordinate (A1) at (0.1,0.5);
+    \coordinate (A2) at (0.1,2);
+    \coordinate (A3) at (1.5,0.8);
+    \coordinate (A4) at (1.5,-0.7);
+    \coordinate (B1) at (0.1+6,0.5);
+    \coordinate (B2) at (0.1+6,2);
+    \coordinate (B3) at (6-1.5,0.8);
+    \coordinate (B4) at (6-1.5,-0.7);
+    \coordinate (x) at (1,1);
+    \coordinate (xa) at (1,0);
+    \coordinate (y) at (5,1);
+    \coordinate (ya) at (5,0);
+    \draw[very thick](x)--(P);
+    \draw[very thick](y)--(P);
+    \draw[very thick](C)--(xa);
+    \draw[very thick](xa)--(ya);
+    \fill[fill=gray!10](A1)--(A2)--(A3)--(A4)--cycle;
+    \fill[fill=gray!10](B1)--(B2)--(B3)--(B4)--cycle;
+    \draw[very thick](C)--(x);
+    \draw[very thick](C2)--(y);
+    \draw[very thick](C)--(xa);
+    \draw[very thick](ya)--(C2);
+    \node[left] at (C){\(C\)};
+    \node[right] at (C2){\(C'\)};
+    \node[above] at (P){\(P\)};
+    \draw[draw=red,thick]($(x)+(0,0.24)$)--($(xa)+(0,-0.28)$);
+    \draw[draw=red,thick]($(y)+(0,0.18)$)--($(ya)+(0,-0.32)$);
+    \foreach \u in {x,xa,y,ya}{
+    \fill[black] (\u)circle[radius=0.06];
+    }
+    \draw[thick](A1)--(A2)--(A3)--(A4)--cycle;
+    \draw[thick](B1)--(B2)--(B3)--(B4)--cycle;
+    \draw[-latex](4,3)node[right]{\tiny エピポーラ平面}--(3,2);
+    \draw[-latex]($(xa)+(-1,-1)$)node[left]{\tiny エピポール}--(xa);
+    \draw[-latex]($(ya)+(1,-0.7)$)node[right]{\tiny エピポーラ線}--($(ya)+(0,-0.1)$);
+\end{tikzpicture}
