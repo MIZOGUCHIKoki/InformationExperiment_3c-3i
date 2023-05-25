@@ -1,0 +1,20 @@
+table {
+    text-align: center;
+}
+
+.kiso {
+    background-color: #00ffff;
+}
+
+.hatten {
+    background-color: #ffd700;
+}
+
+.ryouiki {
+    background-color: #c0c0c0;
+}
+
+p1 {
+    font-weight: bold;
+    text-decoration: underline;
+}
