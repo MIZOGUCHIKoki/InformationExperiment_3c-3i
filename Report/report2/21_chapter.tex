@@ -38,21 +38,7 @@ rct(50-9:50+10,200-49:200+50)=0;
     \end{minipage}
     \hspace{.5em}
     \begin{minipage}[t]{.48\textwidth}
-        \begin{lstlisting}[caption={順応刺激画像の作成},label={src:順応刺激画像の作成}]
-% L: 正弦波縞 90°
-% L_p10,L_n10: 正弦波縞 ±10° 
-% L_n45,L_p45: 正弦波縞 ±45°
-dg_90 = [L; cir; L];
-dg_10 = [L_p10; rct; L_n10];
-dg_45 = [L_n45; rct; L_p45];
-        \end{lstlisting}
-    \end{minipage}
-    \vspace{-.5em}
-\end{center}
-\newpage
-\begin{wrapfigure}{r}[-1mm]{.48\textwidth}
-    \vspace{-1cm}
-    \begin{lstlisting}[caption={刺激画像の表示方法},label={src:刺激画像の表示方法}]
+        \begin{lstlisting}[caption={刺激画像の表示方法},label={src:刺激画像の表示方法}]
 fig = figure;
 set(fig, 'position',get(0,'ScreenSize'));
 colormap(gray(256));
@@ -60,8 +46,10 @@ image(dg_10);
 axis off;
 axis image;    
     \end{lstlisting}
-    \vspace{-.5cm}
-\end{wrapfigure}
+    \end{minipage}
+    \vspace{-.5em}
+\end{center}
+\newpage
 \paragraph{刺激画像の表示}
 順応刺激画像を方位残効が生じやすいように，全画面表示にし，\(60\)秒後にテスト刺激を提示するためには，\matlab の\texttt{set}関数を用いる．
 また，\(60\)秒の待機時間を\texttt{pause(60)}で設定する．\texttt{axis}を設定して，画像に軸や数値ラベルを非表示にする．
@@ -97,19 +85,23 @@ axis image;
 \end{figure}
 \paragraph{方位残効}
 順応刺激\(90\pm10^\circ\)は，方位残効を知覚できた．順応刺激\(90\pm45^\circ\)は，方位残効を知覚できなかった．
+
+\begin{wrapfigure}{r}[0mm]{.7\textwidth}
+    \centering
+    \scalebox{0.73}{
+        \input{fig_chap21}
+        \begin{tikzpicture}[remember picture,overlay]
+            \draw[ultra thick,-latex](A)--(2A);
+            \draw[ultra thick,-latex](B)--(2B);
+        \end{tikzpicture}
+    }
+    \caption{方位残効のメカニズム（垂直方向に反応する受容野）}
+    \label{fig:方位残効のメカニズム}
+    \vspace{-.5cm}
+\end{wrapfigure}
 \section{\consideration}
 運動残効は，運動方位に選択的な細胞のスパイク頻度が高くなることで生じる．運動残効は運動を主に処理するMT野（V5）で生じる．
 方位残効のメカニズムも運動残効と同じメカニズムであるが，運動残効がMT野で生じるのに対して，方位残効は1次視覚野（V1）で生じる．
 垂直方向に反応する受容野に対して，順応刺激\(90-10^\circ\)の応答と感度を，\figref{fig:方位残効のメカニズム}に示す．
 垂直方向に反応する受容野について，\(90\pm n^\circ\)順応刺激の\(n\)が大きい場合，感度が抑制されても応答への影響は少ない．
 \(n\)が小さい場合，その感度が抑制されると，応答が小さくなるため，方位残効を知覚しやすいと考えられる．
-\begin{figure}[H]
-    \centering
-    \input{fig_chap21}
-    \caption{方位残効のメカニズム（垂直方向に反応する受容野）}
-    \label{fig:方位残効のメカニズム}
-\end{figure}
-\begin{tikzpicture}[remember picture,overlay]
-    \draw[ultra thick,-latex](A)--(2A);
-    \draw[ultra thick,-latex](B)--(2B);
-\end{tikzpicture}
