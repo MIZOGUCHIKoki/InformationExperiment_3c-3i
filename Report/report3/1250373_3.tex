@@ -1,0 +1,100 @@
+\documentclass[twoside,twocolumn]{ltjsarticle}
+\usepackage{silence}
+\WarningFilter{caption}{Unknown document}
+\usepackage[top=20truemm,bottom=20truemm,left=15truemm,right=15truemm,headheight=20pt]{geometry}
+\usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow}
+\usepackage{hyperref,graphics,graphicx,framed,subcaption}
+\usepackage[symbol]{footmisc}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,fit,positioning,math}
+\newcolumntype{A}{>{\centering\bfseries}X}
+\newcolumntype{B}{>{\centering\bfseries\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}{>{\raggedleft\arraybackslash}X}
+\bibliographystyle{junsrt}
+\hypersetup{
+    colorlinks=true,
+    citecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\fancypagestyle{report}{
+    \fancyhf{}
+    \fancyhead[RO,LE]{}
+    \fancyfoot[RO,LE]{\thepage\ /\ \pageref{LastPage}}
+    \pagenumbering{arabic}
+    \renewcommand{\headrulewidth}{0mm}
+}
+\lstset{
+    language = {Matlab},
+    %backgroundcolor={\color[gray]{.90}},
+    breaklines = true,
+    breakindent = 10pt,
+    basicstyle = \ttfamily\small,
+    commentstyle = {\ttfamily \color[rgb]{0,0.45,0}},
+    classoffset = 0,
+    keywordstyle = {\bfseries \color{magenta}},
+    stringstyle = {\ttfamily \color{blue}},
+    frame = left,
+    %他オプション：leftline，topline，bottomline，lines，single，shadowbox
+    framesep = 5pt,
+    numbers = none,
+    stepnumber = 1,
+    numberstyle = \small,
+    tabsize = 4,
+    captionpos = t,
+    otherkeywords = {xticks, yticks, exportgraphics, imwrite, bitshift, uint8, double}
+}
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+\renewcommand{\lstlistingname}{src.}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\contentsname}{目次}
+\renewcommand{\listfigurename}{図目次}
+\renewcommand{\listtablename}{表目次}
+\renewcommand{\lstlistlistingname}{ソースコード}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\theequation}{\arabic{equation}}
+% \renewcommand{\thesubfigure}{(\alph{subfigure})}
+\renewcommand{\labelenumi}{\textbf{\theenumi}.\ }
+\renewcommand{\eqref}[1]{式(\ref{#1})}
+\newcommand{\matlab}{\text{{\large M}ATLAB\raisebox{2mm}{\tiny\textregistered}}}
+\newcommand{\mat}[2]{\(#1\)行\(#2\)列}
+\newcommand{\figref}[1]{図\ref{#1}}
+\newcommand{\tblref}[1]{表\ref{#1}}
+\newcommand{\srcref}[1]{src.\ref{#1}}
+\newcommand{\scall}[1]{課題\ （#1）\ のスクリプトは，}
+\newcommand{\sref}[1]{\(\underset{\blacktriangleright\textrm{p.\pageref{#1}}}{\textrm{\srcref{#1}}}\)}
+% \captionsetup[subfigure]{labelformat=simple}
+\makeatletter
+\@addtoreset{figure}{section}
+\@addtoreset{table}{section}
+\@addtoreset{lstlisting}{section}
+\@addtoreset{footnote}{page}
+\makeatother
+\AtBeginDocument{
+    \renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
+}
+\title{{\normalsize 情報学群実験第3C/3i 実験レポート 第3回}\\WEBページ上のカラーユニバーサルデザインに関する実験}
+\author{1250373\hspace{1\zw}溝口 洸熙\thanks{高知工科大学 情報学群 情報セキュリティシステム研究室}\\Group 10}
+\date{June 7th, 2023}
+\input{90_kadaitable.tex}
+\pagestyle{report}
+\begin{document}
+\twocolumn[
+    \maketitle
+    \thispagestyle{report}
+    \input{00_abstract.tex}
+]
+\saythanks
+\input{11_purpose.tex}
+\input{12_method.tex}
+\input{13_result.tex}
+\input{14_consideration.tex}
+\input{30_words.tex}
+\bibliography{bib}
+\input{91_appendix.tex}
+\end{document}
