@@ -3,7 +3,7 @@
 \WarningFilter{caption}{Unknown document}
 \usepackage[top=20truemm,bottom=20truemm,left=15truemm,right=15truemm,headheight=20pt]{geometry}
 \usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow}
-\usepackage{hyperref,graphics,graphicx,framed,subcaption}
+\usepackage{hyperref,graphics,graphicx,framed,subcaption,xcolor,color}
 \usepackage[symbol]{footmisc}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz}
@@ -60,6 +60,7 @@
 \renewcommand{\theequation}{\arabic{equation}}
 % \renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\labelenumi}{\textbf{\theenumi}.\ }
+\renewcommand{\labelenumii}{\textbf{\theenumii}.\ }
 \renewcommand{\eqref}[1]{式(\ref{#1})}
 \newcommand{\matlab}{\text{{\large M}ATLAB\raisebox{2mm}{\tiny\textregistered}}}
 \newcommand{\mat}[2]{\(#1\)行\(#2\)列}
@@ -69,7 +70,8 @@
 \newcommand{\scall}[1]{課題\ （#1）\ のスクリプトは，}
 \newcommand{\sref}[1]{\(\underset{\blacktriangleright\textrm{p.\pageref{#1}}}{\textrm{\srcref{#1}}}\)}
 % \captionsetup[subfigure]{labelformat=simple}
-\newcommand{\rulebox}[2]{\texttt{\hspace{.2em}{\textcolor{black}{\rule{.8em}{.8em}}}\llap{\textcolor{#1}{\rule{.7em}{.7em}}}\hspace{.1em}#2}}
+\newcommand{\rulebox}[2]{\hspace{.2em}{{\color{black}\rule{.8em}{.8em}}}\llap{{\color #1\rule{.7em}{.7em}}}\hspace{.1em}\texttt{#2}}
+\newcommand{\kadai}[1]{\(\blacktriangleright\)\ \underline{#1}}
 \makeatletter
 \@addtoreset{figure}{section}
 \@addtoreset{table}{section}

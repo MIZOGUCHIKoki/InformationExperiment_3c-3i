@@ -1,6 +1,6 @@
 \section{\method}
 \subsection{装置と用語解説}
-\paragraph{実験に用いる装置}この実験にはMathWorks\raisebox{2mm}{\tiny\textregistered}社の\matlab を用いて，\tblref{tbl:実験環境}の環境下で実験する．
+この実験にはMathWorks\raisebox{2mm}{\tiny\textregistered}社の\matlab を用いて，\tblref{tbl:実験環境}の環境下で実験する．
 \begin{table}[H]
     \caption{実験環境}
     \label{tbl:実験環境}
@@ -35,36 +35,103 @@ Cascading Style Sheetsの略で，Webページのスタイルを指定するた�
           この実験で利用するUAは，macOSのSafariである．
           SafariにはUAを変更する機能がある．Chrome，Firefox，MicrosoftEdge，Safari 16.4は，SafariのUA切り替え機能を用いて実験する．
 \end{itemize}
+\kadai{ブラウザ判定}\par
+\texttt{Navigator object}オブジェクトの\texttt{userAgent}プロパティを用いて，利用ブラウザの判定を行う．
+\texttt{A}に\texttt{Strings}が含まれていない場合，戻り値は\texttt{-1}である．この実験では，ブラウザがFirefoxである場合は\ \texttt{this browser is Firefox}\ ，そうでない場合は\ \texttt{this browser is not Firefox}\ と表示するWebページを作成する．\\
+\kadai{ブラウザによるCSSの切り替え}\par
+ブラウザ判定を用いて，ブラウザによってCSSを変更するJavaScriptを記述する．CSSを設定する\texttt{link}タグに\texttt{id}を指定し，\texttt{document.getElementById}関数で\texttt{link}タグをインスタンス化する．
+ブラウザ判定結果により，このインスタンスを利用してCSSを変更する．この実験では，CSSで背景色のみを変更する．UAと指定背景色は\tblref{tbl:UAと指定背景色}に示す．
+\begin{table}[H]
+    \centering
+    \caption{UAと指定背景色}
+    \label{tbl:UAと指定背景色}
+    \begin{tabularx}{\columnwidth}{RRR}
+        \multicolumn{1}{c}{UA} & \multicolumn{1}{c}{背景色}    & \multicolumn{1}{c}{CSS名} \\
+        \hline
+        Firefox                & \rulebox{{orange}}{orange} & \texttt{firefox.css}     \\
+        Chrome                 & \rulebox{{blue}}{blue}     & \texttt{chrome.css}      \\
+        Other                  & \rulebox{{gray}}{gray}     & \texttt{default.css}     \\
+        \hline
+    \end{tabularx}
+\end{table}
+ここで，MicrosoftEdgeは，UAに\texttt{"Chrome"}文字列と\texttt{"Edge"}文字列を持つ．正確にUA\texttt{Chrome}を判別するには，条件式に，「\texttt{"Chrome"}を含み\texttt{"Edge"}を除く」処理を記述する必要がある．\\
+\kadai{時刻によるCSSの切り替え}\par
+JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタンス化する必要がある．\texttt{Date}内の\texttt{getSeconds}関数を呼び出すことで，現在時刻の「秒」を得られる．
+この実験では，現在時刻\footnote{正確には，HTMLを読み込んだ時刻．}の秒数を\(n\)とすると，以下の条件でCSSを変更する．
+\begin{equation*}
+    \textrm{適用するCSS}=
+    \begin{cases}
+        \texttt{firefox.css} & (0\leq n<20)  \\
+        \texttt{chrome.css}  & (20\leq n<40) \\
+        \texttt{default.css} & (40\leq n<60)
+    \end{cases}
+\end{equation*}
+\kadai{マウスイベントの取得}\par
+この実験では，「現在時刻の取得」と書かれた文字上をクリックすると，クリックした時刻をリストとして後ろに追加するプログラムを記述する．文字列「現在時刻の取得」をひとつのオブジェクトとして定義するため，\texttt{<span></span>}タグを用いる．
+また，リストアイテムとして表示するために，現在時刻を\texttt{<ul></ul>}タグ内の要素\texttt{<li></li>}タグへ格納する．\par
 \begin{enumerate}
-    \item \textbf{ブラウザ判定}\\
-          \texttt{Navigator object}オブジェクトの\texttt{userAgent}プロパティを用いて，利用ブラウザの判定を行う．
-          \texttt{A}に\texttt{Strings}が含まれていない場合，戻り値は\texttt{-1}である．この実験では，ブラウザがFirefoxである場合は\ \texttt{this browser is Firefox}\ ，そうでない場合は\ \texttt{this browser is not Firefox}\ と表示するWebページを作成する．
-    \item \textbf{ブラウザによるCSSの切り替え}\\
-          ブラウザ判定を用いて，ブラウザによってCSSを変更するJavaScriptを記述する．CSSを設定する\texttt{link}タグに\texttt{id}を指定し，\texttt{document.getElementById}関数で\texttt{link}タグをインスタンス化する．
-          ブラウザ判定結果により，このインスタンスを利用してCSSを変更する．この実験では，CSSで背景色のみを変更する．
-          \begin{tabularx}{.9\columnwidth}{llR}
-              \\
-              \multicolumn{1}{c}{UA} & \multicolumn{1}{c}{背景色}  & \multicolumn{1}{c}{CSS名} \\
-              \hline
-              Firefox                & \rulebox{orange}{orange} & \texttt{firefox.css}     \\
-              Chrome                 & \rulebox{blue}{blue}     & \texttt{chrome.css}      \\
-              Other                  & \rulebox{gray}{gray}     & \texttt{default.css}     \\
-              \hline                                                                       \\
-          \end{tabularx}
-          ここで，MicrosoftEdgeは，UAに\texttt{"Chrome"}文字列と\texttt{"Edge"}文字列を持つ．正確にUA\texttt{Chrome}を判別するには，条件式に，「\texttt{"Chrome"}を含み\texttt{"Edge"}を除く」処理を記述する必要がある．
-    \item \textbf{時刻によるCSSの切り替え}\\
-          JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタンス化する必要がある．\texttt{Date}内の\texttt{getSeconds}関数を呼び出すことで，現在時刻の「秒」を得られる．
-          この実験では，現在時刻\footnote{正確には，HTMLを読み込んだ時刻．}の秒数を\(n\)とすると，以下の条件でCSSを変更する．
-          \begin{equation*}
-              \textrm{背景色}=
-              \begin{cases}
-                  \texttt{firefox.css} & (0\leq n<20)  \\
-                  \texttt{chrome.css}  & (20\leq n<40) \\
-                  \texttt{default.css} & (40\leq n<60)
-              \end{cases}
-          \end{equation*}
-    \item \textbf{マウスイベントの取得}\\
-          マウスイベントを取得するには，
+    \item 「現在時刻の取得」文字列を\texttt{<p></p>}タグの属性\texttt{onmousedown}で，現在時刻をリストアイテムとして追加する関数\texttt{input\_item()}を呼び出す．この関数を呼び出すと，変数\texttt{time}に，時刻\texttt{Hour:Minutes:Second}が格納される．
+    \item \texttt{<ul></ul>}に対して，\texttt{document.getElementById}関数を用いてインスタンス名\texttt{list}でインスタンス化する．
+    \item \texttt{document.createElement("li")}関数で，\texttt{<li></li>}タグを生成し，変数\texttt{listItem}に格納する．
+    \item \texttt{listItem}の要素を\texttt{listItem.textContent}で指定し，\texttt{time}を代入する．
+    \item \texttt{list.appendChild(listItem)}で\texttt{listitem}を子要素として組み込む．
 \end{enumerate}
-\paragraph{講義一覧の作成}
+\subsection{色覚}
+色覚は，以下のように説明されている．
+\begin{quotation}
+    ``光の刺激により色を見分ける感覚．''\hfill\cite{2020新明解国語辞典}
+\end{quotation}
+すべての色は，光の三原色と呼ばれる「赤」「緑」「青」から構成される．
+色を感じとる視細胞も，赤緑青それぞれに敏感な細胞が3種類存在する．
+色覚異常はこの3種類の視細胞のうちどれか足りなかったり，十分に機能しないために起こる．
+\begin{figure}[H]
+    \centering
+    \caption{各視細胞の光に対する感度}
+    \label{fig:各視細胞の光に対する感度}
+    \begin{tikzpicture}
+        \draw[-latex](0,0)--(5.7,0)node[midway,below=.4cm]{\small 光の波長（nm）};
+        \draw[-latex](0,0)--(0,3)node[midway,left]{\small \rotatebox{90}{光に対する感度}};
+        \foreach \u \v in {0.3/400,1.3/450,2.3/500,3.3/550,4.3/600,5.3/650}
+        \draw(\u,-0.1)node[below]{\scriptsize \v}--(\u,0.1);
+        \draw[very thick,blue,dotted](0.3,0.5)..controls (1.0,2.8)..(2.3,1.2);
+        \draw[very thick,green!50!gray,dashed](1.0,0.5)..controls (2.5,2.8)..(4.9,0.5);
+        \draw[thick, red](2.0,0.8)..controls (3.8,2.8)..(5.4,0.8);
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \draw[very thick,blue,dotted](0,0)--(2,0)node[right,color=black]{青に敏感な視細胞（S錐体）};
+        \draw[very thick,green!50!gray,dashed](0,-.5)--(2,-.5)node[right,color=black]{緑に敏感な視細胞（M錐体）};
+        \draw[thick,red](0,-1)--(2,-1)node[right,color=black]{赤に敏感な視細胞（L錐体）};
+    \end{tikzpicture}
+\end{figure}
+\begin{table}[H]
+    \centering
+    \caption{色覚}
+    \label{tbl:色覚}
+    \begin{tabularx}{\columnwidth}{lR}
+        \multicolumn{1}{c}{色覚} & \multicolumn{1}{c}{状態}          \\
+        \hline
+        C型色覚                   & 3錐体が正常．一般色覚．                    \\
+        P型色覚                   & {\small L錐体に異常がある．赤色と灰色の識別が困難．} \\
+        D型色覚                   & {\small M錐体に異常がある．緑色と灰色の識別が困難．} \\
+        T型色覚                   & S錐体に異常がある．青色と黄色が混同．             \\
+        \hline
+    \end{tabularx}
+\end{table}
+講義一覧，折れ線グラフ，円グラフを4つの色覚に対応できるように設計する．\\
+\kadai{講義一覧の作成}\par
 HTMLの\texttt{table}タグを用いて，講義一覧を作成する．各講義の「専門基礎科目」，「専門発展科目」，「専門領域科目」の背景色と，履修登録必須科目の文字色を，CSSで設定する．
+デフォルトのセル背景配色を\tblref{tbl:デフォルト配色}に示す．
+また，履修登録必須科目は，\texttt{<p1></p1>}タグ内の\texttt{color}属性で指定し，色を\rulebox{[HTML]{ff0000}}{\#ff0000}とする．
+\begin{table}[H]
+    \centering
+    \caption{デフォルト配色}
+    \label{tbl:デフォルト配色}
+    \begin{tabularx}{\columnwidth}{RRR}
+        \multicolumn{1}{c}{分類} & \multicolumn{1}{c}{セル背景色}          & \multicolumn{1}{c}{\texttt{class}名} \\
+        \hline
+        専門基礎科目                 & \rulebox{[HTML]{55bb55}}{\#55bb55} & \texttt{kiso}                       \\
+        専門発展科目                 & \rulebox{[HTML]{ff9900}}{\#ff9900} & \texttt{hatten}                     \\
+        専門領域科目                 & \rulebox{[HTML]{66aaaa}}{\#66aaaa} & \texttt{ryouiki}                    \\
+        \hline
+    \end{tabularx}
+\end{table}
