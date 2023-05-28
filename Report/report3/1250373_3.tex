@@ -1,8 +1,8 @@
-\documentclass[twoside,twocolumn]{ltjsarticle}
+\documentclass[twoside]{ltjsarticle}
 \usepackage{silence}
 \WarningFilter{caption}{Unknown document}
 \usepackage[top=20truemm,bottom=20truemm,left=15truemm,right=15truemm,headheight=20pt]{geometry}
-\usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow}
+\usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow,multicol}
 \usepackage{hyperref,graphics,graphicx,framed,subcaption}
 \usepackage[symbol]{footmisc}
 \usepackage{amsmath,amssymb}
@@ -28,7 +28,7 @@
     \renewcommand{\headrulewidth}{0mm}
 }
 \lstset{
-    language = {Matlab},
+    language = {html},
     %backgroundcolor={\color[gray]{.90}},
     breaklines = true,
     breakindent = 10pt,
@@ -78,23 +78,22 @@
 \AtBeginDocument{
     \renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
 }
-\title{{\normalsize 情報学群実験第3C/3i 実験レポート 第3回}\\WEBページ上のカラーユニバーサルデザインに関する実験}
+\title{{\normalsize 情報学群実験第3C/3i 実験レポート 第3回}\\Webページ上のカラーユニバーサルデザインに関する実験}
 \author{1250373\hspace{1\zw}溝口 洸熙\thanks{高知工科大学 情報学群 情報セキュリティシステム研究室}\\Group 10}
 \date{June 7th, 2023}
 \input{90_kadaitable.tex}
 \pagestyle{report}
 \begin{document}
-\twocolumn[
-    \maketitle
-    \thispagestyle{report}
-    \input{00_abstract.tex}
-]
-\saythanks
-\input{11_purpose.tex}
-\input{12_method.tex}
-\input{13_result.tex}
-\input{14_consideration.tex}
-\input{30_words.tex}
-\bibliography{bib}
+\maketitle
+\thispagestyle{report}
+\input{00_abstract.tex}
+\begin{multicols*}{2}
+    \input{11_purpose.tex}
+    \input{12_method.tex}
+    \input{13_result.tex}
+    \input{14_consideration.tex}
+    \input{30_words.tex}
+    \bibliography{bib}
+\end{multicols*}
 \input{91_appendix.tex}
 \end{document}
