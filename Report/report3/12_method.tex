@@ -1,5 +1,6 @@
 \section{\method}
-\paragraph{実験に用いる装置}このレポート内すべての実験にはMathWorks\raisebox{2mm}{\tiny\textregistered}社の\matlab を用いて，\tblref{tbl:実験環境}の環境下で実験する．
+\subsection{装置と用語解説}
+\paragraph{実験に用いる装置}この実験にはMathWorks\raisebox{2mm}{\tiny\textregistered}社の\matlab を用いて，\tblref{tbl:実験環境}の環境下で実験する．
 \begin{table}[H]
     \caption{実験環境}
     \label{tbl:実験環境}
@@ -10,13 +11,60 @@
         \hline
         \multirow{2}{*}{プロセッサ} & Apple Silicon M2            \\
                                & 8コアCPU，8コアGPU               \\
+        \hline
         メモリ                    & 8GB                         \\
         \hline
-        Webブラウザ                & Safari\ バージョン16.5           \\
+        ブラウザ                   & Safari\ バージョン16.5           \\
         \hline
         ImageJ                 & 1.53k\ Java 13.0.6 (64-bit) \\
         \hline
     \end{tabularx}
 \end{table}
+\paragraph{HTML}
+Hyper Text Markup Languageの略で，Webページを作成するためのマークアップ言語．Webページ上のテキストデータに「タグ」を与えて，文字の大きさ，色やフォントを変更する．
 \paragraph{CSS}
-CSSとは，
+Cascading Style Sheetsの略で，Webページのスタイルを指定するための言語である．CSSの適用により，ホームページの文字や背景などがタグを利用して統一される．
+\paragraph{JavaScript}
+ブラウザ上で動作するアプリケーションを記述するための言語である．現在のWebアプリケーション上でデファクトスタンダード言語である\cite[p.68]{CGとゲームの技術}．
+\subsection{JavaScriptの初歩}
+\begin{itemize}
+    \item \textbf{\texttt{A.indexOf("Strings")}}\\
+          JavaScriptには，\texttt{A.indexOf("Strings")}で，\texttt{Strings}が\texttt{A}に含まれているかどうか出力する関数がある．
+    \item \textbf{ユーザエージェント（UA）}\\
+          ユーザエージェント（UA）とは，利用者のブラウザとOSを指す．
+          この実験で利用するUAは，macOSのSafariである．
+          SafariにはUAを変更する機能がある．Chrome，Firefox，MicrosoftEdge，Safari 16.4は，SafariのUA切り替え機能を用いて実験する．
+\end{itemize}
+\begin{enumerate}
+    \item \textbf{ブラウザ判定}\\
+          \texttt{Navigator object}オブジェクトの\texttt{userAgent}プロパティを用いて，利用ブラウザの判定を行う．
+          \texttt{A}に\texttt{Strings}が含まれていない場合，戻り値は\texttt{-1}である．この実験では，ブラウザがFirefoxである場合は\ \texttt{this browser is Firefox}\ ，そうでない場合は\ \texttt{this browser is not Firefox}\ と表示するWebページを作成する．
+    \item \textbf{ブラウザによるCSSの切り替え}\\
+          ブラウザ判定を用いて，ブラウザによってCSSを変更するJavaScriptを記述する．CSSを設定する\texttt{link}タグに\texttt{id}を指定し，\texttt{document.getElementById}関数で\texttt{link}タグをインスタンス化する．
+          ブラウザ判定結果により，このインスタンスを利用してCSSを変更する．この実験では，CSSで背景色のみを変更する．
+          \begin{tabularx}{.9\columnwidth}{llR}
+              \\
+              \multicolumn{1}{c}{UA} & \multicolumn{1}{c}{背景色}  & \multicolumn{1}{c}{CSS名} \\
+              \hline
+              Firefox                & \rulebox{orange}{orange} & \texttt{firefox.css}     \\
+              Chrome                 & \rulebox{blue}{blue}     & \texttt{chrome.css}      \\
+              Other                  & \rulebox{gray}{gray}     & \texttt{default.css}     \\
+              \hline                                                                       \\
+          \end{tabularx}
+          ここで，MicrosoftEdgeは，UAに\texttt{"Chrome"}文字列と\texttt{"Edge"}文字列を持つ．正確にUA\texttt{Chrome}を判別するには，条件式に，「\texttt{"Chrome"}を含み\texttt{"Edge"}を除く」処理を記述する必要がある．
+    \item \textbf{時刻によるCSSの切り替え}\\
+          JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタンス化する必要がある．\texttt{Date}内の\texttt{getSeconds}関数を呼び出すことで，現在時刻の「秒」を得られる．
+          この実験では，現在時刻\footnote{正確には，HTMLを読み込んだ時刻．}の秒数を\(n\)とすると，以下の条件でCSSを変更する．
+          \begin{equation*}
+              \textrm{背景色}=
+              \begin{cases}
+                  \texttt{firefox.css} & (0\leq n<20)  \\
+                  \texttt{chrome.css}  & (20\leq n<40) \\
+                  \texttt{default.css} & (40\leq n<60)
+              \end{cases}
+          \end{equation*}
+    \item \textbf{マウスイベントの取得}\\
+          マウスイベントを取得するには，
+\end{enumerate}
+\paragraph{講義一覧の作成}
+HTMLの\texttt{table}タグを用いて，講義一覧を作成する．各講義の「専門基礎科目」，「専門発展科目」，「専門領域科目」の背景色と，履修登録必須科目の文字色を，CSSで設定する．
