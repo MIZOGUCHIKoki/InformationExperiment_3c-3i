@@ -35,7 +35,8 @@
     \begin{minipage}[b]{.23\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_21_gimg.png}
-        \subcaption{量子化数\ 8Bit\footnotemark[1]}
+        \subcaption{量子化数\ 8Bit}
+        \label{fig:グレイスケール画像}
     \end{minipage}
     \begin{minipage}[b]{.23\textwidth}
         \centering
@@ -102,7 +103,7 @@
     \begin{minipage}[b]{.25\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/05_50_graph.pdf}
-        \caption{\kadaiae\ 実験結果}
+        \caption{画素値ヒストグラム\footnotemark[1]}
     \end{minipage}
 \end{figure}
 \begin{figure}[H]
@@ -147,7 +148,7 @@
         \caption{背景差分画像の閾値処理}
     \end{minipage}
 \end{figure}
-\footnotetext[1]{NTSC輝度信号のグレイスケール画像}
+\footnotetext[1]{\figref{fig:グレイスケール画像}の画素値ヒストグラム}
 \begin{figure}[h]
     \centering
     \begin{minipage}[b]{.3\textwidth}
@@ -158,12 +159,12 @@
     \begin{minipage}[b]{.3\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../06_ImageFiltering/file_white-Gaussian-Noise.png}
-        \subcaption{白色ガウス雑音（\wgnimg）}
+        \subcaption{白色ガウス雑音画像（\wgnimg）}
     \end{minipage}
     \begin{minipage}[b]{.3\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../06_ImageFiltering/file_impluse-noise.png}
-        \subcaption{インパルス雑音（\inimg）}
+        \subcaption{インパルス雑音画像（\inimg）}
     \end{minipage}
     \caption{\kadaiaa\ 実験結果}
 \end{figure}
@@ -181,7 +182,7 @@
             \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_22_sf_img_in.png}
             \subcaption{\inimg}
         \end{minipage}
-        \caption{平滑化フィルタ}
+        \caption{平滑化フィルタ適用後の画像}
     \end{minipage}
     \begin{minipage}[b]{.49\textwidth}
         \begin{minipage}[b]{.49\textwidth}
@@ -192,7 +193,7 @@
             \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_24_mf_img_in.png}
             \subcaption{\inimg}
         \end{minipage}
-        \caption{メディアンフィルタ}
+        \caption{メディアンフィルタ適用後の画像}
     \end{minipage}
 \end{figure}
 \paragraph{Sobelフィルタ，Laplacianフィルタ}
@@ -214,16 +215,16 @@ Laplacianフィルタを適用すると，画像が暗く出力された．こ�
     \begin{minipage}[b]{.3\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_33_diff-img.png}
-        \subcaption{Sobelフィルタ\footnotemark}
+        \subcaption{Sobelフィルタ\footnotemark 適用後の画像}
     \end{minipage}
-    \caption{Sobelフィルタ適用}
+    \caption{Sobelフィルタの適用}
 \end{figure}
 \begin{figure}[H]
     \centering
     \begin{minipage}[b]{.3\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/06_41_lf-img}
-        \subcaption{Laplacianフィルタ}
+        \subcaption{Laplacianフィルタ適用後の画像}
     \end{minipage}
     \begin{minipage}[b]{.3\textwidth}
         \centering
@@ -339,7 +340,7 @@ Laplacianフィルタを適用すると，画像が暗く出力された．こ�
     \caption{縦縞・横縞に対するフーリエ変換}
 \end{figure}
 \paragraph{2次元フーリエ変換}
-両矩形の変化は，目視で確認できなかった．ただし，両パワースペクトルの差分を取った行列の最大値，最小値を調べると，いずれも\(0\)ではなかった．
+長方形の座標による，対数をとったパワースペクトルの違いは，目視で確認できなかった．ただし，両パワースペクトルの差分を取った行列の最大値，最小値を調べると，いずれも\(0\)ではなかった．
 \begin{figure}[H]
     \centering
     \begin{minipage}[b]{.2\textwidth}
