@@ -56,7 +56,7 @@ html5jp.graph.line.prototype.draw = function (items, inparams) {
 		gbackgroundColor: "#ffffff",
 		gGradation: true,
 		lineWidth: 3,
-		dotRadius: 3,
+		dotRadius: 4,
 		dotType: ["diamond", "square", "disc"],
 		hLineWidth: 2,
 		hLineType: "dotted",
