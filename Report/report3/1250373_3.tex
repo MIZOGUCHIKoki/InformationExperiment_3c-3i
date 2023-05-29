@@ -73,14 +73,8 @@
 \newcommand{\rulebox}[2]{\hspace{.2em}{{\color{black}\rule{.8em}{.8em}}}\llap{{\color #1\rule{.7em}{.7em}}}\hspace{.1em}\texttt{#2}}
 \newcommand{\kadai}[1]{\(\blacktriangleright\)\ \underline{#1}}
 \makeatletter
-\@addtoreset{figure}{section}
-\@addtoreset{table}{section}
-\@addtoreset{lstlisting}{section}
 \@addtoreset{footnote}{page}
 \makeatother
-\AtBeginDocument{
-    \renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
-}
 \title{{\normalsize 情報学群実験第3C/3i 実験レポート 第3回}\\Webページ上のカラーユニバーサルデザインに関する実験}
 \author{1250373\hspace{1\zw}溝口 洸熙\thanks{高知工科大学 情報学群 情報セキュリティシステム研究室}\\Group 10}
 \date{June 7th, 2023}
@@ -99,6 +93,7 @@
 \input{13_result.tex}
 \twocolumn
 \input{14_consideration.tex}
+\input{15_conclusion.tex}
 \input{30_words.tex}
 \bibliography{bib}
 \onecolumn

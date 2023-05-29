@@ -81,29 +81,33 @@ JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタン
 すべての色は，光の三原色と呼ばれる「赤」「緑」「青」から構成される．
 色を感じとる視細胞も，赤緑青それぞれに敏感な細胞が3種類存在する．
 色覚異常はこの3種類の視細胞のうちどれか足りなかったり，十分に機能しないために起こる\cite{色覚の異常}．
-各色覚の見え方を\tblref{tbl:各色覚の見え方}に示す\cite{色覚が変化するとどのように色が見えるのか}．
+各色覚の見え方を\tblref{tbl:各色覚の見え方}に示す．
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
-        \draw[-latex](0,0)--(5.7,0)node[midway,below=.4cm]{\small 光の波長（nm）};
-        \draw[-latex](0,0)--(0,3)node[midway,left]{\small \rotatebox{90}{光に対する感度}};
-        \foreach \u \v in {0.3/400,1.3/450,2.3/500,3.3/550,4.3/600,5.3/650}
-        \draw(\u,-0.1)node[below]{\scriptsize \v}--(\u,0.1);
-        \draw[very thick,blue,dotted](0.3,0.5)..controls (1.0,2.8)..(2.3,1.2);
-        \draw[very thick,green!50!gray,dashed](1.0,0.5)..controls (2.5,2.8)..(4.9,0.5);
-        \draw[thick, red](2.0,0.8)..controls (3.8,2.8)..(5.4,0.8);
+        \draw[thick,-latex](-.3,0)--(6.5,0)node[midway,below=.4cm]{\small 光の波長（nm）};
+        \draw[thick,-latex](-.3,0)--(-.3,3)node[midway,left]{\small \rotatebox{90}{光に対する感度}};
+        \foreach \u \v in {0/400,1/450,2/500,3/550,4/600,5/650,6/700}
+        \draw(\u,-0.1)node[below]{\scriptsize \v}--(\u,0);
+        \foreach \u in {0,0.2,...,6}
+        \draw(\u,0)--(\u,0.1);
+        \foreach \u in {0.3,0.6,...,3.0}
+        \draw(-.3,\u)--(-.2,\u);
+        \draw[very thick,blue,dotted]plot[smooth,tension=0.7]coordinates{(0,1.8)(0.8,2.7)(2.8,0.6)(4.8,0)};
+        \draw[very thick,green!50!gray,dashed]plot[smooth,tension=0.7]coordinates{(0,0.6)(0.4,1.2)(0.8,1.5)(2.8,2.7)(5.6,0.3)};
+        \draw[very thick,red,densely dash dot dot]plot[smooth,tension=0.7]coordinates{(0,0.6)(0.4,1.2)(1,1.45)(3.2,2.8)(6,0.6)};
     \end{tikzpicture}
     \begin{tikzpicture}
         \draw[very thick,blue,dotted](0,0)--(2,0)node[right,color=black]{青に敏感な視細胞（S錐体）};
         \draw[very thick,green!50!gray,dashed](0,-.5)--(2,-.5)node[right,color=black]{緑に敏感な視細胞（M錐体）};
-        \draw[thick,red](0,-1)--(2,-1)node[right,color=black]{赤に敏感な視細胞（L錐体）};
+        \draw[very thick,red,densely dash dot dot](0,-1)--(2,-1)node[right,color=black]{赤に敏感な視細胞（L錐体）};
     \end{tikzpicture}
-    \caption{各視細胞の光に対する感度}
+    \caption{各視細胞の光に対する感度\cite{ガイドライン}}
     \label{fig:各視細胞の光に対する感度}
 \end{figure}
 \begin{table}[H]
     \centering
-    \caption{色覚}
+    \caption{色覚と状態}
     \label{tbl:色覚}
     \begin{tabularx}{\columnwidth}{lR}
         \multicolumn{1}{c}{色覚} & \multicolumn{1}{c}{状態}          \\
@@ -117,7 +121,7 @@ JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタン
 \end{table}
 \begin{table}[H]
     \centering
-    \caption{各色覚の見え方}
+    \caption{各色覚の見え方\cite{色覚が変化するとどのように色が見えるのか}}
     \label{tbl:各色覚の見え方}
     \renewcommand{\arraystretch}{1.2}
     \begin{tabularx}{\columnwidth}{Cp{.7\columnwidth}}

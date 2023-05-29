@@ -1,1 +1,42 @@
 \section{\consideration}
+講義一覧，折れ線グラフ，円グラフのコンテンツを，全ての色覚で内容を判別できるように配色した．
+折れ線グラフについては，マークの形状を商品別に変更することで，凡例と照合して商品を区別した．
+マークは線と同化し，一部見にくいので，線の形状やマークの色を変更することで，さらに見やすいデザインになる．
+また，円グラフは，色の変更だけでなく，項目間の感覚を開けることで，色の境界に対して見やすさを保証できる．
+\paragraph{色覚}
+一般色覚（C型色覚）の人は，L（赤）錐体，M（緑）錐体，S（青）錐体の3種類を持っており，すべて正常に働いている．
+色弱者（色の配慮が不十分な社会における弱者）は，いずれかの錐体がない，またはいずれかの錐体が不十分な働きである．
+例えば，M錐体がない，または不十分な働きであるD型色覚では，\figref{fig:D型色覚の周波数に対する感度}のように2つの周波数領域で混同が生じる．
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw[thick,-latex](-.3,0)--(6.5,0)node[midway,below=.4cm]{\small 光の波長（nm）};
+        \draw[thick,-latex](-.3,0)--(-.3,3)node[midway,left]{\small \rotatebox{90}{光に対する感度}};
+        \foreach \u \v in {0/400,1/450,2/500,3/550,4/600,5/650,6/700}
+        \draw(\u,-0.1)node[below]{\scriptsize \v}--(\u,0);
+        \foreach \u in {0,0.2,...,6}
+        \draw(\u,0)--(\u,0.1);
+        \foreach \u in {0.3,0.6,...,3.0}
+        \draw(-.3,\u)--(-.2,\u);
+        \draw[very thick,blue,dotted]plot[smooth,tension=0.7]coordinates{(0,1.8)(0.8,2.7)(2.8,0.6)(4.8,0)};
+        \draw[very thick,gray!80,dashed]plot[smooth,tension=0.7]coordinates{(0,0.6)(0.4,1.2)(0.8,1.5)(2.8,2.7)(5.6,0.3)};
+        \draw[very thick,red,densely dash dot dot]plot[smooth,tension=0.7]coordinates{(0,0.6)(0.4,1.2)(1,1.45)(3.2,2.8)(6,0.6)};
+        \draw(0.0,0)--(0.0,3);
+        \draw(0.4,0)--(0.4,3);
+        \draw[latex-latex](0,0.6)--(0.4,0.6)node[above right]{\tiny 混同};
+        \draw(3.8,0)--(3.8,3);
+        \draw(2.8,0)--(2.8,3);
+        \draw[latex-latex](2.8,0.6)--(3.8,0.6)node[midway,above]{\tiny 混同};
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \draw[very thick,blue,dotted](0,0)--(2,0)node[right,color=black]{青に敏感な視細胞（S錐体）};
+        \draw[very thick,gray!80,dashed](0,-.5)--(2,-.5)node[right,color=black]{機能しない緑に敏感な視細胞（M錐体）};
+        \draw[very thick,red,densely dash dot dot](0,-1)--(2,-1)node[right,color=black]{赤に敏感な視細胞（L錐体）};
+    \end{tikzpicture}
+    \caption{D型色覚の周波数に対する感度\cite{色覚が変化するとどのように色が見えるのか}}
+    \label{fig:D型色覚の周波数に対する感度}
+\end{figure}
+C型色覚の場合は，L錐体，M錐体，S錐体それぞれからの入力に対して比を取り，色を弁別している．
+それに対して，D型色覚の場合は，L錐体とS錐体の入力の比で色を弁別しているため，L錐体とS錐体の比が同じ箇所は，色の区別がつかないと考えられる．
+この混同部分を避けるために，L錐体とS錐体の感度比が異なる部分を採用する必要があるだろう．
+\\\hfill\cite{色覚が変化するとどのように色が見えるのか}
