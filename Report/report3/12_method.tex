@@ -30,13 +30,13 @@ Cascading Style Sheetsの略で，Webページのスタイルを指定するた�
 \begin{itemize}
     \item \textbf{\texttt{A.indexOf("Strings")}}\\
           JavaScriptには，\texttt{A.indexOf("Strings")}で，\texttt{Strings}が\texttt{A}に含まれているかどうか出力する関数がある．
-    \item \textbf{ユーザエージェント（UA）}\\
-          ユーザエージェント（UA）とは，利用者のブラウザとOSを指す．
+    \item \textbf{User Agent（UA）}\\
+          User Agent（UA）とは，利用者のブラウザとOSを指す．
           この実験で利用するUAは，macOSのSafariである．
           SafariにはUAを変更する機能がある．Chrome，Firefox，MicrosoftEdge，Safari 16.4は，SafariのUA切り替え機能を用いて実験する．
 \end{itemize}
 \kadai{ブラウザ判定}\par
-\texttt{Navigator object}オブジェクトの\texttt{userAgent}プロパティを用いて，利用ブラウザの判定を行う．
+\texttt{Navigator object}オブジェクトの\texttt{userAgent}プロパティを用いて，利用ブラウザを判定する．
 \texttt{A}に\texttt{Strings}が含まれていない場合，戻り値は\texttt{-1}である．この実験では，ブラウザがFirefoxである場合は\ \texttt{this browser is Firefox}\ ，そうでない場合は\ \texttt{this browser is not Firefox}\ と表示するWebページを作成する．\\
 \kadai{ブラウザによるCSSの切り替え}\par
 ブラウザ判定を用いて，ブラウザによってCSSを変更するJavaScriptを記述する．CSSを設定する\texttt{link}タグに\texttt{id}を指定し，\texttt{document.getElementById}関数で\texttt{link}タグをインスタンス化する．
@@ -86,8 +86,6 @@ JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタン
 色覚異常はこの3種類の視細胞のうちどれか足りなかったり，十分に機能しないために起こる．
 \begin{figure}[H]
     \centering
-    \caption{各視細胞の光に対する感度}
-    \label{fig:各視細胞の光に対する感度}
     \begin{tikzpicture}
         \draw[-latex](0,0)--(5.7,0)node[midway,below=.4cm]{\small 光の波長（nm）};
         \draw[-latex](0,0)--(0,3)node[midway,left]{\small \rotatebox{90}{光に対する感度}};
@@ -102,6 +100,8 @@ JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタン
         \draw[very thick,green!50!gray,dashed](0,-.5)--(2,-.5)node[right,color=black]{緑に敏感な視細胞（M錐体）};
         \draw[thick,red](0,-1)--(2,-1)node[right,color=black]{赤に敏感な視細胞（L錐体）};
     \end{tikzpicture}
+    \caption{各視細胞の光に対する感度}
+    \label{fig:各視細胞の光に対する感度}
 \end{figure}
 \begin{table}[H]
     \centering
@@ -117,7 +117,9 @@ JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタン
         \hline
     \end{tabularx}
 \end{table}
-講義一覧，折れ線グラフ，円グラフを4つの色覚に対応できるように設計する．\\
+講義一覧，折れ線グラフ，円グラフを4つの色覚に対応できるように設計する．
+各コンテンツに対して，各色覚での見え方を結果として出力する．出力には，ImageJアプリケーションのVischeckJ1プラグインを利用する．
+VischeckJ1は，イメージに対して，P型，D型，T型色覚での見え方を表示するプラグインである．\\
 \kadai{講義一覧の作成}\par
 HTMLの\texttt{table}タグを用いて，講義一覧を作成する．各講義の「専門基礎科目」，「専門発展科目」，「専門領域科目」の背景色と，履修登録必須科目の文字色を，CSSで設定する．
 デフォルトのセル背景配色を\tblref{tbl:デフォルト配色}に示す．
