@@ -29,7 +29,7 @@ Cascading Style Sheetsの略で，Webページのスタイルを指定するた�
 \subsection{JavaScriptの初歩}
 \begin{itemize}
     \item \textbf{\texttt{A.indexOf("Strings")}}\\
-          JavaScriptには，\texttt{A.indexOf("Strings")}で，\texttt{Strings}が\texttt{A}に含まれていることを確認することができる．含まれていない場合は，\texttt{-1}を戻り値とし，含まれている場合はその箇所を自然数で返す．
+          JavaScriptには，\texttt{A.indexOf("Strings")}で，\texttt{Strings}が\texttt{A}に含まれていることを確認できる．含まれていない場合は，\texttt{-1}を戻り値とし，含まれている場合はその箇所を自然数で返す．
     \item \textbf{User Agent（UA）}\\
           User Agent（UA）とは，利用者のブラウザとOSを指す．
           この実験で利用するUAは，macOSのSafariである．
@@ -165,7 +165,14 @@ HTMLの\texttt{table}タグを用いて，講義一覧を作成する．各講�
     \end{tabularx}
 \end{table}
 \rulebox{[HTML]{B4EBFA}}{\#b4ebfa}は，\rulebox{[HTML]{FFD1D1}}{\#ffd1d1}，\rulebox{[HTML]{FFFF99}}{\#ffff99}は，RGB三原色を多く含んでいる．
-この3色の組み合わせは，3原色の中で1つの認識が困難でも，他の2つで識別が可能である．
+この3色の組み合わせは，3原色の中で1つの認識が困難でも，ほかの2色で識別が可能である．
 これらは白に近い淡い色であり，文字色を\rulebox{{black}}{black}にすることで，色覚によらず文字をはっきりと認識できる．
-履修登録必須科目は，色に依存しないように文字色を変えず，\textbf{\underline{文字を太くし，下線を引く}}ことで表現した．\\
+履修登録必須科目は，色に依存しないように文字色を変えず，\textbf{\underline{文字を太くし，下線を引く}}ことで表現した（\srcref{src:太字と下線を設定するCSS}）．\\
+\begin{lstlisting}[caption={太字と下線を設定するCSS},label={src:太字と下線を設定するCSS}]
+p1 {
+    font-weight: bold;
+    text-decoration: underline;
+}
+\end{lstlisting}
 \kadai{折れ線グラフ}\par
+JavaScriptで記述された折れ線グラフを，カラーユニバーサルデザインに従って変更する．
