@@ -36,6 +36,15 @@ Documentは文書全体を表すノード，Elementは要素を表すノード�
 ここで，Textも1つのノードとなることに注意したい．
 \\\hfill\cite{XML文書とDOM}
 \subsection{WebGL}
-WebGLとは，ブラウザ上で3次元グラフィックを実現する技術である\cite{webglみずほ}．
+OpenGL（Open Graphics Library）とは，3次元グラフィックスライブラリである．これを用いることで，高品質な仮想区間を表現することができる．構成要素として，3次元立体や2次元画像が挙げられる\cite{OpenGL入門}．
+WebGLとは，ブラウザ上で3次元グラフィックを実現する技術である．
 HTML5の\texttt{Canvas}要素に対して，ブラウザでJavaScriptなどを使用してOpenGLで描画する．
+WebGLは，Webブラウザだけで，コンテンツの3次元描画が可能になり，アプリケーションのインストールやバージョンアップは必要なく，OpenGLを用いるため，Web上でネイティブアプリケーションと同等のパフォーマンスを再現できる．
+\\\hfill\cite{webglみずほ}
 \subsection{three.js}
+three.jsは，JavaScriptベースのWebGLエンジンである．グラフィックスを駆使したアプリケーションをブラウザから直接実行することができる．
+three.jsライブラリは，ブラウザ上での3D描画するための機能とAPIを提供している．
+WebGLとthree.jsは，APIかライブラリであるかの違いである．
+WebGLはWebブラウザ上3DグラフィックスをレンダリングするためのJavaScript API であるのに対し，three.jsは，WebGL上で3Dグラフィックスを作成するためのライブラリである．
+three.jsは，物理演算や光源の位置により物体の光り方を変更できたりなど，数学やプログラミングの知識がなくとも簡便に3Dグラフィックスを作成できる．
+\\\hfill\cite{three.js}
