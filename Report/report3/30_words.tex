@@ -1,4 +1,41 @@
 \section{関連語句}
 \subsection{DOM}
+DOMとは，Document Object Model の略称で，プログラムから構造化された文書を扱うためのモデルである．
+DOMは，オブジェクトを操作するAPIを提供している．JavaScriptなどのいろいろなプログラミング言語から利用することができる．
+DOMは，データを木構造で扱う．この構造の構成要素をノード（Node）という．
+構造化された文書の例としてXMLを挙げる．
+例として，以下のようなXML文書に対して，DOM tree で表現する．
+\begin{lstlisting}[caption={XML文書}]
+<?xml version="1.0" encoding="utf-8"?>
+<a version="2.0">
+  <b>
+    <c>
+      <d>KUT</d>
+      <f>kut.com</f>
+    </c>
+  </b>
+</a>
+\end{lstlisting}
+\begin{figure}[H]
+    \begin{framed}
+        \centering
+        \begin{verbatim}
+|-Document
+  `- Element: a vertion="2.0"
+     `- Element: b
+        `-Element: c
+          |- Element: d
+          |  `- Text: KUT
+          `- Element: f   
+             `- Text: kut.com
+\end{verbatim}
+    \end{framed}
+    \caption{DOM tree}
+\end{figure}
+Documentは文書全体を表すノード，Elementは要素を表すノード，Textはテキストを表すノードである．
+ここで，Textも1つのノードとなることに注意したい．
+\\\hfill\cite{XML文書とDOM}
 \subsection{WebGL}
+WebGLとは，ブラウザ上で3次元グラフィックを実現する技術である\cite{webglみずほ}．
+HTML5の\texttt{Canvas}要素に対して，ブラウザでJavaScriptなどを使用してOpenGLで描画する．
 \subsection{three.js}
