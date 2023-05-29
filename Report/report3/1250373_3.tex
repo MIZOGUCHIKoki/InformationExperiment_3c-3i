@@ -27,6 +27,13 @@
     \pagenumbering{arabic}
     \renewcommand{\headrulewidth}{0mm}
 }
+\lstdefinelanguage{JavaScript}{
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morecomment=[s]{/**}{*/}, % JavaDoc style comments
+  morestring=[b]',
+  morestring=[b]"
+}[keywords, comments, strings]
 \lstset{
     language = {html},
     %backgroundcolor={\color[gray]{.90}},
