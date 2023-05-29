@@ -27,13 +27,6 @@
     \pagenumbering{arabic}
     \renewcommand{\headrulewidth}{0mm}
 }
-\lstdefinelanguage{JavaScript}{
-  morecomment=[s]{/*}{*/},
-  morecomment=[l]//,
-  morecomment=[s]{/**}{*/}, % JavaDoc style comments
-  morestring=[b]',
-  morestring=[b]"
-}[keywords, comments, strings]
 \lstset{
     language = {html},
     %backgroundcolor={\color[gray]{.90}},
@@ -42,7 +35,7 @@
     basicstyle = \ttfamily\small,
     commentstyle = {\ttfamily \color[rgb]{0,0.45,0}},
     classoffset = 0,
-    keywordstyle = {\bfseries \color{red}}
+    keywordstyle = {\bfseries \color{red}},
     stringstyle = {\ttfamily \color{blue}},
     frame = lines,
     %他オプション：leftline，topline，bottomline，lines，single，shadowbox
@@ -54,6 +47,21 @@
     captionpos = t,
     otherkeywords = {xticks, yticks, exportgraphics, imwrite, bitshift, uint8, double}
 }
+\lstdefinelanguage{JavaScript}{
+  morekeywords=[1]{break, continue, delete, else, for, function, if, in,
+    new, return, this, typeof, var, void, while, with},
+  % Literals, primitive types, and reference types.
+  morekeywords=[2]{false, null, true, boolean, number, undefined,
+    Array, Boolean, Date, Math, Number, String, Object},
+  % Built-ins.
+  morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
+  sensitive,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morecomment=[s]{/**}{*/}, % JavaDoc style comments
+  morestring=[b]',
+  morestring=[b]"
+}[keywords, comments, strings]
 \renewcommand{\figurename}{図}
 \renewcommand{\tablename}{表}
 \renewcommand{\lstlistingname}{src.}
