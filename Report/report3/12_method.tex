@@ -187,13 +187,29 @@ JavaScriptで記述された折れ線グラフを，カラーユニバーサル�
     \item 線の配色を変更する．
           \begin{itemize}
               \item \rulebox{[HTML]{0080FF}}{\#0080ff}，\rulebox{[HTML]{BFBFBF}}{\#bfbfbf}は色覚によらず色が見える．
-              \item \rulebox{[HTML]{FF0000}}{\#ff0000}はP型，D型色覚には異なった色に見えるが，他の2つと重複しない．
+              \item \rulebox{[HTML]{FF0000}}{\#ff0000}はP型，D型色覚には異なった色に見えるが，ほかの2つと重複しない．
               \item 今回は，線自体が値を示すので，淡い色ではなく，濃い色を採用した．
           \end{itemize}
 \end{itemize}
+マーク形状，マークと線の太さ，背景色と線色の変更は\srcref{src:折れ線グラフの変更}で行う．
+\begin{lstlisting}[caption={折れ線グラフの変更},label={src:折れ線グラフの変更},language={JavaScript}]
+var parms = {
+    // 略
+    // 背景色の変更
+    backgroundColor: "#ffffff", 
+	gbackgroundColor: "#ffffff",
+    lineWidth: 3, // ラインの太さ
+    dotRadius: 4, // マークの太さ
+    // マークの形状
+    dotType: ["diamond", "square", "disc"],
+    // 略
+}
+// 略
+var colors = ["0,128,255", "255,0,0", "191,191,191"]; // 線色の設定
+\end{lstlisting}
 \kadai{円グラフ}\par
 \begin{itemize}
-    \item 円グラフの配色を変更する．以下の配色を，いずれの色覚でも似た色同士が隣り合わないように配置する．
+    \item 円グラフの配色を変更する．以下の配色を，いずれの色覚でも似た色どうしが隣り合わないように配置する．
           \begin{itemize}
               \item \rulebox{[HTML]{FF0000}}{\#ff0000}
               \item \rulebox{[HTML]{4169FF}}{\#4169ff}
@@ -201,3 +217,7 @@ JavaScriptで記述された折れ線グラフを，カラーユニバーサル�
               \item \rulebox{[HTML]{00FFFF}}{\#00ffff}
           \end{itemize}
 \end{itemize}
+円グラフの配色を変更は\srcref{src:円グラフの変更}で行う．
+\begin{lstlisting}[caption={円グラフの変更},label={src:円グラフの変更},language={JavaScript}]
+var colors = ["255,0,0", "65,105,255", "255,255,0", "0,255,255"]; // 円色の変更
+\end{lstlisting}
