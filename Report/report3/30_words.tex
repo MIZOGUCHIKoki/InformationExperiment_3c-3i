@@ -5,7 +5,7 @@ DOMは，オブジェクトを操作するAPIを提供している．JavaScript�
 DOMは，データを木構造で扱う．この構造の構成要素をノード（Node）という．
 構造化された文書の例としてXMLをあげる．
 例として，以下のようなXML文書に対して，DOM tree で表現する．
-\begin{lstlisting}[caption={XML文書}]
+\begin{lstlisting}[caption={XML文書},language={}]
 <?xml version="1.0" encoding="utf-8"?>
 <a version="2.0">
   <b>
@@ -17,9 +17,8 @@ DOMは，データを木構造で扱う．この構造の構成要素をノー�
 </a>
 \end{lstlisting}
 \begin{figure}[H]
-    \begin{framed}
-        \centering
-        \begin{verbatim}
+  \centering
+  \begin{lstlisting}[language={}]
 |-Document
   `- Element: a vertion="2.0"
      `- Element: b
@@ -28,9 +27,8 @@ DOMは，データを木構造で扱う．この構造の構成要素をノー�
           |  `- Text: KUT
           `- Element: f   
              `- Text: kut.com
-\end{verbatim}
-    \end{framed}
-    \caption{DOM tree}
+            \end{lstlisting}
+  \caption{DOM tree}
 \end{figure}
 Documentは文書全体を表すノード，Elementは要素を表すノード，Textはテキストを表すノードである．
 ここで，Textも1つのノードとなることに注意したい．

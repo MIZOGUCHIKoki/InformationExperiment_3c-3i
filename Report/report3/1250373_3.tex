@@ -37,7 +37,7 @@
     classoffset = 0,
     keywordstyle = {\bfseries \color{red}},
     stringstyle = {\ttfamily \color{blue}},
-    frame = lines,
+    frame = single,
     %他オプション：leftline，topline，bottomline，lines，single，shadowbox
     framesep = 5pt,
     numbers = none,
@@ -97,9 +97,9 @@
 \pagestyle{report}
 \begin{document}
 \twocolumn[
-    \maketitle
-    \thispagestyle{report}
-    \input{00_abstract.tex}
+  \maketitle
+  \thispagestyle{report}
+  \input{00_abstract.tex}
 ]
 \saythanks
 \input{11_purpose.tex}
