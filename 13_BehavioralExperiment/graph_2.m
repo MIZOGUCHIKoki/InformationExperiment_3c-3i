@@ -84,10 +84,10 @@ plot(x,mean_type2,'-square',LineWidth=2);
 plot(x,mean_type3,':o',LineWidth=2);
 plot(x,mean_type4,':square',LineWidth=2);
 hold off;
-lgd = legend({'YES / C','YES / CL','NO / C', 'NO / CL'},'Location','northwest');
+lgd = legend({'YES / Star','YES /  Diamond','NO / Star', 'NO / Diamond'},'Location','northwest');
 title(lgd,'Target / Target type');
 xticks([0 4 8 16 20]);
 yticks(800:100:2200)
 xlabel('Set size');
 ylabel('Response time average [ms]');
-exportgraphics(fig1,'../Figures/13_01_graph.pdf','ContentType','vector');
+exportgraphics(fig1,'../Figures/13_02_graph.pdf','ContentType','vector');
