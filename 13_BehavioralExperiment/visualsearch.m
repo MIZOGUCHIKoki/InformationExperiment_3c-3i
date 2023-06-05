@@ -6,7 +6,7 @@ Screen('Preference', 'ConserveVRAM', 2^24); % bugによるエラー回避のた�
 KbName('UnifyKeyNames'); % キー配置の設定
 
 % 実験パラメタの入力
-subject = 'xxx'; % 被験者番号（学籍番号を入力）
+subject = '1250373'; % 被験者番号（学籍番号を入力）
 setsizes = [4 8 16]; % 刺激セットサイズ
 nSetSizes = length(setsizes); % セットサイズの条件数
 pTrials = 12; % 練習試行数
