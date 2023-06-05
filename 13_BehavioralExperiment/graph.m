@@ -88,6 +88,6 @@ lgd = legend({'YES / C','YES / CL','NO / C', 'NO / CL'},'Location','northwest');
 title(lgd,'Target / Target type');
 xticks([0 4 8 16 20]);
 yticks(800:100:2200)
-xlabel('set size');
-ylabel('time[ms]');
+xlabel('Set size');
+ylabel('Response time average [ms]');
 exportgraphics(fig1,'../Figures/13_01_graph.pdf','ContentType','vector');
