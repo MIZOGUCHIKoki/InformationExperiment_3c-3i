@@ -1,0 +1,18 @@
+\chapter*{付録}
+\pagestyle{appendixstyle}
+\addcontentsline{toc}{chapter}{付録}
+\setcounter{section}{0}
+\renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
+\renewcommand{\thesection}{\Alph{section}}
+\newcommand{\secref}[1]{{#1}}
+\makeatletter
+\@addtoreset{lstlisting}{section}
+\makeatother
+\lstset{
+    frame={single},
+    numbers={left}
+}
+\section{\kadaia\ (June 1st, 2023)}
+\lstinputlisting[caption={\secref{\kadaia}},label={src:12_01}]{../../12_DataAnalysis/no1.m}
+\section{\kadaib\ (June 5th, 2023)}
+\lstinputlisting[caption={\secref{\kadaia}},label={src:13_01}]{../../13_BehavioralExperiment/graph.m}
