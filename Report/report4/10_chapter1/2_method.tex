@@ -1,0 +1,92 @@
+\section{\method}
+\newcommand{\elt}{\texttt{Eye Link Ⅱ}}
+\newcommand{\csv}{\texttt{CSV}}
+\paragraph{実験装置}
+眼球運動の計測には，\elt（SR Research社）を用いる．刺激呈示用装置として，汎用コンピュータと液晶ディスプレイを利用する．
+データ分析するソフトウェアには\matlab を用いる．
+\begin{table}[H]
+    \caption{実験装置\ （\kadaia）}
+    \label{tbl:実験装置\kadaia}
+    \begin{tabularx}{\textwidth}{cAR}
+        \hline
+        {\bfseries 眼球運動計測器}                    & \elt                     & SR Research社                                     \\
+        \hline
+        \multirow{3}{*}{\bfseries 刺激呈示コンピュータ}  & プロセッサ                    & Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz 3.40 GHz \\
+                                               & メモリ                      & 4GB                                              \\
+                                               & OS                       & Microsoft Windows 7 Professional Service Pack 1  \\
+        \hline
+        \multirow{6}{*}{\bfseries データ分析コンピュータ} & コンピュータ                   & MacBook Air 2022 （Apple社）\texttt{MLY13J/A}       \\
+                                               & プロセッサ                    & Apple Silicon M2\ \  8コアCPU，8コアGPU               \\
+                                               & メモリ                      & 8GB                                              \\
+                                               & OS                       & macOS 13.4                                       \\
+                                               & \multirow{2}{*}{\matlab} & R2023a - academic use (Update1 9.14.02239454)    \\
+                                               &                          & 64-bit (maci64) March 30, 2023                   \\
+        \hline
+    \end{tabularx}
+\end{table}
+\paragraph{眼球運動の計測}
+顔の印象に関する判断を行うときの，眼球運動の計測を行う．
+\elt のアイカメラを装着し，キャリブレーション\footnote{被験者の中心点を，実験機に記憶させる手続き．}およびバリデーション\footnote{キャリブレーションが正常に完了したことを確認する手続き}を行う．次に固定視点を注視し，左右に現れる顔画像のどちらが魅力的かを判断し，キーを押して反応する．この試行20回行う．
+\paragraph{実験データの分析}
+実験データを\csv ファイルで出力したものでデータの分析を行う．出力された\csv ファイルのIndex を\tblref{tbl:全体CSV意味\kadaia}，\tblref{tbl:部分CSV意味\kadaia}に示す．
+\begin{table}[H]
+    \scriptsize
+    \centering
+    \caption{\texttt{exp4i\_g0310.csv}}
+    \label{tbl:全体CSV意味\kadaia}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\textwidth}{|CCCC|}
+        \multicolumn{1}{C}{1}           & 2                               & 3     & \multicolumn{1}{C}{4} \\
+        \hline
+        \multirow{2}{*}{\bfseries 試行回数} & \multirow{2}{*}{\bfseries 選択画像} & 不明    & 不明                    \\
+                                        &                                 & 今回未使用 & 今回未使用                 \\
+        \hline
+    \end{tabularx}
+    \caption{\texttt{g0310.asc\_TRIAL\_N.csv}\ \ \((\texttt{N}={1,2,\dots 20})\)}
+    \label{tbl:部分CSV意味\kadaia}
+    \begin{tabularx}{\textwidth}{|CCCCCC|}
+        \multicolumn{1}{C}{1}             & 2                    & 3                                & 4                                        & 5                         & \multicolumn{1}{C}{6} \\
+        \hline
+        \multirow{2}{*}{\bfseries 時間（ms）} & {\bfseries 測定する目の情報} & \multirow{2}{*}{\bfseries 画面の状態} & \multirow{2}{*}{\bfseries 左右注視位置\(x\)座標} & {\bfseries 左目注視位置\(y\)座標} & {\bfseries 左目瞳孔径}     \\
+                                          & 今回未使用                &                                  &                                          & 今回未使用                     & 今回未使用                 \\
+        \hline
+    \end{tabularx}
+\end{table}
+\begin{wrapfigure}{r}[0mm]{.35\textwidth}
+    \centering
+    \begin{framed}
+        \scriptsize
+        \begin{minipage}[t]{.48\textwidth}
+            \begin{itemize}
+                \setlength{\leftskip}{-2em}
+                \item {\bfseries 選択画像}
+                      \begin{itemize}
+                          \setlength{\leftskip}{-3em}
+                          \item \texttt{100}：右を選択
+                          \item \texttt{102}：左を選択
+                      \end{itemize}
+            \end{itemize}
+        \end{minipage}
+        \begin{minipage}[t]{.48\textwidth}
+            \begin{itemize}
+                \setlength{\leftskip}{-2em}
+                \item {\bfseries 画面の状態}
+                      \begin{itemize}
+                          \setlength{\leftskip}{-3em}
+                          \item \texttt{0}：画面表示なし
+                          \item \texttt{1}：注視点
+                          \item \texttt{2}：画像呈示
+                      \end{itemize}
+            \end{itemize}
+        \end{minipage}
+    \end{framed}
+    \vspace{-1cm}
+\end{wrapfigure}
+\paragraph{欠損値}
+今回の実験機\elt は，時間周波数\(500\textrm{Hz}\)でデータを取得している．
+この場合，隣接するサンプル間の時間感覚は\(2\textrm{ms}\)となる．
+しかし，眼球の向きが計測できない場合（瞬きなど），その部分のデータは記録できないため欠損値として扱う．
+欠損値の検出方法手続きは，以下の通りである．
+\begin{enumerate}
+    \item
+\end{enumerate}

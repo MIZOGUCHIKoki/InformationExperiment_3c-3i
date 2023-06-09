@@ -8,7 +8,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage{tikz}
 \usetikzlibrary{calc,arrows.meta,fit,positioning,math}
-\newcolumntype{A}{>{\centering\bfseries}X}
+\newcolumntype{A}{>{\bfseries}l}
 \newcolumntype{B}{>{\centering\bfseries\arraybackslash}X}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \newcolumntype{R}{>{\raggedright\arraybackslash}X}
@@ -23,14 +23,14 @@
 \renewcommand{\chaptermark}[1]{\markboth{第\ \thechapter\ 章\,\, #1}{}}
 \fancypagestyle{report}{
     \fancyhf{}
-    \fancyhead[RE,LO]{\leftmark}
-    \fancyfoot[RE,LO]{\thepage\ /\ \pageref{LastPage}}
+    \fancyhead[RO,LE]{\leftmark}
+    \fancyfoot[RO,LE]{\thepage\ /\ \pageref{LastPage}}
     \pagenumbering{arabic}
     }
 \fancypagestyle{appendixstyle}{
     \fancyhf{}
-    \fancyhead[RE,LO]{付録}
-    \fancyfoot[RE,LO]{\thepage\ /\ \pageref{LastPage}}
+    \fancyhead[RO,LE]{付録}
+    \fancyfoot[RO,LE]{\thepage\ /\ \pageref{LastPage}}
     \renewcommand{\headrulewidth}{0mm}
 }
 \lstset{
@@ -98,10 +98,13 @@
 \pagenumbering{roman}\thispagestyle{plain}
 \tableofcontents
 \listoffigures
+\listoftables
 \lstlistoflistings
 \newpage
 \pagestyle{report}
 \setcounter{page}{1}
+\input{10_chapter1/1_purpose.tex}
+\input{10_chapter1/2_method.tex}
 \bibliography{bib}
 \input{91_appendix.tex}
 \end{document}
