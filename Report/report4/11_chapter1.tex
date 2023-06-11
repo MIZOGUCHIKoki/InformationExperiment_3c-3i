@@ -1,3 +1,13 @@
+\chapter{\kadaia}
+\section{\purpose}
+\paragraph{カスケード現象}
+嗜好判断が下される際の眼球運動に注目した研究がある．複数の対象を比較しながら好みのものを選ぶ際には，選好する刺激に対して頻繁に視線を向けること\footnote{選好注視と呼ばれている．}が知られている
+ここで次のような実験が行われた．左右に並んだ顔写真を呈示し，「どちらが魅力的か」を判断してもらう．顔画像を呈示してから，判断するまでの眼球運動を分析すると，画像呈示直後は両者の顔画像を，およそ50\%ずつの割合で見比べるが，その後，片方の顔画像を見る確率が次第に増加し，80\%を超えたところで長く見た顔写真を「魅力的だ」と判断して決定する．
+この実験中の「片方の顔画像を見る確率が次第に増加する」現象を，視覚のカスケード現象（以下，カスケード現象）と呼ぶ．
+Shimojo et al（2003）は，一方の顔画像に対して注視時間が長くなることによりもう一方の刺激を精査する時間が短くなることによって生じると解釈した．\\
+\hfill\cite[p.202]{美感}，\cite{潜在呈示した情報が選択判断時の視線の動きに与える影響}\par
+\paragraph{目的}この実験では，意思決定直前の眼球運動を計測をする．画像が提示された瞬間から，判断するまでの時間に対して，魅力的であると判断した画像を注視した時刻に\texttt{1}，そうでない時刻に\texttt{0}を割り当て，試行回数20回に対しての割合を求め，カスケード現象が実際に起きているか確認する．
+カスケード現象の有無と，理想データと実験データの差異について考察する．
 \section{\method}
 \newcommand{\elt}{\texttt{Eye Link Ⅱ}}
 \newcommand{\csv}{\texttt{CSV}}
@@ -125,25 +135,32 @@
               \item \mat{500}{20}で初期化済みの\texttt{mergeC}行列に対して，\mat{\textrm{全}}{\texttt{k}}に\expos の\(1\)から\(500\)行目（判断前1秒間）のデータを格納する．
           \end{enumerate}
     \item 各時刻（\(2\textrm{ms}\)ごと）を格納する\texttt{ratio}変数を初期化する．
-    \item 魅力的であると判断した顔画像を注視している割合を，欠損値の試行を除いた試行回数で割ることで求める．
+    \item 魅力的であると判断した顔画像を注視している割合を，欠損値の試行を除いた試行回数で割ることにより求める．
     \item 時間軸に対して，\texttt{ratio}を\texttt{plot}関数を用いて，グラフを描画する．
+    \item 考察のために，キーを押下し選択する\(1200\textrm{ms}\)からのデータと，そのデータに対して\texttt{polyfit}関数と\texttt{polyval}関数を用いて，\(x\)軸\texttt{time}，\(y\)軸\texttt{ratio}の3次近似多項式を取り，グラフに描画する．
 \end{enumerate}
-\scall{\kadaia}\sref{src:12_01}．
-
-\begin{wrapfigure}{r}[0mm]{.4\textwidth}
-    \centering
-    \includegraphics[keepaspectratio,width=.4\textwidth]{../../Figures/12_01_graph.pdf}
-    \caption{\kadaia\ 実験結果}
-    \label{fig:\kadaia 実験結果}
-    \includegraphics[keepaspectratio,width=.4\textwidth]{../../Figures/12_02_graph.pdf}
-    \caption{\(1.2\textrm{ms}\)前からの結果，近似多項式}
-    \label{fig:\kadaia 実験結果2}
-\end{wrapfigure}
+\scall{\kadaia}\sref{src:12_01}，\sref{src:12_02}．
 \section{\result}
-実験結果を\figref{fig:\kadaia 実験結果}に示す．
+実験結果を\figref{fig:\kadaia 実験結果}，\figref{fig:\kadaia 実験結果2}に示す．
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.48\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/12_01_graph.pdf}
+        \caption{\kadaia\ 実験結果}
+        \label{fig:\kadaia 実験結果}
+    \end{minipage}
+    \begin{minipage}{.48\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/12_02_graph.pdf}
+        \caption{\(1.2\textrm{ms}\)前からの結果，近似多項式}
+        \label{fig:\kadaia 実験結果2}
+    \end{minipage}
+\end{figure}
 \section{\consideration}
 実験結果ではカスケード現象を確認できなかった．
 原因として，魅力的であると判断した後に少し時間を置いてからキーを押下し選択していることが考えられる．
-この考察を検証するために，キーを押下し選択する\(1.2\textrm{ms}\)からのデータをグラフに描画する．
-そのデータに対して，\texttt{polyfit}関数，\texttt{polyval}を用いて近似多項式を取り，グラフに描画する．
-結果を\figref{fig:\kadaia 実験結果2}に示す．
+\figref{fig:\kadaia 実験結果2}より，判断前\(800\textrm{ms}\)にピークを迎えており，この時刻が魅力的であると判断した時刻と考えられる．
+その前提を真とすると，判断前\(1200\textrm{ms}\)から\(800\textrm{ms}\)で，割合は増加傾向にあり，これがカスケード現象と考えられる．
+\section{\conclusion}
+この実験を通して，カスケード現象を正しく検出するためには，魅力的であると判断した瞬間の選択行為が必要であり，魅力的であると判断してから選択行為の間に時間があると，正しくカスケード現象が検出できないことが分かった．
