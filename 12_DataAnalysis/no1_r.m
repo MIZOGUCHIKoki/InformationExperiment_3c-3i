@@ -48,6 +48,7 @@ for k=1:500
     ratio(k) = sum(ts==1)/(tryTime-sum(ts==-1));
 end
 fig1 = figure;
+box on;
 plot(time,ratio);
 axis([-1000 0 0 1]);
 xlabel('time[ms]');
