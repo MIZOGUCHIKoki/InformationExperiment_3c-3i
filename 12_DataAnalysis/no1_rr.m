@@ -1,8 +1,8 @@
 clear; close all;
 keyData = readmatrix('g0310/exp4i_g0310.csv');
 tryTime = 20;
-margeC = zeros(500, tryTime);
-time = (-998:2:0);
+margeC = zeros(600, tryTime);
+time = (-1198:2:0);
 for k = 1:tryTime
     csv = readmatrix(['g0310/g0310.asc_TRIAL_' num2str(k) '.csv']);
     [sizeR, sizeC] = size(csv);
@@ -40,16 +40,24 @@ for k = 1:tryTime
             expos(m,4) = 0;
         end
     end
-    margeC(:,k) = expos(ms-499:ms,4);
+    margeC(:,k) = expos(ms-599:ms,4);
 end
-ratio = zeros(500,1);
-for k=1:500
+ratio = zeros(600,1);
+for k=1:600
     ts = margeC(k,:);
     ratio(k) = sum(ts==1)/(tryTime-sum(ts==-1));
 end
+disp(ratio);
+p = polyfit(time,ratio(:,1),3);
 fig1 = figure;
+hold on;
 plot(time,ratio);
-axis([-1000 0 0 1]);
+x2 = time;
+y2 = polyval(p,x2);
+plot(x2,y2,LineWidth=2);
+hold off;
+axis([-1200 0 0 1]);
 xlabel('time[ms]');
 ylabel('ratio');
-exportgraphics(fig1,'../Figures/12_01_graph.pdf','ContentType','vector');
+exportgraphics(fig1,'../Figures/12_02_graph.pdf','ContentType','vector');
+legend('ratio','Approximate polynomial',Location='northwest')
