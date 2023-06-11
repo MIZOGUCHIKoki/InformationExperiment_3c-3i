@@ -25,68 +25,71 @@
     \end{tabularx}
 \end{table}
 \paragraph{眼球運動の計測}
-顔の印象に関する判断を行うときの，眼球運動の計測を行う．
+顔の印象に関して判断するときの，眼球運動を計測する
 \elt のアイカメラを装着し，キャリブレーション\footnote{被験者の中心点を，実験機に記憶させる手続き．}およびバリデーション\footnote{キャリブレーションが正常に完了したことを確認する手続き}を行う．次に固定視点を注視し，左右に現れる顔画像のどちらが魅力的かを判断し，キーを押して反応する．この試行20回行う．
 \paragraph{実験データの分析}
-実験データを\csv ファイルで出力したものでデータの分析を行う．出力された\csv ファイルのIndex を\tblref{tbl:全体CSV意味\kadaia}，\tblref{tbl:部分CSV意味\kadaia}に示す．
-\begin{table}[H]
-    \scriptsize
-    \centering
-    \caption{\texttt{exp4i\_g0310.csv}}
-    \label{tbl:全体CSV意味\kadaia}
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabularx}{\textwidth}{|CCCC|}
-        \multicolumn{1}{C}{1}           & 2                               & 3     & \multicolumn{1}{C}{4} \\
-        \hline
-        \multirow{2}{*}{\bfseries 試行回数} & \multirow{2}{*}{\bfseries 選択画像} & 不明    & 不明                    \\
-                                        &                                 & 今回未使用 & 今回未使用                 \\
-        \hline
-    \end{tabularx}
-    \caption{\texttt{g0310.asc\_TRIAL\_N.csv}\ \ \((\texttt{N}={1,2,\dots 20})\)}
-    \label{tbl:部分CSV意味\kadaia}
-    \begin{tabularx}{\textwidth}{|CCCCCC|}
-        \multicolumn{1}{C}{1}             & 2                    & 3                                & 4                                        & 5                         & \multicolumn{1}{C}{6} \\
-        \hline
-        \multirow{2}{*}{\bfseries 時間（ms）} & {\bfseries 測定する目の情報} & \multirow{2}{*}{\bfseries 画面の状態} & \multirow{2}{*}{\bfseries 左右注視位置\(x\)座標} & {\bfseries 左目注視位置\(y\)座標} & {\bfseries 左目瞳孔径}     \\
-                                          & 今回未使用                &                                  &                                          & 今回未使用                     & 今回未使用                 \\
-        \hline
-    \end{tabularx}
-\end{table}
-\begin{wrapfigure}{r}[0mm]{.35\textwidth}
-    \centering
+実験データを\csv ファイルで出力したものに対して分析する．出力された\csv ファイルのIndex を以下に示す．
+\newcommand{\expos}{\texttt{expos}行列}
+\begin{center}
     \begin{framed}
-        \scriptsize
-        \begin{minipage}[t]{.48\textwidth}
-            \begin{itemize}
-                \setlength{\leftskip}{-2em}
-                \item {\bfseries 選択画像}
+        \begin{minipage}[t][]{.23\textwidth}
+            \begin{center}
+                \texttt{exp4i\_g0310.csv}
+            \end{center}
+            \begin{enumerate}
+                \renewcommand{\labelenumi}{\theenumi 列目}
+                \item 試行回数
+                \item 選択画像
                       \begin{itemize}
-                          \setlength{\leftskip}{-3em}
-                          \item \texttt{100}：右を選択
-                          \item \texttt{102}：左を選択
+                          \setlength{\leftskip}{-2em}
+                          \item \texttt{100}：左を選択
+                          \item \texttt{102}：右を選択
                       \end{itemize}
-            \end{itemize}
+            \end{enumerate}
         \end{minipage}
         \begin{minipage}[t]{.48\textwidth}
-            \begin{itemize}
-                \setlength{\leftskip}{-2em}
-                \item {\bfseries 画面の状態}
+            \begin{center}
+                \texttt{g0310.asc\_TRIAL\_N.csv}\ \ \((\texttt{N}={1,2,\dots 20})\)
+            \end{center}
+            \begin{enumerate}
+                \renewcommand{\labelenumi}{\theenumi 列目}
+                \item 時間（ms）
+                \item 測定する目の情報（未使用）
+                \item 画面の状態
                       \begin{itemize}
-                          \setlength{\leftskip}{-3em}
+                          \setlength{\leftskip}{-2em}
                           \item \texttt{0}：画面表示なし
                           \item \texttt{1}：注視点
                           \item \texttt{2}：画像呈示
                       \end{itemize}
-            \end{itemize}
+                \item 左右注視位置\(x\)座標
+                \item 左注視位置\(y\)座標（未使用）
+                \item 左目瞳孔径（未使用）
+            \end{enumerate}
+        \end{minipage}
+        \begin{minipage}[t]{.26\textwidth}
+            \begin{center}
+                \expos
+            \end{center}
+            \begin{enumerate}
+                \renewcommand{\labelenumi}{\theenumi 列目}
+                \item 時間
+                \item 画面の状態
+                \item {\footnotesize 左右どちらを見ているか}
+                \item {\footnotesize 選択した方を見ているか}
+                \item \(x\)座標
+            \end{enumerate}
         \end{minipage}
     \end{framed}
-    \vspace{-1cm}
-\end{wrapfigure}
+\end{center}
 \paragraph{欠損値}
 今回の実験機\elt は，時間周波数\(500\textrm{Hz}\)でデータを取得している．
 この場合，隣接するサンプル間の時間感覚は\(2\textrm{ms}\)となる．
-しかし，眼球の向きが計測できない場合（瞬きなど），その部分のデータは記録できないため欠損値として扱う．
-欠損値の検出方法手続きは，以下の通りである．
+眼球の向きが計測できない場合（まばたきなど），その部分のデータは記録されため欠損値として扱う．
+\paragraph{データ処理の手順}
+今回の実験では，呈示された顔画像に対して魅力的であると判断した時刻から1秒遡った時刻を\(-1000\textrm{ms}\)とし，
+選択した顔画像を見ている場合を\texttt{1}，そうでない場合を\texttt{0}として，
 \begin{enumerate}
+    \item \texttt{exp4i\_g0310.csv}を\texttt{readmatrix}関数を用いて読み込む．
     \item
 \end{enumerate}
