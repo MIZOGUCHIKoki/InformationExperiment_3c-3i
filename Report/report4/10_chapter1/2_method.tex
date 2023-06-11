@@ -24,12 +24,13 @@
         \hline
     \end{tabularx}
 \end{table}
+\newpage
 \paragraph{眼球運動の計測}
 顔の印象に関して判断するときの，眼球運動を計測する
 \elt のアイカメラを装着し，キャリブレーション\footnote{被験者の中心点を，実験機に記憶させる手続き．}およびバリデーション\footnote{キャリブレーションが正常に完了したことを確認する手続き}を行う．次に固定視点を注視し，左右に現れる顔画像のどちらが魅力的かを判断し，キーを押して反応する．この試行20回行う．
 \paragraph{実験データの分析}
-実験データを\csv ファイルで出力したものに対して分析する．出力された\csv ファイルのIndex を以下に示す．
-\newcommand{\expos}{\texttt{expos}行列}
+\newcommand{\expos}{\texttt{expos}}
+実験データを\csv ファイルで出力したものに対して分析する．出力された\csv ファイルと，データ処理の過程で作成する\expos 行列ののIndexを以下に示す．
 \begin{center}
     \begin{framed}
         \begin{minipage}[t][]{.23\textwidth}
@@ -87,9 +88,28 @@
 この場合，隣接するサンプル間の時間感覚は\(2\textrm{ms}\)となる．
 眼球の向きが計測できない場合（まばたきなど），その部分のデータは記録されため欠損値として扱う．
 \paragraph{データ処理の手順}
-今回の実験では，呈示された顔画像に対して魅力的であると判断した時刻から1秒遡った時刻を\(-1000\textrm{ms}\)とし，
-選択した顔画像を見ている場合を\texttt{1}，そうでない場合を\texttt{0}として，
+今回の実験では，呈示された顔画像に対して魅力的であると判断した時刻から1秒さかのぼった時刻を\(-1000\textrm{ms}\)とし，
+選択した顔画像を見ている場合を\texttt{1}，そうでない場合を\texttt{0}として，その合計を欠損値を除いた試行回数で割り，
+\(0\textrm{ms}\)から\(500\textrm{ms}\)の各時刻に対して，魅力的であると判断した画像を注視した割合を算出する．
 \begin{enumerate}
     \item \texttt{exp4i\_g0310.csv}を\texttt{readmatrix}関数を用いて読み込む．
+    \item 試行回数分のループ中に次の処理を行う．ループ変数を\texttt{k}とする．
+          \begin{enumerate}
+              \renewcommand{\theenumii}{\roman{enumii}}
+              \renewcommand{\labelenumii}{\textbf{\theenumii}. }
+              \newcommand{\dt}{\texttt{data}}
+              \newcommand{\ms}{\texttt{ms}}
+              \newcommand{\bn}{\texttt{bin}}
+              \item 各試行結果を\texttt{readmatrix}関数を用いて読み込む（\dt ）．
+              \item \dt の行サイズ（\texttt{sizeR}），列サイズ（\texttt{sizeC}）に対して，欠損値がない場合の理想行サイズ（\ms）を求める．
+              \item \expos を\mat{\ms}{5}で初期化する．初期値を\texttt{0}にするため，\texttt{zeros}関数を用いる．
+              \item \dt と\expos に対して判断した瞬間を時刻\(0\)とするため，\dt と\expos それぞれに対して，\mat{\textrm{全}}{1}と\mat{1}{1}の差をとる．
+              \item デフォルトで欠損値とするため，\expos の2行目から5行目へ\(-1\)を代入する．
+              \item \expos と\dt の1列目に対して欠損値を検出するため，\texttt{ismember}関数を用いる．この関数は，第1引数にある行が第2引数にあれば\texttt{1}，そうでなければ\texttt{0}を返す．この真理行列を\bn とする．
+              \item \expos の2列目に\dt の3列目，\expos の5列目に\dt の4列目を代入する．このとき，\bn が\texttt{1}の行のみ\expos へ代入する．
+              \item 注視展を見ているとき，左目\(x\)座標の平均値（\texttt{x\_ave}）に対して，左目\(x\)座標が\texttt{x\_ave}以下の場合は「左を見ている」，\texttt{x\_ave}より大きい場合は「右を見ている」とし，\expos 3列目に\texttt{100}または\texttt{102}を代入する．欠損値に対しては処理を行わない．
+              \item 最終的に魅力的であると判断した顔画像を注視している場合は\texttt{1}，そうでない場合は\texttt{0}を\expos の4列目に代入する．この処理は，画面状態が\texttt{0}と欠損値に対しては行わない．
+              \item \mat{500}{20}で初期化済みの\texttt{mergeC}行列に対して，\mat{\textrm{全}}{\texttt{k}}に\expos の1から500行目（判断前1秒間）のデータを格納する．
+          \end{enumerate}
     \item
 \end{enumerate}
