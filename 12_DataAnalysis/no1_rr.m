@@ -50,6 +50,7 @@ end
 disp(ratio);
 p = polyfit(time,ratio(:,1),3);
 fig1 = figure;
+box on;
 hold on;
 plot(time,ratio);
 x2 = time;
