@@ -30,7 +30,7 @@
 \elt のアイカメラを装着し，キャリブレーション\footnote{被験者の中心点を，実験機に記憶させる手続き．}およびバリデーション\footnote{キャリブレーションが正常に完了したことを確認する手続き}を行う．次に固定視点を注視し，左右に現れる顔画像のどちらが魅力的かを判断し，キーを押して反応する．この試行20回行う．
 \paragraph{実験データの分析}
 \newcommand{\expos}{\texttt{expos}}
-実験データを\csv ファイルで出力したものに対して分析する．出力された\csv ファイルと，データ処理の過程で作成する\expos 行列ののIndexを以下に示す．
+実験データを\csv ファイルで出力したものに対して分析する．出力された\csv ファイルと，データ処理過程で作成する\expos 行列のIndexを以下に示す．
 \begin{center}
     \begin{framed}
         \begin{minipage}[t][]{.23\textwidth}
@@ -109,7 +109,7 @@
               \item \expos の2列目に\dt の3列目，\expos の5列目に\dt の4列目を代入する．このとき，\bn が\texttt{1}の行のみ\expos へ代入する．
               \item 注視展を見ているとき，左目\(x\)座標の平均値（\texttt{x\_ave}）に対して，左目\(x\)座標が\texttt{x\_ave}以下の場合は「左を見ている」，\texttt{x\_ave}より大きい場合は「右を見ている」とし，\expos 3列目に\texttt{100}または\texttt{102}を代入する．欠損値に対しては処理を行わない．
               \item 最終的に魅力的であると判断した顔画像を注視している場合は\texttt{1}，そうでない場合は\texttt{0}を\expos の4列目に代入する．この処理は，画面状態が\texttt{0}と欠損値に対しては行わない．
-              \item \mat{500}{20}で初期化済みの\texttt{mergeC}行列に対して，\mat{\textrm{全}}{\texttt{k}}に\expos の1から500行目（判断前1秒間）のデータを格納する．
+              \item \mat{500}{20}で初期化済みの\texttt{mergeC}行列に対して，\mat{\textrm{全}}{\texttt{k}}に\expos の\(1\)から\(500\)行目（判断前1秒間）のデータを格納する．
           \end{enumerate}
     \item
 \end{enumerate}
