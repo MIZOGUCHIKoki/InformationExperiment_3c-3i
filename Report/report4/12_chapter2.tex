@@ -1,3 +1,98 @@
 \chapter{\kadaib}
 \section{\purpose}
 この実験では，反応時間を指標とした視覚探索課題の心理物理実験をする．
+心理物理実験とは，物理的世界に属する刺激強度と，心理的世界に属する感覚強度の数学的関数関係を明らかにする実験である\cite{心理物理測定法}．
+今回は，視覚探索課題に対して心理物理実験をする．視覚探索課題とは，複数の刺激項目に対して，あらかじめ決められた目標項目があるか否かを，被験者が判断する課題である\cite{視覚探索}．
+複数の刺激「妨害刺激」の中に，1つだけ異なる刺激「目標刺激」が存在する場合と，そうでない場合について，刺激数に対する探索時間を結果とする実験を行う．
+被験者は，目標刺激が妨害刺激の中にあるかないかを，できるだけ早くかつ正確に判断する必要がある．\par
+また，結果に対して統計的仮説検定をする．統計的仮説検定とは，標本を使って母集団に関する統計的な判断を下す方法である\cite[p.200]{Pythonで学ぶあたらしい統計学の教科書}．
+今回は\(t\)検定を用いて，視覚探索課題における探索非対称性\footnote{目標刺激と妨害刺激が交代しただけで，探索時間が非常に異なる現象のこと\cite{4視覚探索}．}があるか検討する．仮設は「探索非対称性がある」とし，仮設が正しい場合，目標刺激が異なる2条件に対して回帰直線の傾きに差が生じる．
+\section{\method}
+\paragraph{実験装置}
+視覚探索課題の心理物理実験には，\matlab とPsychtoolbox を用いる．Psychtoolboxは，プログラミングを簡便にするツールであり，心理物理学の実験でよく用いられる．
+データ分析するソフトウェアには\matlab とデータを集計するGoogleスプレットシートを用いる．
+\begin{table}[H]
+    \caption{実験装置\ （\kadaib）}
+    \label{tbl:実験装置\kadaib}
+    \begin{tabularx}{\textwidth}{cAR}
+        \hline
+        \multirow{5}{*}{\bfseries 刺激呈示コンピュータ}  & プロセッサ                    & Intel(R) Xeon(R) Gold 5218R CPU @ 2.10GHz     \\
+                                               & メモリ                      & 11.7GB                                        \\
+                                               & OS                       & Microsoft Windows 10 Enterprise LTSC 64bit    \\
+                                               & \matlab                  & R2020b-academic use                           \\
+                                               & Psychtoolbox             & \textbf{◯◯◯◯}                                 \\
+        \hline
+        \multirow{6}{*}{\bfseries データ分析コンピュータ} & コンピュータ                   & MacBook Air 2022 （Apple社）\texttt{MLY13J/A}    \\
+                                               & プロセッサ                    & Apple Silicon M2\ \  8コアCPU，8コアGPU            \\
+                                               & メモリ                      & 8GB                                           \\
+                                               & OS                       & macOS 13.4                                    \\
+                                               & \multirow{2}{*}{\matlab} & R2023a - academic use (Update1 9.14.02239454) \\
+                                               &                          & 64-bit (maci64) March 30, 2023                \\
+        \hline
+    \end{tabularx}
+\end{table}
+\newpage
+\paragraph{視覚探索課題の心理物理実験}
+以下に視覚探索課題の心理物理実験方法を示す．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \vspace{-1cm}
+    \centering
+    \begin{tikzpicture}
+        \draw[thick] (0,0) circle [radius=.3cm];
+        \draw[thick] (1,0) circle [radius=.3cm];
+        \draw[thick] (1,-.1)--(1,-0.5);
+    \end{tikzpicture}
+    \caption{刺激対1}
+    \label{fig:刺激対1}
+    \begin{minipage}[t]{.13\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../13_BehavioralExperiment/syuri.png}
+    \end{minipage}
+    \begin{minipage}[t]{.13\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../13_BehavioralExperiment/star.png}
+    \end{minipage}
+    \caption{刺激対2}
+    \label{fig:刺激対2}
+    \vspace{-1cm}
+\end{wrapfigure}
+\noindent\textbf{\underline{実験1}}
+\begin{enumerate}
+    \renewcommand{\labelenumi}{\fbox{\theenumi}}
+    \item 画面に刺激（刺激対1：\figref{fig:刺激対1}）が表示される．画面に表示される合計の刺激数は\(4,8,16\)個のいずれかである．
+    \item 目標刺激が妨害刺激の中にある場合は「\texttt{F}」，そうでない場合は「\texttt{J}」を押下する．
+    \item 呈示時間は\(500\textrm{ms}\)で，それまでに操作がなければTime overとし，次の刺激を呈示する．
+\end{enumerate}
+\fbox{1}\ から\ \fbox{3}\ を240回繰り返す．\\
+\textbf{\underline{実験2}}\par
+ここでは，表示する刺激（刺激対2：\figref{fig:刺激対2}）を変更して，同様な実験を行う．
+この刺激を選択した理由は，一方の画像に何らかの情報を付加した画像が，もう一方の画像になるからである．
+具体的には，\figref{fig:刺激対2}の左図の鋭角を4つから5つに増やす操作をすると，右図の刺激を得られる．
+これは\figref{fig:刺激対1}の円に線を付加して得られるもう一方の刺激に習った方法である．
+\paragraph{統計的仮説検定}
+ここで示す母集団は，調査の対象となる要素の集合．今回の母集団は全人類である．また，母集団の一部を抽出した集合を標本といい，標本に対して検定を行い，母集団の性質を推測する．
+\begin{framed}
+    \begin{description}
+        \item[帰無仮説\ \(H_0\)] 述べたい事柄を否定する仮設．帰無仮説を棄却することで，述べたい事柄を示す．今回は，視覚探索課題において探索非対称性がないことが帰無仮説となる．
+        \item[対立仮設\ \(H_a\)] 述べたい事柄を支持するような仮設を立てる．
+        \item[\(t\)検定] ある値に対して，「ある値と異なる」ことが言えるかどうかを判断する検定方法．ここで用いるある値を\(t\)値とよび，\(t\)値は検定統計量である．
+        \item[有意確率\ \(p\)] 標本と帰無仮説が矛盾となる目安指標．\(p\)が小さいほど帰無仮説と標本が矛盾している．
+        \item[有意水準\ \(\alpha\)] 帰無仮説を棄却する基準となる値．有意確率\(p\)が有意水準を下回った時に帰無仮説を棄却する．
+            一般的には\(5\%\)か\(1\%\)．今回の実験では，有意水準を\(5\%\)に設定する．
+            \begin{itemize}
+                \item \(p<\alpha\)：有意差があり，帰無仮説が起こる確率が低く帰無仮説を棄却できる．つまり対立仮設を採択できる．
+                \item \(p>\alpha\)：有意差がなく，帰無仮説が起こる確率を無視できず，帰無仮説を棄却できない．
+            \end{itemize}
+        \item[標準誤差\(\textrm{SE}\)] 理論上の「標本平均の標準偏差」の大きさ．母集団の統計量の誤差を，標本から母集団の性質を推定した統計量の標準偏差として表したもので，\eqref{equ:標準誤差}で求める．
+            \begin{align}
+                \textrm{SE} & =\frac{\textrm{標準偏差}}{\sqrt{標本サイズ}}\label{equ:標準誤差}
+            \end{align}
+            \item[回帰直線]標本\((x_1,y_1),(x_2,y_2),\dots ,(x_n,y_n)\)に対して，
+            \begin{align*}
+                (y-y_1)^2+(y-y_2)^2+\dots +(y-y_n)^2
+            \end{align*}
+            を最小にするような直線\(y=ax+b\)を回帰直線という．
+    \end{description}
+    \hfill\cite[p.168, p.200\ -\ p.205]{Pythonで学ぶあたらしい統計学の教科書}
+\end{framed}
