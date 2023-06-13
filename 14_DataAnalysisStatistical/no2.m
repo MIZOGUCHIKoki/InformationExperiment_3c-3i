@@ -33,7 +33,8 @@ y2 = a * x + b;
 plot(x, y1, x, y2, LineWidth=2);
 leg = legend('Data point / C','Data point / CL', 'Regression line / C', 'Regression line / CL','Location','northwest');
 title(leg, 'Genre / Target type')
-axis([3 17 600 1100]);
+axis([3 17 900 1600]);
 xticks([4 8 16])
+box on;
 hold off;
 exportgraphics(fig1,'../Figures/14_02_graph.pdf','ContentType','vector');

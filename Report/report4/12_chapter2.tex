@@ -1,12 +1,12 @@
 \chapter{\kadaib}
 \section{\purpose}
-この実験では，反応時間を指標とした視覚探索課題の心理物理実験をする．
+今回の実験では，反応時間を指標とした視覚探索課題の心理物理実験をする．
 心理物理実験とは，物理的世界に属する刺激強度と，心理的世界に属する感覚強度の数学的関数関係を明らかにする実験である\cite{心理物理測定法}．
 今回は，視覚探索課題に対して心理物理実験をする．視覚探索課題とは，複数の刺激項目に対して，あらかじめ決められた目標項目があるか否かを，被験者が判断する課題である\cite{視覚探索}．
 複数の刺激「妨害刺激」の中に，1つだけ異なる刺激「目標刺激」が存在する場合と，そうでない場合について，刺激数に対する探索時間を結果とする実験を行う．
 被験者は，目標刺激が妨害刺激の中にあるかないかを，できるだけ早くかつ正確に判断する必要がある．\par
 また，結果に対して統計的仮説検定をする．統計的仮説検定とは，標本を使って母集団に関する統計的な判断を下す方法である\cite[p.200]{Pythonで学ぶあたらしい統計学の教科書}．
-今回は\(t\)検定を用いて，視覚探索課題における探索非対称性\footnote{目標刺激と妨害刺激が交代しただけで，探索時間が非常に異なる現象のこと\cite{4視覚探索}．}があるか検討する．仮設は「探索非対称性がある」とし，仮設が正しい場合，目標刺激が異なる2条件に対して回帰直線の傾きに差が生じる．
+今回は\(t\)検定を用いて，視覚探索課題における探索非対称性\footnote{目標刺激と妨害刺激が交代しただけで，探索時間が非常に異なる現象のこと\cite{4視覚探索}．}があるか検討する．仮設は「探索非対称性がある」とし，仮設が正しい場合，目標刺激が異なる2条件に対して回帰直線の傾きに差が生じることを確認する．
 \section{\method}
 \paragraph{実験装置}
 視覚探索課題の心理物理実験には，\matlab とPsychtoolbox を用いる．Psychtoolboxは，プログラミングを簡便にするツールであり，心理物理学の実験でよく用いられる．
@@ -60,39 +60,171 @@
 \noindent\textbf{\underline{実験1}}
 \begin{enumerate}
     \renewcommand{\labelenumi}{\fbox{\theenumi}}
-    \item 画面に刺激（刺激対1：\figref{fig:刺激対1}）が表示される．画面に表示される合計の刺激数は\(4,8,16\)個のいずれかである．
+    \item 画面に刺激（刺激対1：\figref{fig:刺激対1}）が表示される．画面に表示される合計の刺激数は\(4,8,16\)個のいずれかである．円の刺激を\texttt{C}，円と棒の刺激を\texttt{CL}とする．
     \item 目標刺激が妨害刺激の中にある場合は「\texttt{F}」，そうでない場合は「\texttt{J}」を押下する．
     \item 呈示時間は\(500\textrm{ms}\)で，それまでに操作がなければTime overとし，次の刺激を呈示する．
 \end{enumerate}
 \fbox{1}\ から\ \fbox{3}\ を240回繰り返す．\\
 \textbf{\underline{実験2}}\par
-ここでは，表示する刺激（刺激対2：\figref{fig:刺激対2}）を変更して，同様な実験を行う．
+ここでは，表示する刺激（刺激対2：\figref{fig:刺激対2}）を変更して，同様な実験を行う．左の刺激を\texttt{Star}，右の刺激を\texttt{Diamond}とする．
 この刺激を選択した理由は，一方の画像に何らかの情報を付加した画像が，もう一方の画像になるからである．
 具体的には，\figref{fig:刺激対2}の左図の鋭角を4つから5つに増やす操作をすると，右図の刺激を得られる．
-これは\figref{fig:刺激対1}の円に線を付加して得られるもう一方の刺激に習った方法である．
+これは\figref{fig:刺激対1}の円に線を付加して得られるもう一方の刺激に習って作成した．
 \paragraph{統計的仮説検定}
 ここで示す母集団は，調査の対象となる要素の集合．今回の母集団は全人類である．また，母集団の一部を抽出した集合を標本といい，標本に対して検定を行い，母集団の性質を推測する．
-\begin{framed}
+\begin{oframed}
+    \begin{wrapfigure}{r}[0mm]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}
+                [
+                    width=.3\textwidth,
+                    axis lines = box,
+                    xmin = -5, xmax = 5, ymin = -0.05, ymax = 0.45,
+                    xlabel=\(x\), ylabel=\(f(x)\), samples=300,
+                    yticklabel style = {font=\tiny},xticklabel style = {font=\tiny},
+                    ytick={0,0.1,0.2,0.3,0.4},
+                    yticklabels={0,0.1,0.2,0.3,0.4},
+                    xtick={-4,-3,...,4}
+                ]
+                \addplot[domain=-5:5,thick,blue]{exp(-x^2 / 2) / (sqrt(2*pi) * (1 + x^2)^(1/30))};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{\(t\)分布の確率密度関数（概略）}
+        \vspace{-.5cm}
+    \end{wrapfigure}
+    \noindent\textbf{帰無仮説\ \(H_0\)：} 述べたい事柄を否定する仮設．帰無仮説を棄却することで，述べたい事柄を示す．今回は，視覚探索課題において探索非対称性がないことが帰無仮説となる．\\ \\
+    \textbf{対立仮設\ \(H_a\)：} 述べたい事柄を支持するような仮設を立てる．\\ \\
+    \textbf{\(t\)分布：} 正規分布に従う母集団の平均値，分散が不明である場合に利用する確率分布．標本数を\(n\)，標本の平均値を\(\bar{X}\)，不偏分散を\(s^2\)とし\(t\)分布は\eqref{equ:t分布}で定義される．\(n-1\)の値を自由度と呼び，\(t\)分布は自由度が増すほど正規分布に近づく\cite[p.178\ -\ p.179]{応用解析と情報数学}．
+    \begin{align}
+        T & =\frac{\bar{X}-\mu}{\sqrt{s^2/n}}\label{equ:t分布}
+    \end{align}
+    \textbf{\(t\)検定：} \(t\)分布を利用する検定であり，ある値に対して，「ある値と異なる」ことが言えるかどうかを判断する検定方法．ここで用いるある値を\(t\)値とよび，\(t\)値は検定統計量である．今回は\(t\)値を\eqref{equ:t値}に定める．
+    \begin{align}
+        t & = \frac{\textrm{回帰直線傾きの平均}}{\textrm{回帰直線傾きの標準誤差}}\label{equ:t値}
+    \end{align}
+    \textbf{有意確率\ \(p\)：} 標本と帰無仮説が矛盾となる目安指標．\(p\)が小さいほど帰無仮説と標本が矛盾している．\\ \\
+    \textbf{有意水準\ \(\alpha\)：} 帰無仮説を棄却する基準となる値．有意確率\(p\)が有意水準を下回った時に帰無仮説を棄却する．\\ \\
+    一般的には\(5\%\)か\(1\%\)．今回の実験では，有意水準を\(5\%\)に設定する．
+    \begin{itemize}
+        \item \(p<\alpha\)：有意差があり，帰無仮説が起こる確率が低く帰無仮説を棄却できる．つまり対立仮設を採択できる．
+        \item \(p>\alpha\)：有意差がなく，帰無仮説が起こる確率を無視できず，帰無仮説を棄却できない．
+    \end{itemize}
+    \textbf{標準誤差\(\textrm{SE}\)：} 理論上の「標本平均の標準偏差」の大きさ．母集団の統計量の誤差を，標本から母集団の性質を推定した統計量の標準偏差として表したもので，\eqref{equ:標準誤差}で求める．
+    \begin{align}
+        \textrm{SE} & =\frac{\textrm{標準偏差}}{\sqrt{標本サイズ}}\label{equ:標準誤差}
+    \end{align}
+    \textbf{回帰直線：} 標本\((x_1,y_1),(x_2,y_2),\dots ,(x_n,y_n)\)に対して，
+    \begin{align*}
+        (y-y_1)^2+(y-y_2)^2+\dots +(y-y_n)^2
+    \end{align*}
+    を最小にするような直線\(y=ax+b\)を回帰直線という．\\
+    \hfill\cite[p.168, p.187, p.200\ -\ p.205]{Pythonで学ぶあたらしい統計学の教科書}
+\end{oframed}
+データ分析の流れを以下に示す．
+\begin{multicols}{2}
+    \begin{enumerate}
+        \item 帰無仮説，対立仮設を立てる．
+        \item 有意水準\(\alpha\)を設定する．
+        \item 検定統計量\(t\)値を求める．
+        \item \(t\)値から有意確率\(p\)値を求める．
+        \item 棄却，採択の判断をする．
+              \begin{itemize}
+                  \item \(p<\alpha\)：帰無仮説を棄却し，対立仮設を採択する．
+                  \item \(p>\alpha\)：帰無仮説を棄却しない．
+              \end{itemize}
+        \item \matlab を用いて，データの平均値と標準誤差の誤差線を出力する．
+    \end{enumerate}
+\end{multicols}
+今回の実験では，目標刺激が\texttt{C}と\texttt{CL}それぞれの目標刺激の有無に対して，探索非対称性がないことを帰無仮説とする．
+当然，探索非対称性があることが対立仮設となる．データの集計にはGoogleスプレットシートを用いる．以下にGoogleスプレットシート上で用いる関数と，\tblref{tbl:データ集計}に集計方法を示す．
+\begin{multicols}{2}
     \begin{description}
-        \item[帰無仮説\ \(H_0\)] 述べたい事柄を否定する仮設．帰無仮説を棄却することで，述べたい事柄を示す．今回は，視覚探索課題において探索非対称性がないことが帰無仮説となる．
-        \item[対立仮設\ \(H_a\)] 述べたい事柄を支持するような仮設を立てる．
-        \item[\(t\)検定] ある値に対して，「ある値と異なる」ことが言えるかどうかを判断する検定方法．ここで用いるある値を\(t\)値とよび，\(t\)値は検定統計量である．
-        \item[有意確率\ \(p\)] 標本と帰無仮説が矛盾となる目安指標．\(p\)が小さいほど帰無仮説と標本が矛盾している．
-        \item[有意水準\ \(\alpha\)] 帰無仮説を棄却する基準となる値．有意確率\(p\)が有意水準を下回った時に帰無仮説を棄却する．
-            一般的には\(5\%\)か\(1\%\)．今回の実験では，有意水準を\(5\%\)に設定する．
-            \begin{itemize}
-                \item \(p<\alpha\)：有意差があり，帰無仮説が起こる確率が低く帰無仮説を棄却できる．つまり対立仮設を採択できる．
-                \item \(p>\alpha\)：有意差がなく，帰無仮説が起こる確率を無視できず，帰無仮説を棄却できない．
-            \end{itemize}
-        \item[標準誤差\(\textrm{SE}\)] 理論上の「標本平均の標準偏差」の大きさ．母集団の統計量の誤差を，標本から母集団の性質を推定した統計量の標準偏差として表したもので，\eqref{equ:標準誤差}で求める．
-            \begin{align}
-                \textrm{SE} & =\frac{\textrm{標準偏差}}{\sqrt{標本サイズ}}\label{equ:標準誤差}
-            \end{align}
-            \item[回帰直線]標本\((x_1,y_1),(x_2,y_2),\dots ,(x_n,y_n)\)に対して，
-            \begin{align*}
-                (y-y_1)^2+(y-y_2)^2+\dots +(y-y_n)^2
-            \end{align*}
-            を最小にするような直線\(y=ax+b\)を回帰直線という．
+        \item[\texttt{AVERAGE(arg)}] 指定範囲の平均．
+        \item[\texttt{VAR.S(arg)}] 指定範囲の不偏分散．
+        \item[\texttt{STDEV.S(arg)}] 指定範囲の不偏標準偏差（標本標準偏差）．
+        \item[\texttt{COUNT(arg)}] 指定範囲の要素数．
+        \item[\texttt{SQRT(arg)}] 引数の平方根．
+        \item[\texttt{TDIST(arg1,arg2,arg3)}] \(p\)値を出力する．\texttt{arg1}には\(t\)値，\texttt{arg2}には自由度\(\textrm{要素数}-1\)，\texttt{arg3}には利用確率（今回は両側を利用するので\texttt{2}を代入）を格納する．
+        \item[\texttt{SLOPE(arg1,arg2)}] 回帰直線の傾きを出力する．横座標に\texttt{arg1}，縦座標に\texttt{arg2}を指定する．
     \end{description}
-    \hfill\cite[p.168, p.200\ -\ p.205]{Pythonで学ぶあたらしい統計学の教科書}
-\end{framed}
+\end{multicols}
+\begin{table}[H]
+    \centering
+    \caption{Googleスプレットシートを用いたデータ集計}
+    \label{tbl:データ集計}
+    \begin{tabularx}{\textwidth}{|c|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|}
+        \hline
+        \multirow{4}{*}{参加者番号} & \multicolumn{12}{c|}{反応時間}                                     & \multicolumn{3}{c|}{\multirow{2}{*}{回帰直線の傾き}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \\
+        \cline{2-13}
+                               & \multicolumn{6}{c|}{Target Type: \texttt{C}}                   & \multicolumn{6}{c|}{Target type: \texttt{CL}}                      & \multicolumn{3}{c|}{}                                                                                                                                                                                                                                                                                                                                                                                                                                             \\
+        \cline{2-16}
+                               & \multicolumn{3}{c|}{Target: YES}                               & \multicolumn{3}{c|}{Target: NO}                                    & \multicolumn{3}{c|}{Target: YES}                               & \multicolumn{3}{c|}{Target: NO}                                              & \multirow{2}{*}{\texttt{C}\footnotemark[1]} & \multirow{2}{*}{\texttt{CL}\footnotemark[1]}                 & \multirow{2}{*}{差}                                                                                                                                                                                   \\
+        \cline{2-13}
+                               & \tikz[remember picture,baseline=(aa.base)]{\node(aa){4}}       & \tikz[remember picture,baseline=(bb.base)]{\node(bb){8}}           & \tikz[remember picture,baseline=(cc.base)]{\node(cc){16}}      & 4                                                                            & 8                                           & 16                                                           & 4                         & 8 & 16                        & 4                                                         & 8     & 16    &                                                         &  & \\
+        \hline
+                               & \tikz[remember picture,baseline=(a0.base)]{\node(a0){}}        &                                                                    &                                                                &                                                                              &                                             &                                                              &                           &   &                           &                                                           &       &       & \tikz[remember picture,baseline=(b0.base)]{\node(b0){}} &  & \\
+                               & \tikz[remember picture,baseline=(a1.base)]{\node(a1){\(a_1\)}} & \tikz[remember picture,baseline=(a2.base)]{\node(a2){\(a_2\)}}     & \tikz[remember picture,baseline=(a3.base)]{\node(a3){\(a_3\)}} &                                                                              &                                             &                                                              &                           &   &                           & \multicolumn{3}{r|}{\texttt{SLOPE(a,NoT)}\(\rightarrow\)} & \(m\) & \(n\) & {\tiny\(m-n\)}                                               \\
+                               &                                                                &                                                                    &                                                                &                                                                              &                                             &                                                              &                           &   &                           &                                                           &       &       &                                                         &  & \\
+                               & \tikz[remember picture,baseline=(a4.base)]{\node(a4){}}        &                                                                    &                                                                &                                                                              &                                             &                                                              &                           &   &                           &                                                           &       &       & \tikz[remember picture,baseline=(b4.base)]{\node(b4){}} &  & \\
+        \hline
+        {\small 平均値}           & \texttt{AVE}                                                   & \multicolumn{4}{l|}{\(\leftarrow\)\texttt{AVERAGE(range1)}}        &                                                                &                                                                              &                                             & \multicolumn{4}{r|}{\texttt{AVERAGE(range2)}\(\rightarrow\)} & \texttt{\scriptsize lAVE} &   & \texttt{\scriptsize sAVE}                                                                                                                                            \\
+        \hline
+        不偏分散                   & \texttt{UV}                                                    & \multicolumn{4}{l|}{\(\leftarrow\)\texttt{VAR.S(range1)}}          &                                                                &                                                                              &                                             & \multicolumn{4}{r|}{\texttt{VAR.S(range2)}\(\rightarrow\)}   & \texttt{\small lUV}       &   &                                                                                                                                                                      \\
+        \hline
+        標準偏差                   & \texttt{SD}                                                    & \multicolumn{4}{l|}{\(\leftarrow\)\texttt{STDEV.S(range1)}}        &                                                                &                                                                              &                                             & \multicolumn{4}{r|}{\texttt{STDEV.S(range2)}\(\rightarrow\)} & \texttt{\small lSD}       &   &                                                                                                                                                                      \\
+        \hline
+        標準誤差                   & \texttt{SE}                                                    & \multicolumn{5}{l|}{\(\leftarrow\)\texttt{SD/SQRT(COUNT(range1))}} &                                                                & \multicolumn{5}{r|}{\texttt{\texttt{SD/SQRT(COUNT(range2))}}\(\rightarrow\)} & \texttt{\small lSE}                         &                                                              & \texttt{\small sSE}                                                                                                                                                                                  \\
+        \hline
+    \end{tabularx}
+\end{table}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[inner xsep=1.5em,inner ysep=1mm,fit={(aa.base)(bb)(cc.base)},thick,fill=red,fill opacity=0.2](wrap_ind){};
+    \node[inner xsep=1.5em,inner ysep=1mm,fit={(a1.base)(a2)(a3.base)},thick,fill=blue,fill opacity=0.2](wrap_ind2){};
+    \node[inner xsep=1em,inner ysep=.7mm,fit={(a0)(a4)},thick,very thick,rounded corners,draw](wrap_ind3){};
+    \node[inner xsep=1em,inner ysep=.7mm,fit={(b0)(b4)},thick,very thick,rounded corners,draw](wrap_ind4){};
+    \node[below left=.5cm of wrap_ind](ind){\texttt{NoT}};
+    \node[below right=.5cm of wrap_ind2](ind2){\texttt{a}};
+    \node[below right=.35cm of wrap_ind3.east,fill=white](ind3){\texttt{range1}};
+    \node[below left=.35cm of wrap_ind4.west,fill=white](ind4){\texttt{range2}};
+    \draw[-latex](ind.north east)--(wrap_ind.south west);
+    \draw[-latex](ind2.north west)--(wrap_ind2.south east);
+    \draw[-latex](ind3.west)--(wrap_ind3.east |- ind3.west);
+    \draw[-latex](ind4.east)--(wrap_ind4.west |- ind4.east);
+\end{tikzpicture}
+\footnotetext[1]{目標刺激の種類}
+\(t\)値を\texttt{t = sAVE/sSD}，\(p\)値を\texttt{p = TDIST(t,COUNT(range2)-1,2)}で求め，\tblref{tbl:データ集計}を\csv 形式で書き出す．\par
+次に，\matlab でデータの平均値と標準誤差の誤差線を出力するスクリプトを記述する．\texttt{importdata}関数を用いて書き出した\csv を読み込む．
+参加者番号を削除した後に，各統計量を求める．そのデータから平均値と標準誤差の誤差線を\texttt{err\_data}関数を用いて描画する．\par
+最後に，読み込んだデータから回帰直線を求める．\tblref{tbl:データ集計}に示した方法を\matlab で再現し，\texttt{polyfit}関数と\texttt{slope}関数を用いて回帰直線の傾きと切片を求める．
+自分自身のデータを散布図として，回帰直線と同時に描画する．
+\section{\result}
+\begin{table}[H]
+    \centering
+    \fontsize{4}{1}\selectfont\ttfamily
+    \input{../../14_DataAnalysisStatistical/result_table.tex}
+\end{table}
+\begin{table}[H]
+    \centering
+    \fontsize{4}{1}\selectfont\ttfamily
+    \input{../../14_DataAnalysisStatistical/result_table2.tex}
+\end{table}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.24\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/13_01_graph.pdf}
+    \end{minipage}
+    \begin{minipage}{.24\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/13_02_graph.pdf}
+    \end{minipage}
+    \begin{minipage}{.24\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/14_01_graph.pdf}
+    \end{minipage}
+    \begin{minipage}{.24\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/14_02_graph.pdf}
+    \end{minipage}
+\end{figure}

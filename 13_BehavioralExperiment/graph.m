@@ -84,6 +84,7 @@ plot(x,mean_type2,'-square',LineWidth=2);
 plot(x,mean_type3,':o',LineWidth=2);
 plot(x,mean_type4,':square',LineWidth=2);
 hold off;
+box on;
 lgd = legend({'YES / C','YES / CL','NO / C', 'NO / CL'},'Location','northwest');
 title(lgd,'Target / Target type');
 xticks([0 4 8 16 20]);
