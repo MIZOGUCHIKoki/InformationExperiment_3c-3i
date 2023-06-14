@@ -1,0 +1,5 @@
+\begin{tikzpicture}
+    \draw[thick] (0,0) circle [radius=.3cm];
+    \draw[thick] (1,0) circle [radius=.3cm];
+    \draw[thick] (1,-.1)--(1,-0.5);
+\end{tikzpicture}
