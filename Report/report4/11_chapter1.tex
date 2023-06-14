@@ -39,15 +39,15 @@ Shimojo et al（2003）は，一方の顔画像に対して注視時間が長く
     \centering
     \includegraphics[keepaspectratio,width=.2\textwidth]{../../12_DataAnalysis/exp_1.png}
     \caption{実験の様子}
-    \vspace{-2cm}
+    \vspace{-2.5cm}
 \end{wrapfigure}
 \paragraph{眼球運動の計測}
-顔の印象に関して判断するときの，眼球運動を計測する
+顔の印象に関して判断するときの，眼球運動を計測する．実験参加者は，20代男性1名である．
 \elt のアイカメラを装着し，キャリブレーション\footnote{被験者の中心点を，実験機に記憶させる手続き．}およびバリデーション\footnote{キャリブレーションが正常に完了したことを確認する手続き}を行う．
 \begin{enumerate}
     \renewcommand{\labelenumi}{\fbox{\theenumi}}
     \item 注視点を表示する．
-    \item 2つの顔画像を提示する．
+    \item 2つの顔画像を提示する．顔画像の例を\figref{fig:顔画像例}に示す．
     \item 魅力的であると判断した顔画像を，キー操作により選択する．
 \end{enumerate}
 \fbox{1}\ から\ \fbox{3}\ を20回繰り返す．
@@ -107,8 +107,26 @@ Shimojo et al（2003）は，一方の顔画像に対して注視時間が長く
     \end{framed}
 \end{center}
 \paragraph{欠損値}
-今回の実験機\elt は，時間周波数\(500\textrm{Hz}\)でデータを取得している．
-この場合，隣接するサンプル間の時間感覚は\(2\textrm{ms}\)となる．
+今回の実験機\elt は時間周波数\(500\textrm{Hz}\)でデータを取得している．
+
+\begin{wrapfigure}{r}[0mm]{.3\textwidth}
+    \centering
+    \vspace{-1cm}
+    \begin{minipage}{.14\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../12_DataAnalysis/img1.jpeg}
+        \subcaption{左に呈示}
+    \end{minipage}
+    \begin{minipage}{.14\textwidth}
+        \centering
+        \includegraphics[keepaspectratio,width=\textwidth]{../../12_DataAnalysis/img2.jpeg}
+        \subcaption{右に呈示}
+    \end{minipage}
+    \caption{呈示される顔画像（例）}
+    \label{fig:顔画像例}
+    \vspace{-1cm}
+\end{wrapfigure}
+\noindent この場合，隣接するサンプル間の時間感覚は\(2\textrm{ms}\)となる．
 眼球の向きが計測できない場合（まばたきなど），その部分のデータは記録されため欠損値として扱う．
 \paragraph{データ処理の手順}
 今回の実験では，呈示された顔画像に対して魅力的であると判断した時刻から1秒さかのぼった時刻を\(-1000\textrm{ms}\)とし，
@@ -146,14 +164,14 @@ Shimojo et al（2003）は，一方の顔画像に対して注視時間が長く
     \centering
     \begin{minipage}{.48\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/12_01_graph.pdf}
-        \caption{\kadaia\ 実験結果}
+        \includegraphics[keepaspectratio,width=.8\textwidth]{../../Figures/12_01_graph.pdf}
+        \caption{\(1\textrm{s}\)前からの結果}
         \label{fig:\kadaia 実験結果}
     \end{minipage}
     \begin{minipage}{.48\textwidth}
         \centering
-        \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/12_02_graph.pdf}
-        \caption{\(1.2\textrm{ms}\)前からの結果と近似多項式}
+        \includegraphics[keepaspectratio,width=.8\textwidth]{../../Figures/12_02_graph.pdf}
+        \caption{\(1.2\textrm{s}\)前からの結果と近似多項式}
         \label{fig:\kadaia 実験結果2}
     \end{minipage}
 \end{figure}
