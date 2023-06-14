@@ -99,9 +99,9 @@
     \begin{align}
         T & =\frac{\bar{X}-\mu}{\sqrt{s^2/n}}\label{equ:t分布}
     \end{align}
-    \textbf{\(t\)検定：} \(t\)分布を利用する検定であり，ある値に対して，「ある値と異なる」ことが言えるかどうかを判断する検定方法．ここで用いるある値を\(t\)値とよび，\(t\)値は検定統計量である．今回は\(t\)値を\eqref{equ:t値}に定める．
+    \textbf{\(t\)検定：} \(t\)分布を利用する検定であり，ある値に対して，「ある値と異なる」ことが言えるかどうかを判断する検定方法．ここで用いるある値を\(t\)値とよび，\(t\)値は検定統計量である．今回は自由度を\(n\)としたときの\(t\)値を\eqref{equ:t値}に定める．
     \begin{align}
-        t & = \frac{\textrm{回帰直線傾きの平均}}{\textrm{回帰直線傾きの標準誤差}}\label{equ:t値}
+        t(n) & = \frac{\textrm{回帰直線傾きの平均}}{\textrm{回帰直線傾きの標準誤差}}\label{equ:t値}
     \end{align}
     \textbf{有意確率\ \(p\)：} 標本と帰無仮説が矛盾となる目安指標．\(p\)が小さいほど帰無仮説と標本が矛盾している．\\ \\
     \textbf{有意水準\ \(\alpha\)：} 帰無仮説を棄却する基準となる値．有意確率\(p\)が有意水準を下回った時に帰無仮説を棄却する．\\ \\
@@ -204,36 +204,55 @@
 参加者番号を削除した後に，各統計量を求める．そのデータから平均値と標準誤差の誤差線を\texttt{err\_data}関数を用いて描画する．\par
 最後に，読み込んだデータから回帰直線を求める．\tblref{tbl:データ集計}に示した方法を\matlab で再現し，\texttt{polyfit}関数と\texttt{slope}関数を用いて回帰直線の傾きと切片を求める．
 自分自身のデータを散布図として，回帰直線と同時に描画する．
-
-\begin{wrapfigure}{r}[0mm]{.7\textwidth}
+\section{\result}
+刺激（\figref{fig:刺激対1}，\figref{fig:刺激対2}）の，刺激数に対する反応時間を示したグラフを\figref{fig:刺激対の刺激数に対する反応時間}に示す．
+被験者集団\(A\)の平均値と標準誤差の誤差線を\figref{fig:平均値と誤差線}，その回帰線を\figref{fig:平均値と回帰直線}に示す．
+グラフ作成のもととなったデータを\tblref{tbl:反応時間}，\tblref{tbl:回帰直線の傾き}に示す．
+\begin{figure}[H]
     \centering
-    \begin{minipage}{.34\textwidth}
+    \begin{minipage}[b]{.49\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/13_01_graph.pdf}
+        \subcaption{刺激対1の刺激数に対する反応時間}
     \end{minipage}
-    \begin{minipage}{.34\textwidth}
+    \begin{minipage}[b]{.49\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/13_02_graph.pdf}
+        \subcaption{刺激対2の刺激数に対する反応時間}
     \end{minipage}
-    \begin{minipage}{.34\textwidth}
+    \caption{刺激に対する反応時間}
+    \label{fig:刺激対の刺激数に対する反応時間}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[b]{.49\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/14_01_graph.pdf}
+        \caption{平均値と誤差線}
+        \label{fig:平均値と誤差線}
     \end{minipage}
-    \begin{minipage}{.34\textwidth}
+    \begin{minipage}[b]{.49\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/14_02_graph.pdf}
+        \caption{平均値と回帰直線}
+        \label{fig:平均値と回帰直線}
     \end{minipage}
-\end{wrapfigure}
-\section{\result}
+\end{figure}
+有意水準\(5\%\)で対応のある\(t\)検定を行った結果，刺激対1の刺激\texttt{C}と\texttt{CL}の間で有意な差が認められた．
+\begin{align}
+    t(13) & =2.9150238 & p<0.05
+\end{align}
 \begin{table}[H]
     \centering
     \caption{反応時間}
+    \label{tbl:反応時間}
     \fontsize{4}{3}\selectfont\ttfamily
     \input{../../14_DataAnalysisStatistical/result_table.tex}
 \end{table}
 \begin{table}[H]
     \centering
     \caption{回帰直線の傾き}
+    \label{tbl:回帰直線の傾き}
     \fontsize{4}{1}\selectfont\ttfamily
     \input{../../14_DataAnalysisStatistical/result_table2.tex}
 \end{table}

@@ -37,4 +37,6 @@ axis([3 17 900 1600]);
 xticks([4 8 16])
 box on;
 hold off;
+xlabel('Set size');
+ylabel('Response time average [ms]');
 exportgraphics(fig1,'../Figures/14_02_graph.pdf','ContentType','vector');
