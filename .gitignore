@@ -8,3 +8,4 @@
 1250373_*.pdf
 *.app
 *.gnuplot
+node_modules
