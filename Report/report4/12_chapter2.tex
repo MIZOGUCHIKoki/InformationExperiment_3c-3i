@@ -19,8 +19,8 @@
         \multirow{5}{*}{\bfseries 刺激呈示コンピュータ}  & プロセッサ                    & Intel(R) Xeon(R) Gold 5218R CPU @ 2.10GHz     \\
                                                & メモリ                      & 11.7GB                                        \\
                                                & OS                       & Microsoft Windows 10 Enterprise LTSC 64bit    \\
-                                               & \matlab                  & R2020b-academic use                           \\
-                                               & Psychtoolbox             & \textbf{◯◯◯◯}                                 \\
+                                               & \matlab                  & R2020b - academic use                         \\
+                                               & Psychtoolbox             & バージョン不明                                       \\
         \hline
         \multirow{6}{*}{\bfseries データ分析コンピュータ} & コンピュータ                   & MacBook Air 2022 （Apple社）\texttt{MLY13J/A}    \\
                                                & プロセッサ                    & Apple Silicon M2\ \  8コアCPU，8コアGPU            \\
@@ -65,7 +65,7 @@
 ここでは，表示する刺激（刺激対2：\figref{fig:刺激対2}）を変更して，同様に実験をする．左の刺激を\texttt{Star}，右の刺激を\texttt{Diamond}とする．
 この刺激を選択した理由は，一方の画像に何らかの情報を付加した画像が，もう一方の画像になるからである．
 具体的には，\figref{fig:刺激対2}の左図の鋭角を4つから5つに増やす操作をすると，右図の刺激を得られる．
-これは\figref{fig:刺激対1}の円に線を付加して得られるもう一方の刺激に習って作成した．この実験の参加者は20代の学生男性である．
+これは\figref{fig:刺激対1}の円に線を付加して得られるもう一方の刺激に習って作成した．この実験の参加者は20代の学生男性（参加者\(A\)）である．
 \paragraph{統計的仮説検定}
 ここで示す母集団は，調査の対象となる要素の集合．今回の母集団は全人類である．また，母集団の一部を抽出した集合を標本と呼び，標本に対して検定して母集団の性質を推測する．以下の統計的仮設検定に用いるデータは\textbf{\underline{実験1}}のデータである．
 \begin{oframed}
@@ -151,11 +151,11 @@
 次に，\matlab でデータの平均値と標準誤差の誤差線を出力するスクリプトを記述する．\texttt{importdata}関数を用いて書き出した\csv を読み込む．
 参加者番号を削除した後に，各統計量を求める．そのデータから平均値と標準誤差の誤差線を\texttt{err\_data}関数を用いて描画する．\par
 最後に，読み込んだデータから回帰直線を求める．\tblref{tbl:データ集計}に示した方法を\matlab で再現し，\texttt{polyfit}関数と\texttt{slope}関数を用いて回帰直線の傾きと切片を求める．
-自分自身のデータを散布図として，回帰直線と同時に描画する．
+参加者\(A\)のデータを散布図として，回帰直線と同時に描画する．
 \section{\result}
 刺激（\figref{fig:刺激対1}，\figref{fig:刺激対2}）の，刺激数に対する反応時間を示したグラフを\figref{fig:刺激対の刺激数に対する反応時間}に示す．
-実験参加者の平均値と標準誤差の誤差線を\figref{fig:平均値と誤差線}，その回帰線を\figref{fig:平均値と回帰直線}に示す．
-グラフ作成のもととなったデータを\tblref{tbl:反応時間}，\tblref{tbl:回帰直線の傾き}に示す．
+実験参加者の平均値と標準誤差の誤差線を\figref{fig:平均値と誤差線}，参加者\(A\)の結果に対する平均値と回帰直線を\figref{fig:平均値と回帰直線}に示す．
+グラフ作成のもととなったデータを\tblref{tbl:反応時間}，\tblref{tbl:回帰直線の傾き}に示す．参加者\(A\)は「参加者番号」列に明記した．
 \begin{figure}[H]
     \centering
     \begin{minipage}[b]{.49\textwidth}
@@ -182,7 +182,7 @@
     \begin{minipage}[b]{.49\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/14_02_graph.pdf}
-        \caption{平均値と回帰直線}
+        \caption{参加者\(A\)の結果 散布図と回帰直線}
         \label{fig:平均値と回帰直線}
     \end{minipage}
 \end{figure}
@@ -194,13 +194,13 @@
     \centering
     \caption{反応時間}
     \label{tbl:反応時間}
-    \fontsize{4}{3}\selectfont\ttfamily
+    \fontsize{4}{7}\selectfont\ttfamily
     \input{../../14_DataAnalysisStatistical/result_table.tex}
 \end{table}
 \begin{table}[H]
     \centering
     \caption{回帰直線の傾き}
     \label{tbl:回帰直線の傾き}
-    \fontsize{4}{1}\selectfont\ttfamily
+    \fontsize{4}{7}\selectfont\ttfamily
     \input{../../14_DataAnalysisStatistical/result_table2.tex}
 \end{table}
