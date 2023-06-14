@@ -72,7 +72,7 @@ JavaScriptで現在時刻を取得するには，\texttt{Date}をインスタン
 \begin{enumerate}
     \item 「現在時刻の取得」文字列を\texttt{<p></p>}タグの属性\texttt{onmousedown}で，現在時刻をリストアイテムとして追加する関数\texttt{input\_item()}を呼び出す．この関数を呼び出すと，変数\texttt{time}に，時刻\texttt{Hour:Minutes:Second}が格納される．
     \item \texttt{<ul></ul>}に対して，\texttt{document.getElementById}関数を用いてインスタンス名\texttt{list}でインスタンス化する．
-    \item \texttt{document.createElement("li")}関数で，\texttt{<li></li>}タグを生成し，変数\texttt{listItem}に格納する．
+    \item \texttt{document.createElement("li")}関数を用いて，\texttt{<li></li>}タグを生成し，変数\texttt{listItem}に格納する．
     \item \texttt{listItem}の要素を\texttt{listItem.textContent}で指定し，\texttt{time}を代入する．
     \item \texttt{list.appendChild(listItem)}で\texttt{listitem}を子要素として組み込む．
 \end{enumerate}
