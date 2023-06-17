@@ -80,15 +80,16 @@ mean_type4 = [ntarget_type2_size4_mean ntarget_type2_size8_mean ntarget_type2_si
 fig1 = figure;
 hold on;
 plot(x,mean_type1,'-o',LineWidth=2);
-plot(x,mean_type2,'-square',LineWidth=2);
+plot(x,mean_type2,'-*',LineWidth=2);
 plot(x,mean_type3,':o',LineWidth=2);
-plot(x,mean_type4,':square',LineWidth=2);
+plot(x,mean_type4,':*',LineWidth=2);
 hold off;
 box on;
 lgd = legend({'YES / C','YES / CL','NO / C', 'NO / CL'},'Location','northwest');
 title(lgd,'Target / Target type');
 xticks([0 4 8 16 20]);
-yticks(800:100:2200)
+yticks(800:100:2200);
+axis([3 17 800 2200]);
 xlabel('Set size');
 ylabel('Response time average [ms]');
 exportgraphics(fig1,'../Figures/13_01_graph.pdf','ContentType','vector');

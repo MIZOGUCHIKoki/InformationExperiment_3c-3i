@@ -88,7 +88,8 @@ box on;
 lgd = legend({'YES / Star','YES /  Diamond','NO / Star', 'NO / Diamond'},'Location','northwest');
 title(lgd,'Target / Target type');
 xticks([0 4 8 16 20]);
-yticks(800:100:2200)
+yticks(800:100:2200);
+axis([3 17 800 2200]);
 xlabel('Set size');
 ylabel('Response time average [ms]');
 exportgraphics(fig1,'../Figures/13_02_graph.pdf','ContentType','vector');
