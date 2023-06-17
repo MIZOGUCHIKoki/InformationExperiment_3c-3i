@@ -1,6 +1,6 @@
 \chapter{\kadaib}
 \section{\purpose}
-今回の実験では，反応時間を指標とした視覚探索課題の心理物理実験をする．
+今回の実験では，探索時間を指標とした視覚探索課題の心理物理実験をする．
 心理物理実験とは，物理的世界に属する刺激強度と，心理的世界に属する感覚強度の数学的関数関係を明らかにする実験である\cite{心理物理測定法}．
 今回は，視覚探索課題に対して心理物理実験をする．視覚探索課題とは，複数の刺激項目に対して，あらかじめ決められた目標項目があるか否かを，実験参加者が判断する課題である\cite{視覚探索}．
 複数の刺激「妨害刺激」の中に，1つだけ異なる刺激「目標刺激」が存在する場合と，そうでない場合について，刺激数に対する探索時間を計測する．
@@ -156,8 +156,8 @@
 参加者\(A\)のデータを散布図として，回帰直線と同時に描画する．
 \section{\result}
 ＜実験1＞で得られた実験参加者の平均値と標準誤差の誤差線を\figref{fig:平均値と誤差線}，参加者\(A\)の結果に対する平均値と回帰直線を\figref{fig:平均値と回帰直線}に示す．
-グラフ作成のもととなったデータを\tblref{tbl:反応時間}，\tblref{tbl:回帰直線の傾き}に示す．参加者\(A\)は「参加者番号」列に明記した．\par
-＜実験2＞で得られた刺激（\figref{fig:刺激対1}，\figref{fig:刺激対2}）の，刺激数に対する反応時間を示したグラフを\figref{fig:刺激対の刺激数に対する反応時間}に示す．
+グラフ作成のもととなったデータを\tblref{tbl:探索時間}，\tblref{tbl:回帰直線の傾き}に示す．参加者\(A\)は「参加者番号」列に明記した．\par
+＜実験2＞で得られた，刺激対（\figref{fig:刺激対1}，\figref{fig:刺激対2}）の刺激数に対する探索時間を示したグラフを\figref{fig:刺激対の刺激数に対する探索時間}に示す．
 \begin{figure}[H]
     \centering
     \begin{minipage}[b]{.49\textwidth}
@@ -178,15 +178,15 @@
     \begin{minipage}[b]{.49\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/13_01_graph.pdf}
-        \subcaption{刺激対1の刺激数に対する反応時間}
+        \subcaption{刺激対1の刺激数に対する探索時間}
     \end{minipage}
     \begin{minipage}[b]{.49\textwidth}
         \centering
         \includegraphics[keepaspectratio,width=\textwidth]{../../Figures/13_02_graph.pdf}
-        \subcaption{刺激対2の刺激数に対する反応時間}
+        \subcaption{刺激対2の刺激数に対する探索時間}
     \end{minipage}
-    \caption{＜実験2＞\ 刺激に対する反応時間}
-    \label{fig:刺激対の刺激数に対する反応時間}
+    \caption{＜実験2＞\ 各刺激対に対する探索時間}
+    \label{fig:刺激対の刺激数に対する探索時間}
 \end{figure}
 有意水準\(5\%\)で対応のある\(t\)検定を行った結果，刺激対1の刺激\texttt{C}と\texttt{CL}の間で有意な差が認められた．
 \begin{align}
@@ -194,8 +194,8 @@
 \end{align}
 \begin{table}[H]
     \centering
-    \caption{反応時間}
-    \label{tbl:反応時間}
+    \caption{探索時間}
+    \label{tbl:探索時間}
     \fontsize{4}{7}\selectfont\ttfamily
     \input{../../14_DataAnalysisStatistical/result_table.tex}
 \end{table}
@@ -211,3 +211,15 @@
 結果より，目標刺激が\texttt{C}の場合，目標刺激数に伴って探索時間が増加していることがわかる．
 それに対して目標刺激が\texttt{CL}の場合，刺激数に対する探索時間はおよそ一定である．
 これらから\(t\)検定を用いて，両刺激（\texttt{C}，\texttt{CL}）には探索非対称性があると判断された．
+この原因として，目標刺激が\texttt{CL}の探索に対してポップアウト現象が起きていることが考えられる．刺激\texttt{CL}は刺激\texttt{C}に一本の線を足した刺激なので，円刺激に比べて発見しやすい．
+これに対して，目標刺激が\texttt{C}の探索では，刺激\texttt{CL}には\texttt{C}の「円」という要素を含んでいるので，ポップアウトは起きず，逐次探索になると考えられる．
+\paragraph{実験2}
+刺激対1に対する探索時間と，刺激対2に対する探索時間を比較する．刺激対1に比べて，刺激対2は探索時間の偏りは小さい．
+刺激対2について，\texttt{Start}と\texttt{Diamond}の形状が似ており，判断の時間に差異が生まれないからであろう．
+刺激対2の目標刺激がない場合は，刺激数に伴って探索時間が増加しており，
+目標刺激がある場合は，目標刺激に限らず目標刺激数が8から16にかけて一定，または減少している．これは「探索非対称性」があるとは言えない．
+\texttt{Star}，\texttt{Diamond}の両刺激において，逐次探索でなくポップアウトが生じていると考えられる．
+\section{\conclusion}
+今回の実験では，視覚探索課題の心理物理実験をし，目標刺激と妨害刺激が交代しただけで探索時間が大きく異なる「探索非対称性」を検証した．
+その原因となる「ポップアウト」が起きる刺激の条件と，「逐次探索」が起きる刺激の条件が明らかとなった．
+さらに，統計的仮説検定を用いて，刺激\texttt{C}と刺激\texttt{CL}には探索時間に有意な差が認められ，探索非対称性を認められた．
