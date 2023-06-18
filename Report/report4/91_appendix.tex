@@ -9,14 +9,26 @@
 \@addtoreset{lstlisting}{section}
 \makeatother
 \lstset{
-    frame={single},
-    numbers={left}
+    frame={tb},
+    numbers={left},
+    basicstyle = \ttfamily\fontsize{5}{1}\selectfont,
+    numberstyle = \ttfamily\fontsize{3}{1}\selectfont,
+    commentstyle = {\ttfamily \color[rgb]{0,0.45,0}},
+    keywordstyle = {\bfseries \color{red}},
+    stringstyle = {\ttfamily \color{blue}},
+    xleftmargin= {2em}
 }
 \section{\kadaia\ (June 1st, 2023)}
-\lstinputlisting[caption={\secref{\kadaia}},label={src:12_01}]{../../12_DataAnalysis/no1_r.m}
-\lstinputlisting[caption={\secref{\kadaia （近似多項式）}},label={src:12_02}]{../../12_DataAnalysis/no1_rr.m}
-\section{\kadaib\ (June 5th, 2023)}
-\lstinputlisting[caption={\secref{\kadaiba}},label={src:13_01}]{../../13_BehavioralExperiment/graph.m}
-\section{\kadaic\ (June 8th, 2023)}
-\lstinputlisting[caption={\secref{探索データのまとめ}},label={src:14_01}]{../../14_DataAnalysisStatistical/no1.m}
-\lstinputlisting[caption={\secref{統計的仮説検定}},label={src:14_02}]{../../14_DataAnalysisStatistical/no2.m}
+\begin{multicols}{2}
+    \lstinputlisting[caption={\(1\textrm{s}\)前からの眼球運動},label={src:12_01}]{../../12_DataAnalysis/no1_r.m}
+    \columnbreak
+    \lstinputlisting[caption={\(1.2\textrm{s}\)前からの眼球運動と近似多項式曲線},label={src:12_02}]{../../12_DataAnalysis/no1_rr.m}
+\end{multicols}
+\section{\kadaib\ (June 5th and 8th, 2023)}
+\begin{multicols}{2}
+    \lstinputlisting[caption={各刺激対に対するグラフ出力},label={src:13_01}]{../../13_BehavioralExperiment/graph.m}
+    \lstinputlisting[caption={平均値と誤差線の出力},label={src:14_01}]{../../14_DataAnalysisStatistical/no1.m}
+    \lstinputlisting[caption={回帰直線の出力},label={src:14_02}]{../../14_DataAnalysisStatistical/no2.m}
+    \lstinputlisting[caption={\texttt{visualsearch（刺激対1）}},label={src:13_02}]{../../13_BehavioralExperiment/visualsearch.m}
+    \lstinputlisting[caption={\texttt{visualsearch（刺激対2）}},label={src:13_03}]{../../13_BehavioralExperiment/visualsearch_2.m}
+\end{multicols}
