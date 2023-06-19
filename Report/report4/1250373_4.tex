@@ -5,7 +5,7 @@
 \usepackage{fancyhdr,lastpage,abstract,listings,float,wrapfig,tabularx,multirow,multicol}
 \usepackage{hyperref,graphics,graphicx,framed,subcaption}
 \usepackage[symbol]{footmisc}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,amsfonts,enumitem}
 \usepackage{tikz,pgfplots,anyfontsize}
 \pgfplotsset{compat=newest}
 \usetikzlibrary{calc,arrows.meta,fit,positioning,math}
@@ -14,6 +14,7 @@
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \newcolumntype{R}{>{\raggedright\arraybackslash}X}
 \newcolumntype{L}{>{\raggedleft\arraybackslash}X}
+\setlist[itemize,1]{label=\(\diamond\)}
 \bibliographystyle{junsrt}
 \hypersetup{
     colorlinks=true,
