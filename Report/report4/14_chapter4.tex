@@ -1,23 +1,33 @@
 \chapter{\kadaie}
 \section{\purpose}
+脳波は以下のように説明されている．
+\begin{quote}
+    ``神経細胞の間にあるシナプス電位と，後電位などの電極変動の総和を，頭皮上につけた電極を用いて記録したもの．''
+    \\\hfill\cite{自己心理学セミナー}
+\end{quote}
+また，特定の事象に関係する脳波を「事象関連電位（ERP）」と呼ぶ．脳波測定で，ERPを電極で測定する．
+BMI（Brain Machine Interfae）とは，脳からの信号を計測し，それを利用する技術を指す\cite{脳波による実用的なBMI研究開発}．
+これまで，BMIを用いた家電の操作や，文字入力操作が研究されている\cite{脳波による実用的なBMI研究開発}．
+\paragraph{目的}BMIのシステムを体験するために，タイプしたい文字を脳情報から読み取る．ターゲット刺激が表示されたときの脳波と，ターゲット刺激でない刺激が表示されたときの脳波を比較する．
 \section{\method}
 \paragraph{実験装置}
-刺激呈示用装置として，汎用コンピュータと液晶ディスプレイを利用し，データ分析と刺激の呈示には\matlab を用いる．
+刺激呈示用装置として，汎用コンピュータと液晶ディスプレイを利用する．
 脳波測定器やコンピュータなどの実験装置を\tblref{tbl:実験装置\kadaie}に示す．
 \begin{table}[H]
     \caption{実験装置\ （\kadaie）}
     \label{tbl:実験装置\kadaie}
     \begin{tabularx}{\textwidth}{cAR}
         \hline
-        {\bfseries 脳波測定器}                 & ドライ電極                    &                                               \\
-                                          & \texttt{g.USBamp}        & g.tec 社                                       \\
+        \multirow{3}{*}{\bfseries BMI装置}  & 電極       & ドライ電極                                            \\
+                                          & 脳波計測機器   & \texttt{g.USBamp}                                \\
+                                          & 信号分析機    & \texttt{g.BSanalyze}                             \\
         \hline
-        \multirow{6}{*}{\bfseries コンピュータ} & コンピュータ                   & MacBook Air 2022 （Apple社）\texttt{MLY13J/A}    \\
-                                          & プロセッサ                    & Apple Silicon M2\ \  8コアCPU，8コアGPU            \\
-                                          & メモリ                      & 8GB                                           \\
-                                          & OS                       & macOS 13.4                                    \\
-                                          & \multirow{2}{*}{\matlab} & R2023a - academic use (Update1 9.14.02239454) \\
-                                          &                          & 64-bit (maci64) March 30, 2023                \\
+        \multirow{6}{*}{\bfseries コンピュータ} & コンピュータ   & Dell Precision M6600 64-bit Operating System     \\
+                                          & プロセッサ    & Intel(R) Core(TM) i7-2620M SPC @ 2.70GHz 2.70GHz \\
+                                          & メモリ      & 8GB (7.88GB usable)                              \\
+                                          & OS       & Windows 7 Ultimate Service Pack 1                \\
+                                          & \matlab  & バージョン不明                                          \\
+                                          & Simulink & バージョン不明                                          \\
         \hline
     \end{tabularx}
 \end{table}
