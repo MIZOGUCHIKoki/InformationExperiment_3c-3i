@@ -17,5 +17,32 @@
 撮影した眼球の画像から，角膜上の光の反射点と瞳孔を識別する．この結果により眼球の方向を算出する．
 この技術は，第\ref{chap:\kadaia}章の\elt ，第\ref{chap:\kadaid}章の\tobi に用いられている技術である．\\
 \hfill\cite{weko_847_1}
+
+\begin{wrapfigure}{r}[0mm]{.4\textwidth}
+    \centering
+    \begin{minipage}{.19\textwidth}
+        \centering
+        \includegraphics[height=2cm,width=\textwidth]{../../Figures/kenty2.png}
+        \subcaption{入力画像}
+    \end{minipage}
+    \begin{minipage}{.19\textwidth}
+        \centering
+        \includegraphics[height=2cm,width=\textwidth]{../../Figures/kenty1.png}
+        \subcaption{顕著性マップ\cite{動画像コンテンツにおける注視点マップと顕著性マップとの関係性に関する考察}}
+    \end{minipage}
+    \caption{顕著性マップの例\cite{動画像コンテンツにおける注視点マップと顕著性マップとの関係性に関する考察}}
+    \vspace{-1.5cm}
+\end{wrapfigure}
 \section{顕著性マップ}
+顕著性マップは以下のように説明されている．
+\begin{quote}
+    ``顕著性マップとは，人が画像を認識する際に注視しやすい部分を画像で表現したものである．''\hfill\cite{顕著性マップを用いた画質評価法}
+\end{quote}
+第\ref{chap:\kadaid}章の\figref{fig:実験結果\kadaid}で示しているHeat Mapは，「刺激画像のどこをより注視しているか」を色で表現したものであった．
+\figref{fig:実験結果\kadaid}は単なる結果であるが，顕著性マップは画像の物理的特徴を解析して注意が向けられる位置を推定する．
+大まかな処理を説明する．まず入力画像に対して，6つの特徴マップ（色，彩度，方位，コントラスト，点滅，運動）を作成する．
+特徴マップ合成では，6つの生成した特徴マップを線形和し，顕著性マップを算出する．
+顕著性マップを用いることで，実験による注視箇所の特定をせずとも，刺激に対する注視箇所がわかるため，
+テレビ放送などのコマーシャル，包装容姿のデザインなど，商用利用も多く，我々との生活で密にかかわっている．\\
+\hfill\cite{動画像コンテンツにおける注視点マップと顕著性マップとの関係性に関する考察}
 \section{分散分析}
