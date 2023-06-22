@@ -7,6 +7,6 @@ on:
 
 jobs:
   job_correction_WF:
-    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/correction_main.yml@main
+    uses: MIZOGUCHIKoki/ConfigFiles/.github/workflows/correction_main.yml@master
     secrets:
       gh_token: ${{ secrets.ACCESS_TOKEN }}
