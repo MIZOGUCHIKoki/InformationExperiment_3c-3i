@@ -5,7 +5,7 @@
 *.lol
 *.gz
 *.log
-1250373_*.pdf
+!1250373_*.pdf
 *.app
 *.gnuplot
 node_modules
