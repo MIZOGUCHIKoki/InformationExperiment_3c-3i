@@ -1,1 +1,4 @@
 *.js linguist-vendored
+*.tex linguist-vendored
+*.cls linguist-vendored
+*.bib linguist-vendored
